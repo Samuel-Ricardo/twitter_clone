@@ -9,6 +9,7 @@
     "start:docker": "next dev",
     "lint:next": "next lint",
     "lint:staged": "eslint **/*.{js,jsx,ts,tsx} --fix --cache",
+    "format": "prettier --check --ignore-path .gitignore ./src/**/*.{js,jsx,ts,tsx}",
     "test": "jest --passWithNoTests --color",
     "test:docker": "npm run test:dev",
     "test:dev": "jest --watchAll --coverage --passWithNoTests --color",
@@ -37,6 +38,7 @@
     "husky": "^8.0.3",
     "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.6.1",
-    "lint-staged": "^13.2.3"
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0"
   }
 }
