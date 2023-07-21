@@ -17,6 +17,7 @@
     "test:staged": "jest --passWithNoTests --findRelatedTests --color",
     "test:coverage": "jest --coverage --passWithNoTests --color",
     "test:cypress": "cypress open",
+    "test:E2E": "cypress run",
     "husky:prepare": "cd ../ && husky install"
   },
   "dependencies": {
