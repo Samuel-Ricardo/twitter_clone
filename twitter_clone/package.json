@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint",
-    "lint:staged": "eslint **/*.{js,jsx,ts,tsx} --fix --cache"
+    "lint:staged": "eslint **/*.{js,jsx,ts,tsx} --fix --cache"
   },
   "dependencies": {
     "@types/node": "20.4.2",
@@ -24,6 +24,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
     "lint-staged": "^13.2.3"
   }
 }
