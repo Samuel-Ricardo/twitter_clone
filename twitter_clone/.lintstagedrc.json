@@ -1,3 +1,7 @@
 {
-  "*.{ts,tsx,js,jsx}": ["npm run lint:staged", "npm run test:staged"]
+  "*.{ts,tsx,js,jsx}": [
+    "npm run format:fix",
+    "npm run lint:staged",
+    "npm run test:staged"
+  ]
 }
