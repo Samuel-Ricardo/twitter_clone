@@ -10,6 +10,8 @@
     "lint:next": "next lint",
     "lint:staged": "eslint **/*.{js,jsx,ts,tsx} --fix --cache",
     "test": "jest --passWithNoTests --color",
+    "test:docker": "npm run test:dev",
+    "test:dev": "jest --watchAll --coverage --passWithNoTests --color",
     "test:staged": "jest --passWithNoTests --findRelatedTests --color",
     "test:coverage": "jest --coverage --passWithNoTests --color",
     "husky:prepare": "cd ../ && husky install"
