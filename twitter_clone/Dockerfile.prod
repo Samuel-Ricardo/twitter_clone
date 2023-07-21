@@ -9,5 +9,7 @@ RUN npm ci
 
 COPY --chown=node:node ./twitter_clone ./
 
+RUN [ "npm", "run", "build" ]
+
 #CMD ["tail", "-f", "/dev/null"]
-CMD ["npm", "run", "build", "&&", "npm", "run", "start"]
+CMD ["npm", "run", "start"]
