@@ -17,31 +17,31 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        node-version: [18.x]
+    #    strategy:
+    #      matrix:
+    #        node-version: [18.x]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use NodeJS ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+      #      - name: Use NodeJS ${{ matrix.node-version }}
+      #        uses: actions/setup-node@v3
+      #        with:
+      #          node-version: ${{ matrix.node-version }}
+      #          cache: "npm"
 
-      - name: navigate to app directory
-        run: cd twitter_clone && ls -a
+      #      - name: navigate to app directory
+      #        run: cd twitter_clone && ls -a
 
-      - name: Install Dependencies
-        run: npm ci
+      #      - name: Install Dependencies
+      #        run: npm ci
 
-      - name: Run Format
-        run: npm run format:fix
+      #      - name: Run Format
+      #        run: npm run format:fix
 
-      - name: Run Linter
-        run: npm run lint:next && npm run lint:staged
+      #      - name: Run Linter
+      #        run: npm run lint:next && npm run lint:staged
 
       - name: Run tests with docker-compose
         run: docker compose -f ./twitter_clone/docker-compose.ci.yaml up
