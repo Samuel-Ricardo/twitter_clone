@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  code_health:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    entrypoint: ['npm', 'run', 'code:ci']
