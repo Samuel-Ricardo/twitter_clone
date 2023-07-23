@@ -2,11 +2,10 @@ FROM node:18.16.0-slim
 
 WORKDIR /home/node/app
 
-COPY ./twitter_clone/package*.json ./
-RUN ls -a
+COPY ./package*.json ./
 RUN npm ci
 
-COPY ./twitter_clone/ ./
+COPY ./ ./
 RUN npm run build
 
 #CMD ["tail", "-f", "/dev/null"]
