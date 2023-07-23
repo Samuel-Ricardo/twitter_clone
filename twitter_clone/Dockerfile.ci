@@ -1,14 +1,12 @@
 FROM node:18.16.0-slim
 
-USER node
-
 WORKDIR /home/node/app
 
 COPY --chown=node:node ./twitter_clone/package*.json ./
+RUN ls -a
 RUN npm ci
 
 COPY --chown=node:node ./twitter_clone ./
-
 RUN npm run build
 
 #CMD ["tail", "-f", "/dev/null"]
