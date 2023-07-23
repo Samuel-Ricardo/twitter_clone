@@ -21,5 +21,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Lint
+        run: npm run lint:next
+
       - name: Run tests with docker-compose
         run: docker compose -f ./twitter_clone/docker-compose.ci.yaml up
