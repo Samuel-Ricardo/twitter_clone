@@ -6,6 +6,21 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/twitter_clone" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: docker"
+    directory: "/twitter_clone"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: composer"
+    directory: "/twitter_clone"
     schedule:
       interval: "weekly"
