@@ -90,7 +90,7 @@ Navigate to project folder `$ cd ./twitter_clone/` and run it using `docker-comp
 
   #Apps Running on:
 
-  $ API: http://localhost:3000
+  $ APP: http://localhost:3000
 
   See more: ./twitter_clone/docker-compose.yaml
 
