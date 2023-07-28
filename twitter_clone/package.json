@@ -20,8 +20,8 @@
     "test:E2E": "cypress run",
     "husky:prepare": "cd ../ && husky install",
     "code:ci": "npm run format:fix && next lint && npm run lint:staged && npm run test:coverage",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -p 6006 -s ./public",
+    "build-storybook": "storybook build -s ./public"
   },
   "dependencies": {
     "@types/node": "20.4.2",
