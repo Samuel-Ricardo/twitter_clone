@@ -19,7 +19,9 @@
     "test:cypress": "cypress open",
     "test:E2E": "cypress run",
     "husky:prepare": "cd ../ && husky install",
-    "code:ci": "npm run format:fix && next lint && npm run lint:staged && npm run test:coverage"
+    "code:ci": "npm run format:fix && next lint && npm run lint:staged && npm run test:coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/node": "20.4.2",
@@ -36,14 +38,24 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.1.1",
+    "@storybook/addon-interactions": "^7.1.1",
+    "@storybook/addon-links": "^7.1.1",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.1.1",
+    "@storybook/nextjs": "^7.1.1",
+    "@storybook/react": "^7.1.1",
+    "@storybook/testing-library": "^0.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
     "cypress": "^12.17.2",
+    "eslint-plugin-storybook": "^0.6.13",
     "husky": "^8.0.3",
     "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.6.1",
     "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "storybook": "^7.1.1"
   }
 }
