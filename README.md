@@ -94,6 +94,11 @@ Navigate to project folder `$ cd ./twitter_clone/` and run it using `docker-comp
 
   $ APP: http://localhost:3000
 
+  $ STORYBOOK: http://localhost:6006/ [DOCUMENTATION] [DEV]
+
+
+  $ [DEV] = only on development environment
+
   See more: ./twitter_clone/docker-compose.yaml
 
 ```
