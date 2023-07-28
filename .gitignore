@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 ./twitter_clone/storybook-static
+./twitter_clone/storybook-static/
