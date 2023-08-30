@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { IUserDTO } from '../DTO/user.dto';
 
 @injectable()
 export class User {
@@ -20,4 +21,23 @@ export class User {
     private coverImage?: string | null,
     private profileImage?: string | null,
   ) {}
+
+  static create(data: IUserDTO): User {
+    return new User(
+      data.id,
+      data.name,
+      data.username,
+      data.email,
+      data.password,
+      data.createdAt,
+      data.updatedAt,
+      data.hasNotifications,
+      data.sessionToken,
+      data.bio,
+      data.emailVerified,
+      data.image,
+      data.coverImage,
+      data.profileImage,
+    );
+  }
 }
