@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "inversify": "^6.0.1",
     "zod": "^3.22.2"
   }
 }
