@@ -1,13 +1,20 @@
 import { injectable } from 'inversify';
 import { IHTTPGateway } from '../../generic/http.gateway';
 import axios, { AxiosRequestConfig } from 'axios';
+import { ISWRSupport } from '../../support/swr.support';
+import swr from 'swr';
 
 @injectable()
-export class AxiosHTTPGateway implements IHTTPGateway {
+export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   constructor(
     private readonly URL: string,
     private readonly client: typeof axios,
+    private readonly useSWR = swr,
   ) {}
+
+  async fetcher(url: string) {
+    this.client.get(url).then((res) => res.data);
+  }
 
   async get(path: string, config?: AxiosRequestConfig) {
     return await this.client.get(`${this.URL}/${path}`, config);
