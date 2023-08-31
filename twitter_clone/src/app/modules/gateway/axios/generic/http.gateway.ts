@@ -12,7 +12,13 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
     private readonly URL: string,
     private readonly client: typeof axios,
     private readonly useSWR = swr,
-  ) {}
+  ) {
+    this.setup();
+  }
+
+  async setup() {
+    this.client.defaults.baseURL = this.URL;
+  }
 
   async fetcher(url: string) {
     this.client.get(url).then((res) => res.data);
