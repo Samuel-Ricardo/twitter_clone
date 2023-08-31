@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { IUserDTO } from '../DTO/user.dto';
+import { UserSchema } from '../validator';
 
 @injectable()
 export class User {
@@ -20,7 +21,24 @@ export class User {
     private _image?: string | null,
     private _coverImage?: string | null,
     private _profileImage?: string | null,
-  ) {}
+  ) {
+    User.validate({
+      id: _id,
+      name: _name,
+      username: _username,
+      email: _email,
+      password: _password,
+      createdAt: _createdAt,
+      updatedAt: _updatedAt,
+      hasNotifications: _hasNotifications,
+      sessionToken: _sessionToken,
+      bio: _bio,
+      emailVerified: _emailVerified,
+      image: _image,
+      coverImage: _coverImage,
+      profileImage: _profileImage,
+    });
+  }
 
   static create(data: IUserDTO): User {
     return new User(
@@ -39,6 +57,10 @@ export class User {
       data.coverImage,
       data.profileImage,
     );
+  }
+
+  static validate(user: IUserDTO) {
+    return UserSchema.parse(user);
   }
 
   toStruct(): IUserDTO {
