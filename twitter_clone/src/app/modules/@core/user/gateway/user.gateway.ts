@@ -6,7 +6,7 @@ import {
 } from '../DTO';
 import { User } from '../entity/user.entity';
 
-export interface UserGateway {
+export interface IUserGateway {
   create(user: ICreateUserDTO): Promise<User>;
   listAll(): Promise<User[]>;
   selectById(props: ISelectUserByIdDTO): Promise<User>;
