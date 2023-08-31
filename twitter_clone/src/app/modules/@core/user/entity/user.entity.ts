@@ -41,6 +41,25 @@ export class User {
     );
   }
 
+  toStruct(): IUserDTO {
+    return {
+      id: this._id,
+      name: this._name,
+      username: this._username,
+      email: this._email,
+      password: this._password,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+      hasNotifications: this._hasNotifications,
+      sessionToken: this._sessionToken,
+      bio: this._bio,
+      emailVerified: this._emailVerified,
+      image: this._image,
+      coverImage: this._coverImage,
+      profileImage: this._profileImage,
+    };
+  }
+
   get id(): string {
     return this._id;
   }
