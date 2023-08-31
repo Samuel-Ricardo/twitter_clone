@@ -53,4 +53,12 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
 
     await this.delete(`${this.prefix}/${data.id}`);
   }
+
+  async swrListAll() {
+    return this.useSWR<IUserDTO[]>(this.prefix, this.fetcher);
+  }
+
+  async swrSelectById(data: ISelectUserByIdDTO) {
+    return this.useSWR<IUserDTO>(`${this.prefix}/${data.id}`, this.fetcher);
+  }
 }
