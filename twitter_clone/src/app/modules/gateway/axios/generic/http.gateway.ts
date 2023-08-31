@@ -11,7 +11,7 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
     //    @inject(MODULE.CONFIG.API.URL)
     private readonly URL: string,
     private readonly client: typeof axios,
-    private readonly useSWR = swr,
+    protected readonly useSWR = swr,
   ) {
     this.setup();
   }
@@ -21,7 +21,8 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   }
 
   async fetcher(url: string) {
-    this.client.get(url).then((res) => res.data);
+    const response = await this.client.get(url);
+    return response.data;
   }
 
   async get<T>(path: string, config?: AxiosRequestConfig) {
