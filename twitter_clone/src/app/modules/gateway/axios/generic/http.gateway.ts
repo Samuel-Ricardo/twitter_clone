@@ -20,4 +20,8 @@ export class AxiosHTTPGateway implements IHTTPGateway {
   async put(path: string, body: any, config?: AxiosRequestConfig) {
     return await this.client.put(`${this.URL}/${path}`, body, config);
   }
+
+  async patch(path: string, body: any, config?: AxiosRequestConfig) {
+    return await this.client.patch(`${this.URL}/${path}`, body, config);
+  }
 }
