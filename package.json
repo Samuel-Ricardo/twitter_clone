@@ -3,6 +3,7 @@
     "axios": "^1.5.0",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
+    "swr": "^2.2.2",
     "zod": "^3.22.2"
   }
 }
