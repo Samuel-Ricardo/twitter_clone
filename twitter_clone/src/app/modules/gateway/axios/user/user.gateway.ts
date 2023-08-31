@@ -3,6 +3,7 @@ import { AxiosHTTPGateway } from '../generic/http.gateway';
 import { injectable } from 'inversify';
 import {
   ICreateUserDTO,
+  IDeleteuserDTO,
   ISelectUserByIdDTO,
   IUpdateUserDTO,
   IUserDTO,
@@ -10,6 +11,7 @@ import {
 import { User } from '@/app/modules/@core/user/entity/user.entity';
 import {
   CreateUserSchema,
+  DeleteUserScheme,
   SelectUserByIdSchema,
   UpdateUserSchema,
 } from '@/app/modules/@core/user/validator';
@@ -44,5 +46,11 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
 
     const response = await this.put<{ user: IUserDTO }>(this.prefix, data);
     return User.create(response.data.user);
+  }
+
+  async deleteUser(data: IDeleteuserDTO) {
+    DeleteUserScheme.parse(data);
+
+    await this.delete(`${this.prefix}/${data.id}`);
   }
 }
