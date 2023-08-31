@@ -8,4 +8,8 @@ export class AxiosHTTPGateway implements IHTTPGateway {
     private readonly URL: string,
     private readonly client: typeof axios,
   ) {}
+
+  async get(path: string, config?: AxiosRequestConfig) {
+    return await this.client.get(`${this.URL}/${path}`, config);
+  }
 }
