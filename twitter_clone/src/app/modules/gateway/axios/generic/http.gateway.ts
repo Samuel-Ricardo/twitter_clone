@@ -12,4 +12,8 @@ export class AxiosHTTPGateway implements IHTTPGateway {
   async get(path: string, config?: AxiosRequestConfig) {
     return await this.client.get(`${this.URL}/${path}`, config);
   }
+
+  async post(path: string, body: any, config?: AxiosRequestConfig) {
+    return await this.client.post(`${this.URL}/${path}`, body, config);
+  }
 }
