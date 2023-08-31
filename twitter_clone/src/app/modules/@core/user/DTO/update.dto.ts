@@ -1,4 +1,4 @@
-export interface UpdateUserDTO {
+export interface IUpdateUserDTO {
   id: string;
   name?: string;
   username?: string;
