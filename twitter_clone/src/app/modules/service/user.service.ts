@@ -37,6 +37,10 @@ export class UserService {
     return await this.updateUser.execute(user);
   }
 
+  async delete(data: IDeleteuserDTO) {
+    return await this.deleteUser.execute(data);
+  }
+
   async selectById(data: ISelectUserByIdDTO) {
     return await this.selectUserById.execute(data);
   }
