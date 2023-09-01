@@ -23,3 +23,4 @@ UserModule.bind(UserRegistry.USE_CASE.GET.BY.ID).to(SelectUserByIdUseCase);
 
 UserModule.bind(UserRegistry.SERVICE).to(UserService);
 UserModule.bind(UserRegistry.CONTROLLER).to(userController);
+UserModule.bind(UserRegistry.MAIN).to(userController);
