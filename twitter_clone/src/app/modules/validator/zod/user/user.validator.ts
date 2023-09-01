@@ -34,4 +34,8 @@ export class ZodUserValidator implements IUserValidator {
   validateUpdateDTO(DTO: IUpdateUserDTO) {
     return UpdateUserSchema.parse(DTO) ? true : false;
   }
+
+  validateDeleteDTO(DTO: IDeleteuserDTO) {
+    return DeleteUserScheme.parse(DTO) ? true : false;
+  }
 }
