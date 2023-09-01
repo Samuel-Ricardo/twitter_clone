@@ -8,6 +8,7 @@ import {
   SelectUserByIdUseCase,
   ListAllUsersUseCase,
 } from './use-case';
+import { UserService } from './service';
 
 const Modue = new Container({ autoBindInjectable: true });
 
@@ -18,3 +19,5 @@ UserModule.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 UserModule.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
 UserModule.bind(UserRegistry.USE_CASE.GET.ALL).to(ListAllUsersUseCase);
 UserModule.bind(UserRegistry.USE_CASE.GET.BY.ID).to(SelectUserByIdUseCase);
+
+UserModule.bind(UserRegistry.SERVICE).to(UserService);
