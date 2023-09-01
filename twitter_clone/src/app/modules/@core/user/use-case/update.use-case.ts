@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { UserGatewayAccess } from '../gateway/gateway_access';
+import { UserGatewayAccess } from '../gateway';
 import { IUpdateUserDTO } from '../DTO';
 
 @injectable()

@@ -11,6 +11,7 @@ import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
 export const UserFactory = {
+  MAIN: () => UserModule.get<userController>(UserRegistry.MAIN),
   CONTROLLER: () => UserModule.get<userController>(UserRegistry.CONTROLLER),
   SERVICE: () => UserModule.get<UserService>(UserRegistry.SERVICE),
   USE_CASE: {
