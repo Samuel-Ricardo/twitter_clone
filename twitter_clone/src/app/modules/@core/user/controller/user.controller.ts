@@ -13,4 +13,8 @@ export class userController {
   async create(user: ICreateUserDTO) {
     return this.service.create(user);
   }
+
+  async listAll() {
+    return this.service.listAll();
+  }
 }
