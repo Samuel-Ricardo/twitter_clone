@@ -59,6 +59,10 @@ export class User {
     );
   }
 
+  static createArray(data: IUserDTO[]): User[] {
+    return data.map((user) => User.create(user));
+  }
+
   static validate(user: IUserDTO) {
     return UserSchema.parse(user);
   }
