@@ -20,6 +20,10 @@ export class userController {
     return this.service.create(user);
   }
 
+  async delete(user: IDeleteuserDTO) {
+    return this.service.delete(user);
+  }
+
   async update(user: IUpdateUserDTO) {
     return this.service.update(user);
   }
