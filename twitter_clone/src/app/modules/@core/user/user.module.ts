@@ -9,6 +9,7 @@ import {
   ListAllUsersUseCase,
 } from './use-case';
 import { UserService } from './service';
+import { userController } from './controller';
 
 const Modue = new Container({ autoBindInjectable: true });
 
@@ -21,3 +22,4 @@ UserModule.bind(UserRegistry.USE_CASE.GET.ALL).to(ListAllUsersUseCase);
 UserModule.bind(UserRegistry.USE_CASE.GET.BY.ID).to(SelectUserByIdUseCase);
 
 UserModule.bind(UserRegistry.SERVICE).to(UserService);
+UserModule.bind(UserRegistry.CONTROLLER).to(userController);
