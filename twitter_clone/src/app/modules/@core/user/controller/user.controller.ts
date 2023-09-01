@@ -20,11 +20,15 @@ export class userController {
     return this.service.create(user);
   }
 
+  async update(user: IUpdateUserDTO) {
+    return this.service.update(user);
+  }
+
   async listAll() {
     return this.service.listAll();
   }
 
-  async selectById(data: ISelectUserByIdDTO) {
-    return this.service.selectById(data);
+  async selectById(user: ISelectUserByIdDTO) {
+    return this.service.selectById(user);
   }
 }
