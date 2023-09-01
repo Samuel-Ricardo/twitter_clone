@@ -38,4 +38,8 @@ export class ZodUserValidator implements IUserValidator {
   validateDeleteDTO(DTO: IDeleteuserDTO) {
     return DeleteUserScheme.parse(DTO) ? true : false;
   }
+
+  validateSelectByIdDTO(DTO: ISelectUserByIdDTO) {
+    return SelectUserByIdSchema.parse(DTO) ? true : false;
+  }
 }
