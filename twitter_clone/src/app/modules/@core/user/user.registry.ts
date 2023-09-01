@@ -1,4 +1,5 @@
 export const UserRegistry = {
+  SERVICE: Symbol.for('user.service'),
   USE_CASE: {
     CREATE: Symbol.for('user.use-case.create'),
     UPDATE: Symbol.for('user.use-case.update'),
