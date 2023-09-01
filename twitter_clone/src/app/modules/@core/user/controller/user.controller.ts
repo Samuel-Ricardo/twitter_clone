@@ -1,7 +1,13 @@
 import { inject, injectable } from 'inversify';
 import { UserService } from '../service';
 import { MODULE } from '@/app/modules/app.registry';
-import { ICreateUserDTO } from '../DTO';
+import {
+  ICreateUserDTO,
+  IUpdateUserDTO,
+  IUserDTO,
+  IDeleteuserDTO,
+  ISelectUserByIdDTO,
+} from '../DTO';
 
 @injectable()
 export class userController {
@@ -16,5 +22,9 @@ export class userController {
 
   async listAll() {
     return this.service.listAll();
+  }
+
+  async selectById(data: ISelectUserByIdDTO) {
+    return this.service.selectById(data);
   }
 }
