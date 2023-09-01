@@ -7,6 +7,12 @@ import {
   DeleteUserUseCase,
   UpdateUserUseCase,
 } from '../@core/user/use-case';
+import {
+  ICreateUserDTO,
+  ISelectUserByIdDTO,
+  IDeleteuserDTO,
+  IUpdateUserDTO,
+} from '../@core/user/DTO';
 
 @injectable()
 export class UserService {
@@ -22,4 +28,12 @@ export class UserService {
     @inject(MODULE.USER.USE_CASE.DELETE)
     private readonly deleteUser: DeleteUserUseCase,
   ) {}
+
+  async create(user: ICreateUserDTO) {
+    return await this.createUser.execute(user);
+  }
+
+  async update(user: IUpdateUserDTO) {
+    return await this.updateUser.execute(user);
+  }
 }
