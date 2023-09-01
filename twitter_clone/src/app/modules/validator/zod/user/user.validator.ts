@@ -42,4 +42,8 @@ export class ZodUserValidator implements IUserValidator {
   validateSelectByIdDTO(DTO: ISelectUserByIdDTO) {
     return SelectUserByIdSchema.parse(DTO) ? true : false;
   }
+
+  validateUserDTO(DTO: IUserDTO) {
+    return UserSchema.parse(DTO) ? true : false;
+  }
 }
