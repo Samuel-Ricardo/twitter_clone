@@ -9,6 +9,7 @@ import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
 export const UserFactory = {
+  SERVICE: Symbol.for('user.service'),
   USE_CASE: {
     CREATE: () =>
       UserModule.get<CreateUserUseCase>(UserRegistry.USE_CASE.CREATE),
