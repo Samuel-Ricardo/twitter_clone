@@ -17,7 +17,7 @@ export class userController {
   ) {}
 
   async create(user: ICreateUserDTO) {
-    return this.service.create(user);
+    return { user: await this.service.create(user) };
   }
 
   async delete(user: IDeleteuserDTO) {
@@ -25,14 +25,14 @@ export class userController {
   }
 
   async update(user: IUpdateUserDTO) {
-    return this.service.update(user);
+    return { user: await this.service.update(user) };
   }
 
   async listAll() {
-    return this.service.listAll();
+    return { users: await this.service.listAll() };
   }
 
   async selectById(user: ISelectUserByIdDTO) {
-    return this.service.selectById(user);
+    return { user: await this.service.selectById(user) };
   }
 }
