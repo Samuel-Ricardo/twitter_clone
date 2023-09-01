@@ -36,4 +36,12 @@ export class UserService {
   async update(user: IUpdateUserDTO) {
     return await this.updateUser.execute(user);
   }
+
+  async selectById(data: ISelectUserByIdDTO) {
+    return await this.selectUserById.execute(data);
+  }
+
+  async listAll() {
+    return await this.listAllUsers.execute();
+  }
 }
