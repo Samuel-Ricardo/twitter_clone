@@ -1,3 +1,5 @@
+import { userController } from './controller';
+import { UserService } from './service';
 import {
   CreateUserUseCase,
   ListAllUsersUseCase,
@@ -9,7 +11,8 @@ import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
 export const UserFactory = {
-  SERVICE: Symbol.for('user.service'),
+  CONTROLLER: () => UserModule.get<userController>(UserRegistry.CONTROLLER),
+  SERVICE: () => UserModule.get<UserService>(UserRegistry.SERVICE),
   USE_CASE: {
     CREATE: () =>
       UserModule.get<CreateUserUseCase>(UserRegistry.USE_CASE.CREATE),
