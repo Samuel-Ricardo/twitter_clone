@@ -18,7 +18,11 @@ import {
 
 @injectable()
 export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
-  readonly prefix = '/users';
+  readonly prefix = 'users';
+
+  get fullURL() {
+    return `${this.URL}/${this.prefix}`;
+  }
 
   async create(user: ICreateUserDTO) {
     if (!CreateUserSchema.parse(user)) throw Error('Invalid user');
@@ -54,11 +58,11 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
     await this.delete(`${this.prefix}/${data.id}`);
   }
 
-  async swrListAll() {
-    return this.useSWR<IUserDTO[]>(this.prefix, this.fetcher);
+  swrListAll() {
+    return this.useSWR<IUserDTO[]>(this.fullURL, this.fetcher);
   }
 
-  async swrSelectById(data: ISelectUserByIdDTO) {
-    return this.useSWR<IUserDTO>(`${this.prefix}/${data.id}`, this.fetcher);
+  swrSelectById(data: ISelectUserByIdDTO) {
+    return this.useSWR<IUserDTO>(`${this.fullURL}/${data.id}`, this.fetcher);
   }
 }
