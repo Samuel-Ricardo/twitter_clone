@@ -41,11 +41,11 @@ export class UserService {
     return await this.deleteUser.execute(data);
   }
 
-  async selectById(data: ISelectUserByIdDTO) {
-    return await this.selectUserById.execute(data);
+  selectById(data: ISelectUserByIdDTO) {
+    return this.selectUserById.execute(data);
   }
 
-  async listAll() {
-    return await this.listAllUsers.execute();
+  listAll() {
+    return this.listAllUsers.execute();
   }
 }
