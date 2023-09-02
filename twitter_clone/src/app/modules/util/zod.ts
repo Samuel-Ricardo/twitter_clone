@@ -4,5 +4,5 @@ export const catchZod = (zod: {
   error: z.ZodError<any>;
   input: any | undefined;
 }) => {
-  throw new Error(JSON.parse(zod.error.message));
+  throw new Error(zod.error.message);
 };
