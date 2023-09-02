@@ -8,7 +8,7 @@ import { User } from '../entity/user.entity';
 import { ISWRSupport } from './support/swr.support';
 
 export interface IUserGateway extends ISWRSupport {
-  readonly prefix: '/users';
+  readonly prefix: 'users';
 
   create(user: ICreateUserDTO): Promise<User>;
   listAll(): Promise<User[]>;
