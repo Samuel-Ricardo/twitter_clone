@@ -10,13 +10,13 @@ export const UserSchema = z
     email: z.string(),
     password: z.string(),
 
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
     hasNotifications: z.boolean(),
 
     sessionToken: z.string().nullish(),
     bio: z.string().nullish(),
-    emailVerified: z.date().nullish(),
+    emailVerified: z.string().nullish(),
     image: z.string().nullish(),
     coverImage: z.string().nullish(),
     profileImage: z.string().nullish(),
