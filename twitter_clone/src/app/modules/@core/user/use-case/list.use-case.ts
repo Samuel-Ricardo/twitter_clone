@@ -1,7 +1,7 @@
 import { UserGatewayAccess } from '../gateway';
 
 export class ListAllUsersUseCase extends UserGatewayAccess {
-  async execute() {
+  execute() {
     return this.gateway.swrListAll();
   }
 }
