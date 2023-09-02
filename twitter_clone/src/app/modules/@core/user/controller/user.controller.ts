@@ -28,11 +28,11 @@ export class userController {
     return { user: await this.service.update(user) };
   }
 
-  async listAll() {
-    return { users: await this.service.listAll() };
+  listAll() {
+    return { users: this.service.listAll() };
   }
 
-  async selectById(user: ISelectUserByIdDTO) {
-    return { user: await this.service.selectById(user) };
+  selectById(user: ISelectUserByIdDTO) {
+    return { user: this.service.selectById(user) };
   }
 }
