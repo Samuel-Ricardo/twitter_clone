@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
-import { AXIOS_MODULE_MOCK } from '../axios/axios.module';
+import { AXIOS_MODULE_MOCK } from '../../axios/axios.module';
 import { AXIOS_GATEWAY_REGISTRY_MOCK } from './axios.registry';
-import { mockAxiosUserGateway, simulateAxiosUserGateway } from './axios/user';
+import { mockAxiosUserGateway, simulateAxiosUserGateway } from './user';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
