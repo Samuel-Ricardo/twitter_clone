@@ -1,10 +1,12 @@
-version: "3"
+version: '3'
 
 services:
-  app:
+  twitter:
     build: .
-    entrypoint: ["npm", "run", "start:docker"]
+    entrypoint: ['npm', 'run', 'start:docker']
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/home/node/app
+    external_links:
+      - 'host.docker.internal'
