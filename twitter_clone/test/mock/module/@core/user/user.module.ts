@@ -8,6 +8,10 @@ import {
   mockSelectUserByIdUseCase,
 } from './use-case';
 import { mockUserService, simulateUserService } from './service';
+import {
+  mockUserController,
+  simulateUserController,
+} from './controller/user.controller';
 
 const MODULE = new Container();
 
@@ -39,4 +43,12 @@ USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
 
 USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
   simulateUserService,
+);
+
+USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.CONTROLLER.MOCK).toDynamicValue(
+  mockUserController,
+);
+
+USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.CONTROLLER.SIMULATE).toDynamicValue(
+  simulateUserController,
 );
