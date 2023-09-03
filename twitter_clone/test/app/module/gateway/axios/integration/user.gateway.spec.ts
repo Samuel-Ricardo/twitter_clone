@@ -18,5 +18,13 @@ describe('[GATEWAY] | AXIOS => [USER] ', () => {
     expect(gateway).toBeInstanceOf(AxiosUserGateway);
   });
 
-  it('[INTEGRATION] | Should: list [all] => [USER]', async () => {});
+  it('[INTEGRATION] | Should: list [all] => [USER]', async () => {
+    const result = await gateway.listAll();
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBeGreaterThanOrEqual(0);
+
+    expect(result[0]).toBeInstanceOf(User);
+    expect(result[0].id).toBeDefined();
+  });
 });
