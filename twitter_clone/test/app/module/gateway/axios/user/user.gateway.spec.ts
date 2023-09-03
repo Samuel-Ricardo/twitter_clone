@@ -40,4 +40,20 @@ describe('[GATEWAY] | AXIOS => [USER]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: list [all] => [USER]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: { users: [VALID_USER.toStruct()] },
+    });
+
+    const result = await MODULE.gateway.listAll();
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([VALID_USER]);
+    expect(MODULE.client.get).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.get).toHaveBeenCalledWith(
+      MODULE.gateway.fullURL,
+      undefined,
+    );
+  });
 });
