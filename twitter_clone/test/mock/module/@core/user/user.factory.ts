@@ -10,8 +10,18 @@ import {
 import { USER_REGISTRY_MOCK } from './user.registry';
 import { UserService } from '@/app/modules/@core/user/service';
 import { ISimulatedUserService } from '@test/@types';
+import { UserController } from '@/app/modules/@core/user/controller';
+import { ISimulatedUserController } from '@test/@types/simulate/user/controller';
 
 export const USER_FACTORY_MOCK = {
+  CONTROLLER: {
+    MOCK: USER_MODULE_MOCK.get<DeepMockProxy<UserController>>(
+      USER_REGISTRY_MOCK.CONTROLLER.MOCK,
+    ),
+    SIMULATE: USER_MODULE_MOCK.get<ISimulatedUserController>(
+      USER_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+    ),
+  },
   SERVICE: {
     MOCK: USER_MODULE_MOCK.get<DeepMockProxy<UserService>>(
       USER_REGISTRY_MOCK.SERVICE.MOCK,
