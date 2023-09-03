@@ -1,7 +1,7 @@
 export const USER_REGISTRY_MOCK = {
   SERVICE: {
     MOCK: Symbol.for('mock:module.user.service'),
-    SIMULATED: Symbol.for('mock:module.user.service.simulated'),
+    SIMULATE: Symbol.for('mock:module.user.service.simulated'),
   },
   USE_CASE: {
     CREATE: Symbol.for('mock:module.user.use-case.create'),
