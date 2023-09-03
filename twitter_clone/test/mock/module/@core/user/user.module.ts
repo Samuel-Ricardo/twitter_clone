@@ -7,6 +7,7 @@ import {
   mockListAllUsersUseCase,
   mockSelectUserByIdUseCase,
 } from './use-case';
+import { mockUserService, simulateUserService } from './service';
 
 const MODULE = new Container();
 
@@ -30,4 +31,12 @@ USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.USE_CASE.GET.ALL).toDynamicValue(
 
 USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.USE_CASE.GET.BY.ID).toDynamicValue(
   mockSelectUserByIdUseCase,
+);
+
+USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.SERVICE).toDynamicValue(
+  mockUserService,
+);
+
+USER_MODULE_MOCK.bind(USER_REGISTRY_MOCK.SERVICE_SIMULATED).toDynamicValue(
+  simulateUserService,
 );
