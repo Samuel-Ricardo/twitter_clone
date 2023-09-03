@@ -8,8 +8,18 @@ import {
   ListAllUsersUseCase,
 } from '@/app/modules/@core/user/use-case';
 import { USER_REGISTRY_MOCK } from './user.registry';
+import { UserService } from '@/app/modules/@core/user/service';
+import { ISimulatedUserService } from '@test/@types';
 
 export const USER_FACTORY_MOCK = {
+  SERVICE: {
+    MOCK: USER_MODULE_MOCK.get<DeepMockProxy<UserService>>(
+      USER_REGISTRY_MOCK.SERVICE.MOCK,
+    ),
+    SIMULATE: USER_MODULE_MOCK.get<ISimulatedUserService>(
+      USER_REGISTRY_MOCK.SERVICE.SIMULATE,
+    ),
+  },
   USE_CASE: {
     CREATE: () =>
       USER_MODULE_MOCK.get<DeepMockProxy<CreateUserUseCase>>(
