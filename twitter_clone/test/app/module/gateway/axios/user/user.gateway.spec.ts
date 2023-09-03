@@ -97,4 +97,12 @@ describe('[GATEWAY] | AXIOS => [USER]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: delete => [USER]', async () => {
+    MODULE.client.delete.mockResolvedValue({ status: 204 });
+
+    expect(
+      MODULE.gateway.deleteUser({ id: VALID_USER.id }),
+    ).resolves.not.toThrow();
+  });
 });
