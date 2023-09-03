@@ -56,4 +56,20 @@ describe('[GATEWAY] | AXIOS => [USER]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: select [by] => [USER]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: { user: VALID_USER.toStruct() },
+    });
+
+    const result = await MODULE.gateway.selectById({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual(VALID_USER);
+    expect(MODULE.client.get).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.get).toHaveBeenCalledWith(
+      `${MODULE.gateway.fullURL}/${VALID_USER.id}`,
+      undefined,
+    );
+  });
 });
