@@ -1,4 +1,8 @@
 export const USER_REGISTRY_MOCK = {
+  CONTROLLER: {
+    MOCK: Symbol.for('mock:module.user.controller'),
+    SIMULATE: Symbol.for('mock:module.user.controller.simulated'),
+  },
   SERVICE: {
     MOCK: Symbol.for('mock:module.user.service'),
     SIMULATE: Symbol.for('mock:module.user.service.simulated'),
