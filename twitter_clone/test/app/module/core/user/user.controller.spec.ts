@@ -9,10 +9,13 @@ import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { expect } from '@jest/globals';
 import {
   CREATE_USER_DATA,
+  SWR_USER,
   UPDATE_USER_DATA,
   VALID_UPDATE_USER,
   VALID_USER,
 } from '@test/mock/data/user';
+import { IUserDTO } from '@/app/modules/@core/user/DTO';
+import { SWRResponse } from 'swr';
 
 describe('[CONTROLLER] | @CORE => [USER]', () => {
   let MODULE: ISimulatedUserController;
@@ -57,5 +60,20 @@ describe('[CONTROLLER] | @CORE => [USER]', () => {
     expect(
       MODULE.controller.delete({ id: VALID_USER.id }),
     ).resolves.not.toThrow();
+  });
+
+  it('[UNIT] | Should: list [all] => [USER]', async () => {
+    MODULE.service.listAll.mockReturnValue(
+      SWR_USER([VALID_USER.toStruct()]) as SWRResponse<IUserDTO[], any, any>,
+    );
+
+    const result = MODULE.controller.listAll();
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.users)).toStrictEqual(
+      JSON.stringify(SWR_USER([VALID_USER.toStruct()])),
+    ),
+      expect(MODULE.service.listAll).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.listAll).toHaveBeenCalledWith();
   });
 });

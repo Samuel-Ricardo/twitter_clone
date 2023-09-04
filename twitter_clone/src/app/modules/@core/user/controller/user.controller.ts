@@ -24,7 +24,7 @@ export class UserController {
   }
 
   async update(user: IUpdateUserDTO) {
-    return { user: (await this.service.update(user)).toStruct };
+    return { user: (await this.service.update(user)).toStruct() };
   }
 
   listAll() {
