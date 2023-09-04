@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Container } from 'inversify';
 import { USER_MODULE_MOCK } from './@core/user/user.module';
 import { AXIOS_MODULE_MOCK } from './axios/axios.module';
