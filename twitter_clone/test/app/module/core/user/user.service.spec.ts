@@ -7,7 +7,12 @@ import 'reflect-metadata';
 import { expect, describe, it } from '@jest/globals';
 import { ISimulatedUserService } from '@test/@types';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
-import { CREATE_USER_DATA, VALID_USER } from '@test/mock/data/user';
+import {
+  CREATE_USER_DATA,
+  UPDATE_USER_DATA,
+  VALID_UPDATE_USER,
+  VALID_USER,
+} from '@test/mock/data/user';
 
 describe('[SERVICE] | @CORE => [USER]', () => {
   let MODULE: ISimulatedUserService;
@@ -34,6 +39,23 @@ describe('[SERVICE] | @CORE => [USER]', () => {
     expect(MODULE.use_case.create.execute).toHaveBeenCalledTimes(1);
     expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
       CREATE_USER_DATA,
+    );
+  });
+
+  it('[UNIT] | Should: update => [USER]', async () => {
+    MODULE.use_case.update.execute.mockResolvedValue(VALID_UPDATE_USER);
+
+    const result = await MODULE.service.update(UPDATE_USER_DATA);
+
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual(VALID_UPDATE_USER);
+
+    expect(result.id).toEqual(VALID_USER.id);
+    expect(result.bio).not.toEqual(VALID_USER.bio);
+
+    expect(MODULE.use_case.update.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.update.execute).toHaveBeenCalledWith(
+      UPDATE_USER_DATA,
     );
   });
 });
