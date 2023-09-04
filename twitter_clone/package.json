@@ -13,7 +13,7 @@
     "format:fix": "prettier --ignore-path .gitignore --check --write ./src/**/*.{js,jsx,ts,tsx}",
     "test": "jest --passWithNoTests --color",
     "test:docker": "npm run test:dev",
-    "test:dev": "jest --watchAll --coverage --passWithNoTests --color",
+    "test:watch": "jest --watchAll --coverage --passWithNoTests --color",
     "test:staged": "jest --passWithNoTests --findRelatedTests --color",
     "test:coverage": "jest --coverage --passWithNoTests --color",
     "test:cypress": "cypress open",
