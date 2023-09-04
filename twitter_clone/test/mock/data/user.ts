@@ -24,6 +24,16 @@ export const VALID_USER_DATA: IUserDTO = {
 
 export const VALID_USER = User.create(VALID_USER_DATA);
 
+export const UPDATE_USER_DATA: IUpdateUserDTO = {
+  id: VALID_USER_DATA.id,
+  bio: 'Updated BIO',
+};
+
+export const VALID_UPDATE_USER = User.create({
+  ...VALID_USER_DATA,
+  ...UPDATE_USER_DATA,
+});
+
 export const generateValidUser = () =>
   User.create({
     id: randomID(),
