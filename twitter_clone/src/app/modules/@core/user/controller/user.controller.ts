@@ -10,7 +10,7 @@ import {
 } from '../DTO';
 
 @injectable()
-export class userController {
+export class UserController {
   constructor(
     @inject(MODULE.USER.SERVICE)
     private readonly service: UserService,
