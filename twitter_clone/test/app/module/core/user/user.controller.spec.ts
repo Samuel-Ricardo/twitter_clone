@@ -76,4 +76,22 @@ describe('[CONTROLLER] | @CORE => [USER]', () => {
       expect(MODULE.service.listAll).toHaveBeenCalledTimes(1);
     expect(MODULE.service.listAll).toHaveBeenCalledWith();
   });
+
+  it('[UNIT] | Should: select by [id] => [USER]', async () => {
+    MODULE.service.selectById.mockReturnValue(
+      SWR_USER(VALID_USER.toStruct()) as SWRResponse<IUserDTO, any, any>,
+    );
+
+    const result = MODULE.controller.selectById({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.user)).toStrictEqual(
+      JSON.stringify(SWR_USER(VALID_USER.toStruct())),
+    );
+
+    expect(MODULE.service.selectById).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.selectById).toHaveBeenCalledWith({
+      id: VALID_USER.id,
+    });
+  });
 });
