@@ -18,14 +18,14 @@ export const simulateUserService = ({
   const service = new UserService(create, update, id, all, delete_user);
 
   return {
-    servcie: service,
+    service: service,
     use_case: {
       create: create,
       update: update,
       delete: delete_user,
       get: {
         all: all,
-        by: id,
+        by: { id },
       },
     },
   };

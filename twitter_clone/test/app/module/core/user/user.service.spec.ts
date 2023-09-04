@@ -22,8 +22,6 @@ describe('[SERVICE] | @CORE => [USER]', () => {
 
     MODULE = MODULES_MOCK.USER.SERVICE.SIMULATE;
 
-    console.log({ MODULE });
-
     expect(MODULE).toBeDefined();
     expect(MODULE.service).toBeDefined();
     expect(MODULE.use_case).toBeDefined();
@@ -60,12 +58,32 @@ describe('[SERVICE] | @CORE => [USER]', () => {
   });
 
   it('[UNIT] | Should: delete => [USER]', async () => {
-    MODULE.use_case.delete.execute.mockResolvedValue(VALID_USER);
+    MODULE.use_case.delete.execute.mockResolvedValue({});
 
     expect(MODULE.service.delete({ id: VALID_USER.id })).resolves.not.toThrow();
 
     expect(MODULE.use_case.delete.execute).toHaveBeenCalledTimes(1);
     expect(MODULE.use_case.delete.execute).toHaveBeenCalledWith({
+      id: VALID_USER.id,
+    });
+  });
+
+  it('[UNIT] | Should: select by [id] => [USER]', async () => {
+    MODULE.use_case.get.by.id.execute.mockReturnValue({
+      data: VALID_USER.toStruct(),
+      error: null,
+      mutate: () => ({}) as any,
+      isLoading: false,
+      isValidating: false,
+    });
+
+    const result = MODULE.service.selectById({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(result.data).toStrictEqual(VALID_USER.toStruct());
+
+    expect(MODULE.use_case.get.by.id.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.get.by.id.execute).toHaveBeenCalledWith({
       id: VALID_USER.id,
     });
   });
