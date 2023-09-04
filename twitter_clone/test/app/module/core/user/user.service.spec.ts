@@ -87,4 +87,22 @@ describe('[SERVICE] | @CORE => [USER]', () => {
       id: VALID_USER.id,
     });
   });
+
+  it('[UNIT] | Should: list [all] => [USER]', async () => {
+    MODULE.use_case.get.all.execute.mockReturnValue({
+      data: [VALID_USER.toStruct()],
+      error: null,
+      mutate: () => ({}) as any,
+      isLoading: false,
+      isValidating: false,
+    });
+
+    const result = MODULE.service.listAll();
+
+    expect(result).toBeDefined();
+    expect(result.data).toStrictEqual([VALID_USER.toStruct()]);
+
+    expect(MODULE.use_case.get.all.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.get.all.execute).toHaveBeenCalledWith();
+  });
 });
