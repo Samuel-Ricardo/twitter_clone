@@ -4,4 +4,4 @@ import { mockAxios } from './axios';
 
 export const AXIOS_MODULE_MOCK = new Container();
 
-AXIOS_MODULE_MOCK.bind(AXIOS_REGISTRY_MOCK.AXIOS).toDynamicValue(mockAxios);
+AXIOS_MODULE_MOCK.bind(AXIOS_REGISTRY_MOCK.MOCK).toDynamicValue(mockAxios);
