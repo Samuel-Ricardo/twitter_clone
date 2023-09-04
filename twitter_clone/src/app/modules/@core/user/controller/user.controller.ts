@@ -4,7 +4,6 @@ import { MODULE } from '@/app/modules/app.registry';
 import {
   ICreateUserDTO,
   IUpdateUserDTO,
-  IUserDTO,
   IDeleteuserDTO,
   ISelectUserByIdDTO,
 } from '../DTO';
@@ -17,7 +16,7 @@ export class UserController {
   ) {}
 
   async create(user: ICreateUserDTO) {
-    return { user: await this.service.create(user) };
+    return { user: (await this.service.create(user)).toStruct() };
   }
 
   async delete(user: IDeleteuserDTO) {
@@ -25,7 +24,7 @@ export class UserController {
   }
 
   async update(user: IUpdateUserDTO) {
-    return { user: await this.service.update(user) };
+    return { user: (await this.service.update(user)).toStruct };
   }
 
   listAll() {
