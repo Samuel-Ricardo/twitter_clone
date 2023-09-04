@@ -58,4 +58,15 @@ describe('[SERVICE] | @CORE => [USER]', () => {
       UPDATE_USER_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [USER]', async () => {
+    MODULE.use_case.delete.execute.mockResolvedValue(VALID_USER);
+
+    expect(MODULE.service.delete({ id: VALID_USER.id })).resolves.not.toThrow();
+
+    expect(MODULE.use_case.delete.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.delete.execute).toHaveBeenCalledWith({
+      id: VALID_USER.id,
+    });
+  });
 });
