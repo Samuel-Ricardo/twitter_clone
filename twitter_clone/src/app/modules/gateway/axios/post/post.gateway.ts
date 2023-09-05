@@ -77,4 +77,11 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
   swrFindById(data: IFindPostByIdDTO) {
     return this.useSWR<IPostDTO>(`${this.prefix}/${data.id}`, this.fetcher);
   }
+
+  swrFindByAuthor(data: IFindPostByAuthorIdDTO) {
+    return this.useSWR<IPostDTO[]>(
+      `${this.prefix}/author/${data.id}`,
+      this.fetcher,
+    );
+  }
 }
