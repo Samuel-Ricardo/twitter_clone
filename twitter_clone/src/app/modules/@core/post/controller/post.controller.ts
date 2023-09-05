@@ -20,4 +20,8 @@ export class PostController {
     const result = await this.service.create(post);
     return { post: result.toStruct() };
   }
+
+  async update(post: IUpdatePostDTO) {
+    return { post: (await this.service.update(post)).toStruct() };
+  }
 }
