@@ -6,6 +6,6 @@ import { type IPostGateway } from '.';
 export class PostGatewayAccess {
   constructor(
     @inject(MODULE.GATEWAY.AXIOS.POST)
-    private readonly gateway: IPostGateway,
+    protected readonly gateway: IPostGateway,
   ) {}
 }
