@@ -30,10 +30,14 @@ export class PostController {
   }
 
   findAll() {
-    return { post: this.service.findAll() };
+    return { posts: this.service.findAll() };
   }
 
   findById(post: IFindPostByIdDTO) {
     return { post: this.service.findById(post) };
+  }
+
+  findByAuthor(author: IFindPostByAuthorIdDTO) {
+    return { posts: this.service.findByAuthor(author) };
   }
 }
