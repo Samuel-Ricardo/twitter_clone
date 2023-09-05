@@ -1,6 +1,8 @@
+import { injectable } from 'inversify';
 import { IPostDTO } from '../DTO/post.dto';
 import { PostSchema } from '../validator/schema/post.schema';
 
+@injectable()
 export class Post {
   constructor(
     private _id: string,
