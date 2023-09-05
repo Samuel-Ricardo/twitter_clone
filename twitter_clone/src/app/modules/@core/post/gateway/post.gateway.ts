@@ -10,6 +10,7 @@ import { ISWRSupport } from './support';
 
 export interface IPostGateway extends ISWRSupport {
   readonly prefix: 'posts';
+  get fullURL(): string;
 
   create(data: ICreatePostDTO): Promise<Post>;
   findAll(): Promise<Post[]>;
