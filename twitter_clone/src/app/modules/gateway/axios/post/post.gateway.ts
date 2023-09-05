@@ -50,4 +50,13 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
 
     await this.delete(`${this.prefix}/${data.id}`);
   }
+
+  async findById(data: IFindPostByIdDTO) {
+    FindPostByIdSchema.parse(data);
+
+    const response = await this.get<{ post: IPostDTO }>(
+      `${this.prefix}/${data.id}`,
+    );
+    return Post.create(response.data.post);
+  }
 }
