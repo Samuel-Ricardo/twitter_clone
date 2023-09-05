@@ -8,6 +8,7 @@ import {
   FindPostsByAuthorUseCase,
   UpdatePostUseCase,
 } from './use-case';
+import { PostService } from './service';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -23,3 +24,5 @@ POST_MODULE.bind(POST_REGISTRY.USE_CASE.FIND.BY.ID).to(
   FindPostsByAuthorUseCase,
 );
 POST_MODULE.bind(POST_REGISTRY.USE_CASE.UPDATE).to(UpdatePostUseCase);
+
+POST_MODULE.bind(POST_REGISTRY.SERVICE).to(PostService);
