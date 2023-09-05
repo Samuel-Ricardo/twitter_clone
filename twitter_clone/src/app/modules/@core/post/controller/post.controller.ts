@@ -28,4 +28,8 @@ export class PostController {
   async delete(post: IDeletePostDTO) {
     await this.service.delete(post);
   }
+
+  findAll() {
+    return { post: this.service.findAll() };
+  }
 }
