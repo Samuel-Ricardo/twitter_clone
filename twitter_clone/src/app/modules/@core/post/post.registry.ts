@@ -1,4 +1,5 @@
 export const POST_REGISTRY = {
+  CONTROLLER: Symbol.for('post.controller'),
   SERVICE: Symbol.for('post.service'),
   USE_CASE: {
     CREATE: Symbol.for('post.use-case.create'),
