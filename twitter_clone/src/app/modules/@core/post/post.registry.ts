@@ -6,7 +6,9 @@ export const POST_REGISTRY = {
     FIND: {
       ALL: Symbol.for('post.use-case.find.all'),
       BY: {
-        AUTHOR: Symbol.for('post.use-case.find.by.author.id'),
+        AUTHOR: {
+          ID: Symbol.for('post.use-case.find.by.author.id'),
+        },
         ID: Symbol.for('post.use-case.find.by.id'),
       },
     },
