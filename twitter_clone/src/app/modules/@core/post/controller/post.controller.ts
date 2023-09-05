@@ -32,4 +32,8 @@ export class PostController {
   findAll() {
     return { post: this.service.findAll() };
   }
+
+  findById(post: IFindPostByIdDTO) {
+    return { post: this.service.findById(post) };
+  }
 }
