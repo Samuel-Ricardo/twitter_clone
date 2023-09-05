@@ -38,4 +38,28 @@ export class Post {
   static createArray(posts: IPostDTO[]) {
     return posts.map((post) => Post.create(post));
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get body() {
+    return this._body;
+  }
+
+  get authorId() {
+    return this._authorId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
+  get image() {
+    return this._image;
+  }
 }
