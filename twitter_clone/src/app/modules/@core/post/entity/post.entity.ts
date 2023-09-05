@@ -39,6 +39,17 @@ export class Post {
     return posts.map((post) => Post.create(post));
   }
 
+  toStruct(): IPostDTO {
+    return {
+      id: this._id,
+      body: this._body,
+      authorId: this._authorId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+      image: this._image,
+    };
+  }
+
   get id() {
     return this._id;
   }
