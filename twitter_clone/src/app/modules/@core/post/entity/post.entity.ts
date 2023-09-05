@@ -34,4 +34,8 @@ export class Post {
       post.image,
     );
   }
+
+  static createArray(posts: IPostDTO[]) {
+    return posts.map((post) => Post.create(post));
+  }
 }
