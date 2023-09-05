@@ -52,4 +52,8 @@ export class PostService {
   findById(post: IFindPostByIdDTO) {
     return this.findPostById.execute(post);
   }
+
+  findByAuthor(post: IFindPostByAuthorIdDTO) {
+    return this.findPostsByAuthor.execute(post);
+  }
 }
