@@ -24,4 +24,8 @@ export class PostController {
   async update(post: IUpdatePostDTO) {
     return { post: (await this.service.update(post)).toStruct() };
   }
+
+  async delete(post: IDeletePostDTO) {
+    await this.service.delete(post);
+  }
 }
