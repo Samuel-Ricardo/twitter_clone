@@ -34,13 +34,13 @@ export const VALID_UPDATE_USER = User.create({
   ...UPDATE_USER_DATA,
 });
 
-export const SWR_USER = {
-  data: [VALID_USER.toStruct()],
+export const SWR_USER = (data: IUserDTO | IUserDTO[]) => ({
+  data,
   error: null,
   mutate: () => ({}) as any,
   isLoading: false,
   isValidating: false,
-};
+});
 
 export const generateValidUser = () =>
   User.create({
