@@ -23,4 +23,15 @@ export class Post {
   static validate(post: IPostDTO) {
     return PostSchema.parse(post) as IPostDTO;
   }
+
+  static create(post: IPostDTO) {
+    return new Post(
+      post.id,
+      post.body,
+      post.authorId,
+      post.createdAt,
+      post.updatedAt,
+      post.image,
+    );
+  }
 }
