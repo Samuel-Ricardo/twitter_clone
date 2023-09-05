@@ -3,7 +3,7 @@ import { PostGatewayAccess } from '../gateway';
 
 @injectable()
 export class FindAllPostUseCase extends PostGatewayAccess {
-  async execute() {
-    return this.gateway.findAll();
+  execute() {
+    return this.gateway.swrListAll;
   }
 }
