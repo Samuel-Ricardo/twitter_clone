@@ -9,7 +9,7 @@ import {
 import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedUserService {
-  servcie: UserService;
+  service: UserService;
   use_case: {
     create: DeepMockProxy<CreateUserUseCase>;
     update: DeepMockProxy<UpdateUserUseCase>;
