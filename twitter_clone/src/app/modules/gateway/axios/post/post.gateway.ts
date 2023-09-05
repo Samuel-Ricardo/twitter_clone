@@ -26,4 +26,9 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
     const response = await this.post<{ post: IPostDTO }>(this.prefix, post);
     return Post.create(response.data.post);
   }
+
+  async findAll() {
+    const response = await this.get<{ posts: IPostDTO[] }>(this.prefix);
+    return Post.createArray(response.data.posts);
+  }
 }
