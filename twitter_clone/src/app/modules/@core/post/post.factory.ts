@@ -10,6 +10,7 @@ import {
 } from './use-case';
 
 export const POST_FACTORY = {
+  SERVICE: Symbol.for('post.service'),
   USE_CASE: {
     CREATE: () =>
       POST_MODULE.get<CreatePostUseCase>(POST_REGISTRY.USE_CASE.CREATE),
