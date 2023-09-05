@@ -8,7 +8,7 @@ import {
   UpdatePostUseCase,
   FindPostsByAuthorUseCase,
 } from '../use-case';
-import { ICreatePostDTO } from '../DTO';
+import { ICreatePostDTO, IUpdatePostDTO } from '../DTO';
 
 @injectable()
 export class PostService {
@@ -29,5 +29,9 @@ export class PostService {
 
   async create(post: ICreatePostDTO) {
     return this.createPost.execute(post);
+  }
+
+  async update(post: IUpdatePostDTO) {
+    return this.updatePost.execute(post);
   }
 }
