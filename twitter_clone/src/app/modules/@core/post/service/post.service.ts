@@ -8,6 +8,7 @@ import {
   UpdatePostUseCase,
   FindPostsByAuthorUseCase,
 } from '../use-case';
+import { ICreatePostDTO } from '../DTO';
 
 @injectable()
 export class PostService {
@@ -25,4 +26,8 @@ export class PostService {
     @inject(MODULE.POST.USE_CASE.FIND.BY.AUTHOR.ID)
     private readonly findPostsByAuthor: FindPostsByAuthorUseCase,
   ) {}
+
+  async create(post: ICreatePostDTO) {
+    return this.createPost.execute(post);
+  }
 }
