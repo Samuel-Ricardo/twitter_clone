@@ -44,4 +44,10 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
     const response = await this.patch<{ post: IPostDTO }>(this.prefix, data);
     return Post.create(response.data.post);
   }
+
+  async deletePost(data: IDeletePostDTO) {
+    DeletePostSchema.parse(data);
+
+    await this.delete(`${this.prefix}/${data.id}`);
+  }
 }
