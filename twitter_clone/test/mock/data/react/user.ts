@@ -6,7 +6,7 @@ export const USER_DATA: IUserDTO = {
   username: 'p3dr0',
   email: 'pedro@email.com',
   password: 'h3j2f6',
-  id: '123',
+  id: '1234',
   bio: 'Hello World! :D',
   hasNotifications: true,
   createdAt: new Date(),
