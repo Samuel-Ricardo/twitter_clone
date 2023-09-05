@@ -48,4 +48,8 @@ export class PostService {
   findAll() {
     return this.findAllPost.execute();
   }
+
+  findById(post: IFindPostByIdDTO) {
+    return this.findPostById.execute(post);
+  }
 }
