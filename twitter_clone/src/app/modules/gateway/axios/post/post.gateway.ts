@@ -69,4 +69,8 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
 
     return Post.createArray(response.data.posts);
   }
+
+  swrListAll() {
+    return this.useSWR<IPostDTO[]>(this.fullURL, this.fetcher);
+  }
 }
