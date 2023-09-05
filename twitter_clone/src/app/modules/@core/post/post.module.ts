@@ -9,6 +9,7 @@ import {
   UpdatePostUseCase,
 } from './use-case';
 import { PostService } from './service';
+import { PostController } from './controller/post.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -26,3 +27,5 @@ POST_MODULE.bind(POST_REGISTRY.USE_CASE.FIND.BY.ID).to(
 POST_MODULE.bind(POST_REGISTRY.USE_CASE.UPDATE).to(UpdatePostUseCase);
 
 POST_MODULE.bind(POST_REGISTRY.SERVICE).to(PostService);
+
+POST_MODULE.bind(POST_REGISTRY.CONTROLLER).to(PostController);
