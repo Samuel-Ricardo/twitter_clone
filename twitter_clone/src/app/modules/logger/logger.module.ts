@@ -15,9 +15,9 @@ export const logger = {
     context: string;
     message: string;
     error?: Error;
-  }) => console.error(`[${context}] | ${message} `, error),
+  }) => console.error(`[${Date.now()}] | [${context}] | ${message} `, error),
   info: ({ context, message }: { context: string; message: string }) =>
-    console.info(`[${context}] | ${message}`),
+    console.info(`[${Date.now()}] | [${context}] | ${message}`),
   warn: ({ context, message }: { context: string; message: string }) =>
-    console.warn(`[${context}] | ${message}`),
+    console.warn(`[${Date.now()}] | [${context}] | ${message}`),
 };
