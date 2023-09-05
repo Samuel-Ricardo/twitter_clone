@@ -1,5 +1,7 @@
+import { PostController } from './controller/post.controller';
 import { POST_MODULE } from './post.module';
 import { POST_REGISTRY } from './post.registry';
+import { PostService } from './service';
 import {
   CreatePostUseCase,
   DeletePostUseCase,
@@ -10,7 +12,8 @@ import {
 } from './use-case';
 
 export const POST_FACTORY = {
-  SERVICE: Symbol.for('post.service'),
+  CONTROLLER: () => POST_MODULE.get<PostController>(POST_REGISTRY.CONTROLLER),
+  SERVICE: () => POST_MODULE.get<PostService>(POST_REGISTRY.SERVICE),
   USE_CASE: {
     CREATE: () =>
       POST_MODULE.get<CreatePostUseCase>(POST_REGISTRY.USE_CASE.CREATE),
