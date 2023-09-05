@@ -60,7 +60,7 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
     return Post.create(response.data.post);
   }
 
-  async findByAuhor(data: IFindPostByAuthorIdDTO) {
+  async findByAuhorId(data: IFindPostByAuthorIdDTO) {
     FindPostByAuthorIdSchema.parse(data);
 
     const response = await this.get<{ posts: IPostDTO[] }>(
