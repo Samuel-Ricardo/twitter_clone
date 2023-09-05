@@ -9,7 +9,13 @@ import {
   IFindPostByIdDTO,
   IPostDTO,
 } from '@/app/modules/@core/post/DTO';
-import { CreatePostSchema } from '@/app/modules/@core/post/validator/schema';
+import {
+  CreatePostSchema,
+  UpdatePostSchema,
+  DeletePostSchema,
+  FindPostByIdSchema,
+  FindPostByAuthorIdSchema,
+} from '@/app/modules/@core/post/validator/schema';
 import { Post } from '@/app/modules/@core/post/entity';
 
 @injectable()
@@ -30,5 +36,12 @@ export class AxiosPostGateway extends AxiosHTTPGateway implements IPostGateway {
   async findAll() {
     const response = await this.get<{ posts: IPostDTO[] }>(this.prefix);
     return Post.createArray(response.data.posts);
+  }
+
+  async update(data: IUpdatePostDTO) {
+    UpdatePostSchema.parse(data);
+
+    const response = await this.patch<{ post: IPostDTO }>(this.prefix, data);
+    return Post.create(response.data.post);
   }
 }
