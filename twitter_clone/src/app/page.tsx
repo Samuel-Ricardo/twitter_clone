@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useUsers } from './hooks/user/current.hook';
+import { useUsers } from './hooks/user/all.hook';
 
 export default function Home() {
   const { data: users } = useUsers();
