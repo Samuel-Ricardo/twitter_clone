@@ -1,4 +1,8 @@
 export const POST_REGISTRY_MOCK = {
+  CONTROLLER: {
+    MOCK: Symbol.for('mock:modules.post.controller'),
+    SIMULATE: Symbol.for('simulate:modules.post.controller'),
+  },
   SERVICE: {
     MOCK: Symbol.for('mock:modules.post.service'),
     SIMULATE: Symbol.for('simulate:modules.post.service'),
