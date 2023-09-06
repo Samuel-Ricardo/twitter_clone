@@ -9,6 +9,7 @@ import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { expect } from '@jest/globals';
 import {
   CREATE_POST_DATA,
+  SWR_POST,
   UPDATE_POST_DATA,
   VALID_POST,
   VALID_UPDATED_POST,
@@ -63,5 +64,36 @@ describe('[SERVICE] | POST', () => {
 
     expect(MODULE.service.delete({ id: VALID_POST.id })).resolves.not.toThrow();
     expect(MODULE.use_case.deletePost.execute).toHaveBeenCalledTimes(1);
+  });
+
+  it('[UNIT] | Should: find [all] => [POST]', async () => {
+    MODULE.use_case.find.all.execute.mockReturnValue(
+      SWR_POST([VALID_POST.toStruct()]) as any,
+    );
+
+    const result = MODULE.service.findAll();
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.data![0])).toStrictEqual(
+      JSON.stringify(VALID_POST.toStruct()),
+    );
+
+    expect(MODULE.use_case.find.all.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.find.all.execute).toHaveBeenCalledWith();
+  });
+
+  it('[UNIT] | Should: find by [id] => [POST]', async () => {
+    MODULE.use_case.find.by.id.execute.mockReturnValue(
+      SWR_POST(VALID_POST.toStruct()) as any,
+    );
+
+    const result = MODULE.service.findById({ id: VALID_POST.id });
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.data)).toEqual(
+      JSON.stringify(VALID_POST.toStruct()),
+    );
+
+    expect(MODULE.use_case.find.by.id.execute).toHaveBeenCalledTimes(1);
   });
 });

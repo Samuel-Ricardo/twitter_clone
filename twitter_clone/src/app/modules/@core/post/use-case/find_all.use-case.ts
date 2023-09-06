@@ -4,6 +4,6 @@ import { PostGatewayAccess } from '../gateway';
 @injectable()
 export class FindAllPostUseCase extends PostGatewayAccess {
   execute() {
-    return this.gateway.swrListAll;
+    return this.gateway.swrListAll();
   }
 }
