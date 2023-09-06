@@ -17,5 +17,5 @@ export interface IPostGateway extends ISWRSupport {
   findById(data: IFindPostByIdDTO): Promise<Post>;
   findByAuhorId(data: IFindPostByAuthorIdDTO): Promise<Post[]>;
   update(data: IUpdatePostDTO): Promise<Post>;
-  delete(post: IDeletePostDTO): Promise<void>;
+  deletePost(post: IDeletePostDTO): Promise<void>;
 }

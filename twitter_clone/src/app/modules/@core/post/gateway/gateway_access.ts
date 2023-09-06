@@ -1,4 +1,4 @@
-import { MODULE } from '@/app/modules';
+import { MODULE } from '../../../app.registry';
 import { inject, injectable } from 'inversify';
 import { type IPostGateway } from '.';
 
