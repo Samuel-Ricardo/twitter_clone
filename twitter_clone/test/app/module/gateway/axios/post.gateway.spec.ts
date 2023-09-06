@@ -8,6 +8,7 @@ import { AxiosPostGateway } from '@/app/modules/gateway/axios/post/post.gateway'
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { expect } from '@jest/globals';
 import { CREATE_POST_DATA, VALID_POST } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock/data/user';
 
 describe('[GATEWAY] | AXIOS => [POST]', () => {
   let MODULE = MODULES_MOCK.GATEWAY.AXIOS.POST.SIMULATE();
@@ -70,6 +71,23 @@ describe('[GATEWAY] | AXIOS => [POST]', () => {
     expect(MODULE.client.get).toHaveBeenCalledTimes(1);
     expect(MODULE.client.get).toHaveBeenCalledWith(
       `${MODULE.gateway.fullURL}/${VALID_POST.id}`,
+      undefined,
+    );
+  });
+
+  it('[UNIT] | Should: find by [author] => [POST]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: { posts: [VALID_POST.toStruct()] },
+    });
+
+    const result = await MODULE.gateway.findByAuhorId({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([VALID_POST]);
+
+    expect(MODULE.client.get).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.get).toHaveBeenCalledWith(
+      `${MODULE.gateway.fullURL}/author/${VALID_USER.id}`,
       undefined,
     );
   });
