@@ -14,6 +14,7 @@ import {
   VALID_POST,
   VALID_UPDATED_POST,
 } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock/data/user';
 
 describe('[SERVICE] | POST', () => {
   let MODULE: ISimulatedPostService;
@@ -95,5 +96,27 @@ describe('[SERVICE] | POST', () => {
     );
 
     expect(MODULE.use_case.find.by.id.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.find.by.id.execute).toHaveBeenCalledWith({
+      id: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: find by [author] => [POST]', async () => {
+    MODULE.use_case.find.by.author.execute.mockReturnValue(
+      SWR_POST([VALID_POST.toStruct()]) as any,
+    );
+
+    const result = MODULE.service.findByAuthor({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.data)).toEqual(
+      JSON.stringify([VALID_POST.toStruct()]),
+    );
+    expect(result.data![0].authorId).toEqual(VALID_USER.id);
+
+    expect(MODULE.use_case.find.by.author.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.find.by.author.execute).toHaveBeenCalledWith({
+      id: VALID_USER.id,
+    });
   });
 });
