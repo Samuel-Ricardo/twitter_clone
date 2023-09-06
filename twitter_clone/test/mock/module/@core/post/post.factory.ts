@@ -9,10 +9,23 @@ import {
   UpdatePostUseCase,
 } from '@/app/modules/@core/post/use-case';
 import { POST_REGISTRY_MOCK } from './post.registry';
-import { ISimulatedPostService } from '@test/@types/simulate/post';
-import { PostService } from '@/app/modules/@core/post';
+import {
+  ISimulatedPostController,
+  ISimulatedPostService,
+} from '@test/@types/simulate/post';
+import { PostController, PostService } from '@/app/modules/@core/post';
 
 export const POST_FACTORY_MOCK = {
+  CONTROLLER: {
+    MOCK: () =>
+      POST_MODULE_MOCK.get<DeepMockProxy<PostController>>(
+        POST_REGISTRY_MOCK.CONTROLLER.MOCK,
+      ),
+    SIMULATE: () =>
+      POST_MODULE_MOCK.get<ISimulatedPostController>(
+        POST_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+      ),
+  },
   SERVICE: {
     MOCK: () =>
       POST_MODULE_MOCK.get<DeepMockProxy<PostService>>(
