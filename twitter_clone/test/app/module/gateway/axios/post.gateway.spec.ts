@@ -7,7 +7,12 @@ import 'reflect-metadata';
 import { AxiosPostGateway } from '@/app/modules/gateway/axios/post/post.gateway';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { expect } from '@jest/globals';
-import { CREATE_POST_DATA, VALID_POST } from '@test/mock/data/post';
+import {
+  CREATE_POST_DATA,
+  UPDATE_POST_DATA,
+  VALID_POST,
+  VALID_UPDATED_POST,
+} from '@test/mock/data/post';
 import { VALID_USER } from '@test/mock/data/user';
 
 describe('[GATEWAY] | AXIOS => [POST]', () => {
@@ -88,6 +93,25 @@ describe('[GATEWAY] | AXIOS => [POST]', () => {
     expect(MODULE.client.get).toHaveBeenCalledTimes(1);
     expect(MODULE.client.get).toHaveBeenCalledWith(
       `${MODULE.gateway.fullURL}/author/${VALID_USER.id}`,
+      undefined,
+    );
+  });
+
+  it('[UNIT] | Should: update => [POST]', async () => {
+    MODULE.client.patch.mockResolvedValue({
+      data: { post: VALID_UPDATED_POST.toStruct() },
+    });
+
+    const result = await MODULE.gateway.update(UPDATE_POST_DATA);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual(VALID_UPDATED_POST);
+    expect(result.id).toEqual(VALID_POST.id);
+    expect(result.body).not.toEqual(VALID_POST.body);
+    expect(MODULE.client.patch).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.patch).toHaveBeenCalledWith(
+      `${MODULE.gateway.fullURL}`,
+      UPDATE_POST_DATA,
       undefined,
     );
   });
