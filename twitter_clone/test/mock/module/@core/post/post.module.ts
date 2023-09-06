@@ -6,6 +6,7 @@ import { mockDeletePostUseCase } from './use-case/delete.use-case';
 import { mockFindAllPostUseCase } from './use-case/find_all.use-case';
 import { mockFindPostById } from './use-case/find_by_id.use-case';
 import { mockFindPostByAuthorUseCase } from './use-case/find_by_author.use-case';
+import { mockPostService, simulatePostService } from './service/post.service';
 
 export const POST_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -32,3 +33,11 @@ POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.USE_CASE.FIND.BY.ID).toDynamicValue(
 POST_MODULE_MOCK.bind(
   POST_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
 ).toDynamicValue(mockFindPostByAuthorUseCase);
+
+POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
+  mockPostService,
+);
+
+POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
+  simulatePostService,
+);
