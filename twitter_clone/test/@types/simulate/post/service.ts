@@ -7,18 +7,19 @@ import {
   PostService,
   UpdatePostUseCase,
 } from '@/app/modules/@core/post';
+import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedPostService {
   service: PostService;
   use_case: {
-    create: CreatePostUseCase;
-    update: UpdatePostUseCase;
-    deletePost: DeletePostUseCase;
+    create: DeepMockProxy<CreatePostUseCase>;
+    update: DeepMockProxy<UpdatePostUseCase>;
+    deletePost: DeepMockProxy<DeletePostUseCase>;
     find: {
-      all: FindAllPostUseCase;
+      all: DeepMockProxy<FindAllPostUseCase>;
       by: {
-        id: FindPostByIdUseCase;
-        author: FindPostsByAuthorUseCase;
+        id: DeepMockProxy<FindPostByIdUseCase>;
+        author: DeepMockProxy<FindPostsByAuthorUseCase>;
       };
     };
   };
