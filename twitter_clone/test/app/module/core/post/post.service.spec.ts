@@ -57,4 +57,11 @@ describe('[SERVICE] | POST', () => {
       UPDATE_POST_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [POST]', async () => {
+    MODULE.use_case.deletePost.execute.mockResolvedValue();
+
+    expect(MODULE.service.delete({ id: VALID_POST.id })).resolves.not.toThrow();
+    expect(MODULE.use_case.deletePost.execute).toHaveBeenCalledTimes(1);
+  });
 });
