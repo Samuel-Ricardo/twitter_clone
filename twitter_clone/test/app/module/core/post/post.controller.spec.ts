@@ -7,7 +7,7 @@ import 'reflect-metadata';
 import { ISimulatedPostController } from '@test/@types/simulate/post';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { expect } from '@jest/globals';
-import { CREATE_POST_DATA, VALID_POST } from '@test/mock/data/post';
+import { CREATE_POST_DATA, SWR_POST, VALID_POST } from '@test/mock/data/post';
 
 describe('[CONTROLLER] | @CORE => [POST]', () => {
   let MODULE: ISimulatedPostController;
@@ -30,5 +30,20 @@ describe('[CONTROLLER] | @CORE => [POST]', () => {
     expect(result).toStrictEqual({ post: VALID_POST.toStruct() });
     expect(MODULE.service.create).toHaveBeenCalledTimes(1);
     expect(MODULE.service.create).toHaveBeenCalledWith(CREATE_POST_DATA);
+  });
+
+  it('[UNIT] | Should: find [all] => [POST]', async () => {
+    MODULE.service.findAll.mockReturnValue(
+      SWR_POST([VALID_POST.toStruct()]) as any,
+    );
+
+    const result = MODULE.controller.findAll();
+
+    expect(JSON.stringify(result.posts.data!)).toStrictEqual(
+      JSON.stringify([VALID_POST.toStruct()]),
+    );
+
+    expect(MODULE.service.findAll).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.findAll).toHaveBeenCalledWith();
   });
 });
