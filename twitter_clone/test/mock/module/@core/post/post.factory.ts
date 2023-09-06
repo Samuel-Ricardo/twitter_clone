@@ -9,8 +9,20 @@ import {
   UpdatePostUseCase,
 } from '@/app/modules/@core/post/use-case';
 import { POST_REGISTRY_MOCK } from './post.registry';
+import { ISimulatedPostService } from '@test/@types/simulate/post';
+import { PostService } from '@/app/modules/@core/post';
 
 export const POST_FACTORY_MOCK = {
+  SERVICE: {
+    MOCK: () =>
+      POST_MODULE_MOCK.get<DeepMockProxy<PostService>>(
+        POST_REGISTRY_MOCK.SERVICE.MOCK,
+      ),
+    SIMULATE: () =>
+      POST_MODULE_MOCK.get<ISimulatedPostService>(
+        POST_REGISTRY_MOCK.SERVICE.SIMULATE,
+      ),
+  },
   USE_CASE: {
     CREATE: () =>
       POST_MODULE_MOCK.get<DeepMockProxy<CreatePostUseCase>>(
