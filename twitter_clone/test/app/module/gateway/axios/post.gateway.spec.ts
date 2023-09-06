@@ -56,4 +56,21 @@ describe('[GATEWAY] | AXIOS => [POST]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: find by [id] => [POST]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: { post: VALID_POST.toStruct() },
+    });
+
+    const result = await MODULE.gateway.findById({ id: VALID_POST.id });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual(VALID_POST);
+
+    expect(MODULE.client.get).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.get).toHaveBeenCalledWith(
+      `${MODULE.gateway.fullURL}/${VALID_POST.id}`,
+      undefined,
+    );
+  });
 });
