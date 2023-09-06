@@ -46,4 +46,16 @@ describe('[CONTROLLER] | @CORE => [POST]', () => {
     expect(MODULE.service.findAll).toHaveBeenCalledTimes(1);
     expect(MODULE.service.findAll).toHaveBeenCalledWith();
   });
+
+  it('[UNIT] | Should: find by [id] => [POST]', async () => {
+    MODULE.service.findById.mockReturnValue(
+      SWR_POST(VALID_POST.toStruct()) as any,
+    );
+
+    const result = MODULE.controller.findById({ id: VALID_POST.id });
+
+    expect(result.post.data).toStrictEqual(VALID_POST.toStruct());
+    expect(MODULE.service.findById).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.findById).toHaveBeenCalledWith({ id: VALID_POST.id });
+  });
 });
