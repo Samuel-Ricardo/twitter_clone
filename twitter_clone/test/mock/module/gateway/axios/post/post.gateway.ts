@@ -5,9 +5,9 @@ import axios from 'axios';
 import { interfaces } from 'inversify';
 import { mockDeep } from 'jest-mock-extended';
 
-export const mockPostGateway = () => mockDeep<AxiosPostGateway>();
+export const mockAxiosPostGateway = () => mockDeep<AxiosPostGateway>();
 
-export const simulatePostGateway = ({
+export const simulateAxiosPostGateway = ({
   container,
 }: interfaces.Context): ISimulatedPostGateway<
   AxiosPostGateway,
