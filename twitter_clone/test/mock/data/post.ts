@@ -31,3 +31,11 @@ export const VALID_UPDATED_POST = Post.create({
   ...VALID_POST_DATA,
   ...UPDATE_POST_DATA,
 });
+
+export const SWR_POST = (data: IPostDTO | IPostDTO[]) => ({
+  data,
+  error: null,
+  mutate: () => ({}) as any,
+  isLoading: false,
+  isValidating: false,
+});
