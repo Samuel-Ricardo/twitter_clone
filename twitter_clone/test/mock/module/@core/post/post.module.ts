@@ -7,6 +7,10 @@ import { mockFindAllPostUseCase } from './use-case/find_all.use-case';
 import { mockFindPostById } from './use-case/find_by_id.use-case';
 import { mockFindPostByAuthorUseCase } from './use-case/find_by_author.use-case';
 import { mockPostService, simulatePostService } from './service/post.service';
+import {
+  mockPostController,
+  simulatePostController,
+} from './controller/post.controller';
 
 export const POST_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -40,4 +44,12 @@ POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
 
 POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
   simulatePostService,
+);
+
+POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.CONTROLLER.MOCK).toDynamicValue(
+  mockPostController,
+);
+
+POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.CONTROLLER.SIMULATE).toDynamicValue(
+  simulatePostController,
 );
