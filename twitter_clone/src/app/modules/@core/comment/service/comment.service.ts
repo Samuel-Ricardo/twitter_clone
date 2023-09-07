@@ -42,4 +42,8 @@ export class CommentService {
   async delete(comment: IDeleteCommentDTO) {
     return this.deleteComment.execute(comment);
   }
+
+  findByPost(comment: IFindPostCommentsDTO) {
+    return this.findPostComments.execute(comment);
+  }
 }
