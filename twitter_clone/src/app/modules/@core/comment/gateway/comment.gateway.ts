@@ -5,8 +5,9 @@ import {
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { ISWRSupport } from './support/swr.support';
 
-export interface ICommentGateway {
+export interface ICommentGateway extends ISWRSupport {
   create(comment: ICreateCommentDTO): Promise<Comment>;
   update(comment: IUpdateCommentDTO): Promise<Comment>;
   delete(comment: IDeleteCommentDTO): Promise<void>;
