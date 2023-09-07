@@ -10,8 +10,20 @@ import {
 import { COMMENT_REGISTRY_MOCK } from './comment.registry';
 import { PostService } from '@/app/modules/@core/post';
 import { ISimulatedCommentService } from '@test/@types/simulate/comment/service';
+import { CommentController } from '@/app/modules/@core/comment/controller/comment.controller';
+import { ISimulatedCommentController } from '@test/@types/simulate/comment/controller';
 
 export const COMMENT_FACTORY_MOCK = {
+  CONTROLLER: {
+    MOCK: () =>
+      COMMENT_MODULE_MOCK.get<DeepMockProxy<CommentController>>(
+        COMMENT_REGISTRY_MOCK.CONTROLLER.MOCK,
+      ),
+    SIMULATE: () =>
+      COMMENT_MODULE_MOCK.get<ISimulatedCommentController>(
+        COMMENT_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+      ),
+  },
   SERVICE: {
     MOCK: () =>
       COMMENT_MODULE_MOCK.get<DeepMockProxy<PostService>>(
