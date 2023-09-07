@@ -8,10 +8,19 @@ import {
   FindUserCommentsUseCase,
 } from '@/app/modules/@core/comment/use-case';
 import { COMMENT_REGISTRY_MOCK } from './comment.registry';
+import { PostService } from '@/app/modules/@core/post';
+import { ISimulatedCommentService } from '@test/@types/simulate/comment/service';
 
 export const COMMENT_FACTORY_MOCK = {
   SERVICE: {
-    MOCK: () => {},
+    MOCK: () =>
+      COMMENT_MODULE_MOCK.get<DeepMockProxy<PostService>>(
+        COMMENT_REGISTRY_MOCK.SERVICE.MOCK,
+      ),
+    SIMULATE: () =>
+      COMMENT_MODULE_MOCK.get<ISimulatedCommentService>(
+        COMMENT_REGISTRY_MOCK.SERVICE.SIMULATE,
+      ),
   },
   USE_CASE: {
     CREATE: () =>
