@@ -37,6 +37,10 @@ export class Comment {
     );
   }
 
+  static createArray(comments: ICommentDTO[]) {
+    return comments.map(Comment.create);
+  }
+
   toStruct(): ICommentDTO {
     return {
       id: this._id,

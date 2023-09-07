@@ -3,6 +3,7 @@ import { AxiosHTTPGateway } from '../generic/http.gateway';
 import {
   ICommentDTO,
   ICreateCommentDTO,
+  IDeleteCommentDTO,
   IUpdateCommentDTO,
 } from '@/app/modules/@core/comment/DTO';
 import { injectable } from 'inversify';
@@ -33,8 +34,9 @@ export class AxiosCommentGateway
     return Comment.create(result.data.comment);
   }
 
-  delete(comment: IDeleteCommentDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteComment(comment: IDeleteCommentDTO) {
+    await this.delete(`${this.prefix}/${comment.id}`);
+    // if (status !== 204) events.emit('delete.error', ...data)
   }
 
   findByPost(post: IFindPostCommentsDTO): Promise<Comment[]> {
