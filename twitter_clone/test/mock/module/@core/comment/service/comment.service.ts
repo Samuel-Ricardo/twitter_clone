@@ -4,7 +4,7 @@ import { MODULE_MOCK } from '@test/mock/module/app.registry';
 import { interfaces } from 'inversify';
 import { mockDeep } from 'jest-mock-extended';
 
-export const mockCommentService = mockDeep<CommentService>();
+export const mockCommentService = () => mockDeep<CommentService>();
 
 export const simulateCommentService = ({
   container,

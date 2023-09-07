@@ -7,6 +7,10 @@ import {
   mockFindpostCommentsUseCase,
   mockDeepFindUserCommentsUseCase,
 } from './use-case';
+import {
+  mockCommentService,
+  simulateCommentService,
+} from './service/comment.service';
 
 export const COMMENT_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -25,3 +29,11 @@ COMMENT_MODULE_MOCK.bind(
 COMMENT_MODULE_MOCK.bind(
   COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
 ).toDynamicValue(mockDeepFindUserCommentsUseCase);
+
+COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
+  mockCommentService,
+);
+
+COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
+  simulateCommentService,
+);
