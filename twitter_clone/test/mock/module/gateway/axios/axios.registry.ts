@@ -7,4 +7,8 @@ export const AXIOS_GATEWAY_REGISTRY_MOCK = {
     MOCK: Symbol.for('mock:module.gateway.axios.user'),
     SIMULATE: Symbol.for('mock:module.gateway.axios.user.simulated'),
   },
+  COMMENT: {
+    MOCK: Symbol.for('mock:module.gateway.axios.comment'),
+    SIMULATE: Symbol.for('mock:module.gateway.axios.comment.simulated'),
+  },
 };
