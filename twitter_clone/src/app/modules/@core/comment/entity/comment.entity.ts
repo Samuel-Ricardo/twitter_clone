@@ -47,4 +47,32 @@ export class Comment {
       updatedAt: this._updatedAt,
     };
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get body() {
+    return this._body;
+  }
+
+  set body(data: string) {
+    this._body = data;
+  }
+
+  get authorId() {
+    return this._authorId;
+  }
+
+  get postId() {
+    return this._postId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
 }
