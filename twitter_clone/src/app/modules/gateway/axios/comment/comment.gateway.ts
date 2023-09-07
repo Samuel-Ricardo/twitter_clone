@@ -4,6 +4,7 @@ import {
   ICommentDTO,
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '@/app/modules/@core/comment/DTO';
 import { injectable } from 'inversify';
@@ -39,8 +40,12 @@ export class AxiosCommentGateway
     // if (status !== 204) events.emit('delete.error', ...data)
   }
 
-  findByPost(post: IFindPostCommentsDTO): Promise<Comment[]> {
-    throw new Error('Method not implemented.');
+  async findByPost({ postId }: IFindPostCommentsDTO) {
+    const result = await this.get<{ comments: ICommentDTO[] }>(
+      `${this.prefix}/${postId}`,
+    );
+
+    return Comment.createArray(result.data.comments);
   }
 
   findByauthor(author: IFindAuthorCommentsDTO): Promise<Comment[]> {
