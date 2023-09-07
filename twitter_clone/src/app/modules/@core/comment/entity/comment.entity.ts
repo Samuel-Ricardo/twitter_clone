@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { ICommentDTO } from '../DTO';
+import { commentSchema } from '../validator/schema';
 
 @injectable()
 export class Comment {
@@ -10,7 +11,20 @@ export class Comment {
     private _postId: string,
     private _createdAt: Date,
     private _updatedAt: Date,
-  ) {}
+  ) {
+    Comment.validate({
+      id: this._id,
+      body: this._body,
+      authorId: this._authorId,
+      postId: this._postId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+    });
+  }
+
+  static validate(comment: ICommentDTO) {
+    return commentSchema.parse(comment);
+  }
 
   static create(comment: ICommentDTO) {
     return new Comment(
@@ -21,5 +35,16 @@ export class Comment {
       comment.createdAt,
       comment.updatedAt,
     );
+  }
+
+  toStruct(): ICommentDTO {
+    return {
+      id: this._id,
+      body: this._body,
+      authorId: this._authorId,
+      postId: this._postId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+    };
   }
 }
