@@ -64,4 +64,12 @@ describe('[GATEWAY] | Axios => [POST]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: delete => [POST]', async () => {
+    MODULE.client.delete.mockResolvedValue({ data: {} });
+
+    expect(
+      MODULE.gateway.deleteComment({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrow();
+  });
 });
