@@ -34,4 +34,8 @@ export class CommentService {
   async create(comment: ICreateCommentDTO) {
     return this.createComment.execute(comment);
   }
+
+  async update(comment: IUpdateCommentDTO) {
+    return this.updateComment.execute(comment);
+  }
 }
