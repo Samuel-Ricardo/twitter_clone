@@ -4,6 +4,7 @@ import {
   ICommentDTO,
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IFindAuthorCommentsDTO,
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '@/app/modules/@core/comment/DTO';
@@ -37,18 +38,24 @@ export class AxiosCommentGateway
 
   async deleteComment(comment: IDeleteCommentDTO) {
     await this.delete(`${this.prefix}/${comment.id}`);
+    // throw error
+    // or
     // if (status !== 204) events.emit('delete.error', ...data)
   }
 
   async findByPost({ postId }: IFindPostCommentsDTO) {
     const result = await this.get<{ comments: ICommentDTO[] }>(
-      `${this.prefix}/${postId}`,
+      `${this.prefix}/post/${postId}`,
     );
 
     return Comment.createArray(result.data.comments);
   }
 
-  findByauthor(author: IFindAuthorCommentsDTO): Promise<Comment[]> {
-    throw new Error('Method not implemented.');
+  async findByauthor({ authorId }: IFindAuthorCommentsDTO) {
+    const result = await this.get<{ comments: ICommentDTO[] }>(
+      `${this.prefix}/author/${authorId}`,
+    );
+
+    return Comment.createArray(result.data.comments);
   }
 }
