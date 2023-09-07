@@ -11,6 +11,8 @@ import {
   CREATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
   VALID_POST_COMMENT_DATA,
+  UPDATE_POST_COMMENT,
+  UPDATE_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
 
 describe('[GATEWAY] | Axios => [POST]', () => {
@@ -39,6 +41,26 @@ describe('[GATEWAY] | Axios => [POST]', () => {
     expect(MODULE.client.post).toBeCalledWith(
       MODULE.gateway.fullURL,
       CREATE_POST_COMMENT_DATA,
+      undefined,
+    );
+  });
+
+  it('[UNIT] | Should: update => [POST]', async () => {
+    MODULE.client.patch.mockResolvedValue({
+      data: {
+        comment: UPDATE_POST_COMMENT.toStruct(),
+      },
+    });
+
+    const result = await MODULE.gateway.update(UPDATE_POST_COMMENT_DATA);
+
+    expect(result).toStrictEqual(UPDATE_POST_COMMENT);
+    expect(result.id).toBe(VALID_POST_COMMENT.id);
+    expect(result.body).not.toBe(VALID_POST_COMMENT.body);
+    expect(MODULE.client.patch).toBeCalledTimes(1);
+    expect(MODULE.client.patch).toBeCalledWith(
+      MODULE.gateway.fullURL,
+      UPDATE_POST_COMMENT_DATA,
       undefined,
     );
   });
