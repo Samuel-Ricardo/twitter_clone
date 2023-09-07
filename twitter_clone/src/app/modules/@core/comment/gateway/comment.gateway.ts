@@ -5,6 +5,7 @@ import {
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { Comment } from '../entity';
 import { ISWRSupport } from './support/swr.support';
 
 export interface ICommentGateway extends ISWRSupport {
