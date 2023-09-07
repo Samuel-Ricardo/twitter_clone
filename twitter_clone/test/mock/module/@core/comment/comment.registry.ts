@@ -1,4 +1,8 @@
 export const COMMENT_REGISTRY_MOCK = {
+  SERVICE: {
+    MOCK: Symbol.for('mock:module.comment.service'),
+    SIMULATE: Symbol.for('mock:module.comment.service.simulated'),
+  },
   USE_CASE: {
     CREATE: Symbol.for('mock:module.comment.use-case.create'),
     UPDATE: Symbol.for('mock:module.comment.use-case.update'),
