@@ -7,6 +7,14 @@ import {
   UpdateCommentUseCase,
 } from '../use-case';
 import { MODULE } from '@/app/modules/app.registry';
+import {
+  ICreateCommentDTO,
+  IFindAuthorCommentsDTO,
+  IFindPostCommentsDTO,
+  IDeleteCommentDTO,
+  IUpdateCommentDTO,
+} from '../DTO';
+import { create } from 'domain';
 
 @injectable()
 export class CommentService {
@@ -22,4 +30,8 @@ export class CommentService {
     @inject(MODULE.COMMENT.USE_CASE.UPDATE)
     private readonly updateComment: UpdateCommentUseCase,
   ) {}
+
+  async create(comment: ICreateCommentDTO) {
+    return this.createComment.execute(comment);
+  }
 }
