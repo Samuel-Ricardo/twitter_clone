@@ -46,4 +46,8 @@ export class CommentService {
   findByPost(comment: IFindPostCommentsDTO) {
     return this.findPostComments.execute(comment);
   }
+
+  findByAuthor(comment: IFindAuthorCommentsDTO) {
+    return this.findUserComments.execute(comment);
+  }
 }
