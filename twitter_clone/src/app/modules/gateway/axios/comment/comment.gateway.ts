@@ -17,6 +17,9 @@ export class AxiosCommentGateway
   implements ICommentGateway
 {
   readonly prefix = 'comments';
+  get fullURL() {
+    return `${this.URL}/${this.prefix}`;
+  }
 
   async create(comment: ICreateCommentDTO) {
     const result = await this.post<{ comment: ICommentDTO }>(
