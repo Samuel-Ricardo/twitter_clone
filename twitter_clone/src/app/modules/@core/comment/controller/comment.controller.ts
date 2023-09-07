@@ -4,6 +4,7 @@ import { CommentService } from '../service/comment.service';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
 
@@ -24,5 +25,9 @@ export class CommentController {
 
   async delete(comment: IDeleteCommentDTO) {
     return this.service.delete(comment);
+  }
+
+  findPostComments(post: IFindPostCommentsDTO) {
+    return { comments: this.service.findByPost(post) };
   }
 }
