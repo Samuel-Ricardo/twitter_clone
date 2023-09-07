@@ -62,4 +62,8 @@ export class AxiosCommentGateway
   swrFindByPost({ postId }: IFindPostCommentsDTO) {
     return this.useSWR(`${this.prefix}/post/${postId}`, this.fetcher);
   }
+
+  swrFindByAuthor({ authorId }: IFindAuthorCommentsDTO) {
+    return this.useSWR(`${this.prefix}/author/${authorId}`, this.fetcher);
+  }
 }
