@@ -8,7 +8,8 @@ import {
   FindUserCommentsUseCase,
 } from './use-case';
 import { COMMENT_REGISTRY } from './comment.registry';
-import { UserService } from '../user/service';
+import { CommentService } from './service/comment.service';
+import { CommentController } from './controller/comment.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -25,4 +26,5 @@ COMMENT_MODULE.bind(COMMENT_REGISTRY.USE_CASE.FIND.BY.AUTHOR.ID).to(
   FindUserCommentsUseCase,
 );
 
-COMMENT_MODULE.bind(COMMENT_REGISTRY.SERVICE).to(UserService);
+COMMENT_MODULE.bind(COMMENT_REGISTRY.SERVICE).to(CommentService);
+COMMENT_MODULE.bind(COMMENT_REGISTRY.CONTROLLER).to(CommentController);
