@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { type ICommentGateway } from './comment.gateway';
-import { MODULE } from '@/app/modules';
+import { MODULE } from '@/app/modules/app.registry';
 
 @injectable()
 export abstract class CommentGatewayAccess {
