@@ -11,6 +11,10 @@ import {
   mockCommentService,
   simulateCommentService,
 } from './service/comment.service';
+import {
+  mockCommentController,
+  simulateCommentController,
+} from './controller/comment.controller';
 
 export const COMMENT_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -37,3 +41,11 @@ COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
 COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
   simulateCommentService,
 );
+
+COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.CONTROLLER.MOCK).toDynamicValue(
+  mockCommentController,
+);
+
+COMMENT_MODULE_MOCK.bind(
+  COMMENT_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+).toDynamicValue(simulateCommentController);
