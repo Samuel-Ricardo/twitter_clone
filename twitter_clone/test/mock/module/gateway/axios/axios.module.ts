@@ -6,6 +6,10 @@ import {
   mockAxiosPostGateway,
   simulateAxiosPostGateway,
 } from './post/post.gateway';
+import {
+  mockAxiosCommentGateway,
+  simulateAxiosCommentGateway,
+} from './comment/comment.gateway';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -29,3 +33,11 @@ AXIOS_GATEWAY_MODULE_MOCK.bind(
 AXIOS_GATEWAY_MODULE_MOCK.bind(
   AXIOS_GATEWAY_REGISTRY_MOCK.POST.SIMULATE,
 ).toDynamicValue(simulateAxiosPostGateway);
+
+AXIOS_GATEWAY_MODULE_MOCK.bind(
+  AXIOS_GATEWAY_REGISTRY_MOCK.COMMENT.MOCK,
+).toDynamicValue(mockAxiosCommentGateway);
+
+AXIOS_GATEWAY_MODULE_MOCK.bind(
+  AXIOS_GATEWAY_REGISTRY_MOCK.COMMENT.SIMULATE,
+).toDynamicValue(simulateAxiosCommentGateway);
