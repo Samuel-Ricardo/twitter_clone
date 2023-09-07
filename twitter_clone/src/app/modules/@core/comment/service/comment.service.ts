@@ -38,4 +38,8 @@ export class CommentService {
   async update(comment: IUpdateCommentDTO) {
     return this.updateComment.execute(comment);
   }
+
+  async delete(comment: IDeleteCommentDTO) {
+    return this.deleteComment.execute(comment);
+  }
 }
