@@ -58,4 +58,8 @@ export class AxiosCommentGateway
 
     return Comment.createArray(result.data.comments);
   }
+
+  swrFindByPost({ postId }: IFindPostCommentsDTO) {
+    return this.useSWR(`${this.prefix}/post/${postId}`, this.fetcher);
+  }
 }
