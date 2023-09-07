@@ -14,8 +14,9 @@ import {
   UPDATE_POST_COMMENT,
   UPDATE_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
+import { VALID_POST } from '@test/mock/data/post';
 
-describe('[GATEWAY] | Axios => [POST]', () => {
+describe('[GATEWAY] | Axios => [COMMENT]', () => {
   let MODULE = MODULES_MOCK.GATEWAY.AXIOS.COMMENT.SIMULATE();
 
   beforeEach(() => {
@@ -27,7 +28,7 @@ describe('[GATEWAY] | Axios => [POST]', () => {
     expect(MODULE.client).toBeDefined();
   });
 
-  it('[UNIT] | Should: create => [POST]', async () => {
+  it('[UNIT] | Should: create => [COMMENT]', async () => {
     MODULE.client.post.mockResolvedValue({
       data: {
         comment: VALID_POST_COMMENT.toStruct(),
@@ -45,7 +46,7 @@ describe('[GATEWAY] | Axios => [POST]', () => {
     );
   });
 
-  it('[UNIT] | Should: update => [POST]', async () => {
+  it('[UNIT] | Should: update => [COMMENT]', async () => {
     MODULE.client.patch.mockResolvedValue({
       data: {
         comment: UPDATE_POST_COMMENT.toStruct(),
@@ -65,11 +66,28 @@ describe('[GATEWAY] | Axios => [POST]', () => {
     );
   });
 
-  it('[UNIT] | Should: delete => [POST]', async () => {
+  it('[UNIT] | Should: delete => [COMMENT]', async () => {
     MODULE.client.delete.mockResolvedValue({ data: {} });
 
     expect(
       MODULE.gateway.deleteComment({ id: VALID_POST_COMMENT.id }),
     ).resolves.not.toThrow();
+  });
+
+  it('[UNIT] | Should: find by [POST] => [COMMENT]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: { comments: [VALID_POST_COMMENT.toStruct()] },
+    });
+
+    const result = await MODULE.gateway.findByPost({ postId: VALID_POST.id });
+
+    expect(result).toStrictEqual([VALID_POST_COMMENT]);
+    expect(result[0].postId).toBe(VALID_POST.id);
+
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      `${MODULE.gateway.fullURL}/post/${VALID_POST.id}`,
+      undefined,
+    );
   });
 });
