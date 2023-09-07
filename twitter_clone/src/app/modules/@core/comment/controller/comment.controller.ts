@@ -4,6 +4,7 @@ import { CommentService } from '../service/comment.service';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IFindAuthorCommentsDTO,
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
@@ -29,5 +30,9 @@ export class CommentController {
 
   findPostComments(post: IFindPostCommentsDTO) {
     return { comments: this.service.findByPost(post) };
+  }
+
+  findUserComments(post: IFindAuthorCommentsDTO) {
+    return { comments: this.service.findByAuthor(post) };
   }
 }
