@@ -1,4 +1,8 @@
 export const COMMENT_REGISTRY_MOCK = {
+  CONTROLLER: {
+    MOCK: Symbol.for('mock:module.comment.controller'),
+    SIMULATE: Symbol.for('mock:module.comment.controller.simulated'),
+  },
   SERVICE: {
     MOCK: Symbol.for('mock:module.comment.service'),
     SIMULATE: Symbol.for('mock:module.comment.service.simulated'),
