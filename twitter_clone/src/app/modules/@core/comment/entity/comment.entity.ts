@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { ICommentDTO } from '../DTO';
 
 @injectable()
 export class Comment {
