@@ -1,12 +1,41 @@
+import { DeepMockProxy } from 'jest-mock-extended';
+import { COMMENT_MODULE_MOCK } from './comment.module';
+import {
+  CreateCommentUseCase,
+  FindPostCommentsUseCase,
+  DeleteCommentUseCase,
+  UpdateCommentUseCase,
+  FindUserCommentsUseCase,
+} from '@/app/modules/@core/comment/use-case';
+import { COMMENT_REGISTRY_MOCK } from './comment.registry';
+
 export const COMMENT_FACTORY_MOCK = {
+  SERVICE: {
+    MOCK: () => {},
+  },
   USE_CASE: {
-    CREATE: Symbol.for('mock:module.@core.comment.use-case.create'),
-    UPDATE: Symbol.for('mock:module.@core.comment.use-case.update'),
-    DELETE: Symbol.for('mock:module.@core.comment.use-case.delete'),
+    CREATE: () =>
+      COMMENT_MODULE_MOCK.get<DeepMockProxy<CreateCommentUseCase>>(
+        COMMENT_REGISTRY_MOCK.USE_CASE.CREATE,
+      ),
+    UPDATE: () =>
+      COMMENT_MODULE_MOCK.get<DeepMockProxy<UpdateCommentUseCase>>(
+        COMMENT_REGISTRY_MOCK.USE_CASE.UPDATE,
+      ),
+    DELETE: () =>
+      COMMENT_MODULE_MOCK.get<DeepMockProxy<DeleteCommentUseCase>>(
+        COMMENT_REGISTRY_MOCK.USE_CASE.DELETE,
+      ),
     FIND: {
       BY: {
-        POST: Symbol.for('mock:module.@core.comment.use-case.find.by.id'),
-        AUTHOR: Symbol.for('mock:module.@core.comment.use-case.find.by.author'),
+        POST: () =>
+          COMMENT_MODULE_MOCK.get<DeepMockProxy<FindPostCommentsUseCase>>(
+            COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.POST,
+          ),
+        AUTHOR: () =>
+          COMMENT_MODULE_MOCK.get<DeepMockProxy<FindUserCommentsUseCase>>(
+            COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
+          ),
       },
     },
   },
