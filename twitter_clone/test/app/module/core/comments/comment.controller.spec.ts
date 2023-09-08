@@ -15,6 +15,7 @@ import {
   CREATE_POST_COMMENT_DATA,
   UPDATE_POST_COMMENT,
 } from '@test/mock/data/comment';
+import { VALID_POST } from '@test/mock/data/post';
 
 describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
   let MODULE: ISimulatedCommentController;
@@ -70,6 +71,24 @@ describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
     expect(MODULE.service.delete).toHaveBeenCalledTimes(1);
     expect(MODULE.service.delete).toHaveBeenCalledWith({
       id: VALID_POST_COMMENT.id,
+    });
+  });
+
+  it('[UNIT] | Should:  find  by [post] => [COMMENT]', async () => {
+    MODULE.service.findByPost.mockReturnValue(
+      SWR_POST_COMMENT([VALID_POST_COMMENT.toStruct()]) as any,
+    );
+
+    const result = MODULE.controller.findPostComments({
+      postId: VALID_POST.id,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.comments.data).toStrictEqual([VALID_POST_COMMENT.toStruct()]);
+
+    expect(MODULE.service.findByPost).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.findByPost).toHaveBeenCalledWith({
+      postId: VALID_POST.id,
     });
   });
 });
