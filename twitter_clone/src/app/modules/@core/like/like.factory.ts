@@ -1,3 +1,4 @@
+import { LikeController } from './controller';
 import { LIKE_MODULE } from './like.module';
 import { LIKE_REGISTRY } from './like.registry';
 import { LikeService } from './service';
@@ -10,6 +11,7 @@ import {
 } from './use-case';
 
 export const LIKE_FACTORY = {
+  CONTROLLER: () => LIKE_MODULE.get<LikeController>(LIKE_REGISTRY.CONTROLLER),
   SERVICE: () => LIKE_MODULE.get<LikeService>(LIKE_REGISTRY.SERVICE),
   USE_CASE: {
     CREATE: () =>
