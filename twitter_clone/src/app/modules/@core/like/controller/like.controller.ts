@@ -4,6 +4,7 @@ import { MODULE } from '@/app/modules/app.registry';
 import {
   ICreateLikeDTO,
   IDeleteLikeDTO,
+  IFindCommentLikesDTO,
   IFindPostLikesDTO,
   IFindUserLikesDTO,
 } from '../DTO';
@@ -29,5 +30,9 @@ export class LikeController {
 
   getUserLikes(user: IFindUserLikesDTO) {
     return { likes: this.service.findByUser(user) };
+  }
+
+  getCommentLikes(coment: IFindCommentLikesDTO) {
+    return { likes: this.service.findByComment(coment) };
   }
 }
