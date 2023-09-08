@@ -6,6 +6,6 @@ import { MODULE } from '@/app/modules';
 export abstract class LikeGatewayAccess {
   constructor(
     @inject(MODULE.GATEWAY.AXIOS.LIKE)
-    private readonly gateway: ILikeGateway,
+    protected readonly gateway: ILikeGateway,
   ) {}
 }
