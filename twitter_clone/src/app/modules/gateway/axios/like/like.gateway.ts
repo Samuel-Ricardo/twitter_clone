@@ -5,6 +5,7 @@ import {
   IDeleteLikeDTO,
   IFindCommentLikesDTO,
   IFindPostLikesDTO,
+  IFindUserLikesDTO,
   ILikeDTO,
 } from '@/app/modules/@core/like/DTO';
 import { Like } from '../../../@core/like/entity';
@@ -37,6 +38,14 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
   async findCommentLikes(comment: IFindCommentLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
       `${this.fullURL}/${comment.likedId}`,
+    );
+
+    return Like.createArray(result.data.likes);
+  }
+
+  async findUserLikes({ userId }: IFindUserLikesDTO) {
+    const result = await this.get<{ likes: ILikeDTO[] }>(
+      `${this.fullURL}/${userId}`,
     );
 
     return Like.createArray(result.data.likes);
