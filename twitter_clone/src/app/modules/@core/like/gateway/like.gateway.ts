@@ -7,7 +7,7 @@ import {
 } from '../DTO';
 import { Like } from '../entity';
 
-export interface ICommentGateway extends Like {
+export interface ILikeGateway extends Like {
   readonly prefix: string;
 
   get fullURL(): string;
