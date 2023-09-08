@@ -59,4 +59,17 @@ describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
       UPDATE_POST_COMMENT_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [COMMENT]', async () => {
+    MODULE.service.delete.mockResolvedValue();
+
+    expect(
+      MODULE.controller.delete({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrow();
+
+    expect(MODULE.service.delete).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.delete).toHaveBeenCalledWith({
+      id: VALID_POST_COMMENT.id,
+    });
+  });
 });
