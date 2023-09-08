@@ -58,4 +58,17 @@ describe('[CORE] | SERVICE =:> [COMMENT]', () => {
       UPDATE_POST_COMMENT_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [COMMENT]', async () => {
+    MODULE.use_case.deleteComment.execute.mockResolvedValue();
+
+    expect(
+      MODULE.service.delete({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrow();
+
+    expect(MODULE.use_case.deleteComment.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.deleteComment.execute).toHaveBeenCalledWith({
+      id: VALID_POST_COMMENT.id,
+    });
+  });
 });
