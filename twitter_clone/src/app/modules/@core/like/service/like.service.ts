@@ -7,6 +7,13 @@ import {
   FindCommentLikesUseCase,
   FindPostLikesUseCase,
 } from '../use-case';
+import {
+  ICreateLikeDTO,
+  IDeleteLikeDTO,
+  IFindUserLikesDTO,
+  IFindPostLikesDTO,
+  IFindCommentLikesDTO,
+} from '../DTO';
 
 @injectable()
 export class LikeService {
@@ -22,4 +29,8 @@ export class LikeService {
     @inject(MODULE.LIKE.USE_CASE.FIND.BY.POST)
     private readonly findPostLikes: FindPostLikesUseCase,
   ) {}
+
+  async create(like: ICreateLikeDTO) {
+    return await this.createLike.execute(like);
+  }
 }
