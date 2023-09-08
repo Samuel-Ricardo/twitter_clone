@@ -4,12 +4,14 @@ import { UserRegistry as USER } from './@core/user/user.registry';
 import { ConfigRegistry as CONFIG } from './config/config.registry';
 import { POST_REGISTRY as POST } from './@core/post/post.registry';
 import { COMMENT_REGISTRY as COMMENT } from './@core/comment/comment.registry';
+import { LIKE_REGISTRY as LIKE } from './@core/like/like.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
   USER,
   POST,
   COMMENT,
+  LIKE,
   CONFIG,
   GATEWAY,
 };
