@@ -3,6 +3,7 @@ import { AxiosHTTPGateway } from '../generic/http.gateway';
 import {
   ICreateLikeDTO,
   IDeleteLikeDTO,
+  IFindCommentLikesDTO,
   IFindPostLikesDTO,
   ILikeDTO,
 } from '@/app/modules/@core/like/DTO';
@@ -28,6 +29,14 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
   async findPostLikes(post: IFindPostLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
       `${this.fullURL}/${post.likedId}`,
+    );
+
+    return Like.createArray(result.data.likes);
+  }
+
+  async findCommentLikes(comment: IFindCommentLikesDTO) {
+    const result = await this.get<{ likes: ILikeDTO[] }>(
+      `${this.fullURL}/${comment.likedId}`,
     );
 
     return Like.createArray(result.data.likes);
