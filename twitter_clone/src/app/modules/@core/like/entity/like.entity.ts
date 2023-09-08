@@ -31,4 +31,20 @@ export class Like {
       createdAt: this._createdAt,
     };
   }
+
+  get id(): string {
+    return this._id;
+  }
+
+  get userId(): string {
+    return this._userId;
+  }
+
+  get likedId(): string {
+    return this._likedId;
+  }
+
+  get createdAt(): Date {
+    return this._createdAt;
+  }
 }

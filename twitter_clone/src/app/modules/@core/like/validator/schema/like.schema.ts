@@ -6,6 +6,6 @@ export const LikeSchema = z
     id: z.string().catch(catchZod),
     userId: z.string().catch(catchZod),
     likedId: z.string().catch(catchZod),
-    createdAt: z.date().catch(catchZod),
+    createdAt: z.date().or(z.string()).catch(catchZod),
   })
   .catch(catchZod);
