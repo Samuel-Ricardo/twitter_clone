@@ -8,12 +8,13 @@ import { expect } from '@jest/globals';
 import { ISimulatedCommentService } from '@test/@types/simulate/comment/service';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import {
+  SWR_POST_COMMENT,
   UPDATE_POST_COMMENT,
   UPDATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
   VALID_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
-import { VALID_UPDATED_POST } from '@test/mock/data/post';
+import { VALID_POST, VALID_UPDATED_POST } from '@test/mock/data/post';
 
 describe('[CORE] | SERVICE =:> [COMMENT]', () => {
   let MODULE: ISimulatedCommentService;
@@ -70,5 +71,18 @@ describe('[CORE] | SERVICE =:> [COMMENT]', () => {
     expect(MODULE.use_case.deleteComment.execute).toHaveBeenCalledWith({
       id: VALID_POST_COMMENT.id,
     });
+  });
+
+  it('[UNIT] | Should: find by [post] => [COMMENT]', async () => {
+    MODULE.use_case.find.by.post.execute.mockReturnValue(
+      SWR_POST_COMMENT([VALID_POST_COMMENT.toStruct()]) as any,
+    );
+
+    const result = MODULE.service.findByPost({ postId: VALID_POST.id });
+
+    expect(result).toBeDefined();
+    expect(JSON.stringify(result.data![0])).toStrictEqual(
+      JSON.stringify(VALID_POST_COMMENT.toStruct()),
+    );
   });
 });

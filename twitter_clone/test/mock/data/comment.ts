@@ -32,3 +32,11 @@ const UPDATE_POST_COMMENT = Comment.create(VALID_POST_COMMENT_DATA);
 UPDATE_POST_COMMENT.body = UPDATE_POST_COMMENT_DATA.body;
 
 export { UPDATE_POST_COMMENT };
+
+export const SWR_POST_COMMENT = (data: ICommentDTO | ICommentDTO[]) => ({
+  data,
+  error: null,
+  mutate: () => ({}) as any,
+  isLoading: false,
+  isValidating: false,
+});
