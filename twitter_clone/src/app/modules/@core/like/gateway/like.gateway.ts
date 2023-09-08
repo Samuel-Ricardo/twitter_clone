@@ -7,7 +7,11 @@ import {
 } from '../DTO';
 import { Like } from '../entity';
 
-export interface ICommentGateway {
+export interface ICommentGateway extends Like {
+  readonly prefix: string;
+
+  get fullURL(): string;
+
   create(like: ICreateLikeDTO): Promise<Like>;
   deleteLike(like: IDeleteLikeDTO): Promise<Like>;
   findCommentLikes(like: IFindCommentLikesDTO): Promise<Like[]>;
