@@ -18,4 +18,8 @@ export class Like {
   static create(data: ILikeDTO) {
     return new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
+
+  static createArray(data: ILikeDTO[]) {
+    return data.map(Like.create);
+  }
 }
