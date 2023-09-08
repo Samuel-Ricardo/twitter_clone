@@ -6,6 +6,7 @@ import { AxiosUserGateway } from './user/user.gateway';
 import { ConfigModule } from '../../config/config.module';
 import { AxiosPostGateway } from './post/post.gateway';
 import { AxiosCommentGateway } from './comment/comment.gateway';
+import { AxiosLikeGateway } from './like/like.gateway';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -27,4 +28,8 @@ AxiosGatewayModule.bind(AxiosGatewayRegistry.POST)
 
 AxiosGatewayModule.bind(AxiosGatewayRegistry.COMMENT)
   .to(AxiosCommentGateway)
+  .inSingletonScope();
+
+AxiosGatewayModule.bind(AxiosGatewayRegistry.LIKE)
+  .to(AxiosLikeGateway)
   .inSingletonScope();
