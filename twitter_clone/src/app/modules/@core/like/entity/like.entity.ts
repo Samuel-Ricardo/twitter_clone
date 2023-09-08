@@ -1,4 +1,6 @@
 import { injectable } from 'inversify';
+import { ILikeDTO } from '../DTO/like.dto';
+import { LikeSchema } from '../validator/schema/like.schema';
 
 @injectable()
 export class Like {
@@ -8,4 +10,8 @@ export class Like {
     private readonly _likedId: string,
     private readonly _createdAt: Date,
   ) {}
+
+  static validate(data: ILikeDTO) {
+    return LikeSchema.safeParse(data);
+  }
 }
