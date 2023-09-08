@@ -14,4 +14,8 @@ export class Like {
   static validate(data: ILikeDTO) {
     return LikeSchema.safeParse(data);
   }
+
+  static create(data: ILikeDTO) {
+    return new Like(data.id, data.userId, data.likedId, data.createdAt);
+  }
 }
