@@ -1,5 +1,6 @@
 import { LIKE_MODULE } from './like.module';
 import { LIKE_REGISTRY } from './like.registry';
+import { LikeService } from './service';
 import {
   CreateLikeUseCase,
   FindCommentLikesUseCase,
@@ -9,6 +10,7 @@ import {
 } from './use-case';
 
 export const LIKE_FACTORY = {
+  SERVICE: () => LIKE_MODULE.get<LikeService>(LIKE_REGISTRY.SERVICE),
   USE_CASE: {
     CREATE: () =>
       LIKE_MODULE.get<CreateLikeUseCase>(LIKE_REGISTRY.USE_CASE.CREATE),
