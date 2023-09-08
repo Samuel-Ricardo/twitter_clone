@@ -9,6 +9,7 @@ import {
   FindCommentLikesUseCase,
 } from './use-case';
 import { LikeService } from './service';
+import { LikeController } from './controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -23,3 +24,5 @@ LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.FIND.BY.COMMENT).to(
 );
 
 LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.CONTROLLER).to(LikeController);
