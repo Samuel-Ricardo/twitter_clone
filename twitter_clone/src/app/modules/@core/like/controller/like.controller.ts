@@ -1,7 +1,12 @@
 import { inject, injectable } from 'inversify';
 import { LikeService } from '../service';
 import { MODULE } from '@/app/modules/app.registry';
-import { ICreateLikeDTO, IDeleteLikeDTO, IFindPostLikesDTO } from '../DTO';
+import {
+  ICreateLikeDTO,
+  IDeleteLikeDTO,
+  IFindPostLikesDTO,
+  IFindUserLikesDTO,
+} from '../DTO';
 
 @injectable()
 export class LikeController {
@@ -19,6 +24,10 @@ export class LikeController {
   }
 
   getTweetLikes(tweet: IFindPostLikesDTO) {
-    return { like: this.service.findByPost(tweet) };
+    return { likes: this.service.findByPost(tweet) };
+  }
+
+  getUserLikes(user: IFindUserLikesDTO) {
+    return { likes: this.service.findByUser(user) };
   }
 }
