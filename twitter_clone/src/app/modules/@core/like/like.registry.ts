@@ -1,4 +1,5 @@
 export const LIKE_REGISTRY = {
+  CONTROLLER: Symbol.for('LIKE_CONTROLLER'),
   SERVICE: Symbol.for('LIKE_SERVICE'),
   USE_CASE: {
     CREATE: Symbol.for('LIKE_USE_CASE_CREATE'),
