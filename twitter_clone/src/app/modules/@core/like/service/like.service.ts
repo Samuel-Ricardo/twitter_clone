@@ -33,4 +33,12 @@ export class LikeService {
   async create(like: ICreateLikeDTO) {
     return await this.createLike.execute(like);
   }
+
+  async delete(like: IDeleteLikeDTO) {
+    return await this.deleteLike.execute(like);
+  }
+
+  async findByUser(like: IFindUserLikesDTO) {
+    return await this.finduserLikes.execute(like);
+  }
 }
