@@ -38,7 +38,15 @@ export class LikeService {
     return await this.deleteLike.execute(like);
   }
 
-  async findByUser(like: IFindUserLikesDTO) {
-    return await this.finduserLikes.execute(like);
+  findByUser(like: IFindUserLikesDTO) {
+    return this.finduserLikes.execute(like);
+  }
+
+  findByComment(like: IFindCommentLikesDTO) {
+    return this.findCommentLikes.execute(like);
+  }
+
+  findByPost(like: IFindPostLikesDTO) {
+    return this.findPostLikes.execute(like);
   }
 }
