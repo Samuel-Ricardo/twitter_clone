@@ -16,6 +16,7 @@ import {
   UPDATE_POST_COMMENT,
 } from '@test/mock/data/comment';
 import { VALID_POST } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock/data/user';
 
 describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
   let MODULE: ISimulatedCommentController;
@@ -86,9 +87,30 @@ describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
     expect(result).toBeDefined();
     expect(result.comments.data).toStrictEqual([VALID_POST_COMMENT.toStruct()]);
 
+    expect(result.comments.data![0].postId).toEqual(VALID_POST.id);
+
     expect(MODULE.service.findByPost).toHaveBeenCalledTimes(1);
     expect(MODULE.service.findByPost).toHaveBeenCalledWith({
       postId: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should:  find  by [author] => [COMMENT]', async () => {
+    MODULE.service.findByAuthor.mockReturnValue(
+      SWR_POST_COMMENT([VALID_POST_COMMENT.toStruct()]) as any,
+    );
+
+    const result = MODULE.controller.findUserComments({
+      authorId: VALID_USER.id,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.comments.data).toStrictEqual([VALID_POST_COMMENT.toStruct()]);
+    expect(result.comments.data![0].authorId).toEqual(VALID_USER.id);
+
+    expect(MODULE.service.findByAuthor).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.findByAuthor).toHaveBeenCalledWith({
+      authorId: VALID_USER.id,
     });
   });
 });
