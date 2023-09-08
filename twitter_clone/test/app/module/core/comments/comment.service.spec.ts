@@ -84,5 +84,10 @@ describe('[CORE] | SERVICE =:> [COMMENT]', () => {
     expect(JSON.stringify(result.data![0])).toStrictEqual(
       JSON.stringify(VALID_POST_COMMENT.toStruct()),
     );
+
+    expect(MODULE.use_case.find.by.post.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.find.by.post.execute).toHaveBeenCalledWith({
+      postId: VALID_POST.id,
+    });
   });
 });
