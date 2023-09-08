@@ -22,4 +22,13 @@ export class Like {
   static createArray(data: ILikeDTO[]) {
     return data.map(Like.create);
   }
+
+  toStruct(): ILikeDTO {
+    return {
+      id: this._id,
+      userId: this._userId,
+      likedId: this._likedId,
+      createdAt: this._createdAt,
+    };
+  }
 }
