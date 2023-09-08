@@ -20,4 +20,16 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
     return Like.create(result.data.like);
   }
+
+  async deleteLike(like: IDeleteLikeDTO) {
+    await this.delete(`${this.fullURL}/${like.id}`);
+  }
+
+  async findPostLikes(post: IFindPostLikesDTO) {
+    const result = await this.get<{ likes: ILikeDTO[] }>(
+      `${this.fullURL}/${post.likedId}`,
+    );
+
+    return Like.createArray(result.data.likes);
+  }
 }
