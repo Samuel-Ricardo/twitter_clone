@@ -50,4 +50,8 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
     return Like.createArray(result.data.likes);
   }
+
+  swrFindPostLikes({ likedId }: IFindPostLikesDTO) {
+    return this.useSWR<ILikeDTO[]>(`${this.fullURL}/${likedId}`);
+  }
 }
