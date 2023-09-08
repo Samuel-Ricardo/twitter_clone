@@ -31,5 +31,9 @@ describe('[CORE] | CONTROLLER =:> [COMMENT]', () => {
     const result = await MODULE.controller.create(VALID_POST_COMMENT_DATA);
 
     expect(result).toBeDefined();
+    expect(result).toStrictEqual({ comment: VALID_POST_COMMENT.toStruct() });
+
+    expect(MODULE.service.create).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.create).toHaveBeenCalledWith(VALID_POST_COMMENT_DATA);
   });
 });
