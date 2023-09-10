@@ -29,7 +29,7 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
   async findPostLikes(post: IFindPostLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.prefix}/${post.likedId}`,
+      `${this.prefix}/post/${post.likedId}`,
     );
 
     return Like.createArray(result.data.likes);
@@ -37,7 +37,7 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
   async findCommentLikes(comment: IFindCommentLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.prefix}/${comment.likedId}`,
+      `${this.prefix}/comment/${comment.likedId}`,
     );
 
     return Like.createArray(result.data.likes);
@@ -45,7 +45,7 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
   async findUserLikes({ userId }: IFindUserLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.prefix}/${userId}`,
+      `${this.prefix}/user/${userId}`,
     );
 
     return Like.createArray(result.data.likes);
