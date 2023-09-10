@@ -1,4 +1,8 @@
 export const LIKE_REGISTRY_MOCK = {
+  CONTROLLER: {
+    MOCK: Symbol.for('mock:like.controller'),
+    SIMULATE: Symbol.for('simulate:like.controller'),
+  },
   SERVICE: {
     MOCK: Symbol.for('mock:like.service'),
     SIMULATE: Symbol.for('simulate:like.service'),
