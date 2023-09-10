@@ -4,11 +4,13 @@ import { AXIOS_REGISTRY_MOCK as AXIOS } from './axios/axios.registry';
 import { GATEWAY_REGISTRY_MOCK as GATEWAY } from './gateway/gateway.registry';
 import { HOOKS_REGISTRY_MOCK as HOOKS } from './hooks/hooks.registry';
 import { COMMENT_REGISTRY_MOCK as COMMENT } from './@core/comment/comment.registry';
+import { LIKE_REGISTRY_MOCK as LIKE } from './@core/like/like.registry';
 
 export const MODULE_MOCK = {
   USER,
   POST,
   COMMENT,
+  LIKE,
   AXIOS,
   GATEWAY,
   HOOKS,
