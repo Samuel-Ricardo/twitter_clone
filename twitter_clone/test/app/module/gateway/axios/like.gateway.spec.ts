@@ -93,4 +93,23 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: find by [COMMENT]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        likes: [VALID_POST_LIKE.toStruct()],
+      },
+    });
+
+    const result = await MODULE.gateway.findCommentLikes({
+      likedId: VALID_POST_LIKE.likedId,
+    });
+
+    expect(result).toStrictEqual([VALID_POST_LIKE]);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      `${MODULE.gateway.fullURL}/comment/${VALID_POST_LIKE.likedId}`,
+      undefined,
+    );
+  });
 });
