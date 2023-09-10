@@ -55,4 +55,25 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
       MODULE.gateway.deleteLike({ id: VALID_POST_LIKE.id }),
     ).resolves.not.toThrow();
   });
+
+  it('[UNIT] | Should: find by [USER] => [LIKE]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        likes: [VALID_POST_LIKE.toStruct()],
+      },
+    });
+
+    const result = await MODULE.gateway.findUserLikes({
+      userId: VALID_POST_LIKE.userId,
+    });
+
+    expect(result).toStrictEqual([VALID_POST_LIKE]);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      MODULE.gateway.fullURL + '/' + VALID_POST_LIKE.userId,
+      undefined,
+    );
+  });
+
+  //  it('[UNIT] | Should: find by [POST] => [LIKE]', async () => {});
 });
