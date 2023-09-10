@@ -12,7 +12,7 @@ export interface ISimulatedLikeService {
   service: LikeService;
   use_case: {
     create: DeepMockProxy<CreateLikeUseCase>;
-    delete: DeepMockProxy<DeleteLikeUseCase>;
+    deleteLike: DeepMockProxy<DeleteLikeUseCase>;
     find: {
       by: {
         post: DeepMockProxy<FindPostLikesUseCase>;
