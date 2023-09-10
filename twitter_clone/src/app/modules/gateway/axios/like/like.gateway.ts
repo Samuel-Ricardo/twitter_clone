@@ -18,18 +18,18 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
   }
 
   async create(like: ICreateLikeDTO) {
-    const result = await this.post<{ like: ILikeDTO }>(this.fullURL, like);
+    const result = await this.post<{ like: ILikeDTO }>(this.prefix, like);
 
     return Like.create(result.data.like);
   }
 
   async deleteLike(like: IDeleteLikeDTO) {
-    await this.delete(`${this.fullURL}/${like.id}`);
+    await this.delete(`${this.prefix}/${like.id}`);
   }
 
   async findPostLikes(post: IFindPostLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.fullURL}/${post.likedId}`,
+      `${this.prefix}/${post.likedId}`,
     );
 
     return Like.createArray(result.data.likes);
@@ -37,7 +37,7 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
   async findCommentLikes(comment: IFindCommentLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.fullURL}/${comment.likedId}`,
+      `${this.prefix}/${comment.likedId}`,
     );
 
     return Like.createArray(result.data.likes);
@@ -45,7 +45,7 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
 
   async findUserLikes({ userId }: IFindUserLikesDTO) {
     const result = await this.get<{ likes: ILikeDTO[] }>(
-      `${this.fullURL}/${userId}`,
+      `${this.prefix}/${userId}`,
     );
 
     return Like.createArray(result.data.likes);
