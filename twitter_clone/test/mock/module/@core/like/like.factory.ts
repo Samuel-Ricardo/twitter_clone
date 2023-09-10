@@ -8,8 +8,20 @@ import {
 import { LIKE_MODULE_MOCK } from './like.module';
 import { LIKE_REGISTRY_MOCK } from './like.registry';
 import { DeepMockProxy } from 'jest-mock-extended';
+import { LikeService } from '@/app/modules/@core/like/service';
+import { ISimulatedLikeService } from '@test/@types/simulate/like/service';
 
-export const LIKE_FACTORY_MODULE = {
+export const LIKE_FACTORY_MODULE_MOCK = {
+  SERVICE: {
+    MOCK: () =>
+      LIKE_MODULE_MOCK.get<DeepMockProxy<LikeService>>(
+        LIKE_REGISTRY_MOCK.SERVICE.MOCK,
+      ),
+    SIMULATE: () =>
+      LIKE_MODULE_MOCK.get<ISimulatedLikeService>(
+        LIKE_REGISTRY_MOCK.SERVICE.SIMULATE,
+      ),
+  },
   USE_CASE: {
     CREATE: () =>
       LIKE_MODULE_MOCK.get<DeepMockProxy<CreateLikeUseCase>>(
