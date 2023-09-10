@@ -8,8 +8,20 @@ import { AxiosPostGateway } from '@/app/modules/gateway/axios/post/post.gateway'
 import { ISimulatedPostGateway } from '@test/@types/simulate/post/gateway';
 import { AxiosCommentGateway } from '@/app/modules/gateway/axios/comment/comment.gateway';
 import { ISimulatedCommentGateway } from '@test/@types/simulate/comment/gateway';
+import { AxiosLikeGateway } from '@/app/modules/gateway/axios/like/like.gateway';
+import { ISimulatedLikeGateway } from '@test/@types/simulate/like/gateway';
 
 export const AXIOS_GATEWAY_FACTORY_MOCK = {
+  LIKE: {
+    MOCK: () =>
+      AXIOS_GATEWAY_MODULE_MOCK.get<DeepMockProxy<AxiosLikeGateway>>(
+        AXIOS_GATEWAY_REGISTRY_MOCK.LIKE.MOCK,
+      ),
+    SIMULATE: () =>
+      AXIOS_GATEWAY_MODULE_MOCK.get<
+        ISimulatedLikeGateway<AxiosLikeGateway, typeof axios>
+      >(AXIOS_GATEWAY_REGISTRY_MOCK.LIKE.SIMULATE),
+  },
   COMMENT: {
     MOCK: () =>
       AXIOS_GATEWAY_MODULE_MOCK.get<DeepMockProxy<AxiosCommentGateway>>(
