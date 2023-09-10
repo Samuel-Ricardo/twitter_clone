@@ -43,4 +43,16 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: delete => [LIKE]', async () => {
+    MODULE.client.delete.mockResolvedValue({
+      data: {
+        like: VALID_POST_LIKE.toStruct(),
+      },
+    });
+
+    expect(
+      MODULE.gateway.deleteLike({ id: VALID_POST_LIKE.id }),
+    ).resolves.not.toThrow();
+  });
 });
