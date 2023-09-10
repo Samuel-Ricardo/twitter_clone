@@ -7,6 +7,7 @@ import {
   mockFindUserLikesUseCase,
   mockFindCommentLikesUseCase,
 } from './use-case';
+import { mockLikeService, simulateLikeService } from './service';
 
 export const LIKE_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -29,3 +30,11 @@ LIKE_MODULE_MOCK.bind(LIKE_REGISTRY_MOCK.USE_CASE.FIND.BY.USER).toDynamicValue(
 LIKE_MODULE_MOCK.bind(
   LIKE_REGISTRY_MOCK.USE_CASE.FIND.BY.COMMENT,
 ).toDynamicValue(mockFindCommentLikesUseCase);
+
+LIKE_MODULE_MOCK.bind(LIKE_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
+  mockLikeService,
+);
+
+LIKE_MODULE_MOCK.bind(LIKE_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
+  simulateLikeService,
+);
