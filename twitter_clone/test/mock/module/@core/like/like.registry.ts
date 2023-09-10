@@ -1,5 +1,9 @@
 export const LIKE_REGISTRY_MOCK = {
-  USER: {
+  SERVICE: {
+    MOCK: Symbol.for('mock:like.service'),
+    SIMULATE: Symbol.for('simulate:like.service'),
+  },
+  USE_CASE: {
     CREATE: Symbol.for('mock:like.use-case.create'),
     DELETE: Symbol.for('mock:like.use-case.delete'),
     FIND: {
