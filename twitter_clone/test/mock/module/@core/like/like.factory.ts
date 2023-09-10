@@ -10,8 +10,20 @@ import { LIKE_REGISTRY_MOCK } from './like.registry';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { LikeService } from '@/app/modules/@core/like/service';
 import { ISimulatedLikeService } from '@test/@types/simulate/like/service';
+import { LikeController } from '@/app/modules/@core/like/controller';
+import { ISimulatedLikeController } from '@test/@types/simulate/like/controller';
 
 export const LIKE_FACTORY_MODULE_MOCK = {
+  CONTROLLER: {
+    MOCK: () =>
+      LIKE_MODULE_MOCK.get<DeepMockProxy<LikeController>>(
+        LIKE_REGISTRY_MOCK.CONTROLLER.MOCK,
+      ),
+    SIMULATE: () =>
+      LIKE_MODULE_MOCK.get<ISimulatedLikeController>(
+        LIKE_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+      ),
+  },
   SERVICE: {
     MOCK: () =>
       LIKE_MODULE_MOCK.get<DeepMockProxy<LikeService>>(
