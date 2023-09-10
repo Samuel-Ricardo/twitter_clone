@@ -70,10 +70,27 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
     expect(result).toStrictEqual([VALID_POST_LIKE]);
     expect(MODULE.client.get).toBeCalledTimes(1);
     expect(MODULE.client.get).toBeCalledWith(
-      MODULE.gateway.fullURL + '/' + VALID_POST_LIKE.userId,
+      MODULE.gateway.fullURL + '/user/' + VALID_POST_LIKE.userId,
       undefined,
     );
   });
 
-  //  it('[UNIT] | Should: find by [POST] => [LIKE]', async () => {});
+  it('[UNIT] | Should: find by [POST] => [LIKE]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        likes: [VALID_POST_LIKE.toStruct()],
+      },
+    });
+
+    const result = await MODULE.gateway.findPostLikes({
+      likedId: VALID_POST_LIKE.likedId,
+    });
+
+    expect(result).toStrictEqual([VALID_POST_LIKE]);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      `${MODULE.gateway.fullURL}/post/${VALID_POST_LIKE.likedId}`,
+      undefined,
+    );
+  });
 });
