@@ -16,3 +16,11 @@ export const VALID_POST_LIKE_DATA: ILikeDTO = {
 };
 
 export const VALID_POST_LIKE = Like.create(VALID_POST_LIKE_DATA);
+
+export const SWR_POST_LIKE = (data: ILikeDTO | ILikeDTO[]) => ({
+  data,
+  error: null,
+  mutate: () => ({}) as any,
+  isLoading: false,
+  isValidating: false,
+});
