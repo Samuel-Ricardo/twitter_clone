@@ -7,6 +7,7 @@ import 'reflect-metadata';
 import { expect } from '@jest/globals';
 import { ISimulatedLikeService } from '@test/@types/simulate/like/service';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
+import { CREATE_POST_LIKE_DATA, VALID_POST_LIKE } from '@test/mock/data/like';
 
 describe('[CORE] | Service =:> [LIKE]', () => {
   let MODULE: ISimulatedLikeService;
@@ -22,6 +23,16 @@ describe('[CORE] | Service =:> [LIKE]', () => {
   });
 
   it('[UNIT] | Should: create => [COMMENT]', async () => {
-    expect(true).toBeTruthy();
+    MODULE.use_case.create.execute.mockResolvedValue(VALID_POST_LIKE);
+
+    const result = await MODULE.service.create(CREATE_POST_LIKE_DATA);
+
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual(VALID_POST_LIKE);
+
+    expect(MODULE.use_case.create.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
+      CREATE_POST_LIKE_DATA,
+    );
   });
 });
