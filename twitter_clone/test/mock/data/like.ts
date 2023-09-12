@@ -3,6 +3,7 @@ import { Like } from '@/app/modules/@core/like/entity';
 import { VALID_USER } from './user';
 import { VALID_POST } from './post';
 import { randomID } from '@test/util/mongo';
+import { VALID_POST_COMMENT } from './comment';
 
 export const CREATE_POST_LIKE_DATA: ICreateLikeDTO = {
   userId: VALID_USER.id,
@@ -16,6 +17,11 @@ export const VALID_POST_LIKE_DATA: ILikeDTO = {
 };
 
 export const VALID_POST_LIKE = Like.create(VALID_POST_LIKE_DATA);
+
+export const VALID_COMMENT_LIKE = Like.create({
+  ...VALID_POST_LIKE_DATA,
+  likedId: VALID_POST_COMMENT.id,
+});
 
 export const SWR_POST_LIKE = (data: ILikeDTO | ILikeDTO[]) => ({
   data,
