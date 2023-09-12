@@ -35,4 +35,17 @@ describe('[CORE] | Service =:> [LIKE]', () => {
       CREATE_POST_LIKE_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [LIKE]', () => {
+    MODULE.use_case.deleteLike.execute.mockResolvedValue();
+
+    expect(
+      MODULE.service.delete({ id: VALID_POST_LIKE.id }),
+    ).resolves.not.toThrow();
+
+    expect(MODULE.use_case.deleteLike.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.deleteLike.execute).toHaveBeenCalledWith({
+      id: VALID_POST_LIKE.id,
+    });
+  });
 });
