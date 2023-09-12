@@ -14,7 +14,6 @@ import {
   IDeleteCommentDTO,
   IUpdateCommentDTO,
 } from '../DTO';
-import { create } from 'domain';
 
 @injectable()
 export class CommentService {

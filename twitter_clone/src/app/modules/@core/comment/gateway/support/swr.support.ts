@@ -6,6 +6,6 @@ import {
 import { SWRResponse } from 'swr';
 
 export interface ISWRSupport {
-  swrFindByPost(post: IFindPostCommentsDTO): SWRResponse<ICommentDTO>;
+  swrFindByPost(post: IFindPostCommentsDTO): SWRResponse<ICommentDTO[]>;
   swrFindByAuthor(author: IFindAuthorCommentsDTO): SWRResponse<ICommentDTO[]>;
 }
