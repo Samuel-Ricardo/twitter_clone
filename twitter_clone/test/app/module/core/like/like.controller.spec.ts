@@ -13,6 +13,7 @@ import {
   SWR_POST_LIKE,
   VALID_POST_LIKE,
 } from '@test/mock/data/like';
+import { VALID_POST } from '@test/mock/data/post';
 
 describe('[CORE] | Controller =:> [LIKE]', () => {
   let MODULE: ISimulatedLikeController;
@@ -49,6 +50,23 @@ describe('[CORE] | Controller =:> [LIKE]', () => {
     expect(MODULE.service.delete).toHaveBeenCalledTimes(1);
     expect(MODULE.service.delete).toHaveBeenCalledWith({
       id: VALID_POST_LIKE.id,
+    });
+  });
+
+  it('[UNIT] | Should: Find by [POST] => [LIKE]', async () => {
+    MODULE.service.findByPost.mockReturnValue(
+      SWR_POST_LIKE([VALID_POST_LIKE.toStruct()]) as any,
+    );
+
+    const result = MODULE.controller.getTweetLikes({ likedId: VALID_POST.id });
+
+    expect(result).toBeDefined();
+    expect(result.likes.data).toStrictEqual([VALID_POST_LIKE.toStruct()]);
+    expect(result.likes.data![0].likedId).toEqual(VALID_POST.id);
+
+    expect(MODULE.service.findByPost).toBeCalledTimes(1);
+    expect(MODULE.service.findByPost).toHaveBeenCalledWith({
+      likedId: VALID_POST.id,
     });
   });
 });
