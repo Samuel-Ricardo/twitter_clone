@@ -11,6 +11,7 @@ import { VALID_POST_COMMENT } from '@test/mock/data/comment';
 import {
   CREATE_POST_LIKE_DATA,
   SWR_POST_LIKE,
+  VALID_COMMENT_LIKE,
   VALID_POST_LIKE,
 } from '@test/mock/data/like';
 import { VALID_POST } from '@test/mock/data/post';
@@ -67,6 +68,25 @@ describe('[CORE] | Controller =:> [LIKE]', () => {
     expect(MODULE.service.findByPost).toBeCalledTimes(1);
     expect(MODULE.service.findByPost).toHaveBeenCalledWith({
       likedId: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: Find by [COMMENT] => [LIKE]', async () => {
+    MODULE.service.findByComment.mockReturnValue(
+      SWR_POST_LIKE([VALID_COMMENT_LIKE.toStruct()]) as any,
+    );
+
+    const result = MODULE.controller.getCommentLikes({
+      likedId: VALID_POST_COMMENT.id,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.likes.data).toStrictEqual([VALID_COMMENT_LIKE.toStruct()]);
+    expect(result.likes.data![0].likedId).toEqual(VALID_POST_COMMENT.id);
+
+    expect(MODULE.service.findByComment).toBeCalledTimes(1);
+    expect(MODULE.service.findByComment).toHaveBeenCalledWith({
+      likedId: VALID_POST_COMMENT.id,
     });
   });
 });
