@@ -13,6 +13,7 @@ import {
   VALID_POST_LIKE,
 } from '@test/mock/data/like';
 import { VALID_POST } from '@test/mock/data/post';
+import { VALID_POST_COMMENT } from '@test/mock/data/comment';
 
 describe('[CORE] | Service =:> [LIKE]', () => {
   let MODULE: ISimulatedLikeService;
@@ -67,6 +68,24 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     expect(MODULE.use_case.find.by.post.execute).toHaveBeenCalledTimes(1);
     expect(MODULE.use_case.find.by.post.execute).toHaveBeenCalledWith({
       likedId: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: Find by [COMMENT] => [LIKE]', async () => {
+    MODULE.use_case.find.by.comment.execute.mockReturnValue(
+      SWR_POST_LIKE([VALID_POST_LIKE.toStruct()]) as any,
+    );
+
+    const result = MODULE.service.findByComment({
+      likedId: VALID_POST_COMMENT.id,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.data).toStrictEqual([VALID_POST_LIKE.toStruct()]);
+
+    expect(MODULE.use_case.find.by.comment.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.find.by.comment.execute).toHaveBeenCalledWith({
+      likedId: VALID_POST_COMMENT.id,
     });
   });
 });
