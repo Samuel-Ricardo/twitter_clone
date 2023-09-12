@@ -6,13 +6,13 @@ import 'reflect-metadata';
 
 import { expect } from '@jest/globals';
 import { ILikeGateway } from '@/app/modules/@core/like/gateway';
-import { Like } from '@/app/modules/@core/like/entity';
 import { MODULES } from '@/app/modules';
 import { AxiosLikeGateway } from '@/app/modules/gateway/axios/like/like.gateway';
+import { Post } from '@/app/modules/@core/post';
 
 describe('[GATEWAY] | Axios => [COMMENT]', () => {
   let gatewat: ILikeGateway;
-  let like: Like;
+  let post: Post;
 
   beforeAll(() => {
     gatewat = MODULES.GATEWAY.AXIOS.LIKE();
@@ -20,7 +20,19 @@ describe('[GATEWAY] | Axios => [COMMENT]', () => {
     expect(gatewat).toBeInstanceOf(AxiosLikeGateway);
   });
 
+  beforeEach(async () => {
+    post = (await MODULES.GATEWAY.AXIOS.POST().findAll())[0];
+  });
+
   it('[INTEGRATION] | Should: find by [POST] => [LIKE]', async () => {
-    expect(true).toBe(true);
+    const result = await gatewat.findPostLikes({ likedId: post.id });
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBeGreaterThanOrEqual(0);
+
+    if (result.length > 0) {
+      expect(result[0]).toBeInstanceOf(Post);
+      expect(result[0].id).toBeDefined();
+    }
   });
 });
