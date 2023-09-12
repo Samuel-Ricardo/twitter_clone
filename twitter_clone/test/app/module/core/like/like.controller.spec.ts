@@ -15,6 +15,7 @@ import {
   VALID_POST_LIKE,
 } from '@test/mock/data/like';
 import { VALID_POST } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock/data/user';
 
 describe('[CORE] | Controller =:> [LIKE]', () => {
   let MODULE: ISimulatedLikeController;
@@ -87,6 +88,33 @@ describe('[CORE] | Controller =:> [LIKE]', () => {
     expect(MODULE.service.findByComment).toBeCalledTimes(1);
     expect(MODULE.service.findByComment).toHaveBeenCalledWith({
       likedId: VALID_POST_COMMENT.id,
+    });
+  });
+
+  it('[UNIT] | Should: Find by [USER] => [LIKE]', async () => {
+    MODULE.service.findByUser.mockReturnValue(
+      SWR_POST_LIKE([
+        VALID_POST_LIKE.toStruct(),
+        VALID_COMMENT_LIKE.toStruct(),
+      ]) as any,
+    );
+
+    const result = MODULE.controller.getUserLikes({
+      userId: VALID_USER.id,
+    });
+
+    expect(result).toBeDefined();
+
+    expect(result.likes.data).toStrictEqual([
+      VALID_POST_LIKE.toStruct(),
+      VALID_COMMENT_LIKE.toStruct(),
+    ]);
+
+    expect(result.likes.data![0].userId).toEqual(VALID_USER.id);
+
+    expect(MODULE.service.findByUser).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.findByUser).toHaveBeenCalledWith({
+      userId: VALID_USER.id,
     });
   });
 });
