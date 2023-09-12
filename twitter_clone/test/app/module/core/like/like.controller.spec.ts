@@ -7,6 +7,12 @@ import 'reflect-metadata';
 import { expect } from '@jest/globals';
 import { ISimulatedLikeController } from '@test/@types/simulate/like/controller';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
+import { VALID_POST_COMMENT } from '@test/mock/data/comment';
+import {
+  CREATE_POST_LIKE_DATA,
+  SWR_POST_LIKE,
+  VALID_POST_LIKE,
+} from '@test/mock/data/like';
 
 describe('[CORE] | Controller =:> [LIKE]', () => {
   let MODULE: ISimulatedLikeController;
@@ -21,7 +27,15 @@ describe('[CORE] | Controller =:> [LIKE]', () => {
     expect(MODULE.service).toBeDefined();
   });
 
-  it('[UNIT] | Should: create => [COMMENT]', async () => {
-    expect(true).toBeTruthy();
+  it('[UNIT] | Should: create => [LIKE]', async () => {
+    MODULE.service.create.mockResolvedValue(VALID_POST_LIKE);
+
+    const result = await MODULE.controller.create(CREATE_POST_LIKE_DATA);
+
+    expect(result).toBeDefined();
+    expect(result.like).toStrictEqual(VALID_POST_LIKE.toStruct());
+
+    expect(MODULE.service.create).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.create).toHaveBeenCalledWith(CREATE_POST_LIKE_DATA);
   });
 });
