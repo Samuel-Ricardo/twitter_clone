@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { IFollowDTO } from '../DTO';
 
 @injectable()
 export class Follow {
@@ -8,4 +9,13 @@ export class Follow {
     private _followingId: string,
     private _createdAt: Date,
   ) {}
+
+  static create(follow: IFollowDTO) {
+    return new Follow(
+      follow.id,
+      follow.followerId,
+      follow.followingId,
+      follow.createdAt,
+    );
+  }
 }
