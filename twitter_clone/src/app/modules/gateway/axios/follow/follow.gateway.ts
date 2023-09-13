@@ -81,4 +81,18 @@ export class AxiosFollowGateway
       this.fetcher,
     );
   }
+
+  swrCountFollowers(follow: ICountFollowersDTO) {
+    return this.useSWR<number>(
+      `${this.fullURL}/count/followers/${follow.followingId}`,
+      this.fetcher,
+    );
+  }
+
+  swrCountFollowing(follow: ICountFollowingDTO) {
+    return this.useSWR<number>(
+      `${this.fullURL}/count/following/${follow.followerId}`,
+      this.fetcher,
+    );
+  }
 }
