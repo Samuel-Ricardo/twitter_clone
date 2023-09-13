@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import { AxiosHTTPGateway } from '../generic/http.gateway';
 import { IFollowGateway } from '@/app/modules/@core/follow/gateway/follow.gateway';
 import {
+  ICountFollowersDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IFollowDTO,
@@ -30,5 +31,13 @@ export class AxiosFollowGateway
 
   async deleteFollow(follow: IDeleteFollowDTO) {
     await this.delete(`${this.fullURL}/${follow.id}`);
+  }
+
+  async countFollowers(follow: ICountFollowersDTO) {
+    const result = await this.get<{ followers: number }>(
+      `${this.fullURL}/count/followers/${follow.followingId}`,
+    );
+
+    return result.data.followers;
   }
 }
