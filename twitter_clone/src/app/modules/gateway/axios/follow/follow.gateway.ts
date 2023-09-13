@@ -67,4 +67,18 @@ export class AxiosFollowGateway
 
     return Follow.createArray(result.data.following);
   }
+
+  swrGetFollowers(follow: IGetFollowersDTO) {
+    return this.useSWR<IFollowDTO[]>(
+      `${this.fullURL}/followers/${follow.followingId}`,
+      this.fetcher,
+    );
+  }
+
+  swrGetFollowing(follow: IGetFollowingDTO) {
+    return this.useSWR<IFollowDTO[]>(
+      `${this.fullURL}/following/${follow.followerId}`,
+      this.fetcher,
+    );
+  }
 }
