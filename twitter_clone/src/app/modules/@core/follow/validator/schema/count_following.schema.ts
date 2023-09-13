@@ -1,4 +1,4 @@
-import { catchZod } from '@/app/modules/util';
+import { catchZod } from '@/app/modules/util/zod';
 import { z } from 'zod';
 
 export const countFollowingSchema = z
