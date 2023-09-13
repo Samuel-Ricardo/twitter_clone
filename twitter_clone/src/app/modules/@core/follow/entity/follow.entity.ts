@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { IFollowDTO } from '../DTO';
+import { followSchema } from '../validator/schema/follow.schema';
 
 @injectable()
 export class Follow {
@@ -21,5 +22,9 @@ export class Follow {
 
   static createArray(follows: IFollowDTO[]) {
     return follows.map(Follow.create);
+  }
+
+  static validate(data: IFollowDTO) {
+    return followSchema.parse(data);
   }
 }
