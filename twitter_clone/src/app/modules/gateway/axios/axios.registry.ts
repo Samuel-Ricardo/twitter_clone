@@ -6,4 +6,5 @@ export const AxiosGatewayRegistry = {
   POST: Symbol.for('gateway.axios.post'),
   COMMENT: Symbol.for('gateway.axios.comment'),
   LIKE: Symbol.for('gateway.axios.like'),
+  FOLLOW: Symbol.for('gateway.axios.follow'),
 };
