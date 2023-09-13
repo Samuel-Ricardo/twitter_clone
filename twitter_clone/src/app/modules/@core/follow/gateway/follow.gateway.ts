@@ -8,8 +8,9 @@ import {
   ICountFollowingDTO,
 } from '../DTO';
 import { Follow } from '../entity';
+import { ISWRSupport } from './support/swr.support';
 
-export interface IFollowGateway {
+export interface IFollowGateway extends ISWRSupport {
   readonly prefix: string;
 
   get fullURL(): string;
