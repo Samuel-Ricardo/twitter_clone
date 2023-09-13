@@ -18,4 +18,8 @@ export class Follow {
       follow.createdAt,
     );
   }
+
+  static createArray(follows: IFollowDTO[]) {
+    return follows.map(Follow.create);
+  }
 }
