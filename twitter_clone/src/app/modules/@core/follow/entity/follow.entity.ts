@@ -27,4 +27,13 @@ export class Follow {
   static validate(data: IFollowDTO) {
     return followSchema.parse(data);
   }
+
+  toStruct(): IFollowDTO {
+    return {
+      id: this._id,
+      followerId: this._followerId,
+      followingId: this._followingId,
+      createdAt: this._createdAt,
+    };
+  }
 }
