@@ -36,4 +36,20 @@ export class Follow {
       createdAt: this._createdAt,
     };
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get followerId() {
+    return this._followerId;
+  }
+
+  get followingId() {
+    return this._followingId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
 }
