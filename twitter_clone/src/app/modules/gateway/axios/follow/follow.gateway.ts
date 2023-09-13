@@ -8,6 +8,7 @@ import {
   IDeleteFollowDTO,
   IFollowDTO,
   IGetFollowersDTO,
+  IGetFollowingDTO,
 } from '@/app/modules/@core/follow/DTO';
 import { Follow } from '@/app/modules/@core/follow/entity';
 
@@ -57,5 +58,13 @@ export class AxiosFollowGateway
     );
 
     return Follow.createArray(result.data.followers);
+  }
+
+  async getFollowing(follow: IGetFollowingDTO) {
+    const result = await this.get<{ following: IFollowDTO[] }>(
+      `${this.fullURL}/following/${follow.followerId}`,
+    );
+
+    return Follow.createArray(result.data.following);
   }
 }
