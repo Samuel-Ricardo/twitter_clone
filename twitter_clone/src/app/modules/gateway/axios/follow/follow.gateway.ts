@@ -3,6 +3,7 @@ import { AxiosHTTPGateway } from '../generic/http.gateway';
 import { IFollowGateway } from '@/app/modules/@core/follow/gateway/follow.gateway';
 import {
   ICountFollowersDTO,
+  ICountFollowingDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IFollowDTO,
@@ -39,5 +40,13 @@ export class AxiosFollowGateway
     );
 
     return result.data.followers;
+  }
+
+  async countFollowing(follow: ICountFollowingDTO) {
+    const result = await this.get<{ following: number }>(
+      `${this.fullURL}/count/following/${follow.followerId}`,
+    );
+
+    return result.data.following;
   }
 }
