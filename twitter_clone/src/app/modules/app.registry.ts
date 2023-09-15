@@ -5,6 +5,7 @@ import { ConfigRegistry as CONFIG } from './config/config.registry';
 import { POST_REGISTRY as POST } from './@core/post/post.registry';
 import { COMMENT_REGISTRY as COMMENT } from './@core/comment/comment.registry';
 import { LIKE_REGISTRY as LIKE } from './@core/like/like.registry';
+import { FOLLOW_REGISTRY as FOLLOW } from './@core/follow/follow.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
@@ -14,4 +15,5 @@ export const MODULE = {
   LIKE,
   CONFIG,
   GATEWAY,
+  FOLLOW,
 };
