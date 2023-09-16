@@ -86,4 +86,23 @@ describe('[GATEWAY] | Axios => [FOLLOW]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: count [followers] => [FOLLOW]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        followers: 10,
+      },
+    });
+
+    const result = await MODULE.gateway.countFollowers({
+      followingId: VALID_FOLLOW.followingId,
+    });
+
+    expect(result).toStrictEqual(10);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      `${MODULE.gateway.fullURL}/count/followers/${VALID_FOLLOW.followingId}`,
+      undefined,
+    );
+  });
 });
