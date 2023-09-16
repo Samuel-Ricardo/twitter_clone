@@ -9,8 +9,20 @@ import {
   CountFollowersUseCase,
   CountFollowingUseCase,
 } from '@/app/modules/@core/follow/use-case';
+import { FollowService } from '@/app/modules/@core/follow/service';
+import { ISimulatedFollowService } from '@test/@types/simulate/follow/service';
 
 export const FOLLOW_FACTORY_MOCK = {
+  SERVICE: {
+    MOCK: () =>
+      FOLLOW_MODULE_MOCK.get<DeepMockProxy<FollowService>>(
+        FOLLOW_REGISTRY_MOCK.SERVICE.MOCK,
+      ),
+    SIMULATE: () =>
+      FOLLOW_MODULE_MOCK.get<ISimulatedFollowService>(
+        FOLLOW_REGISTRY_MOCK.SERVICE.SIMULATE,
+      ),
+  },
   USE_CASE: {
     CREATE: () =>
       FOLLOW_MODULE_MOCK.get<DeepMockProxy<CreateFollowUseCase>>(
