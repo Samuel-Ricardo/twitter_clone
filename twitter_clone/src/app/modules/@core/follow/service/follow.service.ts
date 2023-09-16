@@ -9,6 +9,7 @@ import {
 } from '../use-case';
 import { MODULE } from '@/app/modules/app.registry';
 import {
+  ICountFollowersDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IGetFollowersDTO,
@@ -33,18 +34,22 @@ export class FollowService {
   ) {}
 
   async create(follow: ICreateFollowDTO) {
-    return this.createFollow.execute(follow);
+    return await this.createFollow.execute(follow);
   }
 
   async delete(follow: IDeleteFollowDTO) {
-    return this.deleteFollow.execute(follow);
+    return await this.deleteFollow.execute(follow);
   }
 
-  async getFollowersOf(user: IGetFollowersDTO) {
+  getFollowersOf(user: IGetFollowersDTO) {
     return this.getFollowers.execute(user);
   }
 
-  async getFollowingOf(user: IGetFollowingDTO) {
+  getFollowingOf(user: IGetFollowingDTO) {
     return this.getFollowing.execute(user);
+  }
+
+  countFollowersOf(user: ICountFollowersDTO) {
+    return this.countFollowers.execute(user);
   }
 }
