@@ -10,6 +10,7 @@ import {
 import { MODULE } from '@/app/modules/app.registry';
 import {
   ICountFollowersDTO,
+  ICountFollowingDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IGetFollowersDTO,
@@ -51,5 +52,9 @@ export class FollowService {
 
   countFollowersOf(user: ICountFollowersDTO) {
     return this.countFollowers.execute(user);
+  }
+
+  countFollowingOf(user: ICountFollowingDTO) {
+    return this.countFollowing.execute(user);
   }
 }
