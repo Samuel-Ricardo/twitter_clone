@@ -11,6 +11,10 @@ import {
   simulateAxiosCommentGateway,
 } from './comment/comment.gateway';
 import { mockAxiosLikeGateway, simulateAxiosLikeGateway } from './like';
+import {
+  mockAxiosFollowGateway,
+  simulateAxiosFollowGateway,
+} from './follow/follow.gateway';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -50,3 +54,11 @@ AXIOS_GATEWAY_MODULE_MOCK.bind(
 AXIOS_GATEWAY_MODULE_MOCK.bind(
   AXIOS_GATEWAY_REGISTRY_MOCK.LIKE.SIMULATE,
 ).toDynamicValue(simulateAxiosLikeGateway);
+
+AXIOS_GATEWAY_MODULE_MOCK.bind(
+  AXIOS_GATEWAY_REGISTRY_MOCK.FOLLOW.MOCK,
+).toDynamicValue(mockAxiosFollowGateway);
+
+AXIOS_GATEWAY_MODULE_MOCK.bind(
+  AXIOS_GATEWAY_REGISTRY_MOCK.FOLLOW.SIMULATE,
+).toDynamicValue(simulateAxiosFollowGateway);
