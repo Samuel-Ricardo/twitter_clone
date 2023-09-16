@@ -10,6 +10,7 @@ import {
   CountFollowingUseCase,
 } from './use-case';
 import { FollowService } from './service';
+import { FollowController } from './controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -31,3 +32,5 @@ FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.COUNT.FOLLOWERS).to(
 );
 
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE).to(FollowService);
+
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.CONTROLLER).to(FollowController);
