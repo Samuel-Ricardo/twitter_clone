@@ -19,26 +19,23 @@ export class AxiosFollowGateway
 {
   readonly prefix = 'follow';
 
-  get fullURL(): string {
-    return `${this.fullURL}/${this.prefix}`;
+  get fullURL() {
+    return `${this.URL}/${this.prefix}`;
   }
 
   async create(follow: ICreateFollowDTO) {
-    const result = await this.post<{ follow: IFollowDTO }>(
-      this.fullURL,
-      follow,
-    );
+    const result = await this.post<{ follow: IFollowDTO }>(this.prefix, follow);
 
     return Follow.create(result.data.follow);
   }
 
   async deleteFollow(follow: IDeleteFollowDTO) {
-    await this.delete(`${this.fullURL}/${follow.id}`);
+    await this.delete(`${this.prefix}/${follow.id}`);
   }
 
   async countFollowers(follow: ICountFollowersDTO) {
     const result = await this.get<{ followers: number }>(
-      `${this.fullURL}/count/followers/${follow.followingId}`,
+      `${this.prefix}/count/followers/${follow.followingId}`,
     );
 
     return result.data.followers;
@@ -46,7 +43,7 @@ export class AxiosFollowGateway
 
   async countFollowing(follow: ICountFollowingDTO) {
     const result = await this.get<{ following: number }>(
-      `${this.fullURL}/count/following/${follow.followerId}`,
+      `${this.prefix}/count/following/${follow.followerId}`,
     );
 
     return result.data.following;
@@ -54,7 +51,7 @@ export class AxiosFollowGateway
 
   async getFollowers(follow: IGetFollowersDTO) {
     const result = await this.get<{ followers: IFollowDTO[] }>(
-      `${this.fullURL}/followers/${follow.followingId}`,
+      `${this.prefix}/${follow.followingId}/followers`,
     );
 
     return Follow.createArray(result.data.followers);
@@ -62,7 +59,7 @@ export class AxiosFollowGateway
 
   async getFollowing(follow: IGetFollowingDTO) {
     const result = await this.get<{ following: IFollowDTO[] }>(
-      `${this.fullURL}/following/${follow.followerId}`,
+      `${this.prefix}/${follow.followerId}/following`,
     );
 
     return Follow.createArray(result.data.following);

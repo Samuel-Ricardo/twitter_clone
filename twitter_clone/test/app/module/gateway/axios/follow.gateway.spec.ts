@@ -63,7 +63,7 @@ describe('[GATEWAY] | Axios => [FOLLOW]', () => {
     expect(result).toStrictEqual([VALID_FOLLOW]);
     expect(MODULE.client.get).toBeCalledTimes(1);
     expect(MODULE.client.get).toBeCalledWith(
-      `${MODULE.gateway.fullURL}/followers/${VALID_FOLLOW.followingId}`,
+      `${MODULE.gateway.fullURL}/${VALID_FOLLOW.followingId}/followers`,
       undefined,
     );
   });
@@ -82,7 +82,7 @@ describe('[GATEWAY] | Axios => [FOLLOW]', () => {
     expect(result).toStrictEqual([VALID_FOLLOW]);
     expect(MODULE.client.get).toBeCalledTimes(1);
     expect(MODULE.client.get).toBeCalledWith(
-      `${MODULE.gateway.fullURL}/following/${VALID_FOLLOW.followerId}`,
+      `${MODULE.gateway.fullURL}/${VALID_FOLLOW.followerId}/following`,
       undefined,
     );
   });
