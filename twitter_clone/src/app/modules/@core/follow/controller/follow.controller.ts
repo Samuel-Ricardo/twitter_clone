@@ -1,7 +1,7 @@
 import { MODULE } from '@/app/modules/app.registry';
 import { inject, injectable } from 'inversify';
 import { FollowService } from '../service';
-import { ICreateFollowDTO, IDeleteFollowDTO } from '../DTO';
+import { ICreateFollowDTO, IDeleteFollowDTO, IGetFollowersDTO } from '../DTO';
 
 @injectable()
 export class FollowController {
@@ -17,5 +17,9 @@ export class FollowController {
 
   async unfollow(user: IDeleteFollowDTO) {
     return await this.service.delete(user);
+  }
+
+  followersOf(user: IGetFollowersDTO) {
+    return { followers: this.service.getFollowersOf(user) };
   }
 }
