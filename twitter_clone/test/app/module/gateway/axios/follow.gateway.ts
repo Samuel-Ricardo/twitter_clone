@@ -9,7 +9,7 @@ import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { AxiosFollowGateway } from '@/app/modules/gateway/axios/follow/follow.gateway';
 import { CREATE_FOLLOW_DATA, VALID_FOLLOW } from '@test/mock/data/follow';
 
-describe('[GATEWAY] | Axios => [LIKE]', () => {
+describe('[GATEWAY] | Axios => [FOLLOW]', () => {
   let MODULE = MODULES_MOCK.GATEWAY.AXIOS.FOLLOW.SIMULATE();
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
     expect(MODULE.client).toBeDefined();
   });
 
-  it('[UNIT] | Should: create => [LIKE]', async () => {
+  it('[UNIT] | Should: create => [FOLLOW]', async () => {
     MODULE.client.post.mockResolvedValue({
       data: {
         follow: VALID_FOLLOW.toStruct(),
@@ -39,7 +39,7 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
     );
   });
 
-  it('[UNIT] | Should: delete => [LIKE]', async () => {
+  it('[UNIT] | Should: delete => [FOLLOW]', async () => {
     MODULE.client.delete.mockResolvedValue({
       data: {},
     });
@@ -47,5 +47,25 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
     expect(
       MODULE.gateway.deleteFollow({ id: VALID_FOLLOW.id }),
     ).resolves.not.toThrow();
+  });
+
+  it('[UNIT] | Should: get [followers] => [FOLLOW]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        followers: [VALID_FOLLOW.toStruct()],
+      },
+    });
+
+    const result = await MODULE.gateway.getFollowers({
+      followingId: VALID_FOLLOW.followingId,
+    });
+
+    expect(result).toStrictEqual([VALID_FOLLOW]);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      MODULE.gateway.fullURL,
+      { followingId: VALID_FOLLOW.followingId },
+      undefined,
+    );
   });
 });
