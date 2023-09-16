@@ -13,7 +13,7 @@ export interface ISimulatedFollowService {
   service: FollowService;
   use_case: {
     create: DeepMockProxy<CreateFollowUseCase>;
-    delete: DeepMockProxy<DeleteFollowUseCase>;
+    deleteFollow: DeepMockProxy<DeleteFollowUseCase>;
     get: {
       followers: DeepMockProxy<GetFollowersUseCase>;
       following: DeepMockProxy<GetFollowingUseCase>;
