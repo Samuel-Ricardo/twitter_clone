@@ -11,8 +11,20 @@ import {
 } from '@/app/modules/@core/follow/use-case';
 import { FollowService } from '@/app/modules/@core/follow/service';
 import { ISimulatedFollowService } from '@test/@types/simulate/follow/service';
+import { FollowController } from '@/app/modules/@core/follow/controller';
+import { ISimulatedFollowController } from '@test/@types/simulate/follow/controller';
 
 export const FOLLOW_FACTORY_MOCK = {
+  CONTROLLER: {
+    MOCK: () =>
+      FOLLOW_MODULE_MOCK.get<DeepMockProxy<FollowController>>(
+        FOLLOW_REGISTRY_MOCK.CONTROLLER.MOCK,
+      ),
+    SIMULATE: () =>
+      FOLLOW_MODULE_MOCK.get<ISimulatedFollowController>(
+        FOLLOW_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+      ),
+  },
   SERVICE: {
     MOCK: () =>
       FOLLOW_MODULE_MOCK.get<DeepMockProxy<FollowService>>(
