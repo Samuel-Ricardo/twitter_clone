@@ -9,7 +9,10 @@ import {
   mockCountFollowersUseCase,
   mockCountFollowingUseCase,
 } from './use-case';
-import { mockFollowService } from './service/follow.service';
+import {
+  mockFollowService,
+  simulateFollowService,
+} from './service/follow.service';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -41,4 +44,8 @@ FOLLOW_MODULE_MOCK.bind(
 
 FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
   mockFollowService,
+);
+
+FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
+  simulateFollowService,
 );
