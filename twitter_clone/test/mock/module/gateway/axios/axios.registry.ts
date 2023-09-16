@@ -1,4 +1,8 @@
 export const AXIOS_GATEWAY_REGISTRY_MOCK = {
+  FOLLOW: {
+    MOCK: Symbol.for('mock:module.gateway.axios.follow'),
+    SIMULATE: Symbol.for('mock:module.gateway.axios.follow.simulated'),
+  },
   LIKE: {
     MOCK: Symbol.for('mock:module.gateway.axios.like'),
     SIMULATE: Symbol.for('mock:module.gateway.axios.like.simulated'),
