@@ -38,4 +38,14 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: delete => [LIKE]', async () => {
+    MODULE.client.delete.mockResolvedValue({
+      data: {},
+    });
+
+    expect(
+      MODULE.gateway.deleteFollow({ id: VALID_FOLLOW.id }),
+    ).resolves.not.toThrow();
+  });
 });
