@@ -8,12 +8,13 @@ import {
   CountFollowingUseCase,
 } from '../use-case';
 import { MODULE } from '@/app/modules/app.registry';
+import { ICreateFollowDTO } from '../DTO';
 
 @injectable()
 export class FollowService {
   constructor(
     @inject(MODULE.FOLLOW.USE_CASE.CREATE)
-    private readonly create: CreateFollowUseCase,
+    private readonly createFollow: CreateFollowUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.DELETE)
     private readonly deleteFollow: DeleteFollowUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.GET.FOLLOWERS)
@@ -25,4 +26,8 @@ export class FollowService {
     @inject(MODULE.FOLLOW.USE_CASE.COUNT.FOLLOWING)
     private readonly countFollowing: CountFollowingUseCase,
   ) {}
+
+  async create(follow: ICreateFollowDTO) {
+    return this.createFollow.execute(follow);
+  }
 }
