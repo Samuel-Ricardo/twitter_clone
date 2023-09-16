@@ -5,12 +5,14 @@ import { GATEWAY_FACTORY_MOCK as GATEWAY } from './gateway/gateway.factory';
 import { HOOKS_FACTORY_MOCK as HOOKS } from './hooks/hooks.factory';
 import { COMMENT_FACTORY_MOCK as COMMENT } from './@core/comment/comment.factory';
 import { LIKE_FACTORY_MODULE_MOCK as LIKE } from './@core/like/like.factory';
+import { FOLLOW_FACTORY_MOCK as FOLLOW } from './@core/follow/follow.factory';
 
 export const MODULES_MOCK = {
   USER,
   POST,
   COMMENT,
   LIKE,
+  FOLLOW,
   AXIOS,
   GATEWAY,
   HOOKS,
