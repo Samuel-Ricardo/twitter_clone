@@ -105,4 +105,23 @@ describe('[GATEWAY] | Axios => [FOLLOW]', () => {
       undefined,
     );
   });
+
+  it('[UNIT] | Should: count [following] => [FOLLOW]', async () => {
+    MODULE.client.get.mockResolvedValue({
+      data: {
+        following: 10,
+      },
+    });
+
+    const result = await MODULE.gateway.countFollowing({
+      followerId: VALID_FOLLOW.followerId,
+    });
+
+    expect(result).toStrictEqual(10);
+    expect(MODULE.client.get).toBeCalledTimes(1);
+    expect(MODULE.client.get).toBeCalledWith(
+      `${MODULE.gateway.fullURL}/count/following/${VALID_FOLLOW.followerId}`,
+      undefined,
+    );
+  });
 });
