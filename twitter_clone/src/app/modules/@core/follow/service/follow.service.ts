@@ -8,7 +8,12 @@ import {
   CountFollowingUseCase,
 } from '../use-case';
 import { MODULE } from '@/app/modules/app.registry';
-import { ICreateFollowDTO, IDeleteFollowDTO, IGetFollowersDTO } from '../DTO';
+import {
+  ICreateFollowDTO,
+  IDeleteFollowDTO,
+  IGetFollowersDTO,
+  IGetFollowingDTO,
+} from '../DTO';
 
 @injectable()
 export class FollowService {
@@ -37,5 +42,9 @@ export class FollowService {
 
   async getFollowersOf(user: IGetFollowersDTO) {
     return this.getFollowers.execute(user);
+  }
+
+  async getFollowingOf(user: IGetFollowingDTO) {
+    return this.getFollowing.execute(user);
   }
 }
