@@ -13,6 +13,10 @@ import {
   mockFollowService,
   simulateFollowService,
 } from './service/follow.service';
+import {
+  mockFollowController,
+  simulateFollowController,
+} from './controller/follow.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -49,3 +53,11 @@ FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
 FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.SERVICE.SIMULATE).toDynamicValue(
   simulateFollowService,
 );
+
+FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.CONTROLLER.MOCK).toDynamicValue(
+  mockFollowController,
+);
+
+FOLLOW_MODULE_MOCK.bind(
+  FOLLOW_REGISTRY_MOCK.CONTROLLER.SIMULATE,
+).toDynamicValue(simulateFollowController);
