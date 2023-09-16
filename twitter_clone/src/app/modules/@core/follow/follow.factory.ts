@@ -1,3 +1,4 @@
+import { FollowController } from './controller';
 import { FOLLOW_MODULE } from './follow.module';
 import { FOLLOW_REGISTRY } from './follow.registry';
 import { FollowService } from './service';
@@ -11,6 +12,7 @@ import {
 } from './use-case';
 
 export const FOLLOW_FACTORY = {
+  CONTROLLER: FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.CONTROLLER),
   SERVICE: FOLLOW_MODULE.get<FollowService>(FOLLOW_REGISTRY.SERVICE),
   USE_CASE: {
     CREATE: FOLLOW_MODULE.get<CreateFollowUseCase>(
