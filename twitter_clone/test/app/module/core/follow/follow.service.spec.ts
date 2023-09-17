@@ -12,6 +12,7 @@ import {
   CREATE_FOLLOW_DATA,
   SWR_FOLLOW,
   USER_FOLLOWED,
+  USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
 
@@ -62,10 +63,29 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
     });
 
     expect(result.data).toEqual([VALID_FOLLOW.toStruct()]);
+    expect(result.data![0].followingId).toEqual(USER_FOLLOWED.id);
 
     expect(MODULE.use_case.get.followers.execute).toHaveBeenCalledTimes(1);
     expect(MODULE.use_case.get.followers.execute).toHaveBeenCalledWith({
       followingId: USER_FOLLOWED.id,
+    });
+  });
+
+  it('[UNIT] | Should: get [following] => [FOLLOW]', async () => {
+    MODULE.use_case.get.following.execute.mockReturnValue(
+      SWR_FOLLOW([VALID_FOLLOW.toStruct()]) as any,
+    );
+
+    const result = MODULE.service.getFollowingOf({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result.data).toEqual([VALID_FOLLOW.toStruct()]);
+    expect(result.data![0].followerId).toEqual(USER_FOLLOWER.id);
+
+    expect(MODULE.use_case.get.following.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.get.following.execute).toHaveBeenCalledWith({
+      followerId: USER_FOLLOWER.id,
     });
   });
 });
