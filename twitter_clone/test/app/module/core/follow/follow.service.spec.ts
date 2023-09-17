@@ -105,4 +105,21 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
       followingId: USER_FOLLOWED.id,
     });
   });
+
+  it('[UNIT] | Should: count [following] => [FOLLOW]', async () => {
+    MODULE.use_case.count.following.execute.mockReturnValue(
+      SWR_FOLLOW(10) as any,
+    );
+
+    const result = MODULE.service.countFollowingOf({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result.data).toEqual(10);
+
+    expect(MODULE.use_case.count.following.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.count.following.execute).toHaveBeenCalledWith({
+      followerId: USER_FOLLOWER.id,
+    });
+  });
 });
