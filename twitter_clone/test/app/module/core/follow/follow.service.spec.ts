@@ -8,6 +8,7 @@ import { expect } from '@jest/globals';
 import { ISimulatedFollowService } from '@test/@types/simulate/follow/service';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { FollowService } from '@/app/modules/@core/follow/service';
+import { CREATE_FOLLOW_DATA, VALID_FOLLOW } from '@test/mock/data/follow';
 
 describe('[CORE] | SERVICE => [FOLLOW]', () => {
   let MODULE: ISimulatedFollowService;
@@ -22,6 +23,14 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
   });
 
   it('[UNIT] | Should: create => [FOLLOW]', async () => {
-    expect(true).toBeTruthy();
+    MODULE.use_case.create.execute.mockResolvedValue(VALID_FOLLOW);
+
+    const result = await MODULE.use_case.create.execute(CREATE_FOLLOW_DATA);
+
+    expect(result).toEqual(VALID_FOLLOW);
+    expect(MODULE.use_case.create.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
+      CREATE_FOLLOW_DATA,
+    );
   });
 });
