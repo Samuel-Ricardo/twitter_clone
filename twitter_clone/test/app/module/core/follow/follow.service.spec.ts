@@ -31,7 +31,7 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
   it('[UNIT] | Should: create => [FOLLOW]', async () => {
     MODULE.use_case.create.execute.mockResolvedValue(VALID_FOLLOW);
 
-    const result = await MODULE.use_case.create.execute(CREATE_FOLLOW_DATA);
+    const result = await MODULE.service.create(CREATE_FOLLOW_DATA);
 
     expect(result).toEqual(VALID_FOLLOW);
     expect(MODULE.use_case.create.execute).toHaveBeenCalledTimes(1);
@@ -86,6 +86,23 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
     expect(MODULE.use_case.get.following.execute).toHaveBeenCalledTimes(1);
     expect(MODULE.use_case.get.following.execute).toHaveBeenCalledWith({
       followerId: USER_FOLLOWER.id,
+    });
+  });
+
+  it('[UNIT] | Should: count [followers] => [FOLLOW]', async () => {
+    MODULE.use_case.count.followers.execute.mockReturnValue(
+      SWR_FOLLOW(10) as any,
+    );
+
+    const result = MODULE.service.countFollowersOf({
+      followingId: USER_FOLLOWED.id,
+    });
+
+    expect(result.data).toEqual(10);
+
+    expect(MODULE.use_case.count.followers.execute).toHaveBeenCalledTimes(1);
+    expect(MODULE.use_case.count.followers.execute).toHaveBeenCalledWith({
+      followingId: USER_FOLLOWED.id,
     });
   });
 });
