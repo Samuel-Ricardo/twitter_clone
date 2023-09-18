@@ -19,7 +19,7 @@ export class FollowController {
 
   async follow(user: ICreateFollowDTO) {
     const result = await this.service.create(user);
-    return { user: result.toStruct() };
+    return { follow: result.toStruct() };
   }
 
   async unfollow(user: IDeleteFollowDTO) {
