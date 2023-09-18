@@ -1,4 +1,4 @@
-import { NotificationType } from './type.dto';
+import { NotificationType } from '../entity';
 
 export interface INotificationDTO {
   id: string;
@@ -8,5 +8,5 @@ export interface INotificationDTO {
   eventId: string;
   createdAt: Date;
   updatedAt: Date;
-  visualizedAt?: Date;
+  visualizedAt?: Date | null;
 }

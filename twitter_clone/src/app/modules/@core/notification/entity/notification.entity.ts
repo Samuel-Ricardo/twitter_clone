@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
-import { INotificationDTO, NotificationType } from '../DTO';
+import { INotificationDTO } from '../DTO';
 import { notificationSchema } from '../validator/schema/notification.schema';
+import { NotificationType } from '.';
 
 @injectable()
 export class Notification {
