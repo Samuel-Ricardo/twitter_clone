@@ -60,4 +60,8 @@ export class Notification {
       visualizedAt: this._visualizedAt,
     };
   }
+
+  get id() {
+    return this._id;
+  }
 }
