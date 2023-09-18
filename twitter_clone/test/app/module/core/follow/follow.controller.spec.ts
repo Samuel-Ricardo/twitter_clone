@@ -34,4 +34,15 @@ describe('[CORE] | CONTROLLER =:> [FOLLOW]', () => {
     expect(MODULE.service.create).toHaveBeenCalledTimes(1);
     expect(MODULE.service.create).toHaveBeenCalledWith(CREATE_FOLLOW_DATA);
   });
+
+  it('[UNIT] | Should: delete => [FOLLOW]', async () => {
+    MODULE.service.delete.mockResolvedValue();
+
+    expect(
+      MODULE.controller.unfollow({ id: VALID_FOLLOW.id }),
+    ).resolves.not.toThrow();
+
+    expect(MODULE.service.delete).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.delete).toHaveBeenCalledWith({ id: VALID_FOLLOW.id });
+  });
 });
