@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { NotificationType } from '../DTO';
+import { INotificationDTO, NotificationType } from '../DTO';
 
 @injectable()
 export class Notification {
@@ -13,4 +13,17 @@ export class Notification {
     private readonly _updatedAt: Date,
     private readonly _visualizedAt?: Date | null,
   ) {}
+
+  static create(notification: INotificationDTO) {
+    return new Notification(
+      notification.id,
+      notification.userId,
+      notification.type,
+      notification.body,
+      notification.eventId,
+      notification.createdAt,
+      notification.updatedAt,
+      notification.visualizedAt,
+    );
+  }
 }
