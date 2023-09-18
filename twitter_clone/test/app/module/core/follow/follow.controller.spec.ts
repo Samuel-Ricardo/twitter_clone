@@ -15,6 +15,7 @@ import {
   USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
+import { Gaegu } from 'next/font/google';
 
 describe('[CORE] | CONTROLLER =:> [FOLLOW]', () => {
   let MODULE: ISimulatedFollowController;
@@ -85,6 +86,36 @@ describe('[CORE] | CONTROLLER =:> [FOLLOW]', () => {
 
     expect(MODULE.service.getFollowingOf).toHaveBeenCalledTimes(1);
     expect(MODULE.service.getFollowingOf).toHaveBeenCalledWith({
+      followerId: USER_FOLLOWER.id,
+    });
+  });
+
+  it('[UNIT] | Should: count [followers] => [FOLLOW]', async () => {
+    MODULE.service.countFollowersOf.mockReturnValue(SWR_FOLLOW(1) as any);
+
+    const result = MODULE.controller.countFollowersOf({
+      followingId: USER_FOLLOWED.id,
+    });
+
+    expect(result.followers.data).toStrictEqual(1);
+
+    expect(MODULE.service.countFollowersOf).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.countFollowersOf).toHaveBeenCalledWith({
+      followingId: USER_FOLLOWED.id,
+    });
+  });
+
+  it('[UNIT] | Should: count [following] => [FOLLOW]', async () => {
+    MODULE.service.countFollowingOf.mockReturnValue(SWR_FOLLOW(1) as any);
+
+    const result = MODULE.controller.countFollowingOf({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result.following.data).toStrictEqual(1);
+
+    expect(MODULE.service.countFollowingOf).toHaveBeenCalledTimes(1);
+    expect(MODULE.service.countFollowingOf).toHaveBeenCalledWith({
       followerId: USER_FOLLOWER.id,
     });
   });
