@@ -1,6 +1,6 @@
 import { SWRResponse } from 'swr';
 import { INotificationDTO } from '../../../DTO';
 
-export interface SWRSupport {
+export interface ISWRSupport {
   swrGetByUser(): SWRResponse<INotificationDTO[]>;
 }
