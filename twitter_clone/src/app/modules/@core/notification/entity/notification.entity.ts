@@ -40,7 +40,24 @@ export class Notification {
     );
   }
 
+  static createArray(notifications: INotificationDTO[]) {
+    return notifications.map(Notification.create);
+  }
+
   static validate(data: INotificationDTO) {
     return notificationSchema.parse(data);
+  }
+
+  toStruct(): INotificationDTO {
+    return {
+      id: this._id,
+      userId: this._userId,
+      type: this._type,
+      body: this._body,
+      eventId: this._eventId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+      visualizedAt: this._visualizedAt,
+    };
   }
 }
