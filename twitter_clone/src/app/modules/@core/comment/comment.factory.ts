@@ -11,6 +11,8 @@ import {
 } from './use-case';
 
 export const COMMENT_FACTORY = {
+  MAIN: () =>
+    COMMENT_MODULE.get<CommentController>(COMMENT_REGISTRY.CONTROLLER),
   CONTROLLER: () =>
     COMMENT_MODULE.get<CommentController>(COMMENT_REGISTRY.CONTROLLER),
   SERVICE: () => COMMENT_MODULE.get<CommentService>(COMMENT_REGISTRY.SERVICE),

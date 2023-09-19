@@ -12,6 +12,7 @@ import {
 } from './use-case';
 
 export const FOLLOW_FACTORY = {
+  MAIN: () => FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.CONTROLLER),
   CONTROLLER: FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.CONTROLLER),
   SERVICE: FOLLOW_MODULE.get<FollowService>(FOLLOW_REGISTRY.SERVICE),
   USE_CASE: {
