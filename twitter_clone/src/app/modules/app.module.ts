@@ -9,6 +9,7 @@ import { POST_MODULE as POST } from './@core/post/post.module';
 import { COMMENT_MODULE as COMMENT } from './@core/comment/comment.module';
 import { LIKE_MODULE as LIKE } from './@core/like/like.module';
 import { FOLLOW_MODULE as FOLLOW } from './@core/follow/follow.module';
+import { EVENT_MODULE as EVENT } from './event/event.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -20,6 +21,7 @@ export const AppModule = Container.merge(
   LIKE,
   FOLLOW,
   CONFIG,
+  EVENT,
   AXIOS,
   GATEWAY,
 );
