@@ -32,6 +32,7 @@
     "crypto": "^1.0.1",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.11",
+    "eventemitter2": "^6.4.9",
     "inversify": "^6.0.1",
     "jest-mock-extended": "^3.0.5",
     "mongodb": "^6.0.0",
