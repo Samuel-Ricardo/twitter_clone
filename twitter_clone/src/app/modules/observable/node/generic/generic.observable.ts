@@ -12,8 +12,8 @@ export class NodeObservable implements IObservable {
   listen(event: string, action: GenericAction) {
     this.event.on(event, action);
   }
-  stopListening(event: string) {
-    throw new Error('Method not implemented.');
+  stopListening(event: string, action: GenericAction) {
+    this.event.off(event, action);
   }
   emit(event: string, data: any) {
     throw new Error('Method not implemented.');
