@@ -1,0 +1,10 @@
+export const LIKE_EVENTS = {
+  LIKE: {
+    COMMENT: 'EVENT:LIKE.POST',
+    POST: 'EVENT:LIKE.COMMENT',
+  },
+  UNLIKE: {
+    COMMENT: 'EVENT:UNLIKE.POST',
+    POST: 'EVENT:UNLIKE.COMMENT',
+  },
+};
