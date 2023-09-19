@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 import { EVENT_REGISTRY } from './event.registry';
-import { EventEmitter } from 'node:stream';
+import { EventEmitter } from 'node:events';
 import { EventEmitter2 } from 'eventemitter2';
 
 export const EVENT_MODULE = new Container({
@@ -8,6 +8,10 @@ export const EVENT_MODULE = new Container({
   defaultScope: 'Singleton',
 });
 
-EVENT_MODULE.bind(EVENT_REGISTRY.EMITER.NODE).toConstantValue(EventEmitter);
+EVENT_MODULE.bind(EVENT_REGISTRY.EMITER.NODE).toConstantValue(
+  new EventEmitter(),
+);
 
-EVENT_MODULE.bind(EVENT_REGISTRY.EMITER[2]).toConstantValue(EventEmitter2);
+EVENT_MODULE.bind(EVENT_REGISTRY.EMITER[2]).toConstantValue(
+  new EventEmitter2(),
+);
