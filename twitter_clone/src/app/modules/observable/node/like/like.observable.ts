@@ -11,16 +11,28 @@ export class NodeLikeObservable
   extends NodeObservable
   implements ILikeObservable
 {
-  listenLike(schedule: IListenLikeDTO) {
+  listenPostLike(schedule: IListenLikeDTO) {
     throw new Error('Method not implemented.');
   }
-  listenDislike(schedule: IListenDislikeDTO) {
+  listenCommentLike(schedule: IListenLikeDTO) {
     throw new Error('Method not implemented.');
   }
-  emitLike(like: IEmitLikeDTO) {
+  listenPostDislike(schedule: IListenDislikeDTO) {
     throw new Error('Method not implemented.');
   }
-  emitDislike(like: IEmitDislikeDTO) {
+  listenCommentDislike(schedule: IListenDislikeDTO) {
+    throw new Error('Method not implemented.');
+  }
+  emitPostLike(like: IEmitLikeDTO) {
+    throw new Error('Method not implemented.');
+  }
+  emitPostDislike(like: IEmitDislikeDTO) {
+    throw new Error('Method not implemented.');
+  }
+  emitCommentLike(like: IEmitLikeDTO) {
+    throw new Error('Method not implemented.');
+  }
+  emitCommentDislike(like: IEmitDislikeDTO) {
     throw new Error('Method not implemented.');
   }
 }
