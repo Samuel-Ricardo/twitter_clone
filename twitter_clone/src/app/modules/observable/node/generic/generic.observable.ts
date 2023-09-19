@@ -16,6 +16,6 @@ export class NodeObservable implements IObservable {
     this.event.off(event, action);
   }
   emit(event: string, data: any) {
-    throw new Error('Method not implemented.');
+    this.event.emit(event, data);
   }
 }
