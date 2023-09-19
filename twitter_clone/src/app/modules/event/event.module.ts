@@ -8,6 +8,6 @@ export const EVENT_MODULE = new Container({
   defaultScope: 'Singleton',
 });
 
-EVENT_MODULE.bind(EVENT_REGISTRY.EMMITER.NODE).toConstantValue(EventEmitter);
+EVENT_MODULE.bind(EVENT_REGISTRY.EMITER.NODE).toConstantValue(EventEmitter);
 
-EVENT_MODULE.bind(EVENT_REGISTRY.EMMITER[2]).toConstantValue(EventEmitter2);
+EVENT_MODULE.bind(EVENT_REGISTRY.EMITER[2]).toConstantValue(EventEmitter2);
