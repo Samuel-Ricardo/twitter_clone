@@ -19,10 +19,10 @@ export class NodeLikeObservable
     this.listen(this.EVENTS.LIKE.COMMENT, schedule.action);
   }
   listenPostDislike(schedule: IListenDislikeDTO) {
-    throw new Error('Method not implemented.');
+    this.listen(this.EVENTS.DISLIKE.POST, schedule.action);
   }
   listenCommentDislike(schedule: IListenDislikeDTO) {
-    throw new Error('Method not implemented.');
+    this.listen(this.EVENTS.DISLIKE.COMMENT, schedule.action);
   }
   emitPostLike(like: IEmitLikeDTO) {
     throw new Error('Method not implemented.');
