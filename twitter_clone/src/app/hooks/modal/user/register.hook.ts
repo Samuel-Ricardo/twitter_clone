@@ -3,6 +3,6 @@ import { create } from 'zustand';
 
 export const useUserRegisterModal = create<IUserRegisterModalState>((set) => ({
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false }),
 }));

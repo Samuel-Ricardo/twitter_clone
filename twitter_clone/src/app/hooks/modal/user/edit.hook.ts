@@ -3,6 +3,6 @@ import { create } from 'zustand';
 
 export const useEditUserModal = create<IUserEditModalState>((set) => ({
   isOpen: false,
-  Open: () => set({ isOpen: true }),
-  Close: () => set({ isOpen: false }),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false }),
 }));
