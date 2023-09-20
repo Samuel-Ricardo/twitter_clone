@@ -1,5 +1,5 @@
 export interface IModalState {
   isOpen: boolean;
-  Open: () => void;
-  Close: () => void;
+  open: () => void;
+  close: () => void;
 }
