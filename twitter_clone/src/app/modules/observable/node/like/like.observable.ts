@@ -11,11 +11,12 @@ export class NodeLikeObservable
   extends NodeObservable
   implements ILikeObservable
 {
-  listenPostLike(schedule: IListenLikeDTO) {
-    throw new Error('Method not implemented.');
+  listenPostLike(scheduled: IListenLikeDTO) {
+    this.listen(this.EVENTS.LIKE.POST, scheduled.action);
   }
+
   listenCommentLike(schedule: IListenLikeDTO) {
-    throw new Error('Method not implemented.');
+    this.listen(this.EVENTS.LIKE.COMMENT, schedule.action);
   }
   listenPostDislike(schedule: IListenDislikeDTO) {
     throw new Error('Method not implemented.');
