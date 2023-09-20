@@ -28,12 +28,12 @@ export class NodeLikeObservable
     this.emit(this.EVENTS.LIKE.POST, like);
   }
   emitPostDislike(like: IEmitDislikeDTO) {
-    throw new Error('Method not implemented.');
+    this.emit(this.EVENTS.DISLIKE.POST, like);
   }
   emitCommentLike(like: IEmitLikeDTO) {
-    throw new Error('Method not implemented.');
+    this.emit(this.EVENTS.LIKE.COMMENT, like);
   }
   emitCommentDislike(like: IEmitDislikeDTO) {
-    throw new Error('Method not implemented.');
+    this.emit(this.EVENTS.DISLIKE.COMMENT, like);
   }
 }
