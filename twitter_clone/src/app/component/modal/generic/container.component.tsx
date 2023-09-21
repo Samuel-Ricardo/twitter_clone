@@ -5,23 +5,32 @@ export const ModalContainer = (props: { children: React.ReactNode }) => (
         items-center 
         flex 
         flex-col
+        
 
-        overflow-x-hidden 
+        
+        z-50
+
+        overflow-x-auto 
         overflow-y-auto
       
-        fixed 
-        z-50
+        fixed
+        inset-0
+        w-fit
+        max-w-auto mx-auto
+        max-h-screen
+        h-fit my-auto
       
         outline-none
         focus:outline-none
               
-        rounded-md
+        rounded-2xl
     
-        pb-6
-        px-6
+        pt-0
+        pb-3
+        px-2
     
         bg-neutral-800 
-        bgroup-opacity-70 
+        shadow-xl shadow-cyan-500/50
       "
   >
     {props.children}
