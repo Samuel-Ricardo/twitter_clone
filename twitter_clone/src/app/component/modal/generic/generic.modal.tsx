@@ -11,11 +11,12 @@ export const Modal: FC<PropsWithChildren<IModalProps>> = (props) => {
   return (
     <ModalContainer>
       <button
-        className=" text-white text-2xl p-1 ml-auto border-0 hover:opacity-70 transition"
+        className=" text-white text-3xl p-1 ml-auto border-0 hover:opacity-80 hover:ease-in hover:text-blue-500 transition"
         onClick={props.onClose}
       >
         <AiOutlineClose />
       </button>
+
       <ModalHeader title={title} onClose={onClose} />
 
       {children}
