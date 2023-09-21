@@ -8,8 +8,11 @@ import {
   UserRegisterFormData,
   userRegisterSchema,
 } from '@/app/modules/validation/zod/user/register.validation';
+import { useUserRegisterModal } from '@/app/hooks/modal/user/register.hook';
 
 export const RegisterModal = () => {
+  const { close, isOpen } = useUserRegisterModal();
+
   const {
     register,
     handleSubmit,
@@ -18,16 +21,19 @@ export const RegisterModal = () => {
     resolver: zodResolver(userRegisterSchema),
   });
 
+  if (!isOpen) return null; // return null if modal is not isOpen
+
   const modalProps: IModalProps = {
     title: 'Register',
-    onClose: () => toast.success('close'),
+    onClose: () => {
+      toast.success('Closed :D');
+      close();
+    },
   };
-
-  console.log({ errors });
 
   const onSubmit = (data: any) => {
     console.log(data);
-    toast.success('Successfully toasted!');
+    toast.success('Successfully toasted! :D');
   };
 
   return (
