@@ -10,6 +10,7 @@ export const UserRegistry = {
       ALL: Symbol.for('user.use-case.get.all'),
       BY: {
         ID: Symbol.for('user.use-case.get.by.id'),
+        CREDENTIALS: Symbol.for('user.use-case.get.by.credentials'),
       },
     },
   },
