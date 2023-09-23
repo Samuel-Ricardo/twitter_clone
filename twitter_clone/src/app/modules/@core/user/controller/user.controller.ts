@@ -7,6 +7,8 @@ import {
   IDeleteuserDTO,
   ISelectUserByIdDTO,
 } from '../DTO';
+import { ISelectUserByCredentialsDTO } from '../DTO/select_by_credentials.dto';
+import { User } from '../entity/user.entity';
 
 @injectable()
 export class UserController {
@@ -33,5 +35,11 @@ export class UserController {
 
   selectById(user: ISelectUserByIdDTO) {
     return { user: this.service.selectById(user) };
+  }
+
+  async selectByCredentials(data: ISelectUserByCredentialsDTO) {
+    const user = await this.service.selectByCredentials(data);
+
+    return user ? { user: user.toStruct() } : null;
   }
 }
