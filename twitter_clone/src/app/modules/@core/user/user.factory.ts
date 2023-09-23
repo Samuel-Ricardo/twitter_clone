@@ -7,6 +7,7 @@ import {
   DeleteUserUseCase,
   SelectUserByIdUseCase,
 } from './use-case';
+import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
@@ -28,6 +29,10 @@ export const UserFactory = {
         ID: () =>
           UserModule.get<SelectUserByIdUseCase>(
             UserRegistry.USE_CASE.GET.BY.ID,
+          ),
+        CREDENTIALS: () =>
+          UserModule.get<SelectUserByCredentialsUseCase>(
+            UserRegistry.USE_CASE.GET.BY.CREDENTIALS,
           ),
       },
     },
