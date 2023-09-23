@@ -14,7 +14,7 @@ export interface IUserGateway extends ISWRSupport {
   create(user: ICreateUserDTO): Promise<User>;
   listAll(): Promise<User[]>;
   selectById(props: ISelectUserByIdDTO): Promise<User>;
-  selectByCredentials(props: ISelectUserByCredentialsDTO): Promise<User>;
+  selectByCredentials(props: ISelectUserByCredentialsDTO): Promise<User | null>;
   update(props: IUpdateUserDTO): Promise<User>;
   deleteUser(props: IDeleteuserDTO): Promise<void | any>;
 }

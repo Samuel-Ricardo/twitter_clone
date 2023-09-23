@@ -13,6 +13,8 @@ import {
   IDeleteuserDTO,
   IUpdateUserDTO,
 } from '../DTO';
+import { ISelectUserByCredentialsDTO } from '../DTO/select_by_credentials.dto';
+import { SelectUserByCredentialsUseCase } from '../use-case/select_by_credentials.use-case';
 
 @injectable()
 export class UserService {
@@ -27,6 +29,8 @@ export class UserService {
     private readonly listAllUsers: ListAllUsersUseCase,
     @inject(MODULE.USER.USE_CASE.DELETE)
     private readonly deleteUser: DeleteUserUseCase,
+    @inject(MODULE.USER.USE_CASE.GET.BY.CREDENTIALS)
+    private readonly selectUserByCredentials: SelectUserByCredentialsUseCase,
   ) {}
 
   async create(user: ICreateUserDTO) {
@@ -39,6 +43,10 @@ export class UserService {
 
   async delete(data: IDeleteuserDTO) {
     return await this.deleteUser.execute(data);
+  }
+
+  async selectByCredentials(data: ISelectUserByCredentialsDTO) {
+    return await this.selectUserByCredentials.execute(data);
   }
 
   selectById(data: ISelectUserByIdDTO) {
