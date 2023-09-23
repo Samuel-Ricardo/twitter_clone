@@ -15,14 +15,14 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password)
           throw new Error('Invalid credentials');
 
-        const user = await MODULES.USER.CONTROLLER().selectByCredentials({
+        const result = await MODULES.USER.MAIN().selectByCredentials({
           email: credentials.email,
           password: credentials.password,
         });
 
-        if (!user) throw new Error('Invalid credentials');
+        if (!result) throw new Error('Invalid credentials');
 
-        return user;
+        return result.user;
       },
     }),
   ],
