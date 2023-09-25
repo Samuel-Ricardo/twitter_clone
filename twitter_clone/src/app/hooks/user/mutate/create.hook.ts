@@ -3,7 +3,7 @@ import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-export const useCreateUser = (DTO: ICreateUserDTO) => {
+export const useCreateUser = () => {
   const MODULE = MODULES.USER.MAIN();
 
   const {
@@ -12,15 +12,15 @@ export const useCreateUser = (DTO: ICreateUserDTO) => {
     mutateAsync: createAsync,
     isLoading,
     error,
-  } = useMutation<{ user: IUserDTO }>({
-    mutationFn: async () => {
+  } = useMutation<{ user: IUserDTO }, any, ICreateUserDTO>({
+    mutationFn: async (DTO: ICreateUserDTO) => {
       return await toast.promise(MODULE.create(DTO), {
         loading: `Creating <b>user<b>...`,
         success: `User created successfully! :D`,
         error: `Error on create user :(`,
       });
     },
-    mutationKey: ['user', { email: DTO.email }, { DTO }],
+    mutationKey: ['user'],
   });
 
   return {
