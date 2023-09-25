@@ -15,6 +15,8 @@ import {
 } from '../DTO';
 import { ISelectUserByCredentialsDTO } from '../DTO/select_by_credentials.dto';
 import { SelectUserByCredentialsUseCase } from '../use-case/select_by_credentials.use-case';
+import { SelectUserByEmailUseCase } from '../use-case/select_by_email.use-case';
+import { ISelectUserByEmailDTO } from '../DTO/select_by_email.dto';
 
 @injectable()
 export class UserService {
@@ -31,6 +33,8 @@ export class UserService {
     private readonly deleteUser: DeleteUserUseCase,
     @inject(MODULE.USER.USE_CASE.GET.BY.CREDENTIALS)
     private readonly selectUserByCredentials: SelectUserByCredentialsUseCase,
+    @inject(MODULE.USER.USE_CASE.GET.BY.EMAIL)
+    private readonly selectUserByEmail: SelectUserByEmailUseCase,
   ) {}
 
   async create(user: ICreateUserDTO) {
@@ -47,6 +51,10 @@ export class UserService {
 
   async selectByCredentials(data: ISelectUserByCredentialsDTO) {
     return await this.selectUserByCredentials.execute(data);
+  }
+
+  async selectByEmail(data: ISelectUserByEmailDTO) {
+    return await this.selectUserByEmail.execute(data);
   }
 
   selectById(data: ISelectUserByIdDTO) {
