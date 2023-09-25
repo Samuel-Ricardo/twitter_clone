@@ -11,6 +11,7 @@ export const UserRegistry = {
       BY: {
         ID: Symbol.for('user.use-case.get.by.id'),
         CREDENTIALS: Symbol.for('user.use-case.get.by.credentials'),
+        EMAIL: Symbol.for('user.use-case.get.by.email'),
       },
     },
   },
