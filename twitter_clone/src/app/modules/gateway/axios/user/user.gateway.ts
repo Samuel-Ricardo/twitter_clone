@@ -17,6 +17,7 @@ import {
 } from '@/app/modules/@core/user/validator';
 import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
 import { error } from 'console';
+import { ISelectUserByEmailDTO } from '@/app/modules/@core/user/DTO/select_by_email.dto';
 
 @injectable()
 export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
@@ -60,6 +61,14 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
     }
 
     return result.user ? User.create(result.user!) : null;
+  }
+
+  async selectByEmail(data: ISelectUserByEmailDTO) {
+    const response = await this.get<{ user: IUserDTO }>(
+      `${this.prefix}/email/${data.email}`,
+    );
+
+    return User.create(response.data.user);
   }
 
   async update(data: IUpdateUserDTO) {
