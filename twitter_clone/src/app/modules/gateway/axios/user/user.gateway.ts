@@ -15,6 +15,8 @@ import {
   SelectUserByIdSchema,
   UpdateUserSchema,
 } from '@/app/modules/@core/user/validator';
+import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
+import { error } from 'console';
 
 @injectable()
 export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
@@ -43,6 +45,21 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
       `${this.prefix}/${data.id}`,
     );
     return User.create(response.data.user);
+  }
+
+  async selectByCredentials(data: ISelectUserByCredentialsDTO) {
+    const response = await this.post<{ user?: IUserDTO; error?: string }>(
+      `${this.prefix}/by/credentials`,
+      data,
+    );
+
+    const result = response.data;
+
+    if (result.error) {
+      throw Error(result.error);
+    }
+
+    return result.user ? User.create(result.user!) : null;
   }
 
   async update(data: IUpdateUserDTO) {
