@@ -91,4 +91,11 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   swrSelectById(data: ISelectUserByIdDTO) {
     return this.useSWR<IUserDTO>(`${this.fullURL}/${data.id}`, this.fetcher);
   }
+
+  swrSelectByEmail(data: ISelectUserByEmailDTO) {
+    return this.useSWR<IUserDTO>(
+      `${this.fullURL}/email/${data.email}`,
+      this.fetcher,
+    );
+  }
 }
