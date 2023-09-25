@@ -43,9 +43,9 @@ export class UserController {
     return user ? { user: user.toStruct() } : null;
   }
 
-  async selectByEmail(data: ISelectUserByEmailDTO) {
-    const user = await this.service.selectByEmail(data);
+  selectByEmail(data: ISelectUserByEmailDTO) {
+    const user = this.service.selectByEmail(data);
 
-    return { user: user.toStruct() };
+    return { user };
   }
 }

@@ -53,8 +53,8 @@ export class UserService {
     return await this.selectUserByCredentials.execute(data);
   }
 
-  async selectByEmail(data: ISelectUserByEmailDTO) {
-    return await this.selectUserByEmail.execute(data);
+  selectByEmail(data: ISelectUserByEmailDTO) {
+    return this.selectUserByEmail.execute(data);
   }
 
   selectById(data: ISelectUserByIdDTO) {
