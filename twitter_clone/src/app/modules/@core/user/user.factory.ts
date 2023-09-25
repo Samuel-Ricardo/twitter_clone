@@ -8,6 +8,7 @@ import {
   SelectUserByIdUseCase,
 } from './use-case';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
+import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
@@ -33,6 +34,10 @@ export const UserFactory = {
         CREDENTIALS: () =>
           UserModule.get<SelectUserByCredentialsUseCase>(
             UserRegistry.USE_CASE.GET.BY.CREDENTIALS,
+          ),
+        EMAIL: () =>
+          UserModule.get<SelectUserByEmailUseCase>(
+            UserRegistry.USE_CASE.GET.BY.EMAIL,
           ),
       },
     },
