@@ -11,6 +11,7 @@ import {
 import { UserService } from './service';
 import { UserController } from './controller';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
+import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 
 const Modue = new Container({ autoBindInjectable: true });
 
@@ -23,6 +24,9 @@ UserModule.bind(UserRegistry.USE_CASE.GET.ALL).to(ListAllUsersUseCase);
 UserModule.bind(UserRegistry.USE_CASE.GET.BY.ID).to(SelectUserByIdUseCase);
 UserModule.bind(UserRegistry.USE_CASE.GET.BY.CREDENTIALS).to(
   SelectUserByCredentialsUseCase,
+);
+UserModule.bind(UserRegistry.USE_CASE.GET.BY.EMAIL).to(
+  SelectUserByEmailUseCase,
 );
 
 UserModule.bind(UserRegistry.SERVICE).to(UserService);
