@@ -9,9 +9,21 @@ import {
   userRegisterSchema,
 } from '@/app/modules/validation/zod/user/register.validation';
 import { useUserRegisterModal } from '@/app/hooks/modal/user/register.hook';
+import { useCreateUser } from '@/app/hooks/user/mutate/create.hook';
+import { useEffect } from 'react';
+import { useLoginModal } from '@/app/hooks/modal/user/login.hook';
+import { RegisterModalFooter } from './register/footer.component';
 
 export const RegisterModal = () => {
   const { close, isOpen } = useUserRegisterModal();
+  const { open: openLogin } = useLoginModal();
+  const { create, data, error, isLoading } = useCreateUser();
+
+  useEffect(() => console.log({ data }), [data]);
+  useEffect(() => console.log({ error }), [error]);
+  useEffect(() => {
+    toast.error(error?.message);
+  }, [error]);
 
   const {
     register,
@@ -21,6 +33,13 @@ export const RegisterModal = () => {
     resolver: zodResolver(userRegisterSchema),
   });
 
+  const toggle = () => {
+    if (isLoading) return toast.error('You should not login while loading :D');
+
+    close();
+    openLogin();
+  };
+
   if (!isOpen) return null; // return null if modal is not isOpen
 
   const modalProps: IModalProps = {
@@ -29,16 +48,19 @@ export const RegisterModal = () => {
       toast.success('Closed :D');
       close();
     },
+    footer: <RegisterModalFooter onClick={toggle} />,
   };
 
   const onSubmit = (data: any) => {
     console.log(data);
     toast.success('Successfully toasted! :D');
+
+    create(data);
   };
 
   return (
     <Modal {...modalProps}>
-      <div className="flex flex-col py-4 px-6 w-[80vw] max-w-1/2">
+      <div className=" overflow-auto flex flex-col py-4 px-[3vw] w-[80vw] max-w-1/2 transition">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <Input
             core={{ type: 'email', placeholder: 'Email' }}
@@ -71,8 +93,10 @@ export const RegisterModal = () => {
 
           <input
             type="submit"
-            className=" transition hover:ease-in  mt-10 bg-white text-black font-semibold text-xl w-full rounded-full py-1.5 hover:cursor-pointer hover:shadow-[-0px_0px_40px] hover:shadow-cyan-500/50"
+            className="transition hover:ease-in  mt-10 bg-white text-black font-semibold text-xl w-full rounded-full py-1.5 hover:cursor-pointer hover:shadow-[-0px_0px_20px_10px] hover:shadow-cyan-500/50"
           />
+
+          <p> {JSON.stringify({ data })} </p>
         </form>
       </div>
     </Modal>
