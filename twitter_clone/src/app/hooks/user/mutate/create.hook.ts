@@ -15,7 +15,7 @@ export const useCreateUser = () => {
   } = useMutation<{ user: IUserDTO }, any, ICreateUserDTO>({
     mutationFn: async (DTO: ICreateUserDTO) => {
       return await toast.promise(MODULE.create(DTO), {
-        loading: `Creating <b>user<b>...`,
+        loading: `Creating user... 🌱`,
         success: `User created successfully! :D`,
         error: `Error on create user :(`,
       });
