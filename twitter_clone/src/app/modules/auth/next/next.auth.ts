@@ -36,4 +36,4 @@ export const authOptions: AuthOptions = {
   secret: ENV.NEXT.AUTH.SECRET,
 };
 
-export const handler = NextAuth(authOptions);
+export const NEXT_AUTH_HANDLER = NextAuth(authOptions);

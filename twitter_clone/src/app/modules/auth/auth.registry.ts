@@ -1,3 +1,6 @@
 export const AUTH_REGISTRY = {
-  NEXT: Symbol.for('MODULE:AUTH.NEXT'),
+  NEXT: {
+    OPTIONS: Symbol.for('MODULE:AUTH.NEXT.OPTIONS'),
+    HANDLER: Symbol.for('MODULE:AUTH.NEXT.HANDLER'),
+  },
 };
