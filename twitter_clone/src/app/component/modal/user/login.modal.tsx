@@ -10,9 +10,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Submit } from '../../form/submit.component';
 import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
+import { LogindModalFooter } from './login/footer.component';
+import { useUserRegisterModal } from '@/app/hooks/modal/user/register.hook';
 
 export const LoginModal = () => {
   const { close, isOpen } = useLoginModal();
+  const { open: openRegister } = useUserRegisterModal();
   const {
     register,
     handleSubmit,
@@ -39,8 +42,17 @@ export const LoginModal = () => {
     return response?.error ? toast.error(response.error) : close();
   });
 
+  const toggle = () => {
+    close();
+    openRegister();
+  };
+
   return (
-    <Modal title="Login" onClose={close}>
+    <Modal
+      title="Login"
+      onClose={close}
+      footer=<LogindModalFooter onClick={toggle} />
+    >
       <div className="overflow-auto flex flex-col py-4 px-[3vw] w-[80vw] max-w-1/2 transition">
         <form onSubmit={submit}>
           <Input
