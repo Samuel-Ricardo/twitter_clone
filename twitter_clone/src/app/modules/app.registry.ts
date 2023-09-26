@@ -7,6 +7,7 @@ import { COMMENT_REGISTRY as COMMENT } from './@core/comment/comment.registry';
 import { LIKE_REGISTRY as LIKE } from './@core/like/like.registry';
 import { FOLLOW_REGISTRY as FOLLOW } from './@core/follow/follow.registry';
 import { EVENT_REGISTRY as EVENT } from './event/event.registry';
+import { AUTH_REGISTRY as AUTH } from './auth/auth.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
@@ -18,4 +19,5 @@ export const MODULE = {
   EVENT,
   GATEWAY,
   FOLLOW,
+  AUTH,
 };
