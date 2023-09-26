@@ -10,6 +10,7 @@ import { COMMENT_MODULE as COMMENT } from './@core/comment/comment.module';
 import { LIKE_MODULE as LIKE } from './@core/like/like.module';
 import { FOLLOW_MODULE as FOLLOW } from './@core/follow/follow.module';
 import { EVENT_MODULE as EVENT } from './event/event.module';
+import { AUTH_MODULE as AUTH } from './auth/auth.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -24,4 +25,5 @@ export const AppModule = Container.merge(
   EVENT,
   AXIOS,
   GATEWAY,
+  AUTH,
 );

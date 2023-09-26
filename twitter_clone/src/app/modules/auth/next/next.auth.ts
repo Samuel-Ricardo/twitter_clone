@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import CredetialProvider from 'next-auth/providers/credentials';
 import { MODULES } from '../..';
 import { ENV } from '../../config/env/app.env';
@@ -36,4 +36,4 @@ export const authOptions: AuthOptions = {
   secret: ENV.NEXT.AUTH.SECRET,
 };
 
-export const NEXT_AUTH_HANDLER = NextAuth(authOptions);
+//export const NEXT_AUTH_HANDLER = NextAuth(authOptions);
