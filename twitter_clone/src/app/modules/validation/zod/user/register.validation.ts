@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UppercaseFirstLetters } from './transformers/name.transformer';
 
 export const userRegisterSchema = z.object({
   email: z
@@ -9,15 +10,9 @@ export const userRegisterSchema = z.object({
   name: z
     .string()
     .nonempty("Name can't be empty")
-    .transform((name) =>
-      name
-        .trim()
-        .split(' ')
-        .map((word) => word[0].toLocaleUpperCase().concat(word.substring(1)))
-        .join(' '),
-    ),
+    .transform(UppercaseFirstLetters),
   username: z.string().nonempty("Username can't be empty"),
-  password: z.string().nonempty("Password can't be empty").min(6),
+  password: z.string().nonempty("Password can't be empty").min(6), //transform (pass => encript(pass))
 });
 
 export type UserRegisterFormData = z.infer<typeof userRegisterSchema>;
