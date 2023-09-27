@@ -45,7 +45,6 @@ export class UserController {
 
   selectByEmail(data: ISelectUserByEmailDTO) {
     const user = this.service.selectByEmail(data);
-
     return { user };
   }
 }

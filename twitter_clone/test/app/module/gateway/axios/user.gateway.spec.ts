@@ -79,7 +79,7 @@ describe('[GATEWAY] | AXIOS => [USER]', () => {
   });
 
   it('[UNIT] | Should: update => [USER]', async () => {
-    MODULE.client.put.mockResolvedValue({
+    MODULE.client.patch.mockResolvedValue({
       data: { user: VALID_UPDATED_USER.toStruct() },
     });
 
@@ -90,8 +90,8 @@ describe('[GATEWAY] | AXIOS => [USER]', () => {
     expect(result.id).toEqual(VALID_USER.id);
     expect(result.bio).not.toEqual(VALID_USER.bio);
 
-    expect(MODULE.client.put).toHaveBeenCalledTimes(1);
-    expect(MODULE.client.put).toHaveBeenCalledWith(
+    expect(MODULE.client.patch).toHaveBeenCalledTimes(1);
+    expect(MODULE.client.patch).toHaveBeenCalledWith(
       MODULE.gateway.fullURL,
       UPDATE_USER_DATA,
       undefined,
