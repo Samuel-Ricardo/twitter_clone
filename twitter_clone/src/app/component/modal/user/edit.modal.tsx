@@ -12,18 +12,30 @@ import { Input } from '../../input.component';
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { useLoginModal } from '@/app/hooks/modal/user/login.hook';
 import { useEditUser } from '@/app/hooks/user/mutate/edit.hook';
-import { IUpdateUserDTO } from '@/app/modules/@core/user/DTO';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 
 export const EditUserModal = () => {
   const { close, isOpen } = useEditUserModal();
   const { open: openLogin } = useLoginModal();
-  const { update, error } = useEditUser();
+  const { updateAsync, error } = useEditUser();
   const {
-    result: { user },
+    result: { data },
     status,
   } = useCurrentUser();
+
+  const user = data?.user;
+
+  const initialValues = useMemo(
+    () => ({
+      name: user?.name,
+      username: user?.username,
+      bio: user?.bio,
+      profileImage: user?.profileImage || '',
+      coverImage: user?.coverImage || '',
+    }),
+    [user],
+  );
 
   const {
     register,
@@ -32,6 +44,7 @@ export const EditUserModal = () => {
     formState: { errors },
   } = useForm<UserEditFormData>({
     resolver: zodResolver(userEditSchema),
+    defaultValues: initialValues,
   });
 
   useEffect(() => {
@@ -44,8 +57,18 @@ export const EditUserModal = () => {
     close();
   }
 
-  const submit = handleSubmit((data) => {
-    update({ ...data, id: user.data!.id } as IUpdateUserDTO);
+  const submit = handleSubmit(async (data) => {
+    await updateAsync({
+      id: user!.id,
+      coverImage: (data.coverImage as string) || user!.coverImage || undefined,
+      profileImage:
+        (data.profileImage as string) || user!.profileImage || undefined,
+      bio: data.bio || user!.bio || undefined,
+      name: data.name || user!.name,
+      username: data.username || user!.username,
+    });
+
+    //    !error && close();
   });
 
   return (
@@ -54,7 +77,7 @@ export const EditUserModal = () => {
         <div className=" mt-2 gap-6 overflow-auto flex flex-col py-4 px-[3vw] w-[80vw] max-w-1/2 transition">
           <ImageUpload
             label="Avatar"
-            image={user.data?.profileImage || ''}
+            image={user?.profileImage || ''}
             errors={errors.profileImage}
             onChange={({ file }) => setValue('profileImage', file)}
             reactForms={{ register, name: 'profileImage' }}
@@ -62,7 +85,7 @@ export const EditUserModal = () => {
 
           <ImageUpload
             label="Cover"
-            image={user.data?.coverImage || ''}
+            image={user?.coverImage || ''}
             errors={errors.coverImage}
             onChange={({ file }) => setValue('coverImage', file)}
             reactForms={{ register, name: 'coverImage' }}
@@ -72,7 +95,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Name',
-              defaultValue: user.data?.name || '',
+              defaultValue: user?.name || '',
             }}
             label="Name"
             reactForms={{ register, name: 'name' }}
@@ -83,7 +106,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Username',
-              defaultValue: user.data?.username || '',
+              defaultValue: user?.username || '',
             }}
             label="Username"
             reactForms={{ register, name: 'username' }}
@@ -94,7 +117,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Bio',
-              defaultValue: user.data?.bio || '',
+              defaultValue: user?.bio || '',
             }}
             label="Bio"
             reactForms={{ register, name: 'bio' }}
