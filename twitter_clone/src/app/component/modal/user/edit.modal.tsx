@@ -8,14 +8,18 @@ import {
   userEditSchema,
 } from '@/app/modules/validation/zod/user/edit.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { Input } from '../../input.component';
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { useLoginModal } from '@/app/hooks/modal/user/login.hook';
+import { useEditUser } from '@/app/hooks/user/mutate/edit.hook';
+import { IUpdateUserDTO } from '@/app/modules/@core/user/DTO';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 export const EditUserModal = () => {
   const { close, isOpen } = useEditUserModal();
   const { open: openLogin } = useLoginModal();
+  const { update, error } = useEditUser();
   const {
     result: { user },
     status,
@@ -30,6 +34,10 @@ export const EditUserModal = () => {
     resolver: zodResolver(userEditSchema),
   });
 
+  useEffect(() => {
+    error && toast.error(error.message);
+  }, [error]);
+
   if (!isOpen) return null;
   if (status === 'unauthenticated') {
     openLogin();
@@ -37,7 +45,7 @@ export const EditUserModal = () => {
   }
 
   const submit = handleSubmit((data) => {
-    console.log({ data });
+    update({ ...data, id: user.data!.id } as IUpdateUserDTO);
   });
 
   return (
@@ -64,7 +72,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Name',
-              value: user.data?.name || '',
+              defaultValue: user.data?.name || '',
             }}
             label="Name"
             reactForms={{ register, name: 'name' }}
@@ -75,7 +83,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Username',
-              value: user.data?.username || '',
+              defaultValue: user.data?.username || '',
             }}
             label="Username"
             reactForms={{ register, name: 'username' }}
@@ -86,7 +94,7 @@ export const EditUserModal = () => {
             core={{
               type: 'text',
               placeholder: 'Bio',
-              value: user.data?.bio || '',
+              defaultValue: user.data?.bio || '',
             }}
             label="Bio"
             reactForms={{ register, name: 'bio' }}
