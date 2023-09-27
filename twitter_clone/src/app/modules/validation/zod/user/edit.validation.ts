@@ -5,12 +5,14 @@ import { UppercaseFirstLetters } from './transformers/name.transformer';
 
 export const userEditSchema = z.object({
   profileImage: z
-    .instanceof(File, { message: 'Avatar must be an image file' })
+    .string()
+    .or(z.instanceof(File, { message: 'Avatar must be an image file' }))
     .nullish()
     .refine(maxFileSize(5 * 1024 * 1024), 'File size must be less than 5MB')
     .transform(toBase64),
   coverImage: z
     .instanceof(File, { message: 'Cover image must be an image file' })
+    .or(z.string())
     .nullish()
     .refine(maxFileSize(5 * 1024 * 1024), 'File size must be less than 5MB')
     .transform(toBase64),
