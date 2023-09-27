@@ -11,14 +11,18 @@ export const useCurrentUser = () => {
   useEffect(() => {
     switch (status) {
       case 'loading':
-        toast.loading('Authenticating user... 🌱');
+        toast.loading('Authenticating user... 🌱', {
+          id: 'authenticating-loading-current-user',
+        });
         break;
 
       case 'unauthenticated':
+        toast.remove('authenticating-loading-current-user');
         toast.error('User not authenticated, please login 🌱');
         break;
 
       case 'authenticated':
+        toast.remove('authenticating-loading-current-user');
         toast.success(`Be Welcome ${data?.user?.name}! :) 🌱`);
         break;
 
@@ -27,7 +31,7 @@ export const useCurrentUser = () => {
     }
   }, [status, data]);
 
-  const user = MODULE.selectByEmail({ email: data?.user?.email });
+  const result = MODULE.selectByEmail({ email: data?.user?.email });
 
-  return { user, status };
+  return { result: result.user, status };
 };
