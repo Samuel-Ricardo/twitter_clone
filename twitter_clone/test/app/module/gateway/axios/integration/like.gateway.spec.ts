@@ -9,8 +9,9 @@ import { ILikeGateway } from '@/app/modules/@core/like/gateway';
 import { MODULES } from '@/app/modules';
 import { AxiosLikeGateway } from '@/app/modules/gateway/axios/like/like.gateway';
 import { Post } from '@/app/modules/@core/post';
+import { Like } from '@/app/modules/@core/like/entity';
 
-describe('[GATEWAY] | Axios => [COMMENT]', () => {
+describe('[GATEWAY] | Axios => [LIKE]', () => {
   let gatewat: ILikeGateway;
   let post: Post;
 
@@ -31,7 +32,7 @@ describe('[GATEWAY] | Axios => [COMMENT]', () => {
     expect(result.length).toBeGreaterThanOrEqual(0);
 
     if (result.length > 0) {
-      expect(result[0]).toBeInstanceOf(Post);
+      expect(result[0]).toBeInstanceOf(Like);
       expect(result[0].id).toBeDefined();
     }
   });
