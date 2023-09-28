@@ -16,7 +16,6 @@ import {
   UpdateUserSchema,
 } from '@/app/modules/@core/user/validator';
 import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
-import { error } from 'console';
 import { ISelectUserByEmailDTO } from '@/app/modules/@core/user/DTO/select_by_email.dto';
 
 @injectable()
@@ -74,7 +73,7 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   async update(data: IUpdateUserDTO) {
     UpdateUserSchema.parse(data);
 
-    const response = await this.put<{ user: IUserDTO }>(this.prefix, data);
+    const response = await this.patch<{ user: IUserDTO }>(this.prefix, data);
     return User.create(response.data.user);
   }
 
@@ -85,16 +84,19 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   }
 
   swrListAll() {
-    return this.useSWR<IUserDTO[]>(this.fullURL, this.fetcher);
+    return this.useSWR<{ users: IUserDTO[] }>(this.fullURL, this.fetcher);
   }
 
   swrSelectById(data: ISelectUserByIdDTO) {
-    return this.useSWR<IUserDTO>(`${this.fullURL}/${data.id}`, this.fetcher);
+    return this.useSWR<{ user: IUserDTO }>(
+      `${this.fullURL}/${data.id}`,
+      this.fetcher,
+    );
   }
 
   swrSelectByEmail(data: ISelectUserByEmailDTO) {
-    return this.useSWR<IUserDTO>(
-      `${this.fullURL}/email/${data.email}`,
+    return this.useSWR<{ user: IUserDTO }>(
+      data.email ? `${this.fullURL}/email/${data.email}` : null,
       this.fetcher,
     );
   }
