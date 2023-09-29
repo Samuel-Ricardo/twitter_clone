@@ -13,7 +13,7 @@ export const Avatar = ({
   const router = useRouter();
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLImageElement>) => {
+    (event: React.MouseEvent<any>) => {
       event.stopPropagation();
       if (onClick) onClick(event);
       router.push(`/users/${userId}`);
@@ -25,18 +25,20 @@ export const Avatar = ({
     <div
       className={`
         ${bordered ? 'border-4 border-black' : ''}
-        ${large ? 'h-32' : 'h-12'}
-        ${large ? 'w-32' : 'w-12'}
+        ${large ? 'h-32' : 'h-20'}
+        ${large ? 'w-32' : 'w-20'}
         rounded-full 
-        hover:opacity-90 
-        transition 
+        hover:scale-110
+        duration-300
+        transition-all
+        ease-in-out
         cursor-pointer
         relative
       `}
     >
       <Image
         fill
-        src={image || '/images/avatar.png'}
+        src={image || '/user/images/placeholder.png'}
         alt="avatar"
         onClick={handleClick}
         style={{
