@@ -52,14 +52,23 @@ export class AxiosLikeGateway extends AxiosHTTPGateway implements ILikeGateway {
   }
 
   swrFindPostLikes({ likedId }: IFindPostLikesDTO) {
-    return this.useSWR<ILikeDTO[]>(`${this.fullURL}/${likedId}`);
+    return this.useSWR<{ likes: ILikeDTO[] }>(
+      `${this.fullURL}/post/${likedId}`,
+      this.fetcher,
+    );
   }
 
   swrFindCommentLikes({ likedId }: IFindCommentLikesDTO) {
-    return this.useSWR<ILikeDTO[]>(`${this.fullURL}/${likedId}`);
+    return this.useSWR<{ likes: ILikeDTO[] }>(
+      `${this.fullURL}/comment/${likedId}`,
+      this.fetcher,
+    );
   }
 
   swrFindUserLikes({ userId }: IFindUserLikesDTO) {
-    return this.useSWR<ILikeDTO[]>(`${this.fullURL}/${userId}`);
+    return this.useSWR<{ liked: ILikeDTO[] }>(
+      `${this.fullURL}/user/${userId}`,
+      this.fetcher,
+    );
   }
 }
