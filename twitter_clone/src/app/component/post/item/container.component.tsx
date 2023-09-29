@@ -5,7 +5,7 @@ export const PostItemContainer = ({
   onClick,
 }: {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent) => void;
 }) => (
   <div
     onClick={onClick}
