@@ -13,6 +13,7 @@ import { useUser } from '@/app/hooks/user/one.hook';
 import { PostItemContainer } from './item/container.component';
 import { PostItemHeader } from './item/header.component';
 import { PostItemFooter } from './item/footer.component';
+import { PostItemContent } from './item/content.component';
 
 export const PostItem = ({
   post,
@@ -46,35 +47,10 @@ export const PostItem = ({
 
   return (
     <PostItemContainer onClick={goToPost}>
-      <div className="flex flex-row items-start gap-3">
-        <div className="min-w-fit">
-          <Avatar userId={author?.id} image={author?.profileImage} />
-        </div>
-        <div>
-          <PostItemHeader user={author} createdAt={createdAt} />
+      <PostItemHeader user={author} createdAt={createdAt} body={post.body} />
 
-          <div className="my-4 mx-2 bg-[rgba(255,255,255,0.35)] p-2 rounded-md overflow-clip break-all hidden md:block ">
-            {post?.body +
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}
-          </div>
-        </div>
-      </div>
+      <PostItemContent body={post.body} image={currentUser?.coverImage} />
 
-      <div className="my-4 mx-2 bg-[rgba(255,255,255,0.35)] p-2 rounded-md overflow-clip break-all md:hidden ">
-        {post?.body +
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}
-      </div>
-
-      {post.image ||
-        (true && (
-          <Image
-            src={currentUser?.coverImage || '/user/images/placeholder.png'}
-            alt="post image"
-            width={1080}
-            height={1920}
-            className=" mx-5 w-auto max-w-full h-full max-h-[50vh]  rounded-md"
-          />
-        ))}
       <PostItemFooter
         onLikeClick={onLikeClick}
         postId={post.id}
