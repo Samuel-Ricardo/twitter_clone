@@ -11,6 +11,8 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { Avatar } from '../user/avatar.component';
 import Image from 'next/image';
 import { useUser } from '@/app/hooks/user/one.hook';
+import { PostItemContainer } from './item/container.component';
+import { PostItemHeader } from './item/header.component';
 
 export const PostItem = ({
   post,
@@ -75,31 +77,25 @@ export const PostItem = ({
   );
 
   return (
-    <div>
+    <PostItemContainer onClick={goToPost}>
+      <Avatar userId={author?.id} image={author?.profileImage} />
       <div>
-        <Avatar userId={author?.id} image={author?.profileImage} />
+        <PostItemHeader user={author} createdAt={createdAt} />
+        <div>{post?.body}</div>
+        {post?.image && <Image src={post?.image} alt="post image" />}
         <div>
-          <div>
-            <p>{author?.name}</p>
-            <span>@{author?.username}</span>
-            <span>{createdAt}</span>
-          </div>
-          <div>{post?.body}</div>
-          {post?.image && <Image src={post?.image} alt="post image" />}
-          <div>
-            <AiOutlineMessage size={20} />
-            <p>comments count</p>
-          </div>
-          <div onClick={handleLike}>
-            {hasLiked() ? (
-              <AiFillHeart size={20} color="red" />
-            ) : (
-              <AiOutlineHeart size={20} />
-            )}
-            <p>{likes?.length}</p>
-          </div>
+          <AiOutlineMessage size={20} />
+          <p>comments count</p>
+        </div>
+        <div onClick={handleLike}>
+          {hasLiked() ? (
+            <AiFillHeart size={20} color="red" />
+          ) : (
+            <AiOutlineHeart size={20} />
+          )}
+          <p>{likes?.length}</p>
         </div>
       </div>
-    </div>
+    </PostItemContainer>
   );
 };
