@@ -1,14 +1,7 @@
 import { IPostItemProps } from '@/app/@types/props/post/item';
-import { useHasLiked } from '@/app/hooks/like/has_liked.hook';
-import { useTweetLikes } from '@/app/hooks/like/post.hook';
-import { useLike } from '@/app/hooks/like/post/mutate/create.hook';
-import { useDislike } from '@/app/hooks/like/post/mutate/delete.hook';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { Avatar } from '../user/avatar.component';
-import Image from 'next/image';
 import { useUser } from '@/app/hooks/user/one.hook';
 import { PostItemContainer } from './item/container.component';
 import { PostItemHeader } from './item/header.component';
