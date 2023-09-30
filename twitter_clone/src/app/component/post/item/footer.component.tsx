@@ -1,37 +1,15 @@
 import { IPostItemFooterProps } from '@/app/@types/props/post/item_footer';
-import { useHasLiked } from '@/app/hooks/like/has_liked.hook';
 import { useTweetLikes } from '@/app/hooks/like/post.hook';
-import { useLike } from '@/app/hooks/like/post/mutate/create.hook';
-import { useDislike } from '@/app/hooks/like/post/mutate/delete.hook';
-import { useCallback, useMemo } from 'react';
+import { useToggleLike } from '@/app/hooks/like/post/mutate/toggle.hook';
+import { useCallback } from 'react';
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 
 export const PostItemFooter = ({
   postId,
-  currentUserId,
   onLikeClick,
 }: IPostItemFooterProps) => {
-  const { data: fetchLikes, mutate: syncLikes } = useTweetLikes({
-    likedId: postId,
-  });
-  const likes = useMemo(() => fetchLikes?.likes, [fetchLikes]);
-  const { giveLike } = useLike();
-  const { dislike } = useDislike();
-
-  const { hasLiked } = useHasLiked({
-    likedId: postId,
-    userId: currentUserId,
-  });
-
-  const toggleLike = useCallback(() => {
-    if (!currentUserId) return;
-
-    hasLiked()
-      ? dislike({
-          id: likes?.find((like) => like.likedId === postId)?.id || '',
-        })
-      : giveLike({ userId: currentUserId, likedId: postId });
-  }, [hasLiked, dislike, giveLike, currentUserId, postId, likes]);
+  const { likes, mutate: syncLikes } = useTweetLikes({ likedId: postId });
+  const { toggle: toggleLike, hasLiked } = useToggleLike({ likedId: postId });
 
   const handleLike = useCallback(
     (event: React.MouseEvent<any>) => {
