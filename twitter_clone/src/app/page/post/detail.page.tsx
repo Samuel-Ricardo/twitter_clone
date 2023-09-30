@@ -7,6 +7,7 @@ import { PostItem } from '@/app/component/post/item.component';
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { useParams } from 'next/navigation';
 import { Header } from '@/app/component/header.component';
+import { SubmitComment } from '@/app/component/submit/comment/submit.component';
 
 export const PostDetailsPage = ({}: IPostDetailsPageProps) => {
   const { currentUser } = useCurrentUser();
@@ -17,7 +18,8 @@ export const PostDetailsPage = ({}: IPostDetailsPageProps) => {
     <div className="flex flex-col gap-3 flex-1 mt-auto mr-2">
       <Header label={`Tweet`} />
       <PostItem post={post} currentUser={currentUser} fitScreen />
-      <CommentFeed />
+      <SubmitComment />
+      <CommentFeed tweetId={post?.id || ''} />
     </div>
   );
 };
