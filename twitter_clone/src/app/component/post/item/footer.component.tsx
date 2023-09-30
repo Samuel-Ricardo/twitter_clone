@@ -8,6 +8,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 export const PostItemFooter = ({
   postId,
   onLikeClick,
+  onCommentClick,
 }: IPostItemFooterProps) => {
   const { likes, mutate: syncLikes } = useTweetLikes({ likedId: postId });
   const { comments } = useTweetComments({ postId });
@@ -27,7 +28,10 @@ export const PostItemFooter = ({
 
   return (
     <div className="flex flex-row items-center mt-3 gap-10">
-      <div className="flex flex-row items-center gap-2 cursor-pointer transition-all hover:scale-105 duration-300 ease-in-out hover:bg-blue-200 hover:rounded-full hover:p-2 ">
+      <div
+        onClick={onCommentClick}
+        className="flex flex-row items-center gap-2 cursor-pointer transition-all hover:scale-105 duration-300 ease-in-out hover:bg-blue-200 hover:rounded-full hover:p-2 "
+      >
         <AiOutlineMessage size={28} />
         <p>{comments.length}</p>
       </div>
