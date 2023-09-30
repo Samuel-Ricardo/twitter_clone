@@ -1,4 +1,5 @@
 import { IPostItemFooterProps } from '@/app/@types/props/post/item_footer';
+import { useTweetComments } from '@/app/hooks/comment/post.hook';
 import { useTweetLikes } from '@/app/hooks/like/post.hook';
 import { useToggleLike } from '@/app/hooks/like/post/mutate/toggle.hook';
 import { useCallback } from 'react';
@@ -9,6 +10,8 @@ export const PostItemFooter = ({
   onLikeClick,
 }: IPostItemFooterProps) => {
   const { likes, mutate: syncLikes } = useTweetLikes({ likedId: postId });
+  const { comments } = useTweetComments({ postId });
+
   const { toggle: toggleLike, hasLiked } = useToggleLike({ likedId: postId });
 
   const handleLike = useCallback(
@@ -26,7 +29,7 @@ export const PostItemFooter = ({
     <div className="flex flex-row items-center mt-3 gap-10">
       <div className="flex flex-row items-center gap-2 cursor-pointer transition-all hover:scale-105 duration-300 ease-in-out hover:bg-blue-200 hover:rounded-full hover:p-2 ">
         <AiOutlineMessage size={28} />
-        <p>0</p>
+        <p>{comments.length}</p>
       </div>
       <div
         onClick={handleLike}
