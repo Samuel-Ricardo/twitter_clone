@@ -46,6 +46,7 @@ export const PostItem = ({
 
       <PostItemFooter
         onLikeClick={onLikeClick}
+        onCommentClick={goToPost}
         postId={post.id}
         currentUserId={currentUser?.id}
       />
