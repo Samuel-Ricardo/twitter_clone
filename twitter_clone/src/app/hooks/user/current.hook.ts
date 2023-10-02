@@ -1,12 +1,19 @@
-import { MODULES } from '@/app/modules';
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { toast } from 'react-hot-toast';
+'use client';
 
-export const useCurrentUser = () => {
+import { MODULES } from '@/app/modules';
+import { IUseCurrentUserConfig } from '@test/@types/hooks/user/current';
+import { useSession } from 'next-auth/react';
+import { useEffect, useMemo } from 'react';
+import { toast } from 'react-hot-toast';
+import { useLoginModal } from '../modal/user/login.hook';
+
+export const useCurrentUser = (config?: IUseCurrentUserConfig) => {
   const MODULE = MODULES.USER.MAIN();
+  const { open: login } = useLoginModal();
 
   const { data, status } = useSession();
+
+  const { displayLogin } = config || {};
 
   useEffect(() => {
     switch (status) {
@@ -18,20 +25,29 @@ export const useCurrentUser = () => {
 
       case 'unauthenticated':
         toast.remove('authenticating-loading-current-user');
-        toast.error('User not authenticated, please login 🌱');
+        toast.remove('authenticated_user');
+        toast.error('User not authenticated, please login 🌱', {
+          id: 'unauthenticated_user',
+        });
+        displayLogin && login();
         break;
 
       case 'authenticated':
         toast.remove('authenticating-loading-current-user');
-        toast.success(`Be Welcome ${data?.user?.name}! :) 🌱`);
+        toast.remove('authenticated_success');
+        toast.success(`Be Welcome ${data?.user?.name}! :) 🌱`, {
+          id: 'authenticated_success',
+        });
         break;
 
       default:
         break;
     }
-  }, [status, data]);
+  }, [status]);
 
   const result = MODULE.selectByEmail({ email: data?.user?.email });
 
-  return { result: result.user, status };
+  const currentUser = useMemo(() => result?.user.data?.user, [result]);
+
+  return { result: result.user, status, currentUser };
 };
