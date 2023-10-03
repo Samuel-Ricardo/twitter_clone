@@ -8,8 +8,16 @@ import {
 import { SWRResponse } from 'swr';
 
 export interface ISWRSupport {
-  swrGetFollowers(data: IGetFollowersDTO): SWRResponse<IFollowDTO[]>;
-  swrGetFollowing(data: IGetFollowingDTO): SWRResponse<IFollowDTO[]>;
-  swrCountFollowing(data: ICountFollowingDTO): SWRResponse<number>;
-  swrCountFollowers(data: ICountFollowersDTO): SWRResponse<number>;
+  swrGetFollowers(
+    data: IGetFollowersDTO,
+  ): SWRResponse<{ followers: IFollowDTO[] }>;
+  swrGetFollowing(
+    data: IGetFollowingDTO,
+  ): SWRResponse<{ following: IFollowDTO[] }>;
+  swrCountFollowing(
+    data: ICountFollowingDTO,
+  ): SWRResponse<{ following: number }>;
+  swrCountFollowers(
+    data: ICountFollowersDTO,
+  ): SWRResponse<{ followers: number }>;
 }
