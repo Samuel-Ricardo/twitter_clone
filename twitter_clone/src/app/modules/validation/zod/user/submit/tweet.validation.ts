@@ -3,7 +3,11 @@ import { maxFileSize } from '../rules/file/size.rule';
 import { toBase64 } from '../transformers/file/toBase64.transformer';
 
 export const SubmitTweetSchema = z.object({
-  body: z.string().nonempty("Can't post a empty tweet"),
+  body: z
+    .string()
+    .nonempty("Can't post an empty tweet")
+    .trim()
+    .min(1, { message: "Tweet can't be empty" }),
   image: z
     .string()
     .or(z.instanceof(File, { message: 'Must be an image file' }))
