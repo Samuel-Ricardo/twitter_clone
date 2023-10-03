@@ -1,20 +1,28 @@
+'use client';
+
 import { IImageUploadProps } from '@/app/@types/props/form/input/image';
 import { ImageUploadContainer } from './container.component';
 import { useDropzone } from 'react-dropzone';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { DeleteButton } from '@/app/component/button/delete.component';
 
 export const ImageUpload = ({
   label,
   errors,
   className,
-  reactForms,
+  reactHook,
   image,
   disabled,
   onChange,
+  large,
 }: IImageUploadProps) => {
   const [base64, setBase64] = useState(image);
-  reactForms?.register(reactForms.name);
+  reactHook?.registry();
+
+  //  const { file } = useFile(base64, { name: 'image', type: 'image/png' });
+
+  useEffect(() => setBase64(image), [image]);
 
   const handleChange = useCallback(
     (file: File, base64: string) => onChange({ file, base64 }),
@@ -44,24 +52,41 @@ export const ImageUpload = ({
   });
 
   return (
-    <ImageUploadContainer
-      errors={errors}
-      className={className}
-      dropzone={getRootProps}
-    >
-      <input {...getInputProps()} />
+    <div className="flex flex-row w-full h-fit gap-2">
+      <ImageUploadContainer
+        errors={errors}
+        className={className}
+        dropzone={getRootProps}
+      >
+        <input {...getInputProps()} />
 
-      {base64 ? (
-        <Image
-          src={base64}
-          width={150}
-          height={150}
-          alt="uploaded image"
-          className="rounded-full"
+        {base64 ? (
+          !large ? (
+            <Image src={base64} width={150} height={150} alt="uploaded image" />
+          ) : (
+            <Image
+              src={base64}
+              width={1920}
+              height={1080}
+              alt="uploaded image"
+              className="w-full h-full"
+            />
+          )
+        ) : (
+          <label className="text-lg text-white font-semibold mb-2">
+            {label}
+          </label>
+        )}
+      </ImageUploadContainer>
+      {base64 && (
+        <DeleteButton
+          className="self-start cursor-pointer text-black"
+          onClick={() => {
+            setBase64('');
+            onChange({ file: null, base64: '' });
+          }}
         />
-      ) : (
-        <label className="text-lg text-white font-semibold mb-2">{label}</label>
       )}
-    </ImageUploadContainer>
+    </div>
   );
 };
