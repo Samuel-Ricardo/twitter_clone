@@ -1,23 +1,22 @@
-import { useCreatePost } from '@/app/hooks/post/mutate/create.hook';
 import { FormSubmit } from '../submit.component';
 import { useTweetComments } from '@/app/hooks/comment/post.hook';
 import { ISubmitCommentProps } from '@/app/@types/props/comment/submit';
 import { useForm } from 'react-hook-form';
-import { useRef } from 'react';
-import { Input } from '../../input.component';
 import { TextArea } from '../../form/input/textarea.component';
-import { ImageUpload } from '../../form/input/image/image.component';
-import { SubmitIcon } from '../../form/submit.icon';
-import { BiExit } from 'react-icons/bi';
 import {
   SubmitCommentData,
   SubmitCommentSchema,
-} from '@/app/modules/validation/zod/user/comment.validation';
+} from '@/app/modules/validation/zod/user/submit/comment.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCreateComment } from '@/app/hooks/comment/mutate/create.hook';
+import { useCurrentUser } from '@/app/hooks/user/current.hook';
+import { toast } from 'react-hot-toast';
+import { SubmitIcon } from '../../button/form/submit.component';
 
 export const SubmitComment = ({ tweetId: id }: ISubmitCommentProps) => {
-  const { createAsync } = useCreatePost();
-  const { mutate } = useTweetComments({ postId: id });
+  const { createAsync } = useCreateComment();
+  const { mutate: sync } = useTweetComments({ postId: id });
+  const { currentUser } = useCurrentUser();
 
   const {
     handleSubmit,
@@ -27,25 +26,27 @@ export const SubmitComment = ({ tweetId: id }: ISubmitCommentProps) => {
     resolver: zodResolver(SubmitCommentSchema),
   });
 
-  const submitRef = useRef<HTMLInputElement>(null);
+  const submit = handleSubmit(async (data) => {
+    if (!currentUser)
+      return toast.error('You must be logged in to comment on a tweet');
+
+    await createAsync({
+      authorId: currentUser.id,
+      postId: id,
+      body: data.body,
+    });
+
+    sync();
+  });
 
   return (
-    <FormSubmit
-      title="Type your reply"
-      onSubmit={handleSubmit((data) => console.log({ data }))}
-    >
+    <FormSubmit title="Type your reply" onSubmit={submit}>
       <TextArea
         hook={{ register: () => register('body') }}
         errors={errors.body}
       />
 
-      <BiExit
-        size={28}
-        onClick={() => submitRef.current?.click()}
-        className="text-black self-end mr-4 cursor-pointer transition hover:text-cyan-300 hover:scale-105"
-      />
-
-      <input type="submit" ref={submitRef} hidden />
+      <SubmitIcon />
     </FormSubmit>
   );
 };
