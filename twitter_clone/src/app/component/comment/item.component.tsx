@@ -4,9 +4,12 @@ import { Avatar } from '../user/avatar.component';
 import { useUser } from '@/app/hooks/user/one.hook';
 import { CommentItemContent } from './item/content.component';
 import { LikeButton } from '../button/like.component';
+import { useCurrentUser } from '@/app/hooks/user/current.hook';
+import { DeleteCommentButton } from '../button/comment/delete.component';
 
 export const CommentItem = ({ comment }: ICommentItemProps) => {
   const { user } = useUser({ id: comment?.authorId });
+  const { currentUser } = useCurrentUser();
 
   return (
     <CommentItemContainer>
@@ -19,6 +22,12 @@ export const CommentItem = ({ comment }: ICommentItemProps) => {
         />
         <LikeButton likedId={comment?.id || ''} className="-ml-16" />
       </div>
+      {currentUser?.id === comment?.authorId && (
+        <DeleteCommentButton
+          id={comment?.id || ''}
+          tweet={comment?.postId || ''}
+        />
+      )}
     </CommentItemContainer>
   );
 };
