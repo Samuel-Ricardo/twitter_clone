@@ -18,7 +18,7 @@ export const PostDetailsPage = ({}: IPostDetailsPageProps) => {
     <div className="flex flex-col gap-3 flex-1 mt-auto mr-2">
       <Header label={`Tweet`} />
       <PostItem post={post} currentUser={currentUser} fitScreen />
-      <SubmitComment />
+      <SubmitComment tweetId={post?.id || ''} />
       <CommentFeed tweetId={post?.id || ''} />
     </div>
   );
