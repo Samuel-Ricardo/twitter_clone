@@ -66,28 +66,28 @@ export class AxiosFollowGateway
   }
 
   swrGetFollowers(follow: IGetFollowersDTO) {
-    return this.useSWR<IFollowDTO[]>(
-      `${this.fullURL}/followers/${follow.followingId}`,
+    return this.useSWR(
+      `${this.fullURL}/${follow.followingId}/followers`,
       this.fetcher,
     );
   }
 
   swrGetFollowing(follow: IGetFollowingDTO) {
-    return this.useSWR<IFollowDTO[]>(
-      `${this.fullURL}/following/${follow.followerId}`,
+    return this.useSWR(
+      `${this.fullURL}/${follow.followerId}/following`,
       this.fetcher,
     );
   }
 
   swrCountFollowers(follow: ICountFollowersDTO) {
-    return this.useSWR<number>(
+    return this.useSWR(
       `${this.fullURL}/count/followers/${follow.followingId}`,
       this.fetcher,
     );
   }
 
   swrCountFollowing(follow: ICountFollowingDTO) {
-    return this.useSWR<number>(
+    return this.useSWR(
       `${this.fullURL}/count/following/${follow.followerId}`,
       this.fetcher,
     );
