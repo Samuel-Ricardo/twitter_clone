@@ -8,8 +8,8 @@ import { useTweetLikes } from '../../post.hook';
 export const useToggleLike = ({ likedId }: { likedId: string }) => {
   const { currentUser } = useCurrentUser();
 
-  const { giveLike } = useLike();
-  const { dislike } = useDislike();
+  const { giveLike, giveLikeAsync } = useLike();
+  const { dislike, dislikeAsync } = useDislike();
 
   const { hasLiked } = useHasLiked({
     likedId: likedId,
@@ -28,5 +28,15 @@ export const useToggleLike = ({ likedId }: { likedId: string }) => {
     [currentUser?.id, dislike, giveLike, hasLiked, likes, likedId],
   );
 
-  return { toggle, hasLiked };
+  const toggleAsync = useCallback(
+    () =>
+      hasLiked()
+        ? dislikeAsync({
+            id: likes?.find((like) => like.likedId === likedId)?.id || '',
+          })
+        : giveLikeAsync({ userId: currentUser?.id || '', likedId: likedId }),
+    [currentUser?.id, dislikeAsync, giveLikeAsync, hasLiked, likes, likedId],
+  );
+
+  return { toggle, toggleAsync, hasLiked };
 };
