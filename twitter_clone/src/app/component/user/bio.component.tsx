@@ -5,7 +5,7 @@ import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { FollowButton } from '../button/user/follow.button';
 
 export const ProfileBio = (props: IProfileBIoProps) => {
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useCurrentUser({ displayLogin: true });
 
   return (
     <BioContainer>
@@ -13,7 +13,7 @@ export const ProfileBio = (props: IProfileBIoProps) => {
         {currentUser?.id === props.userId ? (
           <EditUserButton />
         ) : (
-          <FollowButton />
+          <FollowButton userId={props.userId} />
         )}
       </div>
       {props.bio}
