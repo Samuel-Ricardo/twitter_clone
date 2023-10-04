@@ -15,16 +15,15 @@ export const useToggleFollow = ({ followingId }: { followingId: string }) => {
     followingId,
   });
 
-  const toggle = useCallback(
-    () =>
-      alredyFollowing()
-        ? unfollow({ id: followingId })
-        : follow({
-            followerId: currentUser?.id || '',
-            followingId: followingId,
-          }),
-    [alredyFollowing, currentUser?.id, follow, unfollow, followingId],
-  );
+  const toggle = useCallback(() => {
+    const relationship = alredyFollowing();
+    relationship
+      ? unfollow({ id: relationship.id })
+      : follow({
+          followerId: currentUser?.id || '',
+          followingId: followingId,
+        });
+  }, [alredyFollowing, currentUser?.id, follow, unfollow, followingId]);
 
   const toggleAsync = useCallback(() => {
     const follow = alredyFollowing();
