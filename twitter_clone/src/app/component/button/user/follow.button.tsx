@@ -1,3 +1,4 @@
+import { useCountFollowers } from '@/app/hooks/follow/count/followers.hook';
 import { useFollowers } from '@/app/hooks/follow/followers.hook';
 import { useToggleFollow } from '@/app/hooks/follow/mutate/toggle.hook';
 import { useCallback } from 'react';
@@ -7,7 +8,12 @@ export const FollowButton = ({ userId }: { userId: string }) => {
   const { toggleAsync, alredyFollowing } = useToggleFollow({
     followingId: userId,
   });
-  const { mutate: sync } = useFollowers({ followingId: userId });
+  const { mutate: followersSync } = useFollowers({ followingId: userId });
+  const { mutate: counterSync } = useCountFollowers({ followingId: userId });
+  const sync = useCallback(() => {
+    followersSync();
+    counterSync();
+  }, [followersSync, counterSync]);
   const toggle = useCallback(async () => {
     await toggleAsync();
     sync();
