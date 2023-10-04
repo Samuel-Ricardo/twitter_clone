@@ -13,7 +13,7 @@ export const useAlreadyFollowing = ({
   const alredyFollowing = useCallback(() => {
     if (!followers || !followerId) return undefined;
 
-    return followers.some((follower) => follower.id === followerId);
+    return followers.find((follow) => follow.followerId === followerId);
   }, [followers, followerId]);
 
   return { alredyFollowing };
