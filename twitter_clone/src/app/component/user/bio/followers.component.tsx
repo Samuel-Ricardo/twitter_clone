@@ -9,14 +9,14 @@ export const BioFollowers = ({ userId }: { userId: string }) => {
   return (
     <div className="flex flex-row items-center mt-4 gap-6">
       <div className="flex flex-row items-center gap-1">
-        <p>Followers</p>
-        <p>{followers}</p>
         <FaUsersViewfinder size={34} />
+        <p className="ml-2">Followers</p>
+        <p>{followers}</p>
       </div>
       <div className="flex flex-row items-center gap-1">
-        <p>Following</p>
-        <p>{following}</p>
         <FaUsersBetweenLines size={34} />
+        <p className="ml-2">Following</p>
+        <p>{following}</p>
       </div>
     </div>
   );
