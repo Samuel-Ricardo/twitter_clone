@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
 export const BioContentContainer = ({ children }: { children: ReactNode }) => {
-  return <div className="mt-8 px-4">{children}</div>;
+  return <div className="flex flex-col gap-4 mt-8 px-4 pb-4">{children}</div>;
 };
