@@ -1,5 +1,5 @@
-export interface ICommentItemConentProps {
+export interface ICommentItemContentProps {
   author: string;
   body: string;
-  createdAt: string;
+  createdAt?: Date;
 }
