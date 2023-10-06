@@ -11,6 +11,7 @@ import { LIKE_MODULE as LIKE } from './@core/like/like.module';
 import { FOLLOW_MODULE as FOLLOW } from './@core/follow/follow.module';
 import { EVENT_MODULE as EVENT } from './event/event.module';
 import { AUTH_MODULE as AUTH } from './auth/auth.module';
+import { SOCKET_MODULE as SOCKET } from './socket_io/socket.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -26,4 +27,5 @@ export const AppModule = Container.merge(
   AXIOS,
   GATEWAY,
   AUTH,
+  SOCKET,
 );
