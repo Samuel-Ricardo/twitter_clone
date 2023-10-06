@@ -1,10 +1,10 @@
 import { injectable } from 'inversify';
 import { LikeObservableSupport } from '../../../observable/observable.support';
-import { ILikeDTO } from '../../../DTO';
+import { IEmitLikeDTO } from '../../../DTO/observable/emit/like.dto';
 
 @injectable()
 export class EmitLikeCreatedUseCase extends LikeObservableSupport {
-  execute(like: ILikeDTO) {
+  execute(like: IEmitLikeDTO) {
     this.observable.emitLike(like);
   }
 }
