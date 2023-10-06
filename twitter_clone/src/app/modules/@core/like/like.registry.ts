@@ -11,5 +11,11 @@ export const LIKE_REGISTRY = {
         USER: Symbol.for('LIKE_USE_CASE_FIND_BY_USER'),
       },
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATE: Symbol.for('LIKE_OBSERVABLE_EMIT_CREATE'),
+        DELETE: Symbol.for('LIKE_OBSERVABLE_EMIT_DELETE'),
+      },
+    },
   },
 };
