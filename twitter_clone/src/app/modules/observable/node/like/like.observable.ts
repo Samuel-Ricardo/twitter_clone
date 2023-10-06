@@ -11,6 +11,14 @@ export class NodeLikeObservable
   extends NodeObservable
   implements ILikeObservable
 {
+  emitLike(like: IEmitLikeDTO) {
+    this.emit(this.EVENTS.LIKE.NEW, like);
+  }
+
+  emitDislike(like: IEmitDislikeDTO) {
+    this.emit(this.EVENTS.DISLIKE.NEW, like);
+  }
+
   listenPostLike(scheduled: IListenLikeDTO) {
     this.listen(this.EVENTS.LIKE.POST, scheduled.action);
   }
