@@ -50,4 +50,14 @@ export class SocketIO {
       { reason, description },
     );
   }
+
+  private handleStart(data: { connected: true } | any) {
+    logger.info(
+      {
+        context: 'WEBSOCKET',
+        message: 'Socket.IO: Every things are fine, connection start',
+      },
+      { data },
+    );
+  }
 }
