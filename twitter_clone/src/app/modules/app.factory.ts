@@ -10,6 +10,7 @@ import { EVENT_FACTORY as EVENT } from './event/event.factory';
 import { AUTH_FACTORY as AUTH } from './auth/auth.factory';
 import { SOCKET_FACTORY as SOCKET } from './socket_io/socket.factory';
 import { REACTIVE_FACTORY as REACTIVE } from './reactive/reactive.factory';
+import { OBSERVABLE_FACTORY as OBSERVABLE } from './observable/observable.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -24,4 +25,5 @@ export const MODULES = {
   AUTH,
   SOCKET,
   REACTIVE,
+  OBSERVABLE,
 };
