@@ -10,6 +10,7 @@ import { EVENT_REGISTRY as EVENT } from './event/event.registry';
 import { AUTH_REGISTRY as AUTH } from './auth/auth.registry';
 import { SOCKET_REGISTRY as SOCKET } from './socket_io/socket.registry';
 import { REACTIVE_REGISTRY as REACTIVE } from './reactive/reactive.registry';
+import { OBSERVABLE_REGISTRY as OBSERVABLE } from './observable/observable.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
@@ -24,4 +25,5 @@ export const MODULE = {
   AUTH,
   SOCKET,
   REACTIVE,
+  OBSERVABLE,
 };
