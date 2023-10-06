@@ -4,6 +4,7 @@ import { ConfigModule as CONFIG } from '../../config/config.module';
 import { NODE_OBSERVABLE_REGISTER } from './node.registry';
 import { NodeObservable } from './generic/generic.observable';
 import { NodeLikeObservable } from './like/like.observable';
+import { NodeNotificationObservable } from './notification/notification.observable';
 
 const MODULE = new Container({
   autoBindInjectable: true,
@@ -22,4 +23,8 @@ NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.GENERIC)
 
 NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.LIKE)
   .to(NodeLikeObservable)
+  .inSingletonScope();
+
+NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.NOTIFICATION)
+  .to(NodeNotificationObservable)
   .inSingletonScope();
