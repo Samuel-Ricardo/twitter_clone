@@ -29,8 +29,10 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     expect(MODULE.use_case).toBeDefined();
   });
 
-  it('[UNIT] | Should: create => [COMMENT]', async () => {
+  it('[UNIT] | Should: create => [LIKE] & Emit => [CREATED]', async () => {
     MODULE.use_case.create.execute.mockResolvedValue(VALID_POST_LIKE);
+
+    console.log({ AAAAAAAAAAAAAAAAAAAAAA: MODULE.use_case.observable.emit });
 
     const result = await MODULE.service.create(CREATE_POST_LIKE_DATA);
 
@@ -41,6 +43,13 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
       CREATE_POST_LIKE_DATA,
     );
+
+    expect(
+      MODULE.use_case.observable.emit.created.execute,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.created.execute,
+    ).toHaveBeenCalledWith(VALID_POST_LIKE.toStruct());
   });
 
   it('[UNIT] | Should: delete => [LIKE]', async () => {
