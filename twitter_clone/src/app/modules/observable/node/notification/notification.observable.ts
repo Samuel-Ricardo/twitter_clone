@@ -15,4 +15,8 @@ export class NodeNotificationObservable
   listenLike(scheduled: IListenLikeDTO) {
     this.listen(this.EVENTS.LIKE.NEW, scheduled.action);
   }
+
+  listenDislike(scheduled: IListenDislikeDTO) {
+    this.listen(this.EVENTS.DISLIKE.NEW, scheduled.action);
+  }
 }
