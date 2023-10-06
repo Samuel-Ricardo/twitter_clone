@@ -4,6 +4,9 @@ import { IListenDislikeDTO } from '../DTO/observable/listen/dislike.dto';
 import { IListenLikeDTO } from '../DTO/observable/listen/like.dto';
 
 export interface ILikeObservable {
+  emitLike(like: IEmitLikeDTO): any | Promise<any>;
+  emitDislike(like: IEmitDislikeDTO): any | Promise<any>;
+
   listenPostLike(schedule: IListenLikeDTO): any | Promise<any>;
   listenCommentLike(schedule: IListenLikeDTO): any | Promise<any>;
 

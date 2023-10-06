@@ -32,8 +32,6 @@ describe('[CORE] | Service =:> [LIKE]', () => {
   it('[UNIT] | Should: create => [LIKE] & Emit => [CREATED]', async () => {
     MODULE.use_case.create.execute.mockResolvedValue(VALID_POST_LIKE);
 
-    console.log({ AAAAAAAAAAAAAAAAAAAAAA: MODULE.use_case.observable.emit });
-
     const result = await MODULE.service.create(CREATE_POST_LIKE_DATA);
 
     expect(result).toBeDefined();
@@ -52,10 +50,10 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     ).toHaveBeenCalledWith(VALID_POST_LIKE.toStruct());
   });
 
-  it('[UNIT] | Should: delete => [LIKE]', async () => {
+  it('[UNIT] | Should: delete => [LIKE] & Emit => [DELETED]', async () => {
     MODULE.use_case.deleteLike.execute.mockResolvedValue();
 
-    expect(
+    await expect(
       MODULE.service.delete({ id: VALID_POST_LIKE.id }),
     ).resolves.not.toThrow();
 
@@ -63,6 +61,13 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     expect(MODULE.use_case.deleteLike.execute).toHaveBeenCalledWith({
       id: VALID_POST_LIKE.id,
     });
+
+    expect(
+      MODULE.use_case.observable.emit.deleted.execute,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.deleted.execute,
+    ).toHaveBeenCalledWith({ id: VALID_POST_LIKE.id });
   });
 
   it('[UNIT] | Should: Find by [POST] => [LIKE]', async () => {
