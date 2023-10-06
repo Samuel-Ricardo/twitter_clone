@@ -10,6 +10,8 @@ import {
 } from './use-case';
 import { LikeService } from './service';
 import { LikeController } from './controller';
+import { EmitLikeCreatedUseCase } from './use-case/observable/emit/create.use-case';
+import { EmitLikeDeletedUseCase } from './use-case/observable/emit/delete.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -22,6 +24,14 @@ LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.FIND.BY.USER).to(FinduserLikesUseCase);
 LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.FIND.BY.COMMENT).to(
   FindCommentLikesUseCase,
 );
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATE).to(
+  EmitLikeCreatedUseCase,
+);
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.EMIT.DELETE).to(
+  EmitLikeDeletedUseCase,
+);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
 
 LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
 
