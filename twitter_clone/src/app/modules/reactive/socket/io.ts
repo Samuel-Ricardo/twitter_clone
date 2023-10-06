@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { Socket } from 'socket.io-client';
 import { MODULE } from '../../app.registry';
-import { logger } from '../..';
+import { logger } from '../../logger/logger.module';
 import { SOCKET } from '../reactive.config';
 
 @injectable()
@@ -20,6 +20,7 @@ export class SocketIO {
   private setup() {
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
+    this.io.disconnected && this.io.connect();
     this.io.on(SOCKET.CONNECT, this.handleConnect);
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });

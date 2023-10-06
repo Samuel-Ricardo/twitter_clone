@@ -9,6 +9,7 @@ import { FOLLOW_FACTORY as FOLLOW } from './@core/follow/follow.factory';
 import { EVENT_FACTORY as EVENT } from './event/event.factory';
 import { AUTH_FACTORY as AUTH } from './auth/auth.factory';
 import { SOCKET_FACTORY as SOCKET } from './socket_io/socket.factory';
+import { REACTIVE_FACTORY as REACTIVE } from './reactive/reactive.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -22,4 +23,5 @@ export const MODULES = {
   FOLLOW,
   AUTH,
   SOCKET,
+  REACTIVE,
 };
