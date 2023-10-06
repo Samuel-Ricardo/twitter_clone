@@ -14,6 +14,8 @@ import {
   IFindPostLikesDTO,
   IFindCommentLikesDTO,
 } from '../DTO';
+import { EmitLikeCreatedUseCase } from '../use-case/observable/emit/create.use-case';
+import { EmitLikeDeletedUseCase } from '../use-case/observable/emit/delete.use-case';
 
 @injectable()
 export class LikeService {
@@ -28,14 +30,21 @@ export class LikeService {
     private readonly findCommentLikes: FindCommentLikesUseCase,
     @inject(MODULE.LIKE.USE_CASE.FIND.BY.POST)
     private readonly findPostLikes: FindPostLikesUseCase,
+    @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.EMIT.CREATE)
+    private readonly emitLikeCreated: EmitLikeCreatedUseCase,
+    @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.EMIT.DELETE)
+    private readonly emitLikeDeleted: EmitLikeDeletedUseCase,
   ) {}
 
   async create(like: ICreateLikeDTO) {
-    return await this.createLike.execute(like);
+    const result = await this.createLike.execute(like);
+    result.id && this.emitLikeCreated.execute(result);
+    return result;
   }
 
   async delete(like: IDeleteLikeDTO) {
-    return await this.deleteLike.execute(like);
+    await this.deleteLike.execute(like);
+    this.emitLikeDeleted.execute(like);
   }
 
   findByUser(like: IFindUserLikesDTO) {
