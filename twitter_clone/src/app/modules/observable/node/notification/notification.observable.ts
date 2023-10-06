@@ -11,4 +11,8 @@ export class NodeNotificationObservable
   emitNotification(notification: IEmitNotificationDTO) {
     this.emit(this.EVENTS.NOTIFICATION.CREATED, notification);
   }
+
+  listenLike(scheduled: IListenLikeDTO) {
+    this.listen(this.EVENTS.LIKE.NEW, scheduled.action);
+  }
 }
