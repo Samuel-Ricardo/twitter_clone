@@ -16,8 +16,10 @@ export const logger = {
     message: string;
     error?: Error;
   }) => console.error(`[${Date.now()}] | [${context}] | ${message} `, error),
-  info: ({ context, message }: { context: string; message: string }) =>
-    console.info(`[${Date.now()}] | [${context}] | ${message}`),
+  info: (
+    { context, message }: { context: string; message: string },
+    ...data: any[]
+  ) => console.info(`[${Date.now()}] | [${context}] | ${message}`, ...data),
   warn: ({ context, message }: { context: string; message: string }) =>
     console.warn(`[${Date.now()}] | [${context}] | ${message}`),
 };
