@@ -24,4 +24,20 @@ export class SocketIO {
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
   }
+
+  private handleConnect() {
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Socket.IO: Connection starts',
+    });
+
+    this.io.emit(SOCKET.HANDSHAKE, { CONNECTED: this.io.id });
+    this.io.on(SOCKET.DISCONNECT, this.handleDisconnect);
+    this.io.on(SOCKET.START.CONNECTION, this.handleStart);
+
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Socket.IO: ends event => [connection]',
+    });
+  }
 }
