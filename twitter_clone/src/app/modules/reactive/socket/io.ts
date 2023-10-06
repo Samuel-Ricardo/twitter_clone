@@ -40,4 +40,14 @@ export class SocketIO {
       message: 'Socket.IO: ends event => [connection]',
     });
   }
+
+  private handleDisconnect(reason: Socket.DisconnectReason, description?: any) {
+    logger.info(
+      {
+        context: 'WEBSOCKET',
+        message: 'Socket.IO: Connection ends',
+      },
+      { reason, description },
+    );
+  }
 }
