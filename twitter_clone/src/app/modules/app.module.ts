@@ -13,6 +13,7 @@ import { EVENT_MODULE as EVENT } from './event/event.module';
 import { AUTH_MODULE as AUTH } from './auth/auth.module';
 import { SOCKET_MODULE as SOCKET } from './socket_io/socket.module';
 import { REACTIVE_MODULE as REACTIVE } from './reactive/reactive.module';
+import { OBSERVABLE_MODULE as OBSERVABLE } from './observable/observable.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -30,4 +31,5 @@ export const AppModule = Container.merge(
   AUTH,
   SOCKET,
   REACTIVE,
+  OBSERVABLE,
 );
