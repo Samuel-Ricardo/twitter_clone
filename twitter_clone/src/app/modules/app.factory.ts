@@ -7,6 +7,8 @@ import { COMMENT_FACTORY as COMMENT } from './@core/comment/comment.factory';
 import { LIKE_FACTORY as LIKE } from './@core/like/like.factory';
 import { FOLLOW_FACTORY as FOLLOW } from './@core/follow/follow.factory';
 import { EVENT_FACTORY as EVENT } from './event/event.factory';
+import { AUTH_FACTORY as AUTH } from './auth/auth.factory';
+import { SOCKET_FACTORY as SOCKET } from './socket_io/socket.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -18,4 +20,6 @@ export const MODULES = {
   EVENT,
   GATEWAY,
   FOLLOW,
+  AUTH,
+  SOCKET,
 };
