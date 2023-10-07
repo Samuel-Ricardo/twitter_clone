@@ -4,6 +4,7 @@ import { AxiosCommentGateway } from './comment/comment.gateway';
 import { AxiosFollowGateway } from './follow/follow.gateway';
 import { AxiosHTTPGateway } from './generic/http.gateway';
 import { AxiosLikeGateway } from './like/like.gateway';
+import { AxiosNotificationGateway } from './notification/notification.gateway';
 import { AxiosPostGateway } from './post/post.gateway';
 import { AxiosUserGateway } from './user/user.gateway';
 
@@ -24,4 +25,8 @@ export const AxiosGatewayFactory = {
     AxiosGatewayModule.get<AxiosLikeGateway>(AxiosGatewayRegistry.LIKE),
   FOLLOW: () =>
     AxiosGatewayModule.get<AxiosFollowGateway>(AxiosGatewayRegistry.FOLLOW),
+  NOTIFICATION: () =>
+    AxiosGatewayModule.get<AxiosNotificationGateway>(
+      AxiosGatewayRegistry.NOTIFICATION,
+    ),
 };
