@@ -29,10 +29,16 @@ export class AxiosNotificationGateway
 
     return Notification.create(result.data.notification);
   }
-  setVisualized(
+
+  async setVisualized(
     notification: ISetNotificationVisualizedDTO,
   ): Promise<Notification> {
-    throw new Error('Method not implemented.');
+    const result = await this.post<{ notification: INotificationDTO }>(
+      `${this.fullURL}/visualized`,
+      notification,
+    );
+
+    return Notification.create(result.data.notification);
   }
   getByUser(notification: IGetNotificationsByUserDTO): Promise<Notification[]> {
     throw new Error('Method not implemented.');
