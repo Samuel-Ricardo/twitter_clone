@@ -6,6 +6,7 @@ import {
   ISetNotificationVisualizedDTO,
   IGetNotificationsByUserDTO,
   INotificationDTO,
+  IDeleteNotificationDTO,
 } from '@/app/modules/@core/notification/DTO';
 import { Notification } from '@/app/modules/@core/notification/entity';
 import { SWRResponse } from 'swr';
@@ -21,7 +22,7 @@ export class AxiosNotificationGateway
     return `${this.URL}/${this.prefix}`;
   }
 
-  async create(notification: ICreateNotificationDTO): Promise<Notification> {
+  async create(notification: ICreateNotificationDTO) {
     const result = await this.post<{ notification: INotificationDTO }>(
       this.fullURL,
       notification,
@@ -30,9 +31,7 @@ export class AxiosNotificationGateway
     return Notification.create(result.data.notification);
   }
 
-  async setVisualized(
-    notification: ISetNotificationVisualizedDTO,
-  ): Promise<Notification> {
+  async setVisualized(notification: ISetNotificationVisualizedDTO) {
     const result = await this.post<{ notification: INotificationDTO }>(
       `${this.fullURL}/visualized`,
       notification,
@@ -40,16 +39,16 @@ export class AxiosNotificationGateway
 
     return Notification.create(result.data.notification);
   }
-  async getByUser(
-    notification: IGetNotificationsByUserDTO,
-  ): Promise<Notification[]> {
+
+  async deleteNotification(notification: IDeleteNotificationDTO) {
+    await this.delete(`${this.fullURL}/${notification.id}`);
+  }
+
+  async getByUser(notification: IGetNotificationsByUserDTO) {
     const result = await this.get<{ notifications: INotificationDTO[] }>(
       `${this.fullURL}/user/${notification.userId}`,
     );
 
     return Notification.createArray(result.data.notifications);
-  }
-  swrGetByUser(): SWRResponse<INotificationDTO[], any, any> {
-    throw new Error('Method not implemented.');
   }
 }
