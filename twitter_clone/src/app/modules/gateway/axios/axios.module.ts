@@ -8,6 +8,7 @@ import { AxiosPostGateway } from './post/post.gateway';
 import { AxiosCommentGateway } from './comment/comment.gateway';
 import { AxiosLikeGateway } from './like/like.gateway';
 import { AxiosFollowGateway } from './follow/follow.gateway';
+import { NodeNotificationObservable } from '../../observable/node/notification/notification.observable';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -37,4 +38,8 @@ AxiosGatewayModule.bind(AxiosGatewayRegistry.LIKE)
 
 AxiosGatewayModule.bind(AxiosGatewayRegistry.FOLLOW)
   .to(AxiosFollowGateway)
+  .inSingletonScope();
+
+AxiosGatewayModule.bind(AxiosGatewayRegistry.NOTIFICATION)
+  .to(NodeNotificationObservable)
   .inSingletonScope();
