@@ -9,7 +9,6 @@ import {
   IDeleteNotificationDTO,
 } from '@/app/modules/@core/notification/DTO';
 import { Notification } from '@/app/modules/@core/notification/entity';
-import { SWRResponse } from 'swr';
 
 @injectable()
 export class AxiosNotificationGateway
@@ -50,5 +49,12 @@ export class AxiosNotificationGateway
     );
 
     return Notification.createArray(result.data.notifications);
+  }
+
+  swrGetByUser({ userId }: IGetNotificationsByUserDTO) {
+    return this.useSWR<{ notifications: INotificationDTO[] }>(
+      userId.length > 0 && `${this.fullURL}/user/${userId}`,
+      this.fetcher,
+    );
   }
 }
