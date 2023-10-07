@@ -27,4 +27,11 @@ export class SocketIONotificationGateway
       data,
     });
   }
+
+  subscribeToNotificationCreated(schedule: ISubscribeNotificationCreatedDTO) {
+    this.subscribe({
+      event: SOCKET.NOTIFICATION.CREATED,
+      action: schedule.job,
+    });
+  }
 }
