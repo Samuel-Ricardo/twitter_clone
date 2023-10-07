@@ -6,6 +6,7 @@ import { IPublishNotificationViewedDTO } from '@/app/modules/@core/notification/
 import { IPublishNotificationDeleteDTO } from '@/app/modules/@core/notification/DTO/reactive/publish/delete.dto';
 import { ISubscribeNotificationCreatedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/created.dto';
 import { ISubscribeNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/viewed.dto';
+import { ISubscribeNotificationDeletedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/deleted.dto';
 
 export class SocketIONotificationGateway
   extends SocketIOGateway
@@ -39,6 +40,13 @@ export class SocketIONotificationGateway
   subscribeToNotificationVisualized(schedule: ISubscribeNotificationViewedDTO) {
     this.subscribe({
       event: SOCKET.NOTIFICATION.VISUALIZED,
+      action: schedule.job,
+    });
+  }
+
+  subscribeToNotificationDeleted(schedule: ISubscribeNotificationDeletedDTO) {
+    this.subscribe({
+      event: SOCKET.NOTIFICATION.DELETED,
       action: schedule.job,
     });
   }
