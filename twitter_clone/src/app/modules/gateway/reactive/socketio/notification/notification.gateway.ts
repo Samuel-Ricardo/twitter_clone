@@ -20,4 +20,11 @@ export class SocketIONotificationGateway
       data,
     });
   }
+
+  publishDeleteNotification(data: IPublishNotificationDeleteDTO) {
+    this.publish({
+      event: SOCKET.NOTIFICATION.DELETE,
+      data,
+    });
+  }
 }
