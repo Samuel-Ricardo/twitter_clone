@@ -2,7 +2,8 @@ import { inject, injectable } from 'inversify';
 import { WebSocketGateway } from '../../../generic/websocket.gateway';
 import { SocketIO } from '@/app/modules/reactive/socket/io';
 import { MODULE } from '@/app/modules/app.registry';
-import { IPublishParams } from '@/app/@types/gateway/reactive/websocket/publish';
+import { IPublishSocketData } from '@/app/@types/gateway/reactive/websocket/publish';
+import { ISubscribeSocketData } from '@/app/@types/gateway/reactive/websocket/listen';
 
 @injectable()
 export class SocketIOGateway implements WebSocketGateway<SocketIO> {
@@ -21,7 +22,10 @@ export class SocketIOGateway implements WebSocketGateway<SocketIO> {
     return this._socket;
   }
 
-  publish(payload: IPublishParams) {
+  publish(payload: IPublishSocketData) {
     this.socket.io.emit(payload.event, payload.data);
+  }
+  subscribe(scheduled: ISubscribeSocketData) {
+    this.socket.io.on(scheduled.event, scheduled.action);
   }
 }
