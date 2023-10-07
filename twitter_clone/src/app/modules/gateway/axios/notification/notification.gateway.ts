@@ -40,8 +40,14 @@ export class AxiosNotificationGateway
 
     return Notification.create(result.data.notification);
   }
-  getByUser(notification: IGetNotificationsByUserDTO): Promise<Notification[]> {
-    throw new Error('Method not implemented.');
+  async getByUser(
+    notification: IGetNotificationsByUserDTO,
+  ): Promise<Notification[]> {
+    const result = await this.get<{ notifications: INotificationDTO[] }>(
+      `${this.fullURL}/user/${notification.userId}`,
+    );
+
+    return Notification.createArray(result.data.notifications);
   }
   swrGetByUser(): SWRResponse<INotificationDTO[], any, any> {
     throw new Error('Method not implemented.');
