@@ -11,6 +11,7 @@ import { AUTH_FACTORY as AUTH } from './auth/auth.factory';
 import { SOCKET_FACTORY as SOCKET } from './socket_io/socket.factory';
 import { REACTIVE_FACTORY as REACTIVE } from './reactive/reactive.factory';
 import { OBSERVABLE_FACTORY as OBSERVABLE } from './observable/observable.factory';
+import { NOTIFICATION_FACTORY as NOTIFICATION } from './@core/notification/notification.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -22,6 +23,7 @@ export const MODULES = {
   EVENT,
   GATEWAY,
   FOLLOW,
+  NOTIFICATION,
   AUTH,
   SOCKET,
   REACTIVE,
