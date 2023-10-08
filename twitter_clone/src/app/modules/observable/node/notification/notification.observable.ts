@@ -3,6 +3,7 @@ import { NodeObservable } from '../generic/generic.observable';
 import { IEmitNotificationDTO } from '@/app/modules/@core/notification/DTO/observable/emit/create.dto';
 import { IListenNotificationDTO } from '@/app/modules/@core/notification/DTO/observable/listen/created.dto';
 import { IEmitNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/observable/emit';
+import { IListenNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/observable/listen';
 
 export class NodeNotificationObservable
   extends NodeObservable
@@ -17,5 +18,9 @@ export class NodeNotificationObservable
 
   emitNotificationViewed(notification: IEmitNotificationViewedDTO) {
     this.emit(this.EVENTS.NOTIFICATION.VIEWED, notification);
+  }
+
+  listenNotificationViewed(scheduled: IListenNotificationViewedDTO) {
+    this.listen(this.EVENTS.NOTIFICATION.VIEWED, scheduled.action);
   }
 }
