@@ -1,7 +1,7 @@
 import { MODULE } from '@/app/modules/app.registry';
 import { inject, injectable } from 'inversify';
 import { NotificationService } from '../service/notification.service';
-import { ICreateNotificationDTO } from '../DTO';
+import { ICreateNotificationDTO, ISetNotificationVisualizedDTO } from '../DTO';
 
 @injectable()
 export class NotificationController {
@@ -11,6 +11,10 @@ export class NotificationController {
   ) {}
 
   create(notification: ICreateNotificationDTO) {
-    this.service.create(notification);
+    return this.service.create(notification);
+  }
+
+  view(notification: ISetNotificationVisualizedDTO) {
+    return this.service.view(notification);
   }
 }
