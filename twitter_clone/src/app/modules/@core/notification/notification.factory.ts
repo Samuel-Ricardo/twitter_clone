@@ -2,6 +2,7 @@ import { NOTIFICATION_MODULE } from './notification.module';
 import { NOTIFICATION_REGISTRY } from './notification.registry';
 import { CreateNotificationUseCase } from './use-case/create.use-case';
 import { DeleteNotificationUseCase } from './use-case/delete.use-case';
+import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
 import { ViewNotificationUseCase } from './use-case/view.use-case';
 
 export const NOTIFICATION_FACTORY = {
@@ -18,5 +19,13 @@ export const NOTIFICATION_FACTORY = {
       NOTIFICATION_MODULE.get<DeleteNotificationUseCase>(
         NOTIFICATION_REGISTRY.USE_CASE.DELETE,
       ),
+    FIND: {
+      BY: {
+        USER: () =>
+          NOTIFICATION_MODULE.get<FindNotificationByUserUseCase>(
+            NOTIFICATION_REGISTRY.USE_CASE.FIND.BY.USER,
+          ),
+      },
+    },
   },
 };
