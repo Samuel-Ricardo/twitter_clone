@@ -2,8 +2,14 @@ import { INotificationObservable } from '@/app/modules/@core/notification/observ
 import { NodeObservable } from '../generic/generic.observable';
 import { IEmitNotificationDTO } from '@/app/modules/@core/notification/DTO/observable/emit/create.dto';
 import { IListenNotificationDTO } from '@/app/modules/@core/notification/DTO/observable/listen/created.dto';
-import { IEmitNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/observable/emit';
-import { IListenNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/observable/listen';
+import {
+  IEmitNotificationDeletedDTO,
+  IEmitNotificationViewedDTO,
+} from '@/app/modules/@core/notification/DTO/observable/emit';
+import {
+  IListenNotificationDeletedDTO,
+  IListenNotificationViewedDTO,
+} from '@/app/modules/@core/notification/DTO/observable/listen';
 
 export class NodeNotificationObservable
   extends NodeObservable
@@ -22,5 +28,13 @@ export class NodeNotificationObservable
 
   listenNotificationViewed(scheduled: IListenNotificationViewedDTO) {
     this.listen(this.EVENTS.NOTIFICATION.VIEWED, scheduled.action);
+  }
+
+  emitNotificationDeleted(notification: IEmitNotificationDeletedDTO) {
+    this.emit(this.EVENTS.NOTIFICATION.DELETED, notification);
+  }
+
+  listenNotificationDeleted(scheduled: IListenNotificationDeletedDTO) {
+    this.listen(this.EVENTS.NOTIFICATION.DELETED, scheduled.action);
   }
 }
