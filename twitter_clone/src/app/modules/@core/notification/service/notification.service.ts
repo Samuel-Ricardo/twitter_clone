@@ -8,6 +8,7 @@ import { CreateNotificationUseCase } from '../use-case/create.use-case';
 import { MODULE } from '@/app/modules/app.registry';
 import { ViewNotificationUseCase } from '../use-case/view.use-case';
 import { DeleteNotificationUseCase } from '../use-case/delete.use-case';
+import { FindNotificationByUserUseCase } from '../use-case/findByUser.use-case';
 
 @injectable()
 export class NotificationService {
@@ -18,6 +19,8 @@ export class NotificationService {
     private readonly viewNotification: ViewNotificationUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.DELETE)
     private readonly deleteNotification: DeleteNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.FIND.BY.USER)
+    private readonly findNotificationByUser: FindNotificationByUserUseCase,
   ) {}
 
   create(notification: ICreateNotificationDTO) {
@@ -26,5 +29,9 @@ export class NotificationService {
 
   view(notification: ISetNotificationVisualizedDTO) {
     this.viewNotification.execute(notification);
+  }
+
+  delete(notification: IDeleteNotificationDTO) {
+    this.deleteNotification.execute(notification);
   }
 }
