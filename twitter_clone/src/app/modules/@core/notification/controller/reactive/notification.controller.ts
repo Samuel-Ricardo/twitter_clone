@@ -1,11 +1,17 @@
-import { injectable } from 'inversify';
+import { inject, injectable, tagged } from 'inversify';
 import { ReactiveNotificationService } from '../../service/reactive/notification.service';
 import { IListenNotificationDTO } from '../../DTO/observable/listen';
+import { MODULE } from '@/app/modules/app.registry';
+import { SCOPE } from '../../notification.tag';
 
 //singleton
 @injectable()
 export class ReactiveNotificationController {
-  constructor(private readonly service: ReactiveNotificationService) {
+  constructor(
+    @inject(MODULE.NOTIFICATION.SERVICE)
+    @tagged(SCOPE.TAG, SCOPE.REACTIVE)
+    private readonly service: ReactiveNotificationService,
+  ) {
     this.observeAll();
   }
 
