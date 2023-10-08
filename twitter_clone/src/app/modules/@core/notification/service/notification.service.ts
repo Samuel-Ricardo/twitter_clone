@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify';
 import {
   ICreateNotificationDTO,
   IDeleteNotificationDTO,
+  IFindNotificationsByUserDTO,
   ISetNotificationVisualizedDTO,
 } from '../DTO';
 import { CreateNotificationUseCase } from '../use-case/create.use-case';
@@ -33,5 +34,9 @@ export class NotificationService {
 
   delete(notification: IDeleteNotificationDTO) {
     this.deleteNotification.execute(notification);
+  }
+
+  findByUser(user: IFindNotificationsByUserDTO) {
+    this.findNotificationByUser.execute(user);
   }
 }
