@@ -16,6 +16,16 @@ export const LIKE_REGISTRY = {
         CREATE: Symbol.for('LIKE_OBSERVABLE_EMIT_CREATE'),
         DELETE: Symbol.for('LIKE_OBSERVABLE_EMIT_DELETE'),
       },
+      LISTEN: {
+        POST: {
+          CREATED: Symbol.for('LIKE_OBSERVABLE_LISTEN_POST_CREATED'),
+          DELETED: Symbol.for('LIKE_OBSERVABLE_LISTEN_POST_DELETED'),
+        },
+        COMMENT: {
+          CREATED: Symbol.for('LIKE_OBSERVABLE_LISTEN_COMMENT_CREATED'),
+          DELETED: Symbol.for('LIKE_OBSERVABLE_LISTEN_COMMENT_DELETED'),
+        },
+      },
     },
   },
 };
