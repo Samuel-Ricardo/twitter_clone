@@ -12,6 +12,10 @@ import { LikeService } from './service';
 import { LikeController } from './controller';
 import { EmitLikeCreatedUseCase } from './use-case/observable/emit/create.use-case';
 import { EmitLikeDeletedUseCase } from './use-case/observable/emit/delete.use-case';
+import { ListenPostLikeUseCase } from './use-case/observable/listen/post/created.use-case';
+import { ListenPostDislikeUseCase } from './use-case/observable/listen/post/deleted.use-case';
+import { ListenCommentLikeUseCase } from './use-case/observable/listen/comment/created.use-case';
+import { ListenCommentDislikeUseCase } from './use-case/observable/listen/comment/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -29,6 +33,21 @@ LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATE).to(
 );
 LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.EMIT.DELETE).to(
   EmitLikeDeletedUseCase,
+);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.POST.CREATED).to(
+  ListenPostLikeUseCase,
+);
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.POST.DELETED).to(
+  ListenPostDislikeUseCase,
+);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.COMMENT.CREATED).to(
+  ListenCommentLikeUseCase,
+);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.COMMENT.DELETED).to(
+  ListenCommentDislikeUseCase,
 );
 
 LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
