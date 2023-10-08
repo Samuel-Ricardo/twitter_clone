@@ -6,6 +6,7 @@ import { CreateNotificationUseCase } from './use-case/create.use-case';
 import { ViewNotificationUseCase } from './use-case/view.use-case';
 import { DeleteNotificationUseCase } from './use-case/delete.use-case';
 import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
+import { NotificationService } from './service/notification.service';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -30,3 +31,5 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.DELETE).to(
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.FIND.BY.USER).to(
   FindNotificationByUserUseCase,
 );
+
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE).to(NotificationService);
