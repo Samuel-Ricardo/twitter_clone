@@ -9,6 +9,8 @@ import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
 import { NotificationService } from './service/notification.service';
 import { ReactiveNotificationService } from './service/reactive/notification.service';
 import { SCOPE } from './notification.tag';
+import { NotificationController } from './controller/notification.controller';
+import { ReactiveNotificationController } from './controller/reactive/notification.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -40,4 +42,12 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE)
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE)
   .to(ReactiveNotificationService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
+  .to(NotificationController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
+
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
+  .to(ReactiveNotificationController)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
