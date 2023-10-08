@@ -1,3 +1,5 @@
+import { NotificationController } from './controller/notification.controller';
+import { ReactiveNotificationController } from './controller/reactive/notification.controller';
 import { NOTIFICATION_MODULE } from './notification.module';
 import { NOTIFICATION_REGISTRY } from './notification.registry';
 import { SCOPE } from './notification.tag';
@@ -9,7 +11,20 @@ import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
 import { ViewNotificationUseCase } from './use-case/view.use-case';
 
 export const NOTIFICATION_FACTORY = {
-  CONTROLLER: {},
+  CONTROLLER: {
+    MAIN: () =>
+      NOTIFICATION_MODULE.getTagged<NotificationController>(
+        NOTIFICATION_REGISTRY.CONTROLLER,
+        SCOPE.TAG,
+        SCOPE.MAIN,
+      ),
+    REACTIVE: () =>
+      NOTIFICATION_MODULE.getTagged<ReactiveNotificationController>(
+        NOTIFICATION_REGISTRY.CONTROLLER,
+        SCOPE.TAG,
+        SCOPE.REACTIVE,
+      ),
+  },
   SERVICE: {
     MAIN: () =>
       NOTIFICATION_MODULE.getTagged<ReactiveNotificationService>(
