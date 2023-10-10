@@ -15,20 +15,24 @@ export class ReactiveLikeService {
     @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.LISTEN.POST.DELETED)
     private readonly listenPostDislike: ListenPostDislikeUseCase,
     @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.LISTEN.COMMENT.CREATED)
-    private readonly ListenCommentLike: ListenCommentLikeUseCase,
+    private readonly listenCommentLike: ListenCommentLikeUseCase,
     @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.LISTEN.COMMENT.DELETED)
     private readonly listenCommentDislike: ListenCommentDislikeUseCase,
   ) {}
 
-  async listenTweetLike(schedule: IListenLikeDTO) {
+  async onTweetLike(schedule: IListenLikeDTO) {
     this.listenPostLike.execute(schedule);
   }
 
-  async listenTweetDislike(schedule: IListenDislikeDTO) {
+  async onTweetDislike(schedule: IListenDislikeDTO) {
     this.listenPostDislike.execute(schedule);
   }
 
-  async listenCommentLike(schedule: IListenLikeDTO) {
-    this.ListenCommentLike.execute(schedule);
+  async onCommentLike(schedule: IListenLikeDTO) {
+    this.listenCommentLike.execute(schedule);
+  }
+
+  async onCommentDislike(schedule: IListenDislikeDTO) {
+    this.listenCommentDislike.execute(schedule);
   }
 }
