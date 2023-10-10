@@ -24,4 +24,8 @@ export class ReactiveLikeController {
   onTweetDislike(schedule: IListenDislikeDTO) {
     this.service.onTweetDislike(schedule);
   }
+
+  onCommentDislike(schedule: IListenDislikeDTO) {
+    this.service.onCommentDislike(schedule);
+  }
 }
