@@ -10,6 +10,7 @@ import {
 } from '@/app/modules/@core/comment/DTO';
 import { injectable } from 'inversify';
 import { Comment } from '@/app/modules/@core/comment/entity';
+import { IFindCommentByIDDTO } from '@/app/modules/@core/comment/DTO/get_by_id.dto';
 
 @injectable()
 export class AxiosCommentGateway
@@ -60,6 +61,14 @@ export class AxiosCommentGateway
     );
 
     return Comment.createArray(result.data.comments);
+  }
+
+  async findById({ id }: IFindCommentByIDDTO) {
+    const result = await this.get<{ comment: ICommentDTO }>(
+      `${this.prefix}/${id}`,
+    );
+
+    return Comment.create(result.data.comment);
   }
 
   swrFindByPost({ postId }: IFindPostCommentsDTO) {
