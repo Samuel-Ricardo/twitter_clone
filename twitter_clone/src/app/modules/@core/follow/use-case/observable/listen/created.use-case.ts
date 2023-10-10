@@ -4,7 +4,7 @@ import { FollowObservableSupport } from '../../../observable/observable.support'
 
 @injectable()
 export class ListenFollowUseCase extends FollowObservableSupport {
-  async executeAsync(follow: IListenFollowDTO) {
-    this.observable.listenFollow(follow);
+  async executeAsync(schedule: IListenFollowDTO) {
+    this.observable.listenFollow(schedule);
   }
 }
