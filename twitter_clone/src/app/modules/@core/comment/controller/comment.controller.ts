@@ -8,6 +8,7 @@ import {
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { IFindCommentByIDDTO } from '../DTO/get_by_id.dto';
 
 @injectable()
 export class CommentController {
@@ -26,6 +27,10 @@ export class CommentController {
 
   async delete(comment: IDeleteCommentDTO) {
     return this.service.delete(comment);
+  }
+
+  async findByID(comment: IFindCommentByIDDTO) {
+    return { comment: await this.service.findByID(comment) };
   }
 
   findPostComments(post: IFindPostCommentsDTO) {
