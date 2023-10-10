@@ -5,6 +5,7 @@ import { NODE_OBSERVABLE_REGISTER } from './node.registry';
 import { NodeObservable } from './generic/generic.observable';
 import { NodeLikeObservable } from './like/like.observable';
 import { NodeNotificationObservable } from './notification/notification.observable';
+import { NodeFollowObservable } from './follow/follow.observable';
 
 const MODULE = new Container({
   autoBindInjectable: true,
@@ -27,4 +28,8 @@ NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.LIKE)
 
 NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.NOTIFICATION)
   .to(NodeNotificationObservable)
+  .inSingletonScope();
+
+NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.FOLLOW)
+  .to(NodeFollowObservable)
   .inSingletonScope();
