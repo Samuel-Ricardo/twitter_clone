@@ -1,3 +1,4 @@
+import { NodeFollowObservable } from './follow/follow.observable';
 import { NodeObservable } from './generic/generic.observable';
 import { NodeLikeObservable } from './like/like.observable';
 import { NODE_OBSERVABLE_MODULE } from './node.module';
@@ -16,5 +17,9 @@ export const NODE_OBSERVABLE_FACTORY = {
   NOTIFICATION: () =>
     NODE_OBSERVABLE_MODULE.get<NodeNotificationObservable>(
       NODE_OBSERVABLE_REGISTER.NOTIFICATION,
+    ),
+  FOLLOW: () =>
+    NODE_OBSERVABLE_MODULE.get<NodeFollowObservable>(
+      NODE_OBSERVABLE_REGISTER.FOLLOW,
     ),
 };
