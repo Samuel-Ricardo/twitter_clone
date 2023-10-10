@@ -14,4 +14,5 @@ export interface ICommentGateway extends ISWRSupport {
   deleteComment(comment: IDeleteCommentDTO): Promise<void>;
   findByPost(post: IFindPostCommentsDTO): Promise<Comment[]>;
   findByauthor(author: IFindAuthorCommentsDTO): Promise<Comment[]>;
+  findById(comment: IFindPostCommentsDTO): Promise<Comment>;
 }
