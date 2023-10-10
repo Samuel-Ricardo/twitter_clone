@@ -3,6 +3,7 @@ import { NodeObservable } from '../generic/generic.observable';
 import { IEmitFollowDTO } from '@/app/modules/@core/follow/DTO/observable/emit/created.dto';
 import { IEmitUnfollowDTO } from '@/app/modules/@core/follow/DTO/observable/emit/deleted.dto';
 import { IListenFollowDTO } from '@/app/modules/@core/follow/DTO/observable/listen/created.dto';
+import { IListenUnfollowDTO } from '@/app/modules/@core/follow/DTO/observable/listen/deleted.dto';
 
 export class NodeFollowObservable
   extends NodeObservable
@@ -18,5 +19,8 @@ export class NodeFollowObservable
 
   listenFollow(schedule: IListenFollowDTO): any | Promise<any> {
     this.listen(this.EVENTS.FOLLOW.CREATED, schedule.action);
+  }
+  listenUnfollow(schedule: IListenUnfollowDTO): any | Promise<any> {
+    this.listen(this.EVENTS.FOLLOW.DELETED, schedule.action);
   }
 }
