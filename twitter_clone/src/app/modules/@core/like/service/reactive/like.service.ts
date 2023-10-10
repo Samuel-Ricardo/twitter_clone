@@ -27,4 +27,8 @@ export class ReactiveLikeService {
   async listenTweetDislike(schedule: IListenDislikeDTO) {
     this.listenPostDislike.execute(schedule);
   }
+
+  async listenCommentLike(schedule: IListenLikeDTO) {
+    this.ListenCommentLike.execute(schedule);
+  }
 }
