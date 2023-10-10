@@ -3,6 +3,7 @@ import { SCOPE } from '../../like.tag';
 import { ReactiveLikeService } from '../../service/reactive/like.service';
 import { MODULE } from '@/app/modules/app.registry';
 import { IListenLikeDTO } from '../../DTO/observable/listen/like.dto';
+import { IListenDislikeDTO } from '../../DTO/observable/listen/dislike.dto';
 
 @injectable()
 export class ReactiveLikeController {
@@ -18,5 +19,9 @@ export class ReactiveLikeController {
 
   onCommentLike(schedule: IListenLikeDTO) {
     this.service.onCommentLike(schedule);
+  }
+
+  onTweetDislike(schedule: IListenDislikeDTO) {
+    this.service.onTweetDislike(schedule);
   }
 }
