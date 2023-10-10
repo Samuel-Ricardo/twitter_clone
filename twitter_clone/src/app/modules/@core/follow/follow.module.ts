@@ -11,6 +11,10 @@ import {
 } from './use-case';
 import { FollowService } from './service';
 import { FollowController } from './controller';
+import { EmitFollowUseCase } from './use-case/observable/emit/created.use-case';
+import { ListenFollowUseCase } from './use-case/observable/listen/created.use-case';
+import { EmitUnfollowUseCase } from './use-case/observable/emit/deleted.use-case';
+import { ListenUnfollowUseCase } from './use-case/observable/listen/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -29,6 +33,18 @@ FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.COUNT.FOLLOWING).to(
 );
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.COUNT.FOLLOWERS).to(
   CountFollowersUseCase,
+);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED).to(
+  EmitFollowUseCase,
+);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED).to(
+  ListenFollowUseCase,
+);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.OBSERVABLE.EMIT.DELETED).to(
+  EmitUnfollowUseCase,
+);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.DELETED).to(
+  ListenUnfollowUseCase,
 );
 
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE).to(FollowService);
