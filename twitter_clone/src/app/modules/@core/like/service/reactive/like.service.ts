@@ -4,6 +4,7 @@ import { ListenCommentDislikeUseCase } from '../../use-case/observable/listen/co
 import { ListenPostLikeUseCase } from '../../use-case/observable/listen/post/created.use-case';
 import { ListenPostDislikeUseCase } from '../../use-case/observable/listen/post/deleted.use-case';
 import { MODULE } from '@/app/modules/app.registry';
+import { IListenLikeDTO } from '../../DTO/observable/listen/like.dto';
 
 @injectable()
 export class ReactiveLikeService {
@@ -17,4 +18,12 @@ export class ReactiveLikeService {
     @inject(MODULE.LIKE.USE_CASE.OBSERVABLE.LISTEN.COMMENT.DELETED)
     private readonly listenCommentDislike: ListenCommentDislikeUseCase,
   ) {}
+
+  async listenTweetLike(schedule: IListenLikeDTO) {
+    this.listenPostLike.execute(schedule);
+  }
+
+  async listenTweetDislike(schedule: IListenLikeDTO) {
+    this.listenPostDislike.execute(schedule);
+  }
 }
