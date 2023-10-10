@@ -1,4 +1,6 @@
 export const COMMENT_REGISTRY = {
+  MAIN: Symbol.for('MODULE:COMMENT.MAIN'),
+  REACTIVE: Symbol.for('MODULE:COMMENT.REACTIVE'),
   CONTROLLER: Symbol.for('MODULE:COMMENT.CONTROLLER'),
   SERVICE: Symbol.for('MODULE:COMMENT.SERVICE'),
   USE_CASE: {
@@ -7,6 +9,7 @@ export const COMMENT_REGISTRY = {
     UPDATE: Symbol.for('MODULE:COMMENT.USE_CASE.UPDATE'),
     FIND: {
       BY: {
+        ID: Symbol.for('MODULE:COMMENT.USE_CASE.FIND.BY.ID'),
         AUTHOR: {
           ID: Symbol.for('MODULE:COMMENT.USE_CASE.FIND.BY.AUTHOR.ID'),
         },
