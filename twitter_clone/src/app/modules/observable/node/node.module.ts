@@ -7,6 +7,7 @@ import { NodeLikeObservable } from './like/like.observable';
 import { NodeNotificationObservable } from './notification/notification.observable';
 import { NodeFollowObservable } from './follow/follow.observable';
 import { NodePostObservable } from './post/post.observable';
+import { NodeCommentObservable } from './comment/comment.observable';
 
 const MODULE = new Container({
   autoBindInjectable: true,
@@ -37,4 +38,8 @@ NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.FOLLOW)
 
 NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.POST)
   .to(NodePostObservable)
+  .inSingletonScope();
+
+NODE_OBSERVABLE_MODULE.bind(NODE_OBSERVABLE_REGISTER.COMMENT)
+  .to(NodeCommentObservable)
   .inSingletonScope();
