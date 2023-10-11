@@ -8,7 +8,6 @@ import {
 import { MODULE } from '@/app/modules/app.registry';
 import { SCOPE } from '../../notification.tag';
 
-//singleton
 @injectable()
 export class ReactiveNotificationController {
   constructor(
@@ -19,7 +18,7 @@ export class ReactiveNotificationController {
     this.observeAll();
   }
 
-  private observeAll() {
+  private async observeAll() {
     this.service.observeNotifications();
     this.service.observeLikes();
     this.service.observeComments();
@@ -27,15 +26,15 @@ export class ReactiveNotificationController {
     this.service.observeTweets();
   }
 
-  onCreate(notification: IListenNotificationDTO) {
-    this.service.onCreate(notification);
+  async onCreate(notification: IListenNotificationDTO) {
+    await this.service.onCreate(notification);
   }
 
-  onDelete(notification: IListenNotificationDeletedDTO) {
-    this.service.onDelete(notification);
+  async onDelete(notification: IListenNotificationDeletedDTO) {
+    await this.service.onDelete(notification);
   }
 
-  onView(notification: IListenNotificationViewedDTO) {
-    this.service.onView(notification);
+  async onView(notification: IListenNotificationViewedDTO) {
+    await this.service.onView(notification);
   }
 }
