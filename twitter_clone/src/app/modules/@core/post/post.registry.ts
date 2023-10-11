@@ -1,5 +1,6 @@
 export const POST_REGISTRY = {
   MAIN: Symbol.for('post.main'),
+  REACTIVE: Symbol.for('post.reactive'),
   CONTROLLER: Symbol.for('post.controller'),
   SERVICE: Symbol.for('post.service'),
   USE_CASE: {
