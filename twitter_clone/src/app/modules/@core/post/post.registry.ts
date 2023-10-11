@@ -1,4 +1,5 @@
 export const POST_REGISTRY = {
+  MAIN: Symbol.for('post.main'),
   CONTROLLER: Symbol.for('post.controller'),
   SERVICE: Symbol.for('post.service'),
   USE_CASE: {
@@ -12,6 +13,14 @@ export const POST_REGISTRY = {
           ID: Symbol.for('post.use-case.find.by.author.id'),
         },
         ID: Symbol.for('post.use-case.find.by.id'),
+      },
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for('post.use-case.observable.emit.created'),
+      },
+      LISTEN: {
+        CREATED: Symbol.for('post.use-case.observable.listen.created'),
       },
     },
   },
