@@ -1,0 +1,7 @@
+export const FOLLOW_TAG = {
+  SCOPE: {
+    TAG: 'TAG:FOLLOW.SCOPE',
+    MAIN: 'TAG:FOLLOW.SCOPE.MAIN',
+    REACTIVE: 'TAG:FOLLOW.SCOPE.REACTIVE',
+  },
+};
