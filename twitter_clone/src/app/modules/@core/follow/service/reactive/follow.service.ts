@@ -5,6 +5,7 @@ import { EmitUnfollowUseCase } from '../../use-case/observable/emit/deleted.use-
 import { ListenFollowUseCase } from '../../use-case/observable/listen/created.use-case';
 import { ListenUnfollowUseCase } from '../../use-case/observable/listen/deleted.use-case';
 import { IEmitFollowDTO } from '../../DTO/observable/emit/created.dto';
+import { IEmitUnfollowDTO } from '../../DTO/observable/emit/deleted.dto';
 
 @injectable()
 export class ReactiveFollowService {
@@ -21,5 +22,9 @@ export class ReactiveFollowService {
 
   async emitFollow(follow: IEmitFollowDTO) {
     await this.emitFollowEvent.executeAsync(follow);
+  }
+
+  async emitUnfollow(unfollow: IEmitUnfollowDTO) {
+    await this.emitUnfollowEvent.executeAsync(unfollow);
   }
 }
