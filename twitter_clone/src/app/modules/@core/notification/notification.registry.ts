@@ -10,6 +10,18 @@ export const NOTIFICATION_REGISTRY = {
     FIND: {
       BY: { USER: Symbol.for('module:notification.use-case.find.by.user') },
     },
+    REACTIVE: {
+      PUBLISH: {
+        CREATED: Symbol.for('module:notification.reactive.publish.created'),
+        VIEWED: Symbol.for('module:notification.reactive.publish.viewed'),
+        DELETED: Symbol.for('module:notification.reactive.publish.deleted'),
+      },
+      SUBSCRIBE: {
+        CREATED: Symbol.for('module:notification.reactive.subscribe.created'),
+        VIEWED: Symbol.for('module:notification.reactive.subscribe.viewed'),
+        DELETED: Symbol.for('module:notification.reactive.subscribe.deleted'),
+      },
+    },
     OBSERVABLE: {
       EMIT: {
         CREATED: Symbol.for('module:notification.observable.emit.created'),
