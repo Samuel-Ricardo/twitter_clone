@@ -18,7 +18,7 @@ export class ReactiveCommentService {
     return this.emitCommentUseCase.executeAsync(comment);
   }
 
-  listenComment({ scheduled }: { scheduled: IListenCommentDTO }) {
+  listenComment(scheduled: IListenCommentDTO) {
     return this.listenCommentUseCase.executeAsync(scheduled);
   }
 }
