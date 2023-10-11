@@ -18,6 +18,7 @@ import { ListenUnfollowUseCase } from './use-case/observable/listen/deleted.use-
 import { OBSERVABLE_MODULE } from '../../observable/observable.module';
 import { SCOPE } from './follow.tag';
 import { ReactiveFollowService } from './service/reactive/follow.service';
+import { ReactiveFollowController } from './controller/reactive/follow.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -67,3 +68,9 @@ FOLLOW_MODULE.bind(FOLLOW_REGISTRY.MAIN).to(FollowController);
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE)
   .to(ReactiveFollowService)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.CONTROLLER)
+  .to(ReactiveFollowController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.REACTIVE).to(ReactiveFollowController);
