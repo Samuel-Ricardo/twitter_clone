@@ -11,6 +11,10 @@ import { ReactiveNotificationService } from './service/reactive/notification.ser
 import { SCOPE } from './notification.tag';
 import { NotificationController } from './controller/notification.controller';
 import { ReactiveNotificationController } from './controller/reactive/notification.controller';
+import { EmitNotificationUseCase } from './use-case/observable/emit/created.use-case';
+import { ListenNotificationUseCase } from './use-case/observable/listen/created.use-case';
+import { ListenNotificationViewedUseCase } from './use-case/observable/listen/viewed.use-case';
+import { ListenNotificationDeletedUseCase } from './use-case/observable/listen/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -36,12 +40,29 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.FIND.BY.USER).to(
   FindNotificationByUserUseCase,
 );
 
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED,
+).to(EmitNotificationUseCase);
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED,
+).to(ListenNotificationUseCase);
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.VIEWED,
+).to(ListenNotificationViewedUseCase);
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.DELETED,
+).to(ListenNotificationDeletedUseCase);
+
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE)
   .to(NotificationService)
   .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE)
   .to(ReactiveNotificationService)
+  .inSingletonScope()
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
@@ -50,4 +71,5 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
   .to(ReactiveNotificationController)
+  .inSingletonScope()
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
