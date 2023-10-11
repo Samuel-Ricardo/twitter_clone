@@ -13,9 +13,13 @@ export const NOTIFICATION_REGISTRY = {
     OBSERVABLE: {
       EMIT: {
         CREATED: Symbol.for('module:notification.observable.emit.created'),
+        VIEWED: Symbol.for('module:notification.observable.emit.viewed'),
+        DELETED: Symbol.for('module:notification.observable.emit.deleted'),
       },
       LISTEN: {
         CREATED: Symbol.for('module:notification.observable.listen.created'),
+        VIEWED: Symbol.for('module:notification.observable.listen.viewed'),
+        DELETED: Symbol.for('module:notification.observable.listen.deleted'),
       },
     },
   },
