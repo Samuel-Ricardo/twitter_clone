@@ -15,6 +15,11 @@ import { EmitNotificationUseCase } from './use-case/observable/emit/created.use-
 import { ListenNotificationUseCase } from './use-case/observable/listen/created.use-case';
 import { ListenNotificationViewedUseCase } from './use-case/observable/listen/viewed.use-case';
 import { ListenNotificationDeletedUseCase } from './use-case/observable/listen/deleted.use-case';
+import { LIKE_MODULE } from '../like/like.module';
+import { POST_MODULE } from '../post';
+import { COMMENT_MODULE } from '../comment';
+import { UserModule } from '../user/user.module';
+import { FOLLOW_MODULE } from '../follow/follow.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -22,6 +27,11 @@ export const NOTIFICATION_MODULE = Container.merge(
   MODULE,
   OBSERVABLE_MODULE,
   GatewayModule,
+  LIKE_MODULE,
+  POST_MODULE,
+  COMMENT_MODULE,
+  UserModule,
+  FOLLOW_MODULE,
 );
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.CREATE).to(
