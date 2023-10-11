@@ -5,3 +5,5 @@ export const POST_TAG = {
     REACTIVE: 'TAG:POST.SCOPE.REACTIVE',
   },
 };
+
+export const { SCOPE } = POST_TAG;
