@@ -16,11 +16,11 @@ export class ReactiveNotificationController {
   }
 
   private observeAll() {
-    this.service.observehNotifications();
-    //    this.service.observeLikes();
-    //    this.service.observeComments();
-    //    this.service.observeFollows();
-    //    this.service.observeTweets();
+    this.service.observeNotifications();
+    this.service.observeLikes();
+    this.service.observeComments();
+    this.service.observeFollows();
+    this.service.observeTweets();
   }
 
   onCreate(notification: IListenNotificationDTO) {
