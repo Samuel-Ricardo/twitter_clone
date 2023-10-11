@@ -11,6 +11,18 @@ import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
 import { ViewNotificationUseCase } from './use-case/view.use-case';
 
 export const NOTIFICATION_FACTORY = {
+  MAIN: () =>
+    NOTIFICATION_MODULE.getTagged<NotificationController>(
+      NOTIFICATION_REGISTRY.CONTROLLER,
+      SCOPE.TAG,
+      SCOPE.MAIN,
+    ),
+  REACTIVE: () =>
+    NOTIFICATION_MODULE.getTagged<ReactiveNotificationController>(
+      NOTIFICATION_REGISTRY.CONTROLLER,
+      SCOPE.TAG,
+      SCOPE.REACTIVE,
+    ),
   CONTROLLER: {
     MAIN: () =>
       NOTIFICATION_MODULE.getTagged<NotificationController>(
