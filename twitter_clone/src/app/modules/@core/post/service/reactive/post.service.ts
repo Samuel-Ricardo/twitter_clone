@@ -11,4 +11,8 @@ export class ReactivePostService {
     @inject(MODULE.POST.USE_CASE.OBSERVABLE.LISTEN.CREATED)
     private readonly listenPostEvent: EmitPostUseCase,
   ) {}
+
+  async emitPost(post: IEmitPostDTO) {
+    return await this.emitPostEvent.executeAsync(post);
+  }
 }
