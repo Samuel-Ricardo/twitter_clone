@@ -10,8 +10,11 @@ import {
   FindPostsByAuthorUseCase,
   UpdatePostUseCase,
 } from './use-case';
+import { EmitPostUseCase } from './use-case/observable/emit/created.use-case';
+import { ListenPostUseCase } from './use-case/observable/listen/created.use-case';
 
 export const POST_FACTORY = {
+  MAIN: () => POST_MODULE.get<PostController>(POST_REGISTRY.CONTROLLER),
   CONTROLLER: () => POST_MODULE.get<PostController>(POST_REGISTRY.CONTROLLER),
   SERVICE: () => POST_MODULE.get<PostService>(POST_REGISTRY.SERVICE),
   USE_CASE: {
@@ -34,6 +37,20 @@ export const POST_FACTORY = {
         ID: () =>
           POST_MODULE.get<FindPostByIdUseCase>(
             POST_REGISTRY.USE_CASE.FIND.BY.ID,
+          ),
+      },
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: () =>
+          POST_MODULE.get<EmitPostUseCase>(
+            POST_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED,
+          ),
+      },
+      LISTEN: {
+        CREATED: () =>
+          POST_MODULE.get<ListenPostUseCase>(
+            POST_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED,
           ),
       },
     },
