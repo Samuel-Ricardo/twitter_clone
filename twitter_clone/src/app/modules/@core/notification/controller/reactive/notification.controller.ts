@@ -1,6 +1,10 @@
 import { inject, injectable, tagged } from 'inversify';
 import { ReactiveNotificationService } from '../../service/reactive/notification.service';
-import { IListenNotificationDTO } from '../../DTO/observable/listen';
+import {
+  IListenNotificationDTO,
+  IListenNotificationDeletedDTO,
+  IListenNotificationViewedDTO,
+} from '../../DTO/observable/listen';
 import { MODULE } from '@/app/modules/app.registry';
 import { SCOPE } from '../../notification.tag';
 
@@ -25,5 +29,13 @@ export class ReactiveNotificationController {
 
   onCreate(notification: IListenNotificationDTO) {
     this.service.onCreate(notification);
+  }
+
+  onDelete(notification: IListenNotificationDeletedDTO) {
+    this.service.onDelete(notification);
+  }
+
+  onViewed(notification: IListenNotificationViewedDTO) {
+    this.service.onView(notification);
   }
 }
