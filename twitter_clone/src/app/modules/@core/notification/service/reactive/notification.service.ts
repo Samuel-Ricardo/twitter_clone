@@ -78,6 +78,29 @@ export class ReactiveNotificationService {
     });
   }
 
+  observeComments() {
+    this.reactiveComment.onComment({
+      action: async (comment) => {
+        const { user: author } = await this.userModule.findByIdAsync({
+          id: comment.authorId,
+        });
+
+        const { post } = await this.postModule.findByIdAsync({
+          id: comment.postId,
+        });
+
+        this.notification.create({
+          type: COMMENT,
+          body: `@${
+            author.username
+          } comment on your post - ${comment.body.slice(0, 5)}...`,
+          userId: post.authorId,
+          eventId: comment.id,
+        });
+      },
+    });
+  }
+
   observeFollows() {
     this.reactiveFollow.onFollow({
       action: async (follow) => {
@@ -102,7 +125,7 @@ export class ReactiveNotificationService {
         });
         this.notification.create({
           type: LIKE,
-          body: `Someone Like Your Tweet 👍 - ${post.body.slice(0, 15)}...`,
+          body: `Someone Like Your Tweet 👍 - ${post.body.slice(0, 8)}...`,
           userId: post.authorId,
           eventId: like.id,
         });
