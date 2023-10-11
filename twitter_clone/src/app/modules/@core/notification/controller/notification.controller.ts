@@ -1,16 +1,19 @@
 import { MODULE } from '@/app/modules/app.registry';
-import { inject, injectable } from 'inversify';
+import { inject, injectable, tagged } from 'inversify';
 import { NotificationService } from '../service/notification.service';
 import {
   ICreateNotificationDTO,
   IDeleteNotificationDTO,
+  IFindNotificationsByUserDTO,
   ISetNotificationVisualizedDTO,
 } from '../DTO';
+import { SCOPE } from '../notification.tag';
 
 @injectable()
 export class NotificationController {
   constructor(
     @inject(MODULE.NOTIFICATION.SERVICE)
+    @tagged(SCOPE.TAG, SCOPE.MAIN)
     private readonly service: NotificationService,
   ) {}
 
@@ -24,5 +27,9 @@ export class NotificationController {
 
   delete(notification: IDeleteNotificationDTO) {
     return this.service.delete(notification);
+  }
+
+  findByUser(user: IFindNotificationsByUserDTO) {
+    return this.service.findByUser(user);
   }
 }
