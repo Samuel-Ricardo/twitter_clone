@@ -83,6 +83,13 @@ export class ReactiveNotificationService {
     });
   }
 
+  observerNotificationDeleted() {
+    this.subscribeNotificationDeleted.executeAsync({
+      job: (notification) =>
+        this.emitNotificationDeleted.executeAsync(notification),
+    });
+  }
+
   observeLikes() {
     this.observeTweetLikes();
     this.observeCommentLikes();
