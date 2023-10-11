@@ -4,7 +4,7 @@ import { ISubscribeNotificationCreatedDTO } from '../../../DTO/reactive/subscrib
 
 @injectable()
 export class SubscribeNotificationUseCase extends NotificationReactiveGatewaySupport {
-  execute(schedule: ISubscribeNotificationCreatedDTO) {
+  async execute(schedule: ISubscribeNotificationCreatedDTO) {
     this.gateway.subscribeToNotificationCreated(schedule);
   }
 }
