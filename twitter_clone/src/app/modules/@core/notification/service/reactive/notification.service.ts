@@ -66,36 +66,36 @@ export class ReactiveNotificationService {
     private readonly emitNotificationDeleted: EmitNotificationDeletedUseCase,
   ) {}
 
-  observeNotifications() {
+  async observeNotifications() {
     this.observerNotificationCreated();
   }
 
-  observerNotificationCreated() {
+  async observerNotificationCreated() {
     this.subscribeNotification.execute({
       job: (notification) => this.emitNotification.execute(notification),
     });
   }
 
-  observerNotificationViewed() {
+  async observerNotificationViewed() {
     this.subscribeNotificationViewed.executeAsync({
       job: (notification) =>
         this.emitNotificationViewed.executeAsync(notification),
     });
   }
 
-  observerNotificationDeleted() {
+  async observerNotificationDeleted() {
     this.subscribeNotificationDeleted.executeAsync({
       job: (notification) =>
         this.emitNotificationDeleted.executeAsync(notification),
     });
   }
 
-  observeLikes() {
+  async observeLikes() {
     this.observeTweetLikes();
     this.observeCommentLikes();
   }
 
-  observeTweets() {
+  async observeTweets() {
     this.reactivePost.onPost({
       action: async (post) => {
         const { user: author } = await this.userModule.findByIdAsync({
@@ -121,7 +121,7 @@ export class ReactiveNotificationService {
     });
   }
 
-  observeComments() {
+  async observeComments() {
     this.reactiveComment.onComment({
       action: async (comment) => {
         const { user: author } = await this.userModule.findByIdAsync({
@@ -144,7 +144,7 @@ export class ReactiveNotificationService {
     });
   }
 
-  observeFollows() {
+  async observeFollows() {
     this.reactiveFollow.onFollow({
       action: async (follow) => {
         const { user: follower } = await this.userModule.findByIdAsync({
@@ -160,7 +160,7 @@ export class ReactiveNotificationService {
     });
   }
 
-  observeTweetLikes() {
+  async observeTweetLikes() {
     this.likeModule.onTweetLike({
       action: async (like) => {
         const { post } = await this.postModule.findByIdAsync({
@@ -176,7 +176,7 @@ export class ReactiveNotificationService {
     });
   }
 
-  observeCommentLikes() {
+  async observeCommentLikes() {
     this.likeModule.onCommentLike({
       action: async (like) => {
         const { comment } = await this.commentModule.findAsyncByID({
@@ -195,15 +195,15 @@ export class ReactiveNotificationService {
     });
   }
 
-  onCreate(schedule: IListenNotificationDTO) {
+  async onCreate(schedule: IListenNotificationDTO) {
     this.listenNotification.execute(schedule);
   }
 
-  onView(schedule: IListenNotificationViewedDTO) {
+  async onView(schedule: IListenNotificationViewedDTO) {
     this.listenNotificationViewed.executeAsync(schedule);
   }
 
-  onDelete(schedule: IListenNotificationDeletedDTO) {
+  async onDelete(schedule: IListenNotificationDeletedDTO) {
     this.listenNotificationDeleted.executeAsync(schedule);
   }
 }
