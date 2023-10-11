@@ -4,6 +4,7 @@ import { SCOPE } from '../../follow.tag';
 import { ReactiveFollowService } from '../../service/reactive/follow.service';
 import { IEmitFollowDTO } from '../../DTO/observable/emit/created.dto';
 import { IEmitUnfollowDTO } from '../../DTO/observable/emit/deleted.dto';
+import { IListenFollowDTO } from '../../DTO/observable/listen/created.dto';
 
 @injectable()
 export class ReactiveFollowController {
@@ -19,5 +20,9 @@ export class ReactiveFollowController {
 
   async emitUnfollow(unfollow: IEmitUnfollowDTO) {
     await this.service.emitUnfollow(unfollow);
+  }
+
+  async onFollow(schedule: IListenFollowDTO) {
+    await this.service.onFollow(schedule);
   }
 }
