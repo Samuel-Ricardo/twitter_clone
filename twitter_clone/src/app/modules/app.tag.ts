@@ -5,3 +5,5 @@ export const APP_TAG = {
     REACTIVE: Symbol.for('TAG:APP.SCOPE.REACTIVE'),
   },
 };
+
+export const { SCOPE } = APP_TAG;
