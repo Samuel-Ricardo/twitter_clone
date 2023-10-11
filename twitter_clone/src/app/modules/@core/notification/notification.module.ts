@@ -73,3 +73,8 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
   .to(ReactiveNotificationController)
   .inSingletonScope()
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.MAIN).to(NotificationController);
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.REACTIVE).to(
+  ReactiveNotificationController,
+);
