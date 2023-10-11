@@ -15,6 +15,7 @@ import { EmitCommentUseCase } from './use-case/observable/emit/created.use-case'
 import { ListenCommentUseCase } from './use-case/observable/listen/created.use-case';
 import { ReactiveCommentService } from './service/reactive/comment.service';
 import { SCOPE } from '../../app.tag';
+import { ReactiveCommentController } from './controller/reactive/comment.controller';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -53,3 +54,8 @@ COMMENT_MODULE.bind(COMMENT_REGISTRY.MAIN).to(CommentController);
 COMMENT_MODULE.bind(COMMENT_REGISTRY.SERVICE)
   .to(ReactiveCommentService)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+COMMENT_MODULE.bind(COMMENT_REGISTRY.CONTROLLER)
+  .to(ReactiveCommentController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
+COMMENT_MODULE.bind(COMMENT_REGISTRY.REACTIVE).to(ReactiveCommentController);
