@@ -6,6 +6,6 @@ import { type IPostObservable } from './post.observable';
 export abstract class PostObservableSupport {
   constructor(
     @inject(MODULE.OBSERVABLE.NODE.POST)
-    protected readonly nodePostObservable: IPostObservable,
+    protected readonly observable: IPostObservable,
   ) {}
 }
