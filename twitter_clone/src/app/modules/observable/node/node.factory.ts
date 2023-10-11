@@ -1,3 +1,4 @@
+import { NodeCommentObservable } from './comment/comment.observable';
 import { NodeFollowObservable } from './follow/follow.observable';
 import { NodeObservable } from './generic/generic.observable';
 import { NodeLikeObservable } from './like/like.observable';
@@ -26,5 +27,9 @@ export const NODE_OBSERVABLE_FACTORY = {
   POST: () =>
     NODE_OBSERVABLE_MODULE.get<NodePostObservable>(
       NODE_OBSERVABLE_REGISTER.POST,
+    ),
+  COMMENT: () =>
+    NODE_OBSERVABLE_MODULE.get<NodeCommentObservable>(
+      NODE_OBSERVABLE_REGISTER.COMMENT,
     ),
 };
