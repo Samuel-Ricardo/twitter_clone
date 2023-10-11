@@ -20,6 +20,9 @@ import { POST_MODULE } from '../post';
 import { COMMENT_MODULE } from '../comment';
 import { UserModule } from '../user/user.module';
 import { FOLLOW_MODULE } from '../follow/follow.module';
+import { SubscribeNotificationUseCase } from './use-case/reactive/subscribe/created.use-case';
+import { SubscribeNotificationViewedUseCase } from './use-case/reactive/subscribe/viewed.use-case';
+import { SubscribeNotificationDeletedUseCase } from './use-case/reactive/subscribe/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -49,6 +52,18 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.DELETE).to(
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.FIND.BY.USER).to(
   FindNotificationByUserUseCase,
 );
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.CREATED,
+).to(SubscribeNotificationUseCase);
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.VIEWED,
+).to(SubscribeNotificationViewedUseCase);
+
+NOTIFICATION_MODULE.bind(
+  NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.DELETED,
+).to(SubscribeNotificationDeletedUseCase);
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED,
@@ -85,6 +100,6 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.CONTROLLER)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.MAIN).to(NotificationController);
-NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.REACTIVE).to(
-  ReactiveNotificationController,
-);
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.REACTIVE)
+  .to(ReactiveNotificationController)
+  .inSingletonScope();
