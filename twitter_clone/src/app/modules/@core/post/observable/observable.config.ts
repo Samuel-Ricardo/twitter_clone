@@ -1,0 +1,3 @@
+export const POST_EVENTS = {
+  CREATED: 'EVENT:CREATED.POST',
+};
