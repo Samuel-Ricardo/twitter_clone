@@ -1,7 +1,7 @@
 import {
   ICreateNotificationDTO,
   IDeleteNotificationDTO,
-  IGetNotificationsByUserDTO,
+  IFindNotificationsByUserDTO,
   ISetNotificationVisualizedDTO,
 } from '../DTO';
 import { Notification } from '../entity';
@@ -12,6 +12,8 @@ export interface INotificationGateway extends ISWRSupport {
   setVisualized(
     notification: ISetNotificationVisualizedDTO,
   ): Promise<Notification>;
-  delete(notification: IDeleteNotificationDTO): Promise<void>;
-  getByUser(notification: IGetNotificationsByUserDTO): Promise<Notification[]>;
+  deleteNotification(notification: IDeleteNotificationDTO): Promise<void>;
+  findByUser(
+    notification: IFindNotificationsByUserDTO,
+  ): Promise<Notification[]>;
 }
