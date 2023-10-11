@@ -14,6 +14,12 @@ import { UserController } from '../../../user/controller';
 import { ReactivePostController } from '../../../post/controller/reactive/post.controller';
 import { FollowController } from '../../../follow/controller';
 import { ReactiveCommentController } from '../../../comment/controller/reactive/comment.controller';
+import {
+  IListenNotificationDeletedDTO,
+  IListenNotificationViewedDTO,
+} from '../../DTO/observable/listen';
+import { ListenNotificationViewedUseCase } from '../../use-case/observable/listen/viewed.use-case';
+import { ListenNotificationDeletedUseCase } from '../../use-case/observable/listen/deleted.use-case';
 
 //singleton
 @injectable()
@@ -39,6 +45,8 @@ export class ReactiveNotificationService {
     private readonly subscribeNotification: SubscribeNotificationUseCase,
     private readonly listenNotification: ListenNotificationUseCase,
     private readonly emitNotification: EmitNotificationUseCase,
+    private readonly listenNotificationViewed: ListenNotificationViewedUseCase,
+    private readonly listenNotificationDeleted: ListenNotificationDeletedUseCase,
   ) {}
 
   observeNotifications() {
@@ -156,7 +164,11 @@ export class ReactiveNotificationService {
     this.listenNotification.execute(schedule);
   }
 
-  onView() {}
+  onView(schedule: IListenNotificationViewedDTO) {
+    this.listenNotificationViewed.executeAsync(schedule);
+  }
 
-  onDelete() {}
+  onDelete(schedule: IListenNotificationDeletedDTO) {
+    this.listenNotificationDeleted.executeAsync(schedule);
+  }
 }
