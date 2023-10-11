@@ -23,6 +23,8 @@ import { FOLLOW_MODULE } from '../follow/follow.module';
 import { SubscribeNotificationUseCase } from './use-case/reactive/subscribe/created.use-case';
 import { SubscribeNotificationViewedUseCase } from './use-case/reactive/subscribe/viewed.use-case';
 import { SubscribeNotificationDeletedUseCase } from './use-case/reactive/subscribe/deleted.use-case';
+import { EmitNotificationViewedUSeCase } from './use-case/observable/emit/viewed.use-case';
+import { EmitNotificationDeletedUseCase } from './use-case/observable/emit/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -55,31 +57,50 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.FIND.BY.USER).to(
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.CREATED,
-).to(SubscribeNotificationUseCase);
+)
+  .to(SubscribeNotificationUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.VIEWED,
-).to(SubscribeNotificationViewedUseCase);
+)
+  .to(SubscribeNotificationViewedUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.REACTIVE.SUBSCRIBE.DELETED,
-).to(SubscribeNotificationDeletedUseCase);
+)
+  .to(SubscribeNotificationDeletedUseCase)
+  .inSingletonScope();
 
-NOTIFICATION_MODULE.bind(
-  NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED,
-).to(EmitNotificationUseCase);
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED)
+  .to(EmitNotificationUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED,
-).to(ListenNotificationUseCase);
+)
+  .to(ListenNotificationUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.VIEWED,
-).to(ListenNotificationViewedUseCase);
+)
+  .to(ListenNotificationViewedUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(
   NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.DELETED,
-).to(ListenNotificationDeletedUseCase);
+)
+  .to(ListenNotificationDeletedUseCase)
+  .inSingletonScope();
+
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.VIEWED)
+  .to(EmitNotificationViewedUSeCase)
+  .inSingletonScope();
+NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.OBSERVABLE.EMIT.DELETED)
+  .to(EmitNotificationDeletedUseCase)
+  .inSingletonScope();
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.SERVICE)
   .to(NotificationService)
