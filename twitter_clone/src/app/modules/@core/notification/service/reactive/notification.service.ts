@@ -20,6 +20,8 @@ import {
 } from '../../DTO/observable/listen';
 import { ListenNotificationViewedUseCase } from '../../use-case/observable/listen/viewed.use-case';
 import { ListenNotificationDeletedUseCase } from '../../use-case/observable/listen/deleted.use-case';
+import { SubscribeNotificationViewedUseCase } from '../../use-case/reactive/subscribe/viewed.use-case';
+import { SubscribeNotificationDeletedUseCase } from '../../use-case/reactive/subscribe/deleted.use-case';
 
 //singleton
 @injectable()
@@ -42,16 +44,39 @@ export class ReactiveNotificationService {
     private readonly commentModule: CommentController,
     @inject(MODULE.USER.MAIN)
     private readonly userModule: UserController,
+    @inject(MODULE.NOTIFICATION.USE_CASE.REACTIVE.SUBSCRIBE.CREATED)
     private readonly subscribeNotification: SubscribeNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.REACTIVE.SUBSCRIBE.VIEWED)
+    private readonly subscribeNotificationViewed: SubscribeNotificationViewedUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.REACTIVE.SUBSCRIBE.DELETED)
+    private readonly subscribeNotificationDeleted: SubscribeNotificationDeletedUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.LISTEN.CREATED)
     private readonly listenNotification: ListenNotificationUseCase,
-    private readonly emitNotification: EmitNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.LISTEN.VIEWED)
     private readonly listenNotificationViewed: ListenNotificationViewedUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.LISTEN.DELETED)
     private readonly listenNotificationDeleted: ListenNotificationDeletedUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.CREATED)
+    private readonly emitNotification: EmitNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.VIEWED)
+    private readonly emitNotificationViewed: EmitNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.DELETED)
+    private readonly emitNotificationDeleted: EmitNotificationUseCase,
   ) {}
 
   observeNotifications() {
+    this.observerNotificationCreated();
+  }
+
+  observerNotificationCreated() {
     this.subscribeNotification.execute({
       job: (notification) => this.emitNotification.execute(notification),
+    });
+  }
+
+  observerNotificationViewed() {
+    this.subscribeNotificationViewed.executeAsync({
+      job: (notification) => this.emitNotificationViewed.execute(notification),
     });
   }
 
