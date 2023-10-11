@@ -35,7 +35,7 @@ export class ReactiveNotificationController {
     this.service.onDelete(notification);
   }
 
-  onViewed(notification: IListenNotificationViewedDTO) {
+  onView(notification: IListenNotificationViewedDTO) {
     this.service.onView(notification);
   }
 }
