@@ -3,7 +3,7 @@ import { IListenNotificationDTO } from '../../DTO/observable/listen/created.dto'
 import { EmitNotificationUseCase } from '../../use-case/observable/emit/created.use-case';
 import { ListenNotificationUseCase } from '../../use-case/observable/listen/created.use-case';
 import { SubscribeNotificationUseCase } from '../../use-case/reactive/subscribe/created.use-case';
-import { FOLLOW, LIKE } from '../../entity';
+import { FOLLOW, LIKE, POST, COMMENT } from '../../entity';
 import { PostController } from '../../../post';
 import { NotificationController } from '../../controller/notification.controller';
 import { MODULE } from '@/app/modules/app.registry';
@@ -11,6 +11,9 @@ import { ReactiveLikeController } from '../../../like/controller/reactive/like.c
 import { CommentController } from '../../../comment/controller/comment.controller';
 import { ReactiveFollowController } from '../../../follow/controller/reactive/follow.controller';
 import { UserController } from '../../../user/controller';
+import { ReactivePostController } from '../../../post/controller/reactive/post.controller';
+import { FollowController } from '../../../follow/controller';
+import { ReactiveCommentController } from '../../../comment/controller/reactive/comment.controller';
 
 //singleton
 @injectable()
@@ -20,7 +23,13 @@ export class ReactiveNotificationService {
     @inject(MODULE.LIKE.REACTIVE)
     private readonly likeModule: ReactiveLikeController,
     @inject(MODULE.FOLLOW.REACTIVE)
-    private readonly followModule: ReactiveFollowController,
+    private readonly reactiveFollow: ReactiveFollowController,
+    @inject(MODULE.POST.REACTIVE)
+    private readonly reactivePost: ReactivePostController,
+    @inject(MODULE.COMMENT.REACTIVE)
+    private readonly reactiveComment: ReactiveCommentController,
+    @inject(MODULE.FOLLOW.MAIN)
+    private readonly followModule: FollowController,
     @inject(MODULE.POST.MAIN)
     private readonly postModule: PostController,
     @inject(MODULE.COMMENT.MAIN)
@@ -43,8 +52,34 @@ export class ReactiveNotificationService {
     this.observeCommentLikes();
   }
 
+  observeTweets() {
+    this.reactivePost.onPost({
+      action: async (post) => {
+        const { user: author } = await this.userModule.findByIdAsync({
+          id: post.authorId,
+        });
+
+        const { followers } = await this.followModule.followersOfAsync({
+          followingId: post.authorId,
+        });
+
+        followers.forEach((follower) => {
+          this.notification.create({
+            type: POST,
+            body: `@${author.username} Post a new Tweet 🚀 - ${post.body.slice(
+              0,
+              8,
+            )}...`,
+            userId: follower.id,
+            eventId: post.id,
+          });
+        });
+      },
+    });
+  }
+
   observeFollows() {
-    this.followModule.onFollow({
+    this.reactiveFollow.onFollow({
       action: async (follow) => {
         const { user: follower } = await this.userModule.findByIdAsync({
           id: follow.followerId,
