@@ -10,5 +10,13 @@ export const NOTIFICATION_REGISTRY = {
     FIND: {
       BY: { USER: Symbol.for('module:notification.use-case.find.by.user') },
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for('module:notification.observable.emit.created'),
+      },
+      LISTEN: {
+        CREATED: Symbol.for('module:notification.observable.listen.created'),
+      },
+    },
   },
 };
