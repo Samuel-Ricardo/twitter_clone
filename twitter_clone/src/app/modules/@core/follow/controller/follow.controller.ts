@@ -41,4 +41,10 @@ export class FollowController {
   countFollowingOf(user: ICountFollowingDTO) {
     return { following: this.service.countFollowingOf(user) };
   }
+
+  async followersOfAsync(data: IGetFollowersDTO) {
+    const users = await this.service.getFollowersOfAsync(data);
+
+    return { followers: users.map((user) => user.toStruct()) };
+  }
 }
