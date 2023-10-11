@@ -18,5 +18,11 @@ export const COMMENT_REGISTRY = {
         },
       },
     },
+    OBSERVABLE: {
+      EMIT: { CREATED: Symbol.for('MODULE:COMMENT.OBSERVABLE.EMIT.CREATED') },
+      LISTEN: {
+        CREATED: Symbol.for('MODULE:COMMENT.OBSERVABLE.LISTEN.CREATED'),
+      },
+    },
   },
 };
