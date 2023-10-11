@@ -9,6 +9,8 @@ import {
   FindPostCommentsUseCase,
   DeleteCommentUseCase,
 } from './use-case';
+import { EmitCommentUseCase } from './use-case/observable/emit/created.use-case';
+import { ListenCommentUseCase } from './use-case/observable/listen/created.use-case';
 
 export const COMMENT_FACTORY = {
   MAIN: () =>
@@ -43,6 +45,20 @@ export const COMMENT_FACTORY = {
               COMMENT_REGISTRY.USE_CASE.FIND.BY.AUTHOR.ID,
             ),
         },
+      },
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: () =>
+          COMMENT_MODULE.get<EmitCommentUseCase>(
+            COMMENT_REGISTRY.USE_CASE.OBSERVABLE.EMIT.CREATED,
+          ),
+      },
+      LISTEN: {
+        CREATED: () =>
+          COMMENT_MODULE.get<ListenCommentUseCase>(
+            COMMENT_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED,
+          ),
       },
     },
   },
