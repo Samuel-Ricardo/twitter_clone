@@ -15,10 +15,17 @@ import { EmitFollowUseCase } from './use-case/observable/emit/created.use-case';
 import { ListenFollowUseCase } from './use-case/observable/listen/created.use-case';
 import { EmitUnfollowUseCase } from './use-case/observable/emit/deleted.use-case';
 import { ListenUnfollowUseCase } from './use-case/observable/listen/deleted.use-case';
+import { OBSERVABLE_MODULE } from '../../observable/observable.module';
+import { SCOPE } from './follow.tag';
+import { ReactiveFollowService } from './service/reactive/follow.service';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
-export const FOLLOW_MODULE = Container.merge(MODULE, GatewayModule);
+export const FOLLOW_MODULE = Container.merge(
+  MODULE,
+  OBSERVABLE_MODULE,
+  GatewayModule,
+);
 
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.CREATE).to(CreateFollowUseCase);
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.DELETE).to(DeleteFollowUseCase);
@@ -47,7 +54,16 @@ FOLLOW_MODULE.bind(FOLLOW_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.DELETED).to(
   ListenUnfollowUseCase,
 );
 
-FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE).to(FollowService);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE)
+  .to(FollowService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
 
-FOLLOW_MODULE.bind(FOLLOW_REGISTRY.CONTROLLER).to(FollowController);
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.CONTROLLER)
+  .to(FollowController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
+
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.MAIN).to(FollowController);
+
+FOLLOW_MODULE.bind(FOLLOW_REGISTRY.SERVICE)
+  .to(ReactiveFollowService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
