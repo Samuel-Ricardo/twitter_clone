@@ -22,6 +22,8 @@ import { ListenNotificationViewedUseCase } from '../../use-case/observable/liste
 import { ListenNotificationDeletedUseCase } from '../../use-case/observable/listen/deleted.use-case';
 import { SubscribeNotificationViewedUseCase } from '../../use-case/reactive/subscribe/viewed.use-case';
 import { SubscribeNotificationDeletedUseCase } from '../../use-case/reactive/subscribe/deleted.use-case';
+import { EmitNotificationViewedUSeCase } from '../../use-case/observable/emit/viewed.use-case';
+import { EmitNotificationDeletedUseCase } from '../../use-case/observable/emit/deleted.use-case';
 
 //singleton
 @injectable()
@@ -59,9 +61,9 @@ export class ReactiveNotificationService {
     @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.CREATED)
     private readonly emitNotification: EmitNotificationUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.VIEWED)
-    private readonly emitNotificationViewed: EmitNotificationUseCase,
+    private readonly emitNotificationViewed: EmitNotificationViewedUSeCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.OBSERVABLE.EMIT.DELETED)
-    private readonly emitNotificationDeleted: EmitNotificationUseCase,
+    private readonly emitNotificationDeleted: EmitNotificationDeletedUseCase,
   ) {}
 
   observeNotifications() {
@@ -76,7 +78,8 @@ export class ReactiveNotificationService {
 
   observerNotificationViewed() {
     this.subscribeNotificationViewed.executeAsync({
-      job: (notification) => this.emitNotificationViewed.execute(notification),
+      job: (notification) =>
+        this.emitNotificationViewed.executeAsync(notification),
     });
   }
 
