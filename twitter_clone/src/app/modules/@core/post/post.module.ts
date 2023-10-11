@@ -13,6 +13,8 @@ import { PostService } from './service';
 import { PostController } from './controller/post.controller';
 import { EmitPostUseCase } from './use-case/observable/emit/created.use-case';
 import { ListenPostUseCase } from './use-case/observable/listen/created.use-case';
+import { SCOPE } from './post.tag';
+import { ReactivePostService } from './service/reactive/post.service';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -34,7 +36,16 @@ POST_MODULE.bind(POST_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.CREATED).to(
   ListenPostUseCase,
 );
 
-POST_MODULE.bind(POST_REGISTRY.SERVICE).to(PostService);
+POST_MODULE.bind(POST_REGISTRY.SERVICE)
+  .to(PostService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
 
-POST_MODULE.bind(POST_REGISTRY.CONTROLLER).to(PostController);
+POST_MODULE.bind(POST_REGISTRY.CONTROLLER)
+  .to(PostController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
+
 POST_MODULE.bind(POST_REGISTRY.MAIN).to(PostController);
+
+POST_MODULE.bind(POST_REGISTRY.SERVICE)
+  .to(ReactivePostService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
