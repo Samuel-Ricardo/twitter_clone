@@ -14,6 +14,7 @@ import { CommentController } from '@/app/modules/@core/comment/controller/commen
 import { ISimulatedCommentController } from '@test/@types/simulate/comment/controller';
 import { EmitCommentUseCase } from '@/app/modules/@core/comment/use-case/observable/emit/created.use-case';
 import { ListenCommentUseCase } from '@/app/modules/@core/comment/use-case/observable/listen/created.use-case';
+import { FindCommentByIDUseCase } from '@/app/modules/@core/comment/use-case/find_by_id.use-case';
 
 export const COMMENT_FACTORY_MOCK = {
   CONTROLLER: {
@@ -51,6 +52,10 @@ export const COMMENT_FACTORY_MOCK = {
       ),
     FIND: {
       BY: {
+        ID: () =>
+          COMMENT_MODULE_MOCK.get<DeepMockProxy<FindCommentByIDUseCase>>(
+            COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.ID,
+          ),
         POST: () =>
           COMMENT_MODULE_MOCK.get<DeepMockProxy<FindPostCommentsUseCase>>(
             COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.POST,
