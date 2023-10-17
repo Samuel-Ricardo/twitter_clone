@@ -1,0 +1,3 @@
+export const CRYPTO_REGISTRY = {
+  CRYPTO: 'MODUELE:CRYPTO',
+};
