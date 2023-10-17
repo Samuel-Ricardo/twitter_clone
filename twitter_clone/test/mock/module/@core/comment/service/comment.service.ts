@@ -16,6 +16,11 @@ export const simulateCommentService = ({
   const author = container.get<any>(
     MODULE_MOCK.COMMENT.USE_CASE.FIND.BY.AUTHOR,
   );
+  const id = container.get<any>(MODULE_MOCK.COMMENT.USE_CASE.FIND.BY.ID);
+
+  const created = container.get<any>(
+    MODULE_MOCK.COMMENT.USE_CASE.OBSERVABLE.EMIT.CREATED,
+  );
 
   const service = new CommentService(
     create,
@@ -23,6 +28,8 @@ export const simulateCommentService = ({
     post,
     author,
     update,
+    id,
+    created,
   );
 
   return {
@@ -33,9 +40,13 @@ export const simulateCommentService = ({
       deleteComment,
       find: {
         by: {
+          id,
           post,
           author,
         },
+      },
+      observable: {
+        emit: { created },
       },
     },
   };

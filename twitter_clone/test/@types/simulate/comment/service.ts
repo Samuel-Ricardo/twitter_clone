@@ -28,9 +28,6 @@ export interface ISimulatedCommentService {
       emit: {
         created: DeepMockProxy<EmitCommentUseCase>;
       };
-      Listen: {
-        created: DeepMockProxy<ListenCommentUseCase>;
-      };
     };
   };
 }
