@@ -15,6 +15,7 @@ import {
   mockCommentController,
   simulateCommentController,
 } from './controller/comment.controller';
+import { mockEmitCommentUseCase } from './use-case/observable/emit/created.use-case';
 
 export const COMMENT_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -33,6 +34,12 @@ COMMENT_MODULE_MOCK.bind(
 COMMENT_MODULE_MOCK.bind(
   COMMENT_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
 ).toDynamicValue(mockDeepFindUserCommentsUseCase);
+COMMENT_MODULE_MOCK.bind(
+  COMMENT_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+).toDynamicValue(mockEmitCommentUseCase);
+COMMENT_MODULE_MOCK.bind(
+  COMMENT_REGISTRY_MOCK.USE_CASE.OBSERVABLE.LISTEN.CREATED,
+).toDynamicValue(mockEmitCommentUseCase);
 
 COMMENT_MODULE_MOCK.bind(COMMENT_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
   mockCommentService,
