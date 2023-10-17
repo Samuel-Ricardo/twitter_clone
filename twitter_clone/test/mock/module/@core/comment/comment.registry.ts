@@ -13,6 +13,7 @@ export const COMMENT_REGISTRY_MOCK = {
     DELETE: Symbol.for('mock:module.comment.use-case.delete'),
     FIND: {
       BY: {
+        ID: Symbol.for('mock:module.comment.use-case.find.by.id'),
         POST: Symbol.for('mock:module.comment.use-case.find.by.post'),
         AUTHOR: Symbol.for('mock:module.comment.use-case.find.by.author'),
       },
