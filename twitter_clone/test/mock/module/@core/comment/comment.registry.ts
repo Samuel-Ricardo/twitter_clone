@@ -17,5 +17,17 @@ export const COMMENT_REGISTRY_MOCK = {
         AUTHOR: Symbol.for('mock:module.comment.use-case.find.by.author'),
       },
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for(
+          'mock:module.comment.use-case.observable.emit.created',
+        ),
+      },
+      LISTEN: {
+        CREATED: Symbol.for(
+          'mock:module.comment.use-case.observable.listen.created',
+        ),
+      },
+    },
   },
 };
