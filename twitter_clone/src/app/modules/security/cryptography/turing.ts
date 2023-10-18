@@ -13,4 +13,8 @@ export class Turing implements ICryptographer {
   get crypto() {
     return this._crypto;
   }
+
+  async hash(data: string): Promise<string> {
+    return this._crypto.createHash('sha256').update(data).digest('hex');
+  }
 }
