@@ -1,0 +1,3 @@
+export const BCRYPT_REGISTRY = {
+  BCRYPT: 'MODULE:BCRYPT',
+};
