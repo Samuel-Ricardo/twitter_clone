@@ -17,6 +17,8 @@ import {
   mockFollowController,
   simulateFollowController,
 } from './controller/follow.controller';
+import { mockEmitFollowUseCase } from './use-case/observable/emit/created.use-case';
+import { mockEmitUnfollowUseCase } from './use-case/observable/emit/deleted.use-case';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -45,6 +47,14 @@ FOLLOW_MODULE_MOCK.bind(
 FOLLOW_MODULE_MOCK.bind(
   FOLLOW_REGISTRY_MOCK.USE_CASE.COUNT.FOLLOWERS,
 ).toDynamicValue(mockCountFollowersUseCase);
+
+FOLLOW_MODULE_MOCK.bind(
+  FOLLOW_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+).toDynamicValue(mockEmitFollowUseCase);
+
+FOLLOW_MODULE_MOCK.bind(
+  FOLLOW_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.DELETED,
+).toDynamicValue(mockEmitUnfollowUseCase);
 
 FOLLOW_MODULE_MOCK.bind(FOLLOW_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
   mockFollowService,
