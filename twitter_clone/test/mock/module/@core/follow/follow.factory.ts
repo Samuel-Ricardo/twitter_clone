@@ -13,6 +13,8 @@ import { FollowService } from '@/app/modules/@core/follow/service';
 import { ISimulatedFollowService } from '@test/@types/simulate/follow/service';
 import { FollowController } from '@/app/modules/@core/follow/controller';
 import { ISimulatedFollowController } from '@test/@types/simulate/follow/controller';
+import { EmitFollowUseCase } from '@/app/modules/@core/follow/use-case/observable/emit/created.use-case';
+import { EmitUnfollowUseCase } from '@/app/modules/@core/follow/use-case/observable/emit/deleted.use-case';
 
 export const FOLLOW_FACTORY_MOCK = {
   CONTROLLER: {
@@ -63,6 +65,18 @@ export const FOLLOW_FACTORY_MOCK = {
         FOLLOW_MODULE_MOCK.get<DeepMockProxy<CountFollowingUseCase>>(
           FOLLOW_REGISTRY_MOCK.USE_CASE.COUNT.FOLLOWING,
         ),
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: () =>
+          FOLLOW_MODULE_MOCK.get<DeepMockProxy<EmitFollowUseCase>>(
+            FOLLOW_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+          ),
+        DELETED: () =>
+          FOLLOW_MODULE_MOCK.get<DeepMockProxy<EmitUnfollowUseCase>>(
+            FOLLOW_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.DELETED,
+          ),
+      },
     },
   },
 };
