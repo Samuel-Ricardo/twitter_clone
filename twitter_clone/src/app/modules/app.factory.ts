@@ -12,9 +12,13 @@ import { SOCKET_FACTORY as SOCKET } from './socket_io/socket.factory';
 import { REACTIVE_FACTORY as REACTIVE } from './reactive/reactive.factory';
 import { OBSERVABLE_FACTORY as OBSERVABLE } from './observable/observable.factory';
 import { NOTIFICATION_FACTORY as NOTIFICATION } from './@core/notification/notification.factory';
+import { CRYPTO_FACTORY } from './crypto/crypto.factory';
+import { BCRYPT_FACTORY } from './bcrypt/bcrypt.factory';
 
 export const MODULES = {
   ...AxiosFactory,
+  ...CRYPTO_FACTORY,
+  ...BCRYPT_FACTORY,
   USER,
   POST,
   COMMENT,
