@@ -12,9 +12,11 @@ import { SOCKET_REGISTRY as SOCKET } from './socket_io/socket.registry';
 import { REACTIVE_REGISTRY as REACTIVE } from './reactive/reactive.registry';
 import { OBSERVABLE_REGISTRY as OBSERVABLE } from './observable/observable.registry';
 import { NOTIFICATION_REGISTRY as NOTIFICATION } from './@core/notification/notification.registry';
+import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
+  ...CRYPTO_REGISTRY,
   USER,
   POST,
   COMMENT,
