@@ -58,6 +58,13 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
     expect(MODULE.use_case.deleteFollow.execute).toHaveBeenCalledWith({
       id: VALID_FOLLOW.id,
     });
+
+    expect(
+      MODULE.use_case.observable.emit.deleted.executeAsync,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.deleted.executeAsync,
+    ).toHaveBeenCalledWith(VALID_FOLLOW);
   });
 
   it('[UNIT] | Should: get [followers] => [FOLLOW]', async () => {
