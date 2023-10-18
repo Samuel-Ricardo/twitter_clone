@@ -15,8 +15,19 @@ export const simulatePostService = ({
   const all = container.get<any>(POST_REGISTRY_MOCK.USE_CASE.FIND.ALL);
   const id = container.get<any>(POST_REGISTRY_MOCK.USE_CASE.FIND.BY.ID);
   const author = container.get<any>(POST_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR);
+  const created = container.get<any>(
+    POST_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+  );
 
-  const service = new PostService(create, all, id, deletePost, update, author);
+  const service = new PostService(
+    create,
+    all,
+    id,
+    deletePost,
+    update,
+    author,
+    created,
+  );
 
   return {
     service,
@@ -30,6 +41,9 @@ export const simulatePostService = ({
           id,
           author,
         },
+      },
+      observable: {
+        emit: { created },
       },
     },
   };
