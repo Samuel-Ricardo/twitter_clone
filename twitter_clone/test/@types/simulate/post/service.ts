@@ -7,6 +7,7 @@ import {
   PostService,
   UpdatePostUseCase,
 } from '@/app/modules/@core/post';
+import { EmitPostUseCase } from '@/app/modules/@core/post/use-case/observable/emit/created.use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedPostService {
@@ -20,6 +21,11 @@ export interface ISimulatedPostService {
       by: {
         id: DeepMockProxy<FindPostByIdUseCase>;
         author: DeepMockProxy<FindPostsByAuthorUseCase>;
+      };
+    };
+    observable: {
+      emit: {
+        created: DeepMockProxy<EmitPostUseCase>;
       };
     };
   };
