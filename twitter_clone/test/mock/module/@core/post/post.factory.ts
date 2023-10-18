@@ -14,6 +14,7 @@ import {
   ISimulatedPostService,
 } from '@test/@types/simulate/post';
 import { PostController, PostService } from '@/app/modules/@core/post';
+import { EmitPostUseCase } from '@/app/modules/@core/post/use-case/observable/emit/created.use-case';
 
 export const POST_FACTORY_MOCK = {
   CONTROLLER: {
@@ -62,6 +63,14 @@ export const POST_FACTORY_MOCK = {
         AUTHOR: () =>
           POST_MODULE_MOCK.get<DeepMockProxy<FindPostsByAuthorUseCase>>(
             POST_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
+          ),
+      },
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: () =>
+          POST_MODULE_MOCK.get<DeepMockProxy<EmitPostUseCase>>(
+            POST_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
           ),
       },
     },

@@ -11,6 +11,7 @@ import {
   mockPostController,
   simulatePostController,
 } from './controller/post.controller';
+import { mockEmitPostUseCase } from './use-case/observable/emit/created.use-case';
 
 export const POST_MODULE_MOCK = new Container({ autoBindInjectable: true });
 
@@ -37,6 +38,10 @@ POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.USE_CASE.FIND.BY.ID).toDynamicValue(
 POST_MODULE_MOCK.bind(
   POST_REGISTRY_MOCK.USE_CASE.FIND.BY.AUTHOR,
 ).toDynamicValue(mockFindPostByAuthorUseCase);
+
+POST_MODULE_MOCK.bind(
+  POST_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+).toDynamicValue(mockEmitPostUseCase);
 
 POST_MODULE_MOCK.bind(POST_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
   mockPostService,
