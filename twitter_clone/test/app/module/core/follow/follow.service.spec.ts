@@ -38,6 +38,13 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
     expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
       CREATE_FOLLOW_DATA,
     );
+
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledWith(VALID_FOLLOW);
   });
 
   it('[UNIT] | Should: delete => [FOLLOW]', async () => {
