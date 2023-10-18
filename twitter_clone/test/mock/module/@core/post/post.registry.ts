@@ -18,5 +18,12 @@ export const POST_REGISTRY_MOCK = {
         AUTHOR: Symbol.for('mock:modules.post.use-case.find.by.author'),
       },
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for(
+          'mock:modules.post.use-case.observable.emit.created',
+        ),
+      },
+    },
   },
 };
