@@ -16,6 +16,7 @@ import { REACTIVE_MODULE as REACTIVE } from './reactive/reactive.module';
 import { OBSERVABLE_MODULE as OBSERVABLE } from './observable/observable.module';
 import { NOTIFICATION_MODULE as NOTIFICATION } from './@core/notification/notification.module';
 import { CRYPTO_MODULE as CRYPTO } from './crypto/crypto.module';
+import { BCRYPT_MODULE as BCRYPT } from './bcrypt/bcrypt.module';
 
 import { MODULE } from './module';
 
@@ -36,4 +37,5 @@ export const AppModule = Container.merge(
   REACTIVE,
   OBSERVABLE,
   CRYPTO,
+  BCRYPT,
 );
