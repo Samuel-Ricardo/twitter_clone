@@ -15,6 +15,7 @@ import {
   USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
+import { Gaegu } from 'next/font/google';
 
 describe('[CORE] | SERVICE => [FOLLOW]', () => {
   let MODULE: ISimulatedFollowService;
@@ -50,7 +51,7 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
   it('[UNIT] | Should: delete => [FOLLOW]', async () => {
     MODULE.use_case.deleteFollow.execute.mockResolvedValue();
 
-    expect(
+    await expect(
       MODULE.service.delete({ id: VALID_FOLLOW.id }),
     ).resolves.not.toThrow();
 
@@ -64,7 +65,7 @@ describe('[CORE] | SERVICE => [FOLLOW]', () => {
     ).toHaveBeenCalledTimes(1);
     expect(
       MODULE.use_case.observable.emit.deleted.executeAsync,
-    ).toHaveBeenCalledWith(VALID_FOLLOW);
+    ).toHaveBeenCalledWith({ id: VALID_FOLLOW.id });
   });
 
   it('[UNIT] | Should: get [followers] => [FOLLOW]', async () => {
