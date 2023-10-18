@@ -7,6 +7,8 @@ import {
   CountFollowersUseCase,
   CountFollowingUseCase,
 } from '@/app/modules/@core/follow/use-case';
+import { EmitFollowUseCase } from '@/app/modules/@core/follow/use-case/observable/emit/created.use-case';
+import { EmitUnfollowUseCase } from '@/app/modules/@core/follow/use-case/observable/emit/deleted.use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedFollowService {
@@ -21,6 +23,12 @@ export interface ISimulatedFollowService {
     count: {
       followers: DeepMockProxy<CountFollowersUseCase>;
       following: DeepMockProxy<CountFollowingUseCase>;
+    };
+    observable: {
+      emit: {
+        created: DeepMockProxy<EmitFollowUseCase>;
+        deleted: DeepMockProxy<EmitUnfollowUseCase>;
+      };
     };
   };
 }
