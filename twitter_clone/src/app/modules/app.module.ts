@@ -15,8 +15,9 @@ import { SOCKET_MODULE as SOCKET } from './socket_io/socket.module';
 import { REACTIVE_MODULE as REACTIVE } from './reactive/reactive.module';
 import { OBSERVABLE_MODULE as OBSERVABLE } from './observable/observable.module';
 import { NOTIFICATION_MODULE as NOTIFICATION } from './@core/notification/notification.module';
+import { CRYPTO_MODULE as CRYPTO } from './crypto/crypto.module';
 
-const MODULE = new Container({ autoBindInjectable: true });
+import { MODULE } from './module';
 
 export const AppModule = Container.merge(
   MODULE,
@@ -34,4 +35,5 @@ export const AppModule = Container.merge(
   SOCKET,
   REACTIVE,
   OBSERVABLE,
+  CRYPTO,
 );
