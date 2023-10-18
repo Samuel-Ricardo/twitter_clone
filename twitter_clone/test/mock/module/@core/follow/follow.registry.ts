@@ -18,5 +18,15 @@ export const FOLLOW_REGISTRY_MOCK = {
       FOLLOWERS: Symbol.for('MOCK>MODULE:FOLLOW.USE_CASE.COUNT.FOLLOWERS'),
       FOLLOWING: Symbol.for('MOCK>MODULE:FOLLOW.USE_CASE.COUNT.FOLLOWING'),
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for(
+          'MOCK>MODULE:FOLLOW.USE_CASE.OBSERVABLE.EMIT.CREATED',
+        ),
+        DELETED: Symbol.for(
+          'MOCK>MODULE:FOLLOW.USE_CASE.OBSERVABLE.EMIT.DELETED',
+        ),
+      },
+    },
   },
 };
