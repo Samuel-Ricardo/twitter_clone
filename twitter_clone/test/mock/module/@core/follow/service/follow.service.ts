@@ -20,6 +20,17 @@ export const simulateFollowService = ({
     following: container.get<any>(MODULE_MOCK.FOLLOW.USE_CASE.COUNT.FOLLOWING),
   };
 
+  const observable = {
+    emit: {
+      created: container.get<any>(
+        MODULE_MOCK.FOLLOW.USE_CASE.OBSERVABLE.EMIT.CREATED,
+      ),
+      deleted: container.get<any>(
+        MODULE_MOCK.FOLLOW.USE_CASE.OBSERVABLE.EMIT.DELETED,
+      ),
+    },
+  };
+
   const service = new FollowService(
     create,
     deleteFollow,
@@ -27,6 +38,8 @@ export const simulateFollowService = ({
     get.following,
     count.followers,
     count.following,
+    observable.emit.created,
+    observable.emit.deleted,
   );
 
   return {
@@ -36,6 +49,7 @@ export const simulateFollowService = ({
       deleteFollow,
       get,
       count,
+      observable,
     },
   };
 };
