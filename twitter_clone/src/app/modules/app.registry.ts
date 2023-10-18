@@ -14,11 +14,13 @@ import { OBSERVABLE_REGISTRY as OBSERVABLE } from './observable/observable.regis
 import { NOTIFICATION_REGISTRY as NOTIFICATION } from './@core/notification/notification.registry';
 import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 import { BCRYPT_REGISTRY } from './bcrypt/bcrypt.registry';
+import { ARGON_REGISTRY } from './argon2/argon.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
   ...CRYPTO_REGISTRY,
   ...BCRYPT_REGISTRY,
+  ...ARGON_REGISTRY,
   USER,
   POST,
   COMMENT,
