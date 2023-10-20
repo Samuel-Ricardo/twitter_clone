@@ -37,6 +37,15 @@ export class Turing implements ICryptographer {
     return { data: result, iv };
   }
 
+  decryptiv(secret: IEncriptedIv): string {
+    const decipher = this.decipheriv(secret.iv);
+
+    let result = decipher.update(secret.data, 'hex', 'utf8');
+    result += decipher.final('utf8');
+
+    return result;
+  }
+
   cipheriv() {
     const iv = this.iv;
     return {
@@ -45,7 +54,9 @@ export class Turing implements ICryptographer {
     };
   }
 
-  decipheriv() {}
+  decipheriv(iv: string | Buffer) {
+    return this.crypto.createDecipheriv(this.algorithm, this.key, iv);
+  }
 
   get crypto() {
     return this._crypto;
