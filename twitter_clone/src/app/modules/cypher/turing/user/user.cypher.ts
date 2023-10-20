@@ -11,8 +11,12 @@ export class TuringUserCypher implements IUserCypher {
     private readonly _turing: Turing | ICryptographer,
   ) {}
 
-  hashPassword(password: string) {
-    return this.turing.hash(password);
+  async hashPassword(password: string) {
+    return await this.turing.hash(password);
+  }
+
+  async comparePassword(password: string, hash: string) {
+    return await this.turing.compareHash(password, hash);
   }
 
   get turing() {
