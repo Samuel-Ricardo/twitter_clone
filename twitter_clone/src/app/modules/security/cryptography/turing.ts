@@ -4,13 +4,12 @@ import { ICryptographer } from './cryptography.contract';
 import { MODULE } from '../../app.registry';
 import argon2 from 'argon2';
 import { injectConfig } from '../../config/config.module';
+import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
 
 @injectable()
 export class Turing implements ICryptographer {
   @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.ALGORITHMS.AES[256].GCM)
   private readonly _algorithm: string;
-  @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.IV)
-  private readonly _iv: string;
   @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.KEY)
   private readonly _key: string;
 
@@ -29,19 +28,24 @@ export class Turing implements ICryptographer {
     return this.argon.verify(word, hash, { type: argon2.argon2id });
   }
 
-  encrypt(word: string) {
-    const cipher = this.cipheriv();
+  encryptiv(word: string): IEncriptedIv {
+    const { cipher, iv } = this.cipheriv();
 
     let result = cipher.update(word, 'utf8', 'hex');
     result += cipher.final('hex');
 
-    return result;
+    return { data: result, iv };
   }
 
   cipheriv() {
-    const { algorithm, key, iv } = this;
-    return this.crypto.createCipheriv(algorithm, key, iv);
+    const iv = this.iv;
+    return {
+      cipher: this.crypto.createCipheriv(this.algorithm, this.key, iv),
+      iv,
+    };
   }
+
+  decipheriv() {}
 
   get crypto() {
     return this._crypto;
@@ -56,7 +60,7 @@ export class Turing implements ICryptographer {
   }
 
   get iv() {
-    return this._iv;
+    return this.crypto.randomBytes(32);
   }
 
   get key() {
