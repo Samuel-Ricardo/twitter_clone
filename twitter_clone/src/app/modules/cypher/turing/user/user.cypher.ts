@@ -33,6 +33,11 @@ export class TuringUserCypher implements IUserCypher {
     return this.turing.encryptIv(converted);
   }
 
+  decryptIvUser(user: IEncriptedIv) {
+    const decrypted = this.turing.decryptIv(user);
+    return JSON.parse(decrypted) as IUserDTO;
+  }
+
   get turing() {
     return this._turing;
   }
