@@ -15,6 +15,7 @@ import { NOTIFICATION_FACTORY as NOTIFICATION } from './@core/notification/notif
 import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 import { BCRYPT_FACTORY } from './bcrypt/bcrypt.factory';
 import { ARGON_FACTORY } from './argon2/argon.factory';
+import { SECURITY_FACTORY as SECURITY } from './security/security.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -34,4 +35,5 @@ export const MODULES = {
   SOCKET,
   REACTIVE,
   OBSERVABLE,
+  SECURITY,
 };
