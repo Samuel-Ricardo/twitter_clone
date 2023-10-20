@@ -30,14 +30,15 @@ export class Turing implements ICryptographer {
   }
 
   encrypt(word: string) {
-    return this.cypheriv.update(word, 'utf8', 'hex');
+    const cipher = this.cipheriv();
+
+    let result = cipher.update(word, 'utf8', 'hex');
+    result += cipher.final('hex');
+
+    return result;
   }
 
-  decrypt(word: string) {
-    return this.cypheriv.update(word, 'hex', 'utf8');
-  }
-
-  get cypheriv() {
+  cipheriv() {
     const { algorithm, key, iv } = this;
     return this.crypto.createCipheriv(algorithm, key, iv);
   }
