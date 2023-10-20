@@ -6,9 +6,11 @@ export const CYPHER_CONFIG = {
   ALGORITHMS: {
     AES: {
       128: {
+        GCM: 'aes-128-gcm',
         CBC: 'aes-128-cbc',
       },
       256: {
+        GCM: 'aes-256-gcm',
         CBC: 'aes-256-cbc',
       },
     },
