@@ -24,11 +24,11 @@ export class Turing implements ICryptographer {
     return this.argon.hash(data, { type: argon2.argon2id });
   }
 
-  compare(word: string, hash: string) {
+  compareHash(word: string, hash: string) {
     return this.argon.verify(word, hash, { type: argon2.argon2id });
   }
 
-  encryptiv(word: string): IEncriptedIv {
+  encryptIv(word: string): IEncriptedIv {
     const { cipher, iv } = this.cipheriv();
 
     let result = cipher.update(word, 'utf8', 'hex');
@@ -37,7 +37,7 @@ export class Turing implements ICryptographer {
     return { data: result, iv };
   }
 
-  decryptiv(secret: IEncriptedIv): string {
+  decryptIv(secret: IEncriptedIv): string {
     const decipher = this.decipheriv(secret.iv);
 
     let result = decipher.update(secret.data, 'hex', 'utf8');
