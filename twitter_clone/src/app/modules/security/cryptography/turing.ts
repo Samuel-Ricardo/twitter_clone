@@ -20,12 +20,12 @@ export class Turing implements ICryptographer {
     private readonly _argon: typeof argon2,
   ) {}
 
-  hash(data: string) {
-    return this.argon.hash(data, { type: argon2.argon2id });
+  async hash(data: string) {
+    return await this.argon.hash(data, { type: argon2.argon2id });
   }
 
-  compareHash(word: string, hash: string) {
-    return this.argon.verify(word, hash, { type: argon2.argon2id });
+  async compareHash(word: string, hash: string) {
+    return await this.argon.verify(word, hash, { type: argon2.argon2id });
   }
 
   encryptIv(word: string): IEncriptedIv {
