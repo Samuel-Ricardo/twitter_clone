@@ -1,6 +1,5 @@
 import { IUserCypher } from '@/app/modules/@core/user/cypher/user.cypher';
 import { MODULE } from '@/app/modules/app.registry';
-import { ICryptographer } from '@/app/modules/security/cryptography/cryptography.contract';
 import { Turing } from '@/app/modules/security/cryptography/turing';
 import { inject, injectable } from 'inversify';
 
@@ -8,7 +7,7 @@ import { inject, injectable } from 'inversify';
 export class TuringUserCypher implements IUserCypher {
   constructor(
     @inject(MODULE.SECURITY.CRYPTOGRAPHY.TURING)
-    private readonly _turing: Turing | ICryptographer,
+    private readonly _turing: Turing,
   ) {}
 
   async hashPassword(password: string) {
@@ -17,6 +16,10 @@ export class TuringUserCypher implements IUserCypher {
 
   async comparePassword(password: string, hash: string) {
     return await this.turing.compareHash(password, hash);
+  }
+
+  encryptIvUserId(id: string) {
+    return this.turing.encryptIv(id);
   }
 
   get turing() {
