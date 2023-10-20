@@ -1,4 +1,5 @@
 import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
+import { IUserDTO } from '@/app/modules/@core/user/DTO';
 import { IUserCypher } from '@/app/modules/@core/user/cypher/user.cypher';
 import { MODULE } from '@/app/modules/app.registry';
 import { Turing } from '@/app/modules/security/cryptography/turing';
@@ -25,6 +26,11 @@ export class TuringUserCypher implements IUserCypher {
 
   decryptIvUserId(secret: IEncriptedIv) {
     return this.turing.decryptIv(secret);
+  }
+
+  encryptUser(user: IUserDTO) {
+    const converted = JSON.stringify(user);
+    return this.turing.encryptIv(converted);
   }
 
   get turing() {
