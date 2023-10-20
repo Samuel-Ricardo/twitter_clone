@@ -16,6 +16,7 @@ import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 import { BCRYPT_REGISTRY } from './bcrypt/bcrypt.registry';
 import { ARGON_REGISTRY } from './argon2/argon.registry';
 import { SECURITY_REGISTRY as SECURITY } from './security/security.registry';
+import { CYPHER_REGISTRY as CYPHER } from './cypher/cypher.registry';
 
 export const MODULE = {
   ...AxiosRegistry,
@@ -36,4 +37,5 @@ export const MODULE = {
   REACTIVE,
   OBSERVABLE,
   SECURITY,
+  CYPHER,
 };
