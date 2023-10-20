@@ -1,0 +1,3 @@
+const TURING_REGISTRY = {
+  USER: Symbol.for('MODULE:CYPHER.TURING.USER'),
+};
