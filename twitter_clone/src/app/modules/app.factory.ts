@@ -16,6 +16,7 @@ import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 import { BCRYPT_FACTORY } from './bcrypt/bcrypt.factory';
 import { ARGON_FACTORY } from './argon2/argon.factory';
 import { SECURITY_FACTORY as SECURITY } from './security/security.factory';
+import { CYPHER_FACTORY as CYPHER } from './cypher/cypher.factory';
 
 export const MODULES = {
   ...AxiosFactory,
@@ -36,4 +37,5 @@ export const MODULES = {
   REACTIVE,
   OBSERVABLE,
   SECURITY,
+  CYPHER,
 };
