@@ -13,9 +13,16 @@ import { UserController } from './controller';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 
+import getDecorators from 'inversify-inject-decorators';
+import { USER_POLICY_MODULE } from './policy/policy.module';
+
 const Modue = new Container({ autoBindInjectable: true });
 
-export const UserModule = Container.merge(Modue, GatewayModule);
+export const UserModule = Container.merge(
+  Modue,
+  GatewayModule,
+  USER_POLICY_MODULE,
+);
 
 UserModule.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
 UserModule.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
@@ -32,3 +39,5 @@ UserModule.bind(UserRegistry.USE_CASE.GET.BY.EMAIL).to(
 UserModule.bind(UserRegistry.SERVICE).to(UserService);
 UserModule.bind(UserRegistry.CONTROLLER).to(UserController);
 UserModule.bind(UserRegistry.MAIN).to(UserController);
+
+export const { lazyInject: userInject } = getDecorators(UserModule);
