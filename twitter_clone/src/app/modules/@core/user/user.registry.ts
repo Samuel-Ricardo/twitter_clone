@@ -1,3 +1,5 @@
+import { USER_POLICY_REGISTRY } from './policy/policy.registry';
+
 export const UserRegistry = {
   MAIN: Symbol.for('user.module.main'),
   CONTROLLER: Symbol.for('user.controller'),
@@ -15,4 +17,5 @@ export const UserRegistry = {
       },
     },
   },
+  POLICY: USER_POLICY_REGISTRY,
 };

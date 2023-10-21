@@ -9,28 +9,38 @@ import {
   IUserDTO,
 } from '@/app/modules/@core/user/DTO';
 import { User } from '@/app/modules/@core/user/entity/user.entity';
-import {
-  CreateUserSchema,
-  DeleteUserScheme,
-  SelectUserByIdSchema,
-  UpdateUserSchema,
-} from '@/app/modules/@core/user/validator';
 import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
 import { ISelectUserByEmailDTO } from '@/app/modules/@core/user/DTO/select_by_email.dto';
+import { EncryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/encrypt/data.policy';
+import { DecryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/decrypt/data.policy';
+import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
 
 @injectable()
 export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   readonly prefix = 'users';
+
+  //  @userInject(MODULE.USER.POLICY.ENCRYPT.DATA)
+  protected readonly _encryptUser: EncryptUserDataPolicy;
+  //  @userInject(MODULE.USER.POLICY.DECRYPT.DATA)
+  protected readonly _decryptUser: DecryptUserDataPolicy;
 
   get fullURL() {
     return `${this.URL}/${this.prefix}`;
   }
 
   async create(user: ICreateUserDTO) {
-    if (!CreateUserSchema.parse(user)) throw Error('Invalid user');
-
     const response = await this.post<{ user: IUserDTO }>(this.prefix, user);
     return User.create(response.data.user);
+  }
+
+  async _create(user: ICreateUserDTO) {
+    //    const encrypt = this.POLICY.SECURITY.ENCRYPT.CREATE.execute(user);
+    const response = await this.post<{ user: IEncriptedIv }>(this.prefix, user);
+    const result = this.POLICY.SECURITY.DECRYPT.USER.execute(
+      response.data.user,
+    );
+
+    return User.create(result);
   }
 
   async listAll() {
@@ -39,8 +49,6 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   }
 
   async selectById(data: ISelectUserByIdDTO) {
-    if (!SelectUserByIdSchema.parse(data)) throw Error('Invalid user');
-
     const response = await this.get<{ user: IUserDTO }>(
       `${this.prefix}/${data.id}`,
     );
@@ -71,15 +79,11 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   }
 
   async update(data: IUpdateUserDTO) {
-    UpdateUserSchema.parse(data);
-
     const response = await this.patch<{ user: IUserDTO }>(this.prefix, data);
     return User.create(response.data.user);
   }
 
   async deleteUser(data: IDeleteuserDTO) {
-    DeleteUserScheme.parse(data);
-
     await this.delete(`${this.prefix}/${data.id}`);
   }
 
@@ -89,7 +93,7 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
 
   swrSelectById(data: ISelectUserByIdDTO) {
     return this.useSWR<{ user: IUserDTO }>(
-      `${this.fullURL}/${data.id}`,
+      data.id ? `${this.fullURL}/${data.id}` : null,
       this.fetcher,
     );
   }
@@ -99,5 +103,18 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
       data.email ? `${this.fullURL}/email/${data.email}` : null,
       this.fetcher,
     );
+  }
+
+  get POLICY() {
+    return {
+      SECURITY: {
+        ENCRYPT: {
+          USER: this._encryptUser,
+        },
+        DECRYPT: {
+          USER: this._decryptUser,
+        },
+      },
+    };
   }
 }
