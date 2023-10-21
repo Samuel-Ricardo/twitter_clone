@@ -1,4 +1,5 @@
 import { UserController } from './controller';
+import { USER_POLICY_FACTORY } from './policy/policy.factory';
 import { UserService } from './service';
 import {
   CreateUserUseCase,
@@ -16,6 +17,7 @@ export const UserFactory = {
   MAIN: () => UserModule.get<UserController>(UserRegistry.MAIN),
   CONTROLLER: () => UserModule.get<UserController>(UserRegistry.CONTROLLER),
   SERVICE: () => UserModule.get<UserService>(UserRegistry.SERVICE),
+  POLICY: USER_POLICY_FACTORY,
   USE_CASE: {
     CREATE: () =>
       UserModule.get<CreateUserUseCase>(UserRegistry.USE_CASE.CREATE),
