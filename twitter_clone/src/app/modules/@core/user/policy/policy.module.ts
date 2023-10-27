@@ -5,8 +5,11 @@ import { DecryptUserDataPolicy } from './security/decrypt/user.policy';
 import getDecorators from 'inversify-inject-decorators';
 import { EncryptCreateUserDataPolicy } from './security/encrypt/create.policy';
 import { DecryptCreateUserDataPolicy } from './security/decrypt/create.policy';
+import { CYPHER_MODULE } from '@/app/modules/cypher/cypher.module';
 
-export const USER_POLICY_MODULE = new Container({ autoBindInjectable: true });
+const MODULE = new Container({ autoBindInjectable: true });
+
+export const USER_POLICY_MODULE = Container.merge(MODULE, CYPHER_MODULE);
 
 USER_POLICY_MODULE.bind(USER_POLICY_REGISTRY.SECURITY.ENCRYPT.DATA).to(
   EncryptUserDataPolicy,
