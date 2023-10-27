@@ -1,4 +1,12 @@
-import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
+import {
+  ICreateUserDTO,
+  IDeleteuserDTO,
+  ISelectUserByIdDTO,
+  IUpdateUserDTO,
+  IUserDTO,
+} from '@/app/modules/@core/user/DTO';
+import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
+import { ISelectUserByEmailDTO } from '@/app/modules/@core/user/DTO/select_by_email.dto';
 import { IUserCypher } from '@/app/modules/@core/user/cypher/user.cypher';
 import { MODULE } from '@/app/modules/app.registry';
 import { Turing } from '@/app/modules/security/cryptography/turing';
@@ -39,6 +47,40 @@ export class TuringUserCypher implements IUserCypher {
   decryptIvUser(user: string) {
     const decrypted = this.turing.decryptIv(user);
     return JSON.parse(decrypted) as IUserDTO;
+  }
+
+  decryptIvCreateDTO(user: string): ICreateUserDTO {
+    throw new Error('Method not implemented.');
+  }
+  enecryptIvUpdateDTO(user: IUpdateUserDTO): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvUpdateDTO(user: string): IUpdateUserDTO {
+    throw new Error('Method not implemented.');
+  }
+  encryptIvDeleteDTO(user: IDeleteuserDTO): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvDeleteDTO(user: string): IDeleteuserDTO {
+    throw new Error('Method not implemented.');
+  }
+  encryptIvSelectByIdDTO(user: ISelectUserByIdDTO): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvSelectByIdDTO(user: string): ISelectUserByIdDTO {
+    throw new Error('Method not implemented.');
+  }
+  encryptIvSelectByEmailDTO(user: ISelectUserByEmailDTO): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvSelectByEmailDTO(user: string): ISelectUserByEmailDTO {
+    throw new Error('Method not implemented.');
+  }
+  encryptIvSelectByCredentialsDTO(user: ISelectUserByCredentialsDTO): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvSelectByCredentialsDTO(user: string): ISelectUserByCredentialsDTO {
+    throw new Error('Method not implemented.');
   }
 
   get turing() {
