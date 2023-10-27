@@ -1,4 +1,3 @@
-import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
 import {
   ICreateUserDTO,
   IDeleteuserDTO,
@@ -13,31 +12,27 @@ export interface IUserCypher {
   hashPassword(password: string): string | Promise<string>;
   comparePassword(password: string, hash: string): string | Promise<boolean>;
 
-  encryptIvUserId(id: string): IEncriptedIv;
-  decryptIvUserId(secret: IEncriptedIv): string;
+  encryptIvUserId(id: string): string;
+  decryptIvUserId(secret: string): string;
 
-  encryptIvUser(user: IUserDTO): IEncriptedIv;
-  decryptIvUser(user: IEncriptedIv): IUserDTO;
+  encryptIvUser(user: IUserDTO): string;
+  decryptIvUser(user: string): IUserDTO;
 
-  enecryptIvCreateDTO(user: ICreateUserDTO): IEncriptedIv;
-  decryptIvCreateDTO(user: IEncriptedIv): ICreateUserDTO;
+  encryptIvCreateDTO(user: ICreateUserDTO): string;
+  decryptIvCreateDTO(user: string): ICreateUserDTO;
 
-  enecryptIvUpdateDTO(user: IUpdateUserDTO): IEncriptedIv;
-  decryptIvUpdateDTO(user: IEncriptedIv): IUpdateUserDTO;
+  enecryptIvUpdateDTO(user: IUpdateUserDTO): string;
+  decryptIvUpdateDTO(user: string): IUpdateUserDTO;
 
-  encryptIvDeleteDTO(user: IDeleteuserDTO): IEncriptedIv;
-  decryptIvDeleteDTO(user: IEncriptedIv): IDeleteuserDTO;
+  encryptIvDeleteDTO(user: IDeleteuserDTO): string;
+  decryptIvDeleteDTO(user: string): IDeleteuserDTO;
 
-  encryptIvSelectByIdDTO(user: ISelectUserByIdDTO): IEncriptedIv;
-  decryptIvSelectByIdDTO(user: IEncriptedIv): ISelectUserByIdDTO;
+  encryptIvSelectByIdDTO(user: ISelectUserByIdDTO): string;
+  decryptIvSelectByIdDTO(user: string): ISelectUserByIdDTO;
 
-  encryptIvSelectByEmailDTO(user: ISelectUserByEmailDTO): IEncriptedIv;
-  decryptIvSelectByEmailDTO(user: IEncriptedIv): ISelectUserByEmailDTO;
+  encryptIvSelectByEmailDTO(user: ISelectUserByEmailDTO): string;
+  decryptIvSelectByEmailDTO(user: string): ISelectUserByEmailDTO;
 
-  encryptIvSelectByCredentialsDTO(
-    user: ISelectUserByCredentialsDTO,
-  ): IEncriptedIv;
-  decryptIvSelectByCredentialsDTO(
-    user: IEncriptedIv,
-  ): ISelectUserByCredentialsDTO;
+  encryptIvSelectByCredentialsDTO(user: ISelectUserByCredentialsDTO): string;
+  decryptIvSelectByCredentialsDTO(user: string): ISelectUserByCredentialsDTO;
 }

@@ -1,5 +1,4 @@
-import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
-import { IUserDTO } from '@/app/modules/@core/user/DTO';
+import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 import { IUserCypher } from '@/app/modules/@core/user/cypher/user.cypher';
 import { MODULE } from '@/app/modules/app.registry';
 import { Turing } from '@/app/modules/security/cryptography/turing';
@@ -20,11 +19,15 @@ export class TuringUserCypher implements IUserCypher {
     return await this.turing.compareHash(password, hash);
   }
 
+  encryptIvCreateDTO(user: ICreateUserDTO) {
+    return this.turing.encryptIv(JSON.stringify(user));
+  }
+
   encryptIvUserId(id: string) {
     return this.turing.encryptIv(id);
   }
 
-  decryptIvUserId(secret: IEncriptedIv) {
+  decryptIvUserId(secret: string) {
     return this.turing.decryptIv(secret);
   }
 
@@ -33,7 +36,7 @@ export class TuringUserCypher implements IUserCypher {
     return this.turing.encryptIv(converted);
   }
 
-  decryptIvUser(user: IEncriptedIv) {
+  decryptIvUser(user: string) {
     const decrypted = this.turing.decryptIv(user);
     return JSON.parse(decrypted) as IUserDTO;
   }
