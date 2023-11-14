@@ -106,6 +106,13 @@ export class Turing implements ICryptographer {
     );
   }
 
+  getAuthTag(secret: string) {
+    return Buffer.from(
+      Turing.getDataFromSecret(secret, this._authBreaker),
+      'hex',
+    );
+  }
+
   protected get crypto() {
     return this._crypto;
   }
