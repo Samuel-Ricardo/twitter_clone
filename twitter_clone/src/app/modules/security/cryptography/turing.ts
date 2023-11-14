@@ -87,6 +87,14 @@ export class Turing implements ICryptographer {
     return { decipher, iv, authTag, secret };
   }
 
+  injectAuthTag(secret: string, authTag: Buffer) {
+    return Turing.setDataInSecret(
+      secret,
+      authTag.toString('hex'),
+      this._authBreaker,
+    );
+  }
+
   protected get crypto() {
     return this._crypto;
   }
