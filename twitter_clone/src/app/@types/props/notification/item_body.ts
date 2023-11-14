@@ -1,5 +1,8 @@
+import { INotificationDTO } from '@/app/modules/@core/notification/DTO';
+
 export interface INotificationItemBodyProps {
-  body: string;
-  visualizedAt?: Date;
+  notification?: INotificationDTO;
   createdAt?: Date;
+  visualizedAt?: Date;
+  onClick?: any;
 }
