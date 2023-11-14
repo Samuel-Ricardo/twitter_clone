@@ -1,4 +1,4 @@
-export interface IReactiveNotificationDTO<D, F extends Function> {
+export interface IReactiveNotificationDTO<D, F> {
   notification: D;
   schedule: F;
 }
