@@ -71,6 +71,22 @@ export class Turing implements ICryptographer {
     };
   }
 
+  decipheriv(encrypted: string) {
+    const iv = this.extractIV(encrypted);
+    const authTag = this.getAuthTag(encrypted);
+    const secret = this.extractSecret(encrypted);
+
+    const decipher = this.crypto.createDecipheriv(
+      this.algorithm,
+      this.key,
+      iv,
+    ) as cryptoLib.DecipherGCM;
+
+    decipher.setAuthTag(authTag);
+
+    return { decipher, iv, authTag, secret };
+  }
+
   protected get crypto() {
     return this._crypto;
   }
