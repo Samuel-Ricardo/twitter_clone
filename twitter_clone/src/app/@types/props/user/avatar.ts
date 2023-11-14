@@ -1,5 +1,7 @@
 export interface IAvatarProps {
-  image: string;
+  image?: string | null;
+  userId?: string;
+  onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
   large?: boolean;
   bordered?: boolean;
 }
