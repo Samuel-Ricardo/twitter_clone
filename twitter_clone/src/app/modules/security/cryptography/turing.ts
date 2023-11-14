@@ -26,6 +26,10 @@ export class Turing implements ICryptographer {
     private readonly _hasher: typeof bcrypt,
   ) {}
 
+  async hash(data: string) {
+    return await this.hasher.hash(data, 32);
+  }
+
   protected get crypto() {
     return this._crypto;
   }
