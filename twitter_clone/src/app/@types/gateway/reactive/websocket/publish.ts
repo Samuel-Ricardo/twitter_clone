@@ -1,4 +1,4 @@
-export interface IPublishParams {
+export interface IPublishSocketData<D> {
   event: string;
-  data: any;
+  data: D;
 }
