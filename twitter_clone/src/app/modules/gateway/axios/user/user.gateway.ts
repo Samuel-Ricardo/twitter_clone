@@ -11,18 +11,23 @@ import {
 import { User } from '@/app/modules/@core/user/entity/user.entity';
 import { ISelectUserByCredentialsDTO } from '@/app/modules/@core/user/DTO/select_by_credentials.dto';
 import { ISelectUserByEmailDTO } from '@/app/modules/@core/user/DTO/select_by_email.dto';
-import { EncryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/encrypt/data.policy';
-import { DecryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/decrypt/data.policy';
-import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
+import { EncryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/encrypt/user.policy';
+import { DecryptUserDataPolicy } from '@/app/modules/@core/user/policy/security/decrypt/user.policy';
+import { injectUserPolicy } from '@/app/modules/@core/user/policy/policy.module';
+import { MODULE } from '@/app/modules/app.registry';
+import { EncryptCreateUserDataPolicy } from '@/app/modules/@core/user/policy/security/encrypt/create.policy';
 
 @injectable()
 export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   readonly prefix = 'users';
 
-  //  @userInject(MODULE.USER.POLICY.ENCRYPT.DATA)
+  @injectUserPolicy(MODULE.USER.POLICY.SECURITY.ENCRYPT.DATA)
   protected readonly _encryptUser: EncryptUserDataPolicy;
-  //  @userInject(MODULE.USER.POLICY.DECRYPT.DATA)
+  @injectUserPolicy(MODULE.USER.POLICY.SECURITY.DECRYPT.DATA)
   protected readonly _decryptUser: DecryptUserDataPolicy;
+
+  @injectUserPolicy(MODULE.USER.POLICY.SECURITY.ENCRYPT.CREATE)
+  protected readonly _encryptCreate: EncryptCreateUserDataPolicy;
 
   get fullURL() {
     return `${this.URL}/${this.prefix}`;
@@ -34,11 +39,15 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   }
 
   async _create(user: ICreateUserDTO) {
-    //    const encrypt = this.POLICY.SECURITY.ENCRYPT.CREATE.execute(user);
-    const response = await this.post<{ user: IEncriptedIv }>(this.prefix, user);
+    const response = await this.post<{ user: string }>(this.prefix, user);
+
+    console.log({ response });
+
     const result = this.POLICY.SECURITY.DECRYPT.USER.execute(
       response.data.user,
     );
+
+    console.log({ result });
 
     return User.create(result);
   }
@@ -110,6 +119,7 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
       SECURITY: {
         ENCRYPT: {
           USER: this._encryptUser,
+          CREATE: this._encryptCreate,
         },
         DECRYPT: {
           USER: this._decryptUser,
