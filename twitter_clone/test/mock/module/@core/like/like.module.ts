@@ -6,6 +6,8 @@ import {
   mockFindPostLikesUseCase,
   mockFindUserLikesUseCase,
   mockFindCommentLikesUseCase,
+  mockEmitLikeCreatedUseCase,
+  mockEmitLikeDeletedUseCase,
 } from './use-case';
 import { mockLikeService, simulateLikeService } from './service';
 import { mockLikeController, simulateLikeController } from './controller';
@@ -31,6 +33,14 @@ LIKE_MODULE_MOCK.bind(LIKE_REGISTRY_MOCK.USE_CASE.FIND.BY.USER).toDynamicValue(
 LIKE_MODULE_MOCK.bind(
   LIKE_REGISTRY_MOCK.USE_CASE.FIND.BY.COMMENT,
 ).toDynamicValue(mockFindCommentLikesUseCase);
+
+LIKE_MODULE_MOCK.bind(
+  LIKE_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+).toDynamicValue(mockEmitLikeCreatedUseCase);
+
+LIKE_MODULE_MOCK.bind(
+  LIKE_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.DELETED,
+).toDynamicValue(mockEmitLikeDeletedUseCase);
 
 LIKE_MODULE_MOCK.bind(LIKE_REGISTRY_MOCK.SERVICE.MOCK).toDynamicValue(
   mockLikeService,
