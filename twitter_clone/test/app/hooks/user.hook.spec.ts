@@ -16,7 +16,7 @@ describe('[HOOK] | USER', () => {
   });
 
   it('[UNIT] | [HOOK] - Should: list [all] => [USER]', async () => {
-    MODULE.controller.listAll.mockReturnValue(SWR_USER([USER_DATA]));
+    MODULE.controller.listAll.mockReturnValue(SWR_USER([USER_DATA]) as any);
 
     const { result } = renderHook(() => useUsers());
     const { data } = result.current;
