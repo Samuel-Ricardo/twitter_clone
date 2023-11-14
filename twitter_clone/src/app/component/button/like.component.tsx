@@ -6,20 +6,22 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 export const LikeButton = ({
   likedId,
+  isComment,
   onClick,
   onMouseEnter,
   onMouseLeave,
   className,
 }: ILikeButtonProps) => {
   const { likes, mutate } = useTweetLikes({ likedId });
-  const { toggle, hasLiked } = useToggleLike({ likedId });
+  const { toggleAsync, hasLiked } = useToggleLike({ likedId });
 
   const onLikeClick = useCallback(
-    (event: React.MouseEvent) => {
+    async (event: React.MouseEvent) => {
       onClick ? onClick(event) : event.stopPropagation();
-      toggle();
+      await toggleAsync({ isComment });
+      mutate();
     },
-    [toggle, onClick],
+    [toggleAsync, mutate, onClick, isComment],
   );
 
   const handleMouseEnter = useCallback(
@@ -33,9 +35,9 @@ export const LikeButton = ({
   const handleMouseLeave = useCallback(
     (event: React.MouseEvent) => {
       onMouseLeave ? onMouseLeave(event) : event.stopPropagation();
-      mutate();
+      //mutate();
     },
-    [onMouseLeave, mutate],
+    [onMouseLeave],
   );
 
   return (
