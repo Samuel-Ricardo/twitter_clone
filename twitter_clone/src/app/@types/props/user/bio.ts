@@ -1,3 +1,5 @@
+import { IUserDTO } from '@/app/modules/@core/user/DTO';
+
 export interface IProfileBIoProps {
-  bio: string;
+  user: IUserDTO | null | undefined;
 }
