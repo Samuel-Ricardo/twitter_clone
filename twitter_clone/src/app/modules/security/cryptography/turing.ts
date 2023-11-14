@@ -58,6 +58,19 @@ export class Turing implements ICryptographer {
     return result;
   }
 
+  cipheriv() {
+    const iv = this.iv;
+
+    return {
+      cipher: this.crypto.createCipheriv(
+        this.algorithm,
+        this.key,
+        iv,
+      ) as cryptoLib.CipherGCM,
+      iv,
+    };
+  }
+
   protected get crypto() {
     return this._crypto;
   }
