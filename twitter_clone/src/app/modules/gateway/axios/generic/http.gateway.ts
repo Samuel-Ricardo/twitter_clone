@@ -86,4 +86,16 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   private get userToken() {
     return GlobalUser.user?.sessionToken ?? '';
   }
+
+  private encrypt(data: any) {
+    return { encrypted: this.cypher.encryptIv(JSON.stringify(data)) };
+  }
+
+  private decrypt(data: any) {
+    Object.keys(data).forEach(async (key) => {
+      if (typeof data[key] === 'string')
+        data[key] = JSON.parse(await this.cypher.decryptIv(data[key]));
+    });
+    return data;
+  }
 }
