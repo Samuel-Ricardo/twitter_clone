@@ -1,3 +1,4 @@
+import { MODULES } from '@/app/modules';
 import { AxiosUserGateway } from '@/app/modules/gateway/axios/user/user.gateway';
 import { ISimulatedUserGateweay } from '@test/@types/simulate/user/gateway';
 import { MODULE_MOCK } from '@test/mock/module/app.registry';
@@ -14,7 +15,10 @@ export const simulateAxiosUserGateway = ({
   typeof axios
 > => {
   const client = container.get<any>(MODULE_MOCK.AXIOS.MOCK);
-  const gateway = new AxiosUserGateway('http://localhost:3004', client);
+  const gateway = new AxiosUserGateway(
+    client,
+    MODULES.SECURITY.CRYPTOGRAPHY.TURING(),
+  );
 
   return { gateway, client };
 };
