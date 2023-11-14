@@ -11,7 +11,7 @@ export const BaseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <SessionProvider>
-        <div className="flex h-[100vh] w-[100vw]">
+        <div className="flex flex-1 mb-28 pr-2 lg:pr-0">
           <Toaster position="bottom-center" />
           <LoginModal />
           <RegisterModal />
