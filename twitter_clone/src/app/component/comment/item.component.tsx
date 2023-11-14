@@ -20,7 +20,7 @@ export const CommentItem = ({ comment }: ICommentItemProps) => {
           body={comment?.body || ''}
           createdAt={comment?.createdAt}
         />
-        <LikeButton likedId={comment?.id || ''} className="-ml-16" />
+        <LikeButton likedId={comment?.id || ''} isComment className="-ml-16" />
       </div>
       {currentUser?.id === comment?.authorId && (
         <DeleteCommentButton
