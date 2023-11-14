@@ -10,6 +10,14 @@ export const NotificationItemBody = ({
   createdAt,
   visualizedAt,
 }: INotificationItemBodyProps) => {
+  const { push: goTo } = useRouter();
+
+  const date = useMemo(
+    () =>
+      createdAt ? format(visualizedAt || createdAt, 'MMM d - h:mm a') : '',
+    [createdAt, visualizedAt],
+  );
+
   return (
     <div onClick={onClick} className="flex flex-1">
       <p className="truncate">{notification?.body}</p>
