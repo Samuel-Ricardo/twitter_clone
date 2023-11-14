@@ -30,6 +30,10 @@ export class Turing implements ICryptographer {
     return await this.hasher.hash(data, 32);
   }
 
+  async compareHash(word: string, hash: string) {
+    return await this.hasher.compare(word, hash);
+  }
+
   protected get crypto() {
     return this._crypto;
   }
