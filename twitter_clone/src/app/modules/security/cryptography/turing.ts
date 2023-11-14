@@ -113,6 +113,9 @@ export class Turing implements ICryptographer {
     );
   }
 
+  extractSecret(data: string) {
+    return data.split(this._breaker)[0];
+  }
   protected get crypto() {
     return this._crypto;
   }
