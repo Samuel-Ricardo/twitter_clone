@@ -1,6 +1,5 @@
 import {
   ICreateFollowDTO,
-  IFollowDTO,
   IDeleteFollowDTO,
   IGetFollowersDTO,
   IGetFollowingDTO,
