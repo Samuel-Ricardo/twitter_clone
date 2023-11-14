@@ -4,7 +4,7 @@ import { injectable } from 'inversify';
 import {
   ICreateNotificationDTO,
   ISetNotificationVisualizedDTO,
-  IGetNotificationsByUserDTO,
+  IFindNotificationsByUserDTO,
   INotificationDTO,
   IDeleteNotificationDTO,
 } from '@/app/modules/@core/notification/DTO';
@@ -15,7 +15,7 @@ export class AxiosNotificationGateway
   extends AxiosHTTPGateway
   implements INotificationGateway
 {
-  readonly prefix = 'notification';
+  readonly prefix = 'notifications';
 
   get fullURL() {
     return `${this.URL}/${this.prefix}`;
@@ -43,7 +43,7 @@ export class AxiosNotificationGateway
     await this.delete(`${this.fullURL}/${notification.id}`);
   }
 
-  async getByUser(notification: IGetNotificationsByUserDTO) {
+  async findByUser(notification: IFindNotificationsByUserDTO) {
     const result = await this.get<{ notifications: INotificationDTO[] }>(
       `${this.fullURL}/user/${notification.userId}`,
     );
@@ -51,7 +51,7 @@ export class AxiosNotificationGateway
     return Notification.createArray(result.data.notifications);
   }
 
-  swrGetByUser({ userId }: IGetNotificationsByUserDTO) {
+  swrGetByUser({ userId }: IFindNotificationsByUserDTO) {
     return this.useSWR<{ notifications: INotificationDTO[] }>(
       userId.length > 0 && `${this.fullURL}/user/${userId}`,
       this.fetcher,
