@@ -14,8 +14,22 @@ export const simulateLikeService = ({
   const post = container.get<any>(MODULE_MOCK.LIKE.USE_CASE.FIND.BY.POST);
   const user = container.get<any>(MODULE_MOCK.LIKE.USE_CASE.FIND.BY.USER);
   const comment = container.get<any>(MODULE_MOCK.LIKE.USE_CASE.FIND.BY.COMMENT);
+  const created = container.get<any>(
+    MODULE_MOCK.LIKE.USE_CASE.OBSERVABLE.EMIT.CREATED,
+  );
+  const deleted = container.get<any>(
+    MODULE_MOCK.LIKE.USE_CASE.OBSERVABLE.EMIT.DELETED,
+  );
 
-  const service = new LikeService(create, deleteLike, user, comment, post);
+  const service = new LikeService(
+    create,
+    deleteLike,
+    user,
+    comment,
+    post,
+    created,
+    deleted,
+  );
 
   return {
     service,
@@ -27,6 +41,12 @@ export const simulateLikeService = ({
           post,
           user,
           comment,
+        },
+      },
+      observable: {
+        emit: {
+          created,
+          deleted,
         },
       },
     },
