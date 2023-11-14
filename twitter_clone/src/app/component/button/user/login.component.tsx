@@ -17,12 +17,10 @@ export const LoginButton = (props: React.HTMLAttributes<HTMLDivElement>) => {
     <div
       {...props}
       onClick={handleClick}
-      className={
-        'flex items-center cursor-pointer transition-all duration-700 ease-in-out hover:scale-110 hover:bg-blue-200 hover:p-4 hover:rounded-full ' +
-        props.className
-      }
+      className={`flex items-center cursor-pointer transition-all duration-700 ease-in-out hover:bg-blue-200 hover:py-2 hover:pr-3 hover:pl-1 hover:rounded-full 
+        ${props.className}`}
     >
-      <BiLogIn className="w-full h-full" />
+      <BiLogIn size={38} className="w-full h-full" />
     </div>
   );
 };
