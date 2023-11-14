@@ -14,6 +14,7 @@ export class SocketIONotificationGateway
 {
   publishNewNotification(data: IPublishNotificationDTO) {
     this.publish({ event: SOCKET.NOTIFICATION.NEW, data });
+    console.log({ PUBLISH_NEW_NOTIFICATION: data });
   }
 
   publishViewNotification(data: IPublishNotificationViewedDTO) {
