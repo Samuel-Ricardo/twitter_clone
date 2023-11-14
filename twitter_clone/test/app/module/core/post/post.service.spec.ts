@@ -41,6 +41,13 @@ describe('[SERVICE] | POST', () => {
     expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
       CREATE_POST_DATA,
     );
+
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledWith(result);
   });
 
   it('[UNIT] | Should: update => [POST]', async () => {
