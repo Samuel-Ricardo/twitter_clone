@@ -20,8 +20,8 @@ export class SocketIO {
   private setup() {
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
+    this.io.on(SOCKET.CONNECT, () => this.handleConnect());
     this.io.disconnected && this.io.connect();
-    this.io.on(SOCKET.CONNECT, this.handleConnect);
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
   }
@@ -33,8 +33,12 @@ export class SocketIO {
     });
 
     this.io.emit(SOCKET.HANDSHAKE, { CONNECTED: this.io.id });
-    this.io.on(SOCKET.DISCONNECT, this.handleDisconnect);
-    this.io.on(SOCKET.START.CONNECTION, this.handleStart);
+    this.io.on(SOCKET.DISCONNECT, (r, d) => this.handleDisconnect(r, d));
+    this.io.on(SOCKET.START.CONNECTION, (d) => this.handleStart(d));
+
+    this.io.on(SOCKET.ANY, (data) =>
+      logger.info({ context: 'WEBSOCKET', message: 'New Event: ' }, { data }),
+    );
 
     logger.info({
       context: 'WEBSOCKET',
