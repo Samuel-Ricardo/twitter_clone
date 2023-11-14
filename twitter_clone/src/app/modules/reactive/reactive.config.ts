@@ -1,4 +1,5 @@
 export const SOCKET = {
+  ANY: '*',
   ERROR: {
     APP: 'error.app',
   },
@@ -17,6 +18,8 @@ export const SOCKET = {
   NOTIFICATION: {
     NEW: 'new.notification',
     CREATED: 'notification.created',
+    DELETE: 'delete.notification',
+    DELETED: 'notification.deleted',
     VISUALIZE: 'visualize.notification',
     VISUALIZED: 'notification.visualized',
     TOGGLE: 'notification.toggle',
