@@ -49,6 +49,15 @@ export class Turing implements ICryptographer {
     return result;
   }
 
+  decryptIv(encrypted: string): string {
+    const { decipher, secret } = this.decipheriv(encrypted);
+
+    let result = decipher.update(secret, 'hex', 'utf8');
+    result += decipher.final('utf8');
+
+    return result;
+  }
+
   protected get crypto() {
     return this._crypto;
   }
