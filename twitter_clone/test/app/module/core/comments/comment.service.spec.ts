@@ -13,9 +13,8 @@ import {
   UPDATE_POST_COMMENT,
   UPDATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
-  VALID_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
-import { VALID_POST, VALID_UPDATED_POST } from '@test/mock/data/post';
+import { VALID_POST } from '@test/mock/data/post';
 import { VALID_USER } from '@test/mock/data/user';
 
 describe('[CORE] | SERVICE =:> [COMMENT]', () => {
@@ -43,6 +42,13 @@ describe('[CORE] | SERVICE =:> [COMMENT]', () => {
     expect(MODULE.use_case.create.execute).toHaveBeenCalledWith(
       CREATE_POST_COMMENT_DATA,
     );
+
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      MODULE.use_case.observable.emit.created.executeAsync,
+    ).toHaveBeenCalledWith(result);
   });
 
   it('[UNIT] | Should: update => [COMMENT]', async () => {
