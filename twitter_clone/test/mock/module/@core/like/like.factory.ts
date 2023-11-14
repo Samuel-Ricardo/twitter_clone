@@ -12,6 +12,8 @@ import { LikeService } from '@/app/modules/@core/like/service';
 import { ISimulatedLikeService } from '@test/@types/simulate/like/service';
 import { LikeController } from '@/app/modules/@core/like/controller';
 import { ISimulatedLikeController } from '@test/@types/simulate/like/controller';
+import { EmitLikeCreatedUseCase } from '@/app/modules/@core/like/use-case/observable/emit/create.use-case';
+import { EmitLikeDeletedUseCase } from '@/app/modules/@core/like/use-case/observable/emit/delete.use-case';
 
 export const LIKE_FACTORY_MODULE_MOCK = {
   CONTROLLER: {
@@ -56,6 +58,18 @@ export const LIKE_FACTORY_MODULE_MOCK = {
         COMMENT: () =>
           LIKE_MODULE_MOCK.get<DeepMockProxy<FindCommentLikesUseCase>>(
             LIKE_REGISTRY_MOCK.USE_CASE.FIND.BY.COMMENT,
+          ),
+      },
+    },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: () =>
+          LIKE_MODULE_MOCK.get<DeepMockProxy<EmitLikeCreatedUseCase>>(
+            LIKE_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.CREATED,
+          ),
+        DELETED: () =>
+          LIKE_MODULE_MOCK.get<DeepMockProxy<EmitLikeDeletedUseCase>>(
+            LIKE_REGISTRY_MOCK.USE_CASE.OBSERVABLE.EMIT.DELETED,
           ),
       },
     },
