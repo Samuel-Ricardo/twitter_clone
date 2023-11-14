@@ -1,3 +1,4 @@
+import { MODULES } from '@/app/modules';
 import { AxiosCommentGateway } from '@/app/modules/gateway/axios/comment/comment.gateway';
 import { ISimulatedCommentGateway } from '@test/@types/simulate/comment/gateway';
 import { MODULE_MOCK } from '@test/mock/module/app.registry';
@@ -14,7 +15,10 @@ export const simulateAxiosCommentGateway = ({
   typeof axios
 > => {
   const client = container.get<any>(MODULE_MOCK.AXIOS.MOCK);
-  const gateway = new AxiosCommentGateway('http://localhost:3004', client);
+  const gateway = new AxiosCommentGateway(
+    client,
+    MODULES.SECURITY.CRYPTOGRAPHY.TURING(),
+  );
 
   return { gateway, client };
 };
