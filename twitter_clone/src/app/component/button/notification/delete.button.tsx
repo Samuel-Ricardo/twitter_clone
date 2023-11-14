@@ -4,6 +4,8 @@ import { IoMdClose } from 'react-icons/io';
 export const DeleteNotificationButton = (
   props: React.HtmlHTMLAttributes<HTMLDivElement>,
 ) => {
+  const MODULE = MODULES.NOTIFICATION.MAIN();
+  const handleClick = async () => MODULE.delete({ id: props.id || '' });
   return (
     <div
       {...props}
