@@ -4,10 +4,8 @@ export const InputContainer = (props: IInputContainerProps) => {
   const { label, errors, children } = props;
 
   return (
-    <div className="flex flex-col">
-      {label && (
-        <label className="text-lg text-white font-semibold mb-2">{label}</label>
-      )}
+    <div className={`flex flex-col w-full p-4 text-white ${props.className}`}>
+      {label && <label className="text-lg text-black  mb-2">{label}</label>}
 
       {children}
 
