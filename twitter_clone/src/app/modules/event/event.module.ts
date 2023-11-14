@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 import { EVENT_REGISTRY } from './event.registry';
-import { EventEmitter } from 'node:events';
+import { EventEmitter } from 'events';
 import { EventEmitter2 } from 'eventemitter2';
 
 export const EVENT_MODULE = new Container({
