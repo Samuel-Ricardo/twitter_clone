@@ -78,4 +78,8 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   async delete<T>(path: string, config?: AxiosRequestConfig) {
     return await this.client.delete<T>(`${this.URL}/${path}`, config);
   }
+
+  get server() {
+    return this.client;
+  }
 }
