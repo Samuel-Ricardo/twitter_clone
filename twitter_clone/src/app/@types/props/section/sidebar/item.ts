@@ -2,8 +2,8 @@ import { IconType } from 'react-icons';
 
 export interface ISidebarItemProps {
   label: string;
-  icons: IconType | string;
+  icon: IconType | string;
   href?: string;
-  onClick?: () => void;
+  onClick?: () => void | any;
   alert?: boolean;
 }
