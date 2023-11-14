@@ -82,4 +82,8 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   get server() {
     return this.client;
   }
+
+  private get userToken() {
+    return GlobalUser.user?.sessionToken ?? '';
+  }
 }
