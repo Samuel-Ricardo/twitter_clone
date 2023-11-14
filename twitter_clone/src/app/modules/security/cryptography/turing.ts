@@ -25,4 +25,24 @@ export class Turing implements ICryptographer {
     @inject(MODULE.BCRYPT)
     private readonly _hasher: typeof bcrypt,
   ) {}
+
+  protected get crypto() {
+    return this._crypto;
+  }
+
+  protected get hasher() {
+    return this._hasher;
+  }
+
+  protected get algorithm() {
+    return this._algorithm;
+  }
+
+  protected get iv() {
+    return this.crypto.randomBytes(32);
+  }
+
+  protected get key() {
+    return this._key;
+  }
 }
