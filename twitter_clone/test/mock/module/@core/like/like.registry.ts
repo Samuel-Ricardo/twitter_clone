@@ -17,5 +17,11 @@ export const LIKE_REGISTRY_MOCK = {
         COMMENT: Symbol.for('mock:like.use-case.find.by.comment'),
       },
     },
+    OBSERVABLE: {
+      EMIT: {
+        CREATED: Symbol.for('mock:like.use-case.observable.create'),
+        DELETED: Symbol.for('mock:like.use-case.observable.delete'),
+      },
+    },
   },
 };
