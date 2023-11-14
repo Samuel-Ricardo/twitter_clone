@@ -19,7 +19,7 @@ export const FOLLOW_DATA: IFollowDTO = {
 
 export const VALID_FOLLOW = Follow.create(FOLLOW_DATA);
 
-export const SWR_POST_LIKE = (data: IFollowDTO | IFollowDTO[]) => ({
+export const SWR_FOLLOW = (data: IFollowDTO | IFollowDTO[] | number) => ({
   data,
   error: null,
   mutate: () => ({}) as any,
