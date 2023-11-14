@@ -2,9 +2,8 @@ import { inject, injectable } from 'inversify';
 import cryptoLib from 'crypto';
 import { ICryptographer } from './cryptography.contract';
 import { MODULE } from '../../app.registry';
-import argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import { injectConfig } from '../../config/config.module';
-import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
 
 @injectable()
 export class Turing implements ICryptographer {
@@ -13,68 +12,17 @@ export class Turing implements ICryptographer {
   @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.KEY)
   private readonly _key: string;
 
+  @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.BREAKER)
+  private readonly _breaker: string;
+  @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.AUTH.BREAKER)
+  private readonly _authBreaker: string;
+  @injectConfig(MODULE.CONFIG.SECURITY.CYPHER.IV.BREAKER)
+  private readonly _ivBreaker: string;
+
   constructor(
     @inject(MODULE.CRYPTO)
     private readonly _crypto: typeof cryptoLib,
-    @inject(MODULE.ARGON2)
-    private readonly _argon: typeof argon2,
+    @inject(MODULE.BCRYPT)
+    private readonly _hasher: typeof bcrypt,
   ) {}
-
-  async hash(data: string) {
-    return await this.argon.hash(data, { type: argon2.argon2id });
-  }
-
-  async compareHash(word: string, hash: string) {
-    return await this.argon.verify(word, hash, { type: argon2.argon2id });
-  }
-
-  encryptIv(word: string): IEncriptedIv {
-    const { cipher, iv } = this.cipheriv();
-
-    let result = cipher.update(word, 'utf8', 'hex');
-    result += cipher.final('hex');
-
-    return { data: result, iv };
-  }
-
-  decryptIv(secret: IEncriptedIv): string {
-    const decipher = this.decipheriv(secret.iv);
-
-    let result = decipher.update(secret.data, 'hex', 'utf8');
-    result += decipher.final('utf8');
-
-    return result;
-  }
-
-  cipheriv() {
-    const iv = this.iv;
-    return {
-      cipher: this.crypto.createCipheriv(this.algorithm, this.key, iv),
-      iv,
-    };
-  }
-
-  decipheriv(iv: string | Buffer) {
-    return this.crypto.createDecipheriv(this.algorithm, this.key, iv);
-  }
-
-  get crypto() {
-    return this._crypto;
-  }
-
-  get argon() {
-    return this._argon;
-  }
-
-  get algorithm() {
-    return this._algorithm;
-  }
-
-  get iv() {
-    return this.crypto.randomBytes(32);
-  }
-
-  get key() {
-    return this._key;
-  }
 }
