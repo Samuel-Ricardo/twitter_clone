@@ -19,7 +19,7 @@ export const logger = {
   info: (
     { context, message }: { context: string; message: string },
     ...data: any[]
-  ) => console.info(`[${Date.now()}] | [${context}] | ${message}`, ...data),
+  ) => console.log(`[${Date.now()}] | [${context}] | ${message}`, ...data),
   warn: ({ context, message }: { context: string; message: string }) =>
     console.warn(`[${Date.now()}] | [${context}] | ${message}`),
 };
