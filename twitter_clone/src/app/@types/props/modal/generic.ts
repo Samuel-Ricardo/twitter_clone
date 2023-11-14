@@ -1,3 +1,5 @@
 export interface IModalProps {
-  body: JSX.Element;
+  title: string;
+  onClose: () => void;
+  footer?: JSX.Element;
 }
