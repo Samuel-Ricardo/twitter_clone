@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 
-export const Header = ({ label, hideBackButton }: IHeaderProps) => {
+export const Header = ({ label, hideBackButton, className }: IHeaderProps) => {
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -13,7 +13,11 @@ export const Header = ({ label, hideBackButton }: IHeaderProps) => {
   }, [router]);
 
   return (
-    <div className="border-b-[1px] border-neutral-800 p5 flex w-full h-fit">
+    <div
+      className={
+        'border-b-[1px] border-neutral-800 p5 flex w-full h-fit ' + className
+      }
+    >
       <div className="flex flex-row w-full h-fit items-center px-3 py-3">
         {!hideBackButton && (
           <BiArrowBack
