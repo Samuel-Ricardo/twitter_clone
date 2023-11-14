@@ -6,6 +6,8 @@ import {
   FindPostLikesUseCase,
   FinduserLikesUseCase,
 } from '@/app/modules/@core/like/use-case';
+import { EmitLikeCreatedUseCase } from '@/app/modules/@core/like/use-case/observable/emit/create.use-case';
+import { EmitLikeDeletedUseCase } from '@/app/modules/@core/like/use-case/observable/emit/delete.use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedLikeService {
@@ -18,6 +20,12 @@ export interface ISimulatedLikeService {
         post: DeepMockProxy<FindPostLikesUseCase>;
         user: DeepMockProxy<FinduserLikesUseCase>;
         comment: DeepMockProxy<FindCommentLikesUseCase>;
+      };
+    };
+    observable: {
+      emit: {
+        created: DeepMockProxy<EmitLikeCreatedUseCase>;
+        deleted: DeepMockProxy<EmitLikeDeletedUseCase>;
       };
     };
   };
