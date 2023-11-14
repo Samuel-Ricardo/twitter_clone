@@ -47,7 +47,7 @@ describe('[CORE] | Service =:> [LIKE]', () => {
     ).toHaveBeenCalledTimes(1);
     expect(
       MODULE.use_case.observable.emit.created.execute,
-    ).toHaveBeenCalledWith(VALID_POST_LIKE.toStruct());
+    ).toHaveBeenCalledWith(VALID_POST_LIKE.toStruct(), undefined);
   });
 
   it('[UNIT] | Should: delete => [LIKE] & Emit => [DELETED]', async () => {
