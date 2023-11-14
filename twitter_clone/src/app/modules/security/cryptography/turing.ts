@@ -95,6 +95,10 @@ export class Turing implements ICryptographer {
     );
   }
 
+  injectIV(secret: string, iv: Buffer) {
+    return Turing.setDataInSecret(secret, iv.toString('hex'), this._ivBreaker);
+  }
+
   protected get crypto() {
     return this._crypto;
   }
