@@ -1,3 +1,4 @@
+import { MODULES } from '@/app/modules';
 import { AxiosPostGateway } from '@/app/modules/gateway/axios/post/post.gateway';
 import { ISimulatedPostGateway } from '@test/@types/simulate/post/gateway';
 import { MODULE_MOCK } from '@test/mock/module/app.registry';
@@ -14,7 +15,10 @@ export const simulateAxiosPostGateway = ({
   typeof axios
 > => {
   const client = container.get<any>(MODULE_MOCK.AXIOS.MOCK);
-  const gateway = new AxiosPostGateway('http://localhost:3004', client);
+  const gateway = new AxiosPostGateway(
+    client,
+    MODULES.SECURITY.CRYPTOGRAPHY.TURING(),
+  );
 
   return { gateway, client };
 };
