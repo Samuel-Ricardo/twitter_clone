@@ -13,15 +13,15 @@ export const ProfilePage = () => {
 
   return (
     <div className="flex flex-col flex-1">
-      <div className="flex flex-col mb-24">
+      <div className="flex flex-col mb-14">
         <Header label="Profile" />
         <ProfileCover
           userId={id as string}
           cover={user?.coverImage}
           avatar={user?.profileImage}
         />
+        <ProfileBio user={user} />
       </div>
-      <ProfileBio bio={user?.bio || ''} />
       <UserFeed userId={id as string} />
     </div>
   );
