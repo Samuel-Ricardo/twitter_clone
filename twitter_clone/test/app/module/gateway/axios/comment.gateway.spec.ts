@@ -10,7 +10,6 @@ import { AxiosCommentGateway } from '@/app/modules/gateway/axios/comment/comment
 import {
   CREATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
-  VALID_POST_COMMENT_DATA,
   UPDATE_POST_COMMENT,
   UPDATE_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
