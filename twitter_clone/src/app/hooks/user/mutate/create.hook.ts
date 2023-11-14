@@ -20,7 +20,7 @@ export const useCreateUser = () => {
         error: `Error on create user :(`,
       });
     },
-    mutationKey: ['user'],
+    mutationKey: ['user', 'create'],
   });
 
   return {
