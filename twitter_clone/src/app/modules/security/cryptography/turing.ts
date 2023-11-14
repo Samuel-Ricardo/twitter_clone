@@ -99,6 +99,13 @@ export class Turing implements ICryptographer {
     return Turing.setDataInSecret(secret, iv.toString('hex'), this._ivBreaker);
   }
 
+  extractIV(secret: string) {
+    return Buffer.from(
+      Turing.getDataFromSecret(secret, this._ivBreaker),
+      'hex',
+    );
+  }
+
   protected get crypto() {
     return this._crypto;
   }
