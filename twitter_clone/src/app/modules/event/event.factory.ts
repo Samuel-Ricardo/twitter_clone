@@ -1,4 +1,4 @@
-import { EventEmitter } from 'node:events';
+import { EventEmitter } from 'events';
 import { EVENT_MODULE } from './event.module';
 import { EVENT_REGISTRY } from './event.registry';
 import EventEmitter2 from 'eventemitter2';
