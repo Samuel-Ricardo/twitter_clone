@@ -116,6 +116,24 @@ export class Turing implements ICryptographer {
   extractSecret(data: string) {
     return data.split(this._breaker)[0];
   }
+
+  static setDataInSecret(secret: string, data: string, breaker: string) {
+    const result = secret.concat(breaker, data, breaker);
+    console.log({
+      breaker,
+      secret,
+      data,
+      result,
+    });
+    return result;
+  }
+
+  static getDataFromSecret(secret: string, breaker: string) {
+    const data = secret.split(breaker)[1];
+    console.log({ breaker, secret, data });
+    return data;
+  }
+
   protected get crypto() {
     return this._crypto;
   }
