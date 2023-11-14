@@ -34,6 +34,21 @@ export class Turing implements ICryptographer {
     return await this.hasher.compare(word, hash);
   }
 
+  encryptIv(word: string): string {
+    const { cipher, iv } = this.cipheriv();
+
+    let result = cipher.update(word, 'utf8', 'hex');
+    result += cipher.final('hex');
+    result += this._breaker;
+
+    const authTag = cipher.getAuthTag();
+
+    result = this.injectAuthTag(result, authTag);
+    result = this.injectIV(result, iv);
+
+    return result;
+  }
+
   protected get crypto() {
     return this._crypto;
   }
