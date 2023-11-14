@@ -18,6 +18,21 @@ export const NotificationItemBody = ({
     [createdAt, visualizedAt],
   );
 
+  const onClick = useCallback(() => {
+    switch (notification?.type) {
+      case POST:
+        goTo(`/post/${notification.eventId}`);
+        break;
+
+      case FOLLOW:
+        goTo(`/users/${notification.userId}`);
+        break;
+
+      default:
+        break;
+    }
+  }, [goTo, notification]);
+
   return (
     <div onClick={onClick} className="flex flex-1">
       <p className="truncate">{notification?.body}</p>
