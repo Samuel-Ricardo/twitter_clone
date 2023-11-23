@@ -1,9 +1,5 @@
 import { MODULES } from '@/app/modules';
-import {
-  ICreateLikeDTO,
-  IDeleteLikeDTO,
-  ILikeDTO,
-} from '@/app/modules/@core/like/DTO';
+import { ICreateLikeDTO, ILikeDTO } from '@/app/modules/@core/like/DTO';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
