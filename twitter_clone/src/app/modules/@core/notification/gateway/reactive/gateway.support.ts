@@ -1,4 +1,4 @@
-import { MODULE } from '@/app/modules/app.registry';
+import { MODULE } from '../../../../app.registry';
 import { inject, injectable } from 'inversify';
 import { type IReactiveNotificationGateway } from './notification.gateway';
 
