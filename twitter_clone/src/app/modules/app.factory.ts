@@ -14,7 +14,7 @@ import { OBSERVABLE_FACTORY as OBSERVABLE } from './observable/observable.factor
 import { NOTIFICATION_FACTORY as NOTIFICATION } from './@core/notification/notification.factory';
 import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 import { BCRYPT_FACTORY } from './bcrypt/bcrypt.factory';
-import { ARGON_FACTORY } from './argon2/argon.factory';
+//import { ARGON_FACTORY } from './argon2/argon.factory';
 import { SECURITY_FACTORY as SECURITY } from './security/security.factory';
 import { CYPHER_FACTORY as CYPHER } from './cypher/cypher.factory';
 
@@ -22,7 +22,7 @@ export const MODULES = {
   ...AxiosFactory,
   ...CRYPTO_FACTORY,
   ...BCRYPT_FACTORY,
-  ...ARGON_FACTORY,
+  //  ...ARGON_FACTORY,
   USER,
   POST,
   COMMENT,
