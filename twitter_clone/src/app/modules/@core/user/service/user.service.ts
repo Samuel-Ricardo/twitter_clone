@@ -17,6 +17,12 @@ import { ISelectUserByCredentialsDTO } from '../DTO/select_by_credentials.dto';
 import { SelectUserByCredentialsUseCase } from '../use-case/select_by_credentials.use-case';
 import { SelectUserByEmailUseCase } from '../use-case/select_by_email.use-case';
 import { ISelectUserByEmailDTO } from '../DTO/select_by_email.dto';
+import {
+  CreateUserSchema,
+  DeleteUserScheme,
+  SelectUserByIdSchema,
+  UpdateUserSchema,
+} from '@/app/modules/@core/user/validator';
 
 @injectable()
 export class UserService {
@@ -38,14 +44,17 @@ export class UserService {
   ) {}
 
   async create(user: ICreateUserDTO) {
+    CreateUserSchema.parse(user);
     return await this.createUser.execute(user);
   }
 
   async update(user: IUpdateUserDTO) {
+    UpdateUserSchema.parse(user);
     return await this.updateUser.execute(user);
   }
 
   async delete(data: IDeleteuserDTO) {
+    DeleteUserScheme.parse(data);
     return await this.deleteUser.execute(data);
   }
 
@@ -63,5 +72,9 @@ export class UserService {
 
   listAll() {
     return this.listAllUsers.execute();
+  }
+
+  async selectAsyncById(user: ISelectUserByIdDTO) {
+    return await this.selectUserById.executeAsync(user);
   }
 }
