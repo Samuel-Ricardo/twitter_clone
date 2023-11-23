@@ -13,12 +13,14 @@ export const useDislike = () => {
     isLoading,
     error,
   } = useMutation<any, any, IDeleteLikeDTO>({
-    mutationFn: async (DTO) =>
-      await toast.promise(MODULE.dislike(DTO), {
+    mutationFn: async (DTO) => {
+      console.log({ DTO });
+      return await toast.promise(MODULE.dislike(DTO), {
         loading: `Deleting like... 💌`,
-        success: `Dislike ❤️`,
+        success: `Dislike 💔`,
         error: `Failed on dislike 💔 :(`,
-      }),
+      });
+    },
     mutationKey: ['like', 'delete'],
   });
 
