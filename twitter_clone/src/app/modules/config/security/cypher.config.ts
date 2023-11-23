@@ -1,5 +1,7 @@
 import { ENV } from '../env/app.env';
 
+console.log({ KKKKEEEEYYYY: ENV.SECURITY.CYPHER.KEY });
+
 export const CYPHER_CONFIG = {
   KEY: ENV.SECURITY.CYPHER.KEY,
   BREAKER: ENV.SECURITY.CYPHER.BREAKER,
