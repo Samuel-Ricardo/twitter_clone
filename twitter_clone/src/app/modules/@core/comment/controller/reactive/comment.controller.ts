@@ -1,9 +1,9 @@
 import { inject, injectable, tagged } from 'inversify';
 import { ReactiveCommentService } from '../../service/reactive/comment.service';
 import { MODULE } from '@/app/modules/app.registry';
-import { SCOPE } from '../../../notification/notification.tag';
 import { IEmitCommentDTO } from '../../DTO/observable/emit/created.dto';
 import { IListenCommentDTO } from '../../DTO/observable/listen/created.dto';
+import { SCOPE } from '@/app/modules/app.tag';
 
 @injectable()
 export class ReactiveCommentController {
