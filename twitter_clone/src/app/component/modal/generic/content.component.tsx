@@ -1,4 +1,4 @@
-export function ModalContentContainer(props: { children }) {
+export function ModalContentContainer(props: { children: any }) {
   return (
     <div
       className="
