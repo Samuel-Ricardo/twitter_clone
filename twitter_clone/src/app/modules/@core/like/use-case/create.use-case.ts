@@ -4,7 +4,7 @@ import { LikeGatewayAccess } from '../gateway';
 
 @injectable()
 export class CreateLikeUseCase extends LikeGatewayAccess {
-  async execute(like: ICreateLikeDTO) {
-    return this.gateway.create(like);
+  async execute({ userId, likedId }: ICreateLikeDTO) {
+    return this.gateway.create({ userId, likedId });
   }
 }
