@@ -1,36 +1,50 @@
-import { INotificationDTO } from '@/app/modules/@core/notification/DTO';
-import { LIKE } from '@/app/modules/@core/notification/entity';
+'use client';
+
+import { useNotifications } from '@/app/hooks/notification/find_by_user.hook';
+import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { NotificationItem } from './item.component';
+import { useNotificationEvents } from '@/app/hooks/notification/observable/all.hook';
+import { compareDesc } from 'date-fns';
+import { NotLogged } from '../not_logged.component';
 
 export const NotificationFeed = () => {
-  const notifications: INotificationDTO[] = [
-    {
-      id: '1',
-      type: LIKE,
-      body: 'Liked your tweet',
-      userId: '1',
-      eventId: '1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      visualizedAt: new Date(),
+  const { currentUser } = useCurrentUser();
+  const { notifications, mutate: sync } = useNotifications({
+    userId: currentUser?.id || '',
+  });
+  const { notification: event } = useNotificationEvents();
+
+  event.onView({ action: () => sync() });
+
+  event.onCreate({
+    action: (notification) => {
+      console.log({ notificationCreatedFront: notification });
+      notifications?.push(notification);
+      notifications?.sort((a, b) =>
+        compareDesc(new Date(a.createdAt), new Date(b.createdAt)),
+      );
+
+      sync(notifications);
     },
-  ];
+  });
+
+  event.onDelete({
+    action: (notification) =>
+      sync(notifications?.filter((n) => n.id !== notification.id)),
+  });
+
+  console.log({ notifications });
+
+  if (!currentUser)
+    return (
+      <div className="mt-4">
+        <NotLogged />
+      </div>
+    );
 
   return (
     <div className="flex flex-col flex-1 mt-4 gap-6">
-      {notifications.map((notification) => (
-        <NotificationItem key={notification.id} notification={notification} />
-      ))}
-      {notifications.map((notification) => (
-        <NotificationItem key={notification.id} notification={notification} />
-      ))}
-      {notifications.map((notification) => (
-        <NotificationItem key={notification.id} notification={notification} />
-      ))}
-      {notifications.map((notification) => (
-        <NotificationItem key={notification.id} notification={notification} />
-      ))}
-      {notifications.map((notification) => (
+      {notifications?.map((notification) => (
         <NotificationItem key={notification.id} notification={notification} />
       ))}
     </div>
