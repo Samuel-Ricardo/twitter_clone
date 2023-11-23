@@ -1,5 +1,5 @@
 import { MODULE } from '@/app/modules/app.registry';
-import { inject, injectable } from 'inversify';
+import { inject, injectable, tagged } from 'inversify';
 import { CommentService } from '../service/comment.service';
 import {
   ICreateCommentDTO,
@@ -9,11 +9,13 @@ import {
   IUpdateCommentDTO,
 } from '../DTO';
 import { IFindCommentByIDDTO } from '../DTO/get_by_id.dto';
+import { SCOPE } from '@/app/modules/app.tag';
 
 @injectable()
 export class CommentController {
   constructor(
     @inject(MODULE.COMMENT.SERVICE)
+    @tagged(SCOPE.TAG, SCOPE.MAIN)
     private readonly service: CommentService,
   ) {}
 
@@ -29,7 +31,7 @@ export class CommentController {
     return this.service.delete(comment);
   }
 
-  async findByID(comment: IFindCommentByIDDTO) {
+  async findAsyncByID(comment: IFindCommentByIDDTO) {
     return { comment: await this.service.findByID(comment) };
   }
 
