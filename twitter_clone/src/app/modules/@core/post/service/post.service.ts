@@ -62,4 +62,9 @@ export class PostService {
   findByAuthor(post: IFindPostByAuthorIdDTO) {
     return this.findPostsByAuthor.execute(post);
   }
+
+  async findByIdAsync(post: IFindPostByIdDTO) {
+    console.log({ PEDRO: post });
+    return this.findPostById.executeAsync(post);
+  }
 }
