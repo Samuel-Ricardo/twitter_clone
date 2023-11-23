@@ -16,6 +16,7 @@ import {
 } from '../DTO';
 import { FindCommentByIDUseCase } from '../use-case/find_by_id.use-case';
 import { IFindCommentByIDDTO } from '../DTO/get_by_id.dto';
+import { EmitCommentUseCase } from '../use-case/observable/emit/created.use-case';
 
 @injectable()
 export class CommentService {
@@ -32,10 +33,14 @@ export class CommentService {
     private readonly updateComment: UpdateCommentUseCase,
     @inject(MODULE.COMMENT.USE_CASE.FIND.BY.ID)
     private readonly findComment: FindCommentByIDUseCase,
+    @inject(MODULE.COMMENT.USE_CASE.OBSERVABLE.EMIT.CREATED)
+    private readonly emitComment: EmitCommentUseCase,
   ) {}
 
   async create(comment: ICreateCommentDTO) {
-    return this.createComment.execute(comment);
+    const result = await this.createComment.execute(comment);
+    this.emitComment.executeAsync(result);
+    return result;
   }
 
   async update(comment: IUpdateCommentDTO) {
