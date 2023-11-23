@@ -1,3 +1,4 @@
+import { SCOPE } from '../../app.tag';
 import { PostController } from './controller/post.controller';
 import { POST_MODULE } from './post.module';
 import { POST_REGISTRY } from './post.registry';
@@ -14,9 +15,19 @@ import { EmitPostUseCase } from './use-case/observable/emit/created.use-case';
 import { ListenPostUseCase } from './use-case/observable/listen/created.use-case';
 
 export const POST_FACTORY = {
-  MAIN: () => POST_MODULE.get<PostController>(POST_REGISTRY.CONTROLLER),
-  CONTROLLER: () => POST_MODULE.get<PostController>(POST_REGISTRY.CONTROLLER),
-  SERVICE: () => POST_MODULE.get<PostService>(POST_REGISTRY.SERVICE),
+  MAIN: () => POST_MODULE.get<PostController>(POST_REGISTRY.MAIN),
+  CONTROLLER: () =>
+    POST_MODULE.getTagged<PostController>(
+      POST_REGISTRY.CONTROLLER,
+      SCOPE.TAG,
+      SCOPE.MAIN,
+    ),
+  SERVICE: () =>
+    POST_MODULE.getTagged<PostService>(
+      POST_REGISTRY.SERVICE,
+      SCOPE.TAG,
+      SCOPE.MAIN,
+    ),
   USE_CASE: {
     CREATE: () =>
       POST_MODULE.get<CreatePostUseCase>(POST_REGISTRY.USE_CASE.CREATE),
