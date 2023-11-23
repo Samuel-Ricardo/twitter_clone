@@ -47,4 +47,13 @@ export class UserController {
     const user = this.service.selectByEmail(data);
     return { user };
   }
+
+  getRecomendations() {
+    //followbar.component.ts
+  }
+
+  async findByIdAsync(data: ISelectUserByIdDTO) {
+    const user = await this.service.selectAsyncById(data);
+    return { user: user.toStruct() };
+  }
 }
