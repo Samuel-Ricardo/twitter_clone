@@ -5,6 +5,7 @@ import {
   IFindPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { IFindCommentByIDDTO } from '../DTO/get_by_id.dto';
 import { Comment } from '../entity';
 import { ISWRSupport } from './support/swr.support';
 
@@ -14,5 +15,5 @@ export interface ICommentGateway extends ISWRSupport {
   deleteComment(comment: IDeleteCommentDTO): Promise<void>;
   findByPost(post: IFindPostCommentsDTO): Promise<Comment[]>;
   findByauthor(author: IFindAuthorCommentsDTO): Promise<Comment[]>;
-  findById(comment: IFindPostCommentsDTO): Promise<Comment>;
+  findById(comment: IFindCommentByIDDTO): Promise<Comment>;
 }
