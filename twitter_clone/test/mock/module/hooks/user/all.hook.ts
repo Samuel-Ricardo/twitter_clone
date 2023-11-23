@@ -17,7 +17,7 @@ export const simulateUseUsers = ({
 }: interfaces.Context): ISimulatedUseUsersHook => {
   const controller = container.get<any>(MODULE_MOCK.USER.CONTROLLER.MOCK);
 
-  MODULES.USER.MAIN.mockReturnValue(controller);
+  (MODULES.USER.MAIN as jest.Mock).mockReturnValue(controller);
 
   return { hook: useUsers, controller };
 };
