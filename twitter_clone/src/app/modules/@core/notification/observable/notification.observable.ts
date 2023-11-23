@@ -27,8 +27,6 @@ export interface INotificationObservable {
     scheduled: IListenNotificationDeletedDTO,
   ): any | Promise<any>;
 
-  //  emitDeleteNotification(notification: IEmitNotificationDTO): any | Promise<any>;
-
   //  listenLike: (schedule: IListenLikeDTO) => any | Promise<any>;
   //  listenDislike: (schedule: IListenDislikeDTO) => any | Promise<any>;
   // listenPost: (schedule: IListenPostDTO) => any | Promise<any>;
