@@ -6,7 +6,7 @@ export const UpdateUserSchema = z
     id: z.string().nonempty().catch(catchZod),
     name: z.string().optional().catch(catchZod),
     username: z.string().optional().catch(catchZod),
-    bio: z.string().max(255).optional().catch(catchZod),
+    bio: z.string().max(600).optional().catch(catchZod),
     email: z.string().email().optional().catch(catchZod),
     password: z.string().optional().catch(catchZod),
     createdAt: z.string().or(z.date()).nullish().catch(catchZod),
