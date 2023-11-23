@@ -22,8 +22,14 @@ export const ENV = {
   },
   SECURITY: {
     CYPHER: {
-      IV: process.env.NEXT_PUBLIC_SECURITY_CYPHER_IV || '',
       KEY: process.env.NEXT_PUBLIC_SECURITY_CYPHER_KEY || '',
+      BREAKER: process.env.NEXT_PUBLIC_SECURITY_CYPHER_BREAKER || '',
+      AUTH: {
+        BREAKER: process.env.NEXT_PUBLIC_SECURITY_CYPHER_AUTH_BREAKER || '',
+      },
+      IV: {
+        BREAKER: process.env.NEXT_PUBLIC_SECURITY_CYPHER_IV_BREAKER || '',
+      },
     },
   },
 };
