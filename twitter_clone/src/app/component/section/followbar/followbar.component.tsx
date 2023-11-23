@@ -1,3 +1,5 @@
+'use client';
+
 import { useFollowers } from '@/app/hooks/follow/followers.hook';
 import { useFollowing } from '@/app/hooks/follow/following.hook';
 import { useUsers } from '@/app/hooks/user/all.hook';
@@ -10,19 +12,13 @@ import { FollowBarItem } from './item.component';
 
 export const FollowBar = () => {
   const { data = { users: [] } } = useUsers();
-  const {
-    result: { data: auth },
-  } = useCurrentUser();
-  const { data: following } = useFollowing({
-    followerId: auth?.user?.id || '',
+  const { currentUser: logged } = useCurrentUser();
+  const { following } = useFollowing({
+    followerId: logged?.id || '',
   });
-  const { data: followers } = useFollowers({
-    followingId: auth?.user?.id || '',
+  const { followers } = useFollowers({
+    followingId: logged?.id || '',
   });
-
-  const logged = useMemo(() => auth?.user, [auth]);
-
-  console.log({ following, followers });
 
   const removeLogged = useCallback(
     (user: IUserDTO) => user.id !== logged?.id,
@@ -31,8 +27,10 @@ export const FollowBar = () => {
 
   const removeRelatedUsers = useCallback(
     (user: IUserDTO) =>
-      !(user.id in following?.map((follow) => follow.followingId)!) ||
-      !(user.id in followers?.map((follow) => follow.followerId)!),
+      !following || !followers
+        ? true
+        : !(user.id in following?.map((follow) => follow.followingId)!) ||
+          !(user.id in followers?.map((follow) => follow.followerId)!),
     [followers, following],
   );
 
@@ -57,7 +55,9 @@ export const FollowBar = () => {
     <FollowBarContainer>
       <h2> Meet new users 🌱 </h2>
       <div className="flex flex-col gap-6 mt-4">
-        {users?.map((user) => <FollowBarItem key={user.id} user={user} />)}
+        {users
+          ?.slice(0, 5)
+          .map((user) => <FollowBarItem key={user.id} user={user} />)}
       </div>
     </FollowBarContainer>
   );
