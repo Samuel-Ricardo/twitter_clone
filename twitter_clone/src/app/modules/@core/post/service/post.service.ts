@@ -15,6 +15,7 @@ import {
   IFindPostByAuthorIdDTO,
   IFindPostByIdDTO,
 } from '../DTO';
+import { EmitPostUseCase } from '../use-case/observable/emit/created.use-case';
 
 @injectable()
 export class PostService {
@@ -31,10 +32,15 @@ export class PostService {
     private readonly updatePost: UpdatePostUseCase,
     @inject(MODULE.POST.USE_CASE.FIND.BY.AUTHOR.ID)
     private readonly findPostsByAuthor: FindPostsByAuthorUseCase,
+    @inject(MODULE.POST.USE_CASE.OBSERVABLE.EMIT.CREATED)
+    private readonly emitPost: EmitPostUseCase,
   ) {}
 
   async create(post: ICreatePostDTO) {
-    return this.createPost.execute(post);
+    const result = await this.createPost.execute(post);
+    result.id && this.emitPost.executeAsync(result);
+
+    return result;
   }
 
   async update(post: IUpdatePostDTO) {
