@@ -1,3 +1,3 @@
-import { ILikeDTO } from '../..';
+import { IDeleteLikeDTO } from '../..';
 
-export interface IEmitDislikeDTO extends ILikeDTO {}
+export interface IEmitDislikeDTO extends IDeleteLikeDTO {}
