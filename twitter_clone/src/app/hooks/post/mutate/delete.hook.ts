@@ -3,7 +3,7 @@ import { IDeletePostDTO } from '@/app/modules/@core/post';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-export const useDeletePost = () => {
+export const useDeleteTweet = () => {
   const {
     mutate: deleteSync,
     mutateAsync: deleteAsync,
