@@ -14,8 +14,21 @@ export const simulateUserService = ({
   const delete_user = container.get<any>(USER_REGISTRY_MOCK.USE_CASE.DELETE);
   const all = container.get<any>(USER_REGISTRY_MOCK.USE_CASE.GET.ALL);
   const id = container.get<any>(USER_REGISTRY_MOCK.USE_CASE.GET.BY.ID);
+  //  const email = container.get<any>(USER_REGISTRY_MOCK.USE_CASE.GET.BY.EMAIL);
+  //  const credentials = container.get<any>(USER_REGISTRY_MOCK.USE_CASE.GET.BY.CREDENTIALS);
 
-  const service = new UserService(create, update, id, all, delete_user);
+  const credentials = {} as any;
+  const email = {} as any;
+
+  const service = new UserService(
+    create,
+    update,
+    id,
+    all,
+    delete_user,
+    credentials,
+    email,
+  );
 
   return {
     service: service,
