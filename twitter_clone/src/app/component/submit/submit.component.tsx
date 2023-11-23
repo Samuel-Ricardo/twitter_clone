@@ -17,7 +17,7 @@ export function FormSubmit(props: IFormSubmitProps) {
           <form
             {...props}
             onSubmit={onSubmit}
-            className={'flex flex-1 flex-col' + className}
+            className={'flex flex-1 flex-col'}
           >
             {children}
           </form>
