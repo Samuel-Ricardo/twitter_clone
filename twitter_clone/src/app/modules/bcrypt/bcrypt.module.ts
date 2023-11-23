@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 import { BCRYPT_REGISTRY } from './bcrypt.registry';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import getDecorators from 'inversify-inject-decorators';
 
 export const BCRYPT_MODULE = new Container({ autoBindInjectable: true });
