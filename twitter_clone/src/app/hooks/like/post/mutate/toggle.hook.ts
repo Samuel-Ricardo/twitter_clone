@@ -1,5 +1,5 @@
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useLike } from './create.hook';
 import { useDislike } from './delete.hook';
 import { useHasLiked } from '../../has_liked.hook';
@@ -18,24 +18,36 @@ export const useToggleLike = ({ likedId }: { likedId: string }) => {
 
   const { likes } = useTweetLikes({ likedId: likedId });
 
-  const toggle = useCallback(
+  const likeId = useMemo(
     () =>
+      likes?.find(
+        (like) => like.likedId === likedId && like.userId === currentUser?.id,
+      )?.id || '',
+    [likes, likedId, currentUser?.id],
+  );
+
+  const toggle = useCallback(
+    ({ isComment }: { isComment?: boolean }) =>
       hasLiked()
-        ? dislike({
-            id: likes?.find((like) => like.likedId === likedId)?.id || '',
-          })
-        : giveLike({ userId: currentUser?.id || '', likedId: likedId }),
-    [currentUser?.id, dislike, giveLike, hasLiked, likes, likedId],
+        ? dislike({ id: likeId })
+        : giveLike({
+            userId: currentUser?.id || '',
+            likedId: likedId,
+            isComment,
+          }),
+    [dislike, giveLike, hasLiked, likedId, likeId, currentUser?.id],
   );
 
   const toggleAsync = useCallback(
-    () =>
+    ({ isComment }: { isComment?: boolean }) =>
       hasLiked()
-        ? dislikeAsync({
-            id: likes?.find((like) => like.likedId === likedId)?.id || '',
-          })
-        : giveLikeAsync({ userId: currentUser?.id || '', likedId: likedId }),
-    [currentUser?.id, dislikeAsync, giveLikeAsync, hasLiked, likes, likedId],
+        ? dislikeAsync({ id: likeId })
+        : giveLikeAsync({
+            userId: currentUser?.id || '',
+            likedId: likedId,
+            isComment,
+          }),
+    [currentUser?.id, dislikeAsync, giveLikeAsync, hasLiked, likeId, likedId],
   );
 
   return { toggle, toggleAsync, hasLiked };
