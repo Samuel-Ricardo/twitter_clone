@@ -17,6 +17,15 @@ export const Sidebar = () => {
     result: { data },
   } = useCurrentUser();
 
+  const { notifications } = useNotifications({ userId: data?.user?.id || '' });
+  const { notification } = useNotificationEvents();
+
+  const [hasNotifications, syncNotifications] = useState<boolean>(false);
+
+  notification.onCreate({
+    action: (n) => syncNotifications(n.userId === data?.user?.id),
+  });
+
   return (
     <div className="col-span-1 h-screen px-3 md:pr-6 pt-2 mr-2 bg-gradient-to-r from-gray-300/40 to-gray-100/30 rounded-e-lg ">
       <div className="flex flex-col items-end h-full w-fit">
