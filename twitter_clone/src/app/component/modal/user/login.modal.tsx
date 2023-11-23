@@ -1,3 +1,5 @@
+'use client';
+
 import { useLoginModal } from '@/app/hooks/modal/user/login.hook';
 import { Modal } from '../generic/generic.modal';
 import { Input } from '../../input.component';
@@ -56,17 +58,19 @@ export const LoginModal = () => {
       <div className="overflow-auto flex flex-col py-4 px-[3vw] w-[80vw] max-w-1/2 transition">
         <form onSubmit={submit}>
           <Input
+            light
             core={{ type: 'email', placeholder: 'Email' }}
             label="Email"
             reactForms={{ register, name: 'email' }}
-            className="my-4"
+            className="my-1"
             errors={errors.email}
           />
           <Input
+            light
             core={{ type: 'password', placeholder: 'Password' }}
             label="Password"
             reactForms={{ register, name: 'password' }}
-            className="my-4"
+            className="my-1"
             errors={errors.password}
           />
 
