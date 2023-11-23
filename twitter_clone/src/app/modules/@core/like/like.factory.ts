@@ -11,6 +11,7 @@ import {
 } from './use-case';
 
 export const LIKE_FACTORY = {
+  MAIN: () => LIKE_MODULE.get<LikeController>(LIKE_REGISTRY.MAIN),
   CONTROLLER: () => LIKE_MODULE.get<LikeController>(LIKE_REGISTRY.CONTROLLER),
   SERVICE: () => LIKE_MODULE.get<LikeService>(LIKE_REGISTRY.SERVICE),
   USE_CASE: {
