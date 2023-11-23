@@ -4,7 +4,7 @@ import { EmitNotificationUseCase } from '../../use-case/observable/emit/created.
 import { ListenNotificationUseCase } from '../../use-case/observable/listen/created.use-case';
 import { SubscribeNotificationUseCase } from '../../use-case/reactive/subscribe/created.use-case';
 import { FOLLOW, LIKE, POST, COMMENT } from '../../entity';
-import { PostController } from '../../../post';
+import { PostController, postInject } from '../../../post';
 import { NotificationController } from '../../controller/notification.controller';
 import { MODULE } from '@/app/modules/app.registry';
 import { ReactiveLikeController } from '../../../like/controller/reactive/like.controller';
@@ -24,28 +24,36 @@ import { SubscribeNotificationViewedUseCase } from '../../use-case/reactive/subs
 import { SubscribeNotificationDeletedUseCase } from '../../use-case/reactive/subscribe/deleted.use-case';
 import { EmitNotificationViewedUSeCase } from '../../use-case/observable/emit/viewed.use-case';
 import { EmitNotificationDeletedUseCase } from '../../use-case/observable/emit/deleted.use-case';
+import { lazyInject as likeInject } from '../../../like/like.module';
+import { lazyInject as commentInject } from '../../../comment/comment.module';
+import { IEmitNotificationViewedDTO } from '../../DTO/observable/emit';
+import { followInject } from '../../../follow/follow.module';
+import { userInject } from '../../../user/user.module';
+import { cut } from '@/app/modules/util/string';
 
 //singleton
 @injectable()
 export class ReactiveNotificationService {
+  @likeInject(MODULE.LIKE.REACTIVE)
+  private readonly likeModule: ReactiveLikeController;
+  @followInject(MODULE.FOLLOW.REACTIVE)
+  private readonly reactiveFollow: ReactiveFollowController;
+  @postInject(MODULE.POST.REACTIVE)
+  private readonly reactivePost: ReactivePostController;
+  @commentInject(MODULE.COMMENT.REACTIVE)
+  private readonly reactiveComment: ReactiveCommentController;
+  @followInject(MODULE.FOLLOW.MAIN)
+  private readonly followModule: FollowController;
+  @postInject(MODULE.POST.MAIN)
+  private readonly postModule: PostController;
+  @commentInject(MODULE.COMMENT.MAIN)
+  private readonly commentModule: CommentController;
+  @userInject(MODULE.USER.MAIN)
+  private readonly userModule: UserController;
+
   constructor(
+    @inject(MODULE.NOTIFICATION.MAIN)
     private readonly notification: NotificationController,
-    @inject(MODULE.LIKE.REACTIVE)
-    private readonly likeModule: ReactiveLikeController,
-    @inject(MODULE.FOLLOW.REACTIVE)
-    private readonly reactiveFollow: ReactiveFollowController,
-    @inject(MODULE.POST.REACTIVE)
-    private readonly reactivePost: ReactivePostController,
-    @inject(MODULE.COMMENT.REACTIVE)
-    private readonly reactiveComment: ReactiveCommentController,
-    @inject(MODULE.FOLLOW.MAIN)
-    private readonly followModule: FollowController,
-    @inject(MODULE.POST.MAIN)
-    private readonly postModule: PostController,
-    @inject(MODULE.COMMENT.MAIN)
-    private readonly commentModule: CommentController,
-    @inject(MODULE.USER.MAIN)
-    private readonly userModule: UserController,
     @inject(MODULE.NOTIFICATION.USE_CASE.REACTIVE.SUBSCRIBE.CREATED)
     private readonly subscribeNotification: SubscribeNotificationUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.REACTIVE.SUBSCRIBE.VIEWED)
@@ -68,11 +76,16 @@ export class ReactiveNotificationService {
 
   async observeNotifications() {
     this.observerNotificationCreated();
+    this.observerNotificationViewed();
+    this.observerNotificationDeleted();
   }
 
   async observerNotificationCreated() {
     this.subscribeNotification.execute({
-      job: (notification) => this.emitNotification.execute(notification),
+      job: (notification) => {
+        console.log({ SUBSCRIBED: notification });
+        this.emitNotification.execute(notification);
+      },
     });
   }
 
@@ -98,22 +111,26 @@ export class ReactiveNotificationService {
   async observeTweets() {
     this.reactivePost.onPost({
       action: async (post) => {
+        console.log('OBSERVE POST', { post });
+
         const { user: author } = await this.userModule.findByIdAsync({
           id: post.authorId,
         });
+
+        console.log({ author });
 
         const { followers } = await this.followModule.followersOfAsync({
           followingId: post.authorId,
         });
 
-        followers.forEach((follower) => {
+        console.log({ followers });
+
+        followers.forEach((follow) => {
+          console.log({ follow: follow });
           this.notification.create({
             type: POST,
-            body: `@${author.username} Post a new Tweet 🚀 - ${post.body.slice(
-              0,
-              8,
-            )}...`,
-            userId: follower.id,
+            body: `@${author.username} Post a new Tweet 🚀 - ${cut(post.body)}`,
+            userId: follow.followerId,
             eventId: post.id,
           });
         });
@@ -124,19 +141,25 @@ export class ReactiveNotificationService {
   async observeComments() {
     this.reactiveComment.onComment({
       action: async (comment) => {
+        console.log('OBSERVE COMMENT', { comment });
+
         const { user: author } = await this.userModule.findByIdAsync({
           id: comment.authorId,
         });
+
+        console.log({ author });
 
         const { post } = await this.postModule.findByIdAsync({
           id: comment.postId,
         });
 
+        console.log({ post });
+
         this.notification.create({
           type: COMMENT,
-          body: `@${
-            author.username
-          } comment on your post - ${comment.body.slice(0, 5)}...`,
+          body: `@${author.username} comment on your post 💬 - ${cut(
+            comment.body,
+          )}`,
           userId: post.authorId,
           eventId: comment.id,
         });
@@ -147,12 +170,17 @@ export class ReactiveNotificationService {
   async observeFollows() {
     this.reactiveFollow.onFollow({
       action: async (follow) => {
+        console.log('OBSERVE FOLLOW', { follow });
+
         const { user: follower } = await this.userModule.findByIdAsync({
           id: follow.followerId,
         });
+
+        console.log({ follower });
+
         this.notification.create({
           type: FOLLOW,
-          body: `${follower.name} Follow you 👀`,
+          body: `@${follower.username} Follow you 👀`,
           userId: follow.followingId,
           eventId: follow.id,
         });
@@ -163,12 +191,17 @@ export class ReactiveNotificationService {
   async observeTweetLikes() {
     this.likeModule.onTweetLike({
       action: async (like) => {
+        console.log('OBSERVE TWEET LIKE', { like });
+
         const { post } = await this.postModule.findByIdAsync({
           id: like.likedId,
         });
+
+        console.log({ post });
+
         this.notification.create({
           type: LIKE,
-          body: `Someone Like Your Tweet 👍 - ${post.body.slice(0, 8)}...`,
+          body: `Someone Like Your Tweet 👍 - ${cut(post.body)}`,
           userId: post.authorId,
           eventId: like.id,
         });
@@ -179,15 +212,17 @@ export class ReactiveNotificationService {
   async observeCommentLikes() {
     this.likeModule.onCommentLike({
       action: async (like) => {
+        console.log('OBSERVE COMMENT LIKE', { like });
+
         const { comment } = await this.commentModule.findAsyncByID({
           id: like.likedId,
         });
+
+        console.log({ comment });
+
         this.notification.create({
           type: LIKE,
-          body: `Someone Like Your Comment 👍 - ${comment.body.slice(
-            0,
-            15,
-          )}...`,
+          body: `Someone Like Your Comment 👍 - ${cut(comment.body)}`,
           userId: comment.authorId,
           eventId: like.id,
         });
@@ -205,5 +240,9 @@ export class ReactiveNotificationService {
 
   async onDelete(schedule: IListenNotificationDeletedDTO) {
     this.listenNotificationDeleted.executeAsync(schedule);
+  }
+
+  async emitVizualized(notification: IEmitNotificationViewedDTO) {
+    await this.emitNotificationViewed.executeAsync(notification);
   }
 }
