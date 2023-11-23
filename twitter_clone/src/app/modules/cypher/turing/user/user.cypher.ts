@@ -18,6 +18,12 @@ export class TuringUserCypher implements IUserCypher {
     @inject(MODULE.SECURITY.CRYPTOGRAPHY.TURING)
     private readonly _turing: Turing,
   ) {}
+  encryptIvUserList(users: IUserDTO[]): string {
+    throw new Error('Method not implemented.');
+  }
+  decryptIvUserList(users: string): IUserDTO[] {
+    throw new Error('Method not implemented.');
+  }
 
   async hashPassword(password: string) {
     return await this.turing.hash(password);
