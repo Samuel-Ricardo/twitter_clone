@@ -40,14 +40,16 @@ export const PostItem = ({
   return (
     <PostItemContainer onClick={goToPost}>
       <PostItemHeader
+        id={post?.id || ''}
         user={author}
         createdAt={createdAt || ''}
         body={post?.body || ''}
+        deletable={post?.authorId === currentUser?.id}
       />
 
       <PostItemContent
         body={post?.body}
-        image={currentUser?.coverImage}
+        image={post?.image}
         fitScreen={fitScreen}
       />
 
