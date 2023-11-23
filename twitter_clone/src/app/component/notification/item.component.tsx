@@ -3,16 +3,19 @@ import { SidebarLogo } from '../section/sidebar/logo.component';
 import { NotificationItemContainer } from './item/container.component';
 import { DeleteNotificationButton } from '../button/notification/delete.button';
 import { NotificationItemBody } from './item/body.componen';
+import { MODULES } from '@/app/modules';
 
 export const NotificationItem = ({ notification }: INotificationItemProps) => {
+  const MODULE = MODULES.NOTIFICATION.MAIN();
+
+  const handleClick = async () =>
+    !notification.visualizedAt &&
+    MODULE.view({ id: notification.id, visualizedAt: new Date() });
+
   return (
-    <NotificationItemContainer>
+    <NotificationItemContainer onClick={handleClick}>
       <SidebarLogo />
-      <NotificationItemBody
-        body={notification.body}
-        createdAt={notification.createdAt}
-        visualizedAt={notification.visualizedAt || undefined}
-      />
+
       <DeleteNotificationButton id={notification.id} />
     </NotificationItemContainer>
   );
