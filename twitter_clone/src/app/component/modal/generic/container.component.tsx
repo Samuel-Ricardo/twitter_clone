@@ -6,8 +6,6 @@ export const ModalContainer = (props: { children: React.ReactNode }) => (
         flex 
         flex-col
         
-
-        
         z-50
 
         overflow-x-auto 
@@ -29,8 +27,8 @@ export const ModalContainer = (props: { children: React.ReactNode }) => (
         pb-3
         px-2
     
-        bg-neutral-800 
-        shadow-xl shadow-cyan-500/50
+        bg-gradient-to-br from-gray-100 to-gray-400/90
+        shadow-[-5px_5px_20px_0px] shadow-cyan-500/50
       "
   >
     {props.children}
