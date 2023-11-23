@@ -7,7 +7,9 @@ import {
 import { SWRResponse } from 'swr';
 
 export interface ISWRSupport {
-  swrFindPostLikes(post: IFindPostLikesDTO): SWRResponse<ILikeDTO[]>;
-  swrFindUserLikes(user: IFindUserLikesDTO): SWRResponse<ILikeDTO[]>;
-  swrFindCommentLikes(comment: IFindCommentLikesDTO): SWRResponse<ILikeDTO[]>;
+  swrFindPostLikes(post: IFindPostLikesDTO): SWRResponse<{ likes: ILikeDTO[] }>;
+  swrFindUserLikes(user: IFindUserLikesDTO): SWRResponse<{ liked: ILikeDTO[] }>;
+  swrFindCommentLikes(
+    comment: IFindCommentLikesDTO,
+  ): SWRResponse<{ likes: ILikeDTO[] }>;
 }
