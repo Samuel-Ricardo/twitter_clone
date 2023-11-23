@@ -24,19 +24,20 @@ export class NotificationService {
     private readonly findNotificationByUser: FindNotificationByUserUseCase,
   ) {}
 
-  create(notification: ICreateNotificationDTO) {
-    this.createNotification.execute(notification);
+  async create(notification: ICreateNotificationDTO) {
+    console.log({ CREATESERVICE: notification });
+    return this.createNotification.execute(notification);
   }
 
-  view(notification: ISetNotificationVisualizedDTO) {
-    this.viewNotification.execute(notification);
+  async view(notification: ISetNotificationVisualizedDTO) {
+    return this.viewNotification.execute(notification);
   }
 
-  delete(notification: IDeleteNotificationDTO) {
-    this.deleteNotification.execute(notification);
+  async delete(notification: IDeleteNotificationDTO) {
+    return this.deleteNotification.execute(notification);
   }
 
   findByUser(user: IFindNotificationsByUserDTO) {
-    this.findNotificationByUser.execute(user);
+    return { notifications: this.findNotificationByUser.execute(user) };
   }
 }
