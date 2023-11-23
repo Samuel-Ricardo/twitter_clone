@@ -1,7 +1,7 @@
 import { USER_POLICY_MODULE } from './policy.module';
 import { USER_POLICY_REGISTRY } from './policy.registry';
-import { DecryptUserDataPolicy } from './security/decrypt/data.policy';
-import { EncryptUserDataPolicy } from './security/encrypt/data.policy';
+import { DecryptUserDataPolicy } from './security/decrypt/user.policy';
+import { EncryptUserDataPolicy } from './security/encrypt/user.policy';
 
 export const USER_POLICY_FACTORY = {
   SECURITY: {
