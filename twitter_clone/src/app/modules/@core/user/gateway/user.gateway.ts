@@ -1,3 +1,4 @@
+//import { IEncriptedIv } from '@/app/@types/security/cryptographer/encriptedIv';
 import {
   ICreateUserDTO,
   IDeleteuserDTO,
@@ -13,6 +14,7 @@ export interface IUserGateway extends ISWRSupport {
   readonly prefix: 'users';
 
   create(user: ICreateUserDTO): Promise<User>;
+  _create(user: ICreateUserDTO): Promise<User>;
   listAll(): Promise<User[]>;
   selectById(props: ISelectUserByIdDTO): Promise<User>;
   selectByCredentials(props: ISelectUserByCredentialsDTO): Promise<User | null>;
