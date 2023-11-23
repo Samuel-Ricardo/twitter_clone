@@ -1,3 +1,3 @@
 export interface ISelectUserByEmailDTO {
-  email: string;
+  email?: string | null;
 }
