@@ -42,4 +42,8 @@ export class PostController {
   findByAuthor(author: IFindPostByAuthorIdDTO) {
     return { posts: this.service.findByAuthor(author) };
   }
+
+  async findByIdAsync(id: IFindPostByIdDTO) {
+    return { post: await this.service.findByIdAsync(id) };
+  }
 }
