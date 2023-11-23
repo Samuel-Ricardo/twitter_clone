@@ -37,8 +37,11 @@ export class LikeService {
   ) {}
 
   async create(like: ICreateLikeDTO) {
+    console.log({ LIKECREATEDTO: like });
     const result = await this.createLike.execute(like);
-    result.id && this.emitLikeCreated.execute(result);
+    result.id &&
+      this.emitLikeCreated.execute(result.toStruct(), like.isComment);
+    console.log({ LIKE: result });
     return result;
   }
 
