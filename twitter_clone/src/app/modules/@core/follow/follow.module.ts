@@ -16,9 +16,11 @@ import { ListenFollowUseCase } from './use-case/observable/listen/created.use-ca
 import { EmitUnfollowUseCase } from './use-case/observable/emit/deleted.use-case';
 import { ListenUnfollowUseCase } from './use-case/observable/listen/deleted.use-case';
 import { OBSERVABLE_MODULE } from '../../observable/observable.module';
-import { SCOPE } from './follow.tag';
 import { ReactiveFollowService } from './service/reactive/follow.service';
 import { ReactiveFollowController } from './controller/reactive/follow.controller';
+import { SCOPE } from '../../app.tag';
+
+import getDecorators from 'inversify-inject-decorators';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -74,3 +76,5 @@ FOLLOW_MODULE.bind(FOLLOW_REGISTRY.CONTROLLER)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
 
 FOLLOW_MODULE.bind(FOLLOW_REGISTRY.REACTIVE).to(ReactiveFollowController);
+
+export const { lazyInject: followInject } = getDecorators(FOLLOW_MODULE);
