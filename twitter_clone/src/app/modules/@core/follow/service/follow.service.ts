@@ -16,6 +16,8 @@ import {
   IGetFollowersDTO,
   IGetFollowingDTO,
 } from '../DTO';
+import { EmitFollowUseCase } from '../use-case/observable/emit/created.use-case';
+import { EmitUnfollowUseCase } from '../use-case/observable/emit/deleted.use-case';
 
 @injectable()
 export class FollowService {
@@ -32,14 +34,22 @@ export class FollowService {
     private readonly countFollowers: CountFollowersUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.COUNT.FOLLOWING)
     private readonly countFollowing: CountFollowingUseCase,
+    @inject(MODULE.FOLLOW.USE_CASE.OBSERVABLE.EMIT.CREATED)
+    private readonly emitFollow: EmitFollowUseCase,
+    @inject(MODULE.FOLLOW.USE_CASE.OBSERVABLE.EMIT.DELETED)
+    private readonly emitUnfollow: EmitUnfollowUseCase,
   ) {}
 
   async create(follow: ICreateFollowDTO) {
-    return await this.createFollow.execute(follow);
+    const result = await this.createFollow.execute(follow);
+    result.id && this.emitFollow.executeAsync(result);
+    return result;
   }
 
   async delete(follow: IDeleteFollowDTO) {
-    return await this.deleteFollow.execute(follow);
+    await this.deleteFollow.execute(follow);
+    this.emitUnfollow.executeAsync(follow);
+    return true;
   }
 
   getFollowersOf(user: IGetFollowersDTO) {
@@ -56,5 +66,9 @@ export class FollowService {
 
   countFollowingOf(user: ICountFollowingDTO) {
     return this.countFollowing.execute(user);
+  }
+
+  async getFollowersOfAsync(data: IGetFollowersDTO) {
+    return await this.getFollowers.executeAsync(data);
   }
 }
