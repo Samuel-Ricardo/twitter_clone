@@ -1,3 +1,3 @@
 import { IDeleteFollowDTO } from '../..';
 
-export interface IEmitFollowDeletedDTO extends IDeleteFollowDTO {}
+export interface IEmitUnfollowDTO extends IDeleteFollowDTO {}
