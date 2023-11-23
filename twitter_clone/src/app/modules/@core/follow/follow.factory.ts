@@ -16,7 +16,7 @@ import { ListenFollowUseCase } from './use-case/observable/listen/created.use-ca
 import { ListenUnfollowUseCase } from './use-case/observable/listen/deleted.use-case';
 
 export const FOLLOW_FACTORY = {
-  MAIN: () => FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.CONTROLLER),
+  MAIN: () => FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.MAIN),
   CONTROLLER: () =>
     FOLLOW_MODULE.get<FollowController>(FOLLOW_REGISTRY.CONTROLLER),
   SERVICE: () => FOLLOW_MODULE.get<FollowService>(FOLLOW_REGISTRY.SERVICE),
