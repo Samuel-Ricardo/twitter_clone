@@ -1,10 +1,10 @@
 'use client';
 
-import { ISubmitIconProps } from '@/app/@types/props/submit/icon';
-import { useRef } from 'react';
+//import { ISubmitIconProps } from '@/app/@types/props/submit/icon';
+import { HTMLAttributes, useRef } from 'react';
 import { BiExit } from 'react-icons/bi';
 
-export const SubmitIcon = (props: ISubmitIconProps) => {
+export const SubmitIcon = (props: HTMLAttributes<HTMLButtonElement>) => {
   const submitRef = useRef<HTMLInputElement>(null);
   return (
     <>
