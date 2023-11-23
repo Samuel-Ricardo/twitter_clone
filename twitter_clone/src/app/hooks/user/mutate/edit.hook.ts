@@ -1,6 +1,7 @@
 import { MODULES } from '@/app/modules';
 import { IUpdateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 import { useMutation } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 
 export const useEditUser = () => {
@@ -23,8 +24,11 @@ export const useEditUser = () => {
     mutationKey: ['user', 'update'],
   });
 
+  const updatedUser = useMemo(() => data?.user, [data]);
+
   return {
     data,
+    updatedUser,
     update,
     updateAsync,
     isLoading,
