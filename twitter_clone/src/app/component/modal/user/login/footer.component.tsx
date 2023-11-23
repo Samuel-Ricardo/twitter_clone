@@ -4,7 +4,7 @@ import { Linked } from '@/app/component/text/link.component';
 
 export const LogindModalFooter = ({ onClick }: ILoginModalFooterProps) => {
   return (
-    <div className="text-neutral-400 text-center mt-4 ">
+    <div className="text-center mt-4 ">
       <FooterText>
         You not have an account?{' '}
         <Linked onClick={onClick}>Register Now! :D </Linked>
