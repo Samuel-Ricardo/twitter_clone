@@ -5,7 +5,7 @@ export const BioBody = (props: IBioBodyProps) => {
   return (
     <div className="flex flex-col mt-4 gap-2">
       {props.bio && (
-        <div className="p-2 bg-gray-100/70 rounded-md h-fit w-fit">
+        <div className=" mx-4 p-2 bg-gray-100/70 rounded-md h-fit w-fit">
           <p>{props.bio}</p>
         </div>
       )}
