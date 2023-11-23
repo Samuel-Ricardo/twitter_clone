@@ -4,7 +4,7 @@ import { IFindCommentByIDDTO } from '../DTO/get_by_id.dto';
 
 @injectable()
 export class FindCommentByIDUseCase extends CommentGatewayAccess {
-  async execute({ id }: IFindCommentByIDDTO) {
+  async executeAsync({ id }: IFindCommentByIDDTO) {
     return this.gateway.findById({ id });
   }
 }
