@@ -1,3 +1,5 @@
+'use client';
+
 import { useEditUserModal } from '@/app/hooks/modal/user/edit.hook';
 import { Modal } from '../generic/generic.modal';
 import { ImageUpload } from '../../form/input/image/image.component';
@@ -20,7 +22,7 @@ export const EditUserModal = () => {
   const { open: openLogin } = useLoginModal();
   const { updateAsync, error } = useEditUser();
   const {
-    result: { data },
+    result: { data, mutate },
     status,
   } = useCurrentUser();
 
@@ -68,7 +70,8 @@ export const EditUserModal = () => {
       username: data.username || user!.username,
     });
 
-    //    !error && close();
+    !error && mutate();
+    !error && close();
   });
 
   return (
@@ -78,20 +81,21 @@ export const EditUserModal = () => {
           <ImageUpload
             label="Avatar"
             image={user?.profileImage || ''}
-            errors={errors.profileImage}
+            errors={errors.profileImage?.message}
             onChange={({ file }) => setValue('profileImage', file)}
-            reactForms={{ register, name: 'profileImage' }}
+            reactHook={{ registry: () => register('profileImage') }}
           />
 
           <ImageUpload
             label="Cover"
             image={user?.coverImage || ''}
-            errors={errors.coverImage}
+            errors={errors.coverImage?.message}
             onChange={({ file }) => setValue('coverImage', file)}
-            reactForms={{ register, name: 'coverImage' }}
+            reactHook={{ registry: () => register('coverImage') }}
           />
 
           <Input
+            light
             core={{
               type: 'text',
               placeholder: 'Name',
@@ -99,10 +103,12 @@ export const EditUserModal = () => {
             }}
             label="Name"
             reactForms={{ register, name: 'name' }}
+            className="-my-4"
             errors={errors.name}
           />
 
           <Input
+            light
             core={{
               type: 'text',
               placeholder: 'Username',
@@ -110,10 +116,12 @@ export const EditUserModal = () => {
             }}
             label="Username"
             reactForms={{ register, name: 'username' }}
+            className="-my-4"
             errors={errors.username}
           />
 
           <Input
+            light
             core={{
               type: 'text',
               placeholder: 'Bio',
@@ -121,6 +129,7 @@ export const EditUserModal = () => {
             }}
             label="Bio"
             reactForms={{ register, name: 'bio' }}
+            className="-my-4"
             errors={errors.bio}
           />
 
