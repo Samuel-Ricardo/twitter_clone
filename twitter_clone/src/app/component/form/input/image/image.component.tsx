@@ -6,6 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { DeleteButton } from '@/app/component/button/delete.component';
+import { File } from '../../../../@types/file';
 
 export const ImageUpload = ({
   label,
