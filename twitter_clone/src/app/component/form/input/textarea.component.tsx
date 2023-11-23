@@ -9,7 +9,7 @@ export const TextArea = (props: ITextAreaProps) => {
         className={` flex rounded-md text-black my-4 mx-2 bg-[rgba(255,255,255,0.35)] py-2 pl-2 break-all outline-none  ${props.className}`}
       />
       {props.errors && (
-        <p className="text-red-500 font-semibold text-sm">
+        <p className="text-red-500 font-semibold text-sm mb-6">
           {props.errors.message}
         </p>
       )}
