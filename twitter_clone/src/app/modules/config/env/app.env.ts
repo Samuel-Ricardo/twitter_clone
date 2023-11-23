@@ -1,3 +1,6 @@
+import { config as loadEnvForTests } from 'dotenv';
+loadEnvForTests({ path: '.env.local' });
+
 export const ENV = {
   ...process.env,
 
