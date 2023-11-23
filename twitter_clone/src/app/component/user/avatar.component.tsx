@@ -24,9 +24,9 @@ export const Avatar = ({
   return (
     <div
       className={`
-        ${bordered ? 'border-4 border-black' : ''}
-        ${large ? 'h-32' : 'h-20'}
-        ${large ? 'w-32' : 'w-20'}
+        ${bordered ? 'border-4 border-gray-400/40' : ''}
+        ${large ? 'h-36' : 'h-20'}
+        ${large ? 'w-36' : 'w-20'}
         rounded-full 
         hover:scale-110
         duration-300
