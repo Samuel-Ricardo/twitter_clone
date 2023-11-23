@@ -6,7 +6,8 @@ import {
   IListenNotificationViewedDTO,
 } from '../../DTO/observable/listen';
 import { MODULE } from '@/app/modules/app.registry';
-import { SCOPE } from '../../notification.tag';
+import { SCOPE } from '@/app/modules/app.tag';
+import { IEmitNotificationViewedDTO } from '../../DTO/observable/emit';
 
 @injectable()
 export class ReactiveNotificationController {
@@ -36,5 +37,9 @@ export class ReactiveNotificationController {
 
   async onView(notification: IListenNotificationViewedDTO) {
     await this.service.onView(notification);
+  }
+
+  async emitVizualized(notification: IEmitNotificationViewedDTO) {
+    await this.service.emitVizualized(notification);
   }
 }
