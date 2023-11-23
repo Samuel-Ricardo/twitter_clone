@@ -1,5 +1,5 @@
 import { BCRYPT_MODULE } from './bcrypt.module';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { BCRYPT_REGISTRY } from './bcrypt.registry';
 
 export const BCRYPT_FACTORY = {
