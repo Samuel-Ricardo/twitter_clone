@@ -13,8 +13,7 @@ import { EmitCommentUseCase } from './use-case/observable/emit/created.use-case'
 import { ListenCommentUseCase } from './use-case/observable/listen/created.use-case';
 
 export const COMMENT_FACTORY = {
-  MAIN: () =>
-    COMMENT_MODULE.get<CommentController>(COMMENT_REGISTRY.CONTROLLER),
+  MAIN: () => COMMENT_MODULE.get<CommentController>(COMMENT_REGISTRY.MAIN),
   CONTROLLER: () =>
     COMMENT_MODULE.get<CommentController>(COMMENT_REGISTRY.CONTROLLER),
   SERVICE: () => COMMENT_MODULE.get<CommentService>(COMMENT_REGISTRY.SERVICE),
