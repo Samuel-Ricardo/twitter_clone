@@ -1,5 +1,5 @@
 import { MODULE } from '@/app/modules/app.registry';
-import { inject, injectable } from 'inversify';
+import { inject, injectable, tagged } from 'inversify';
 import { FollowService } from '../service';
 import {
   ICountFollowersDTO,
@@ -9,11 +9,13 @@ import {
   IGetFollowersDTO,
   IGetFollowingDTO,
 } from '../DTO';
+import { SCOPE } from '@/app/modules/app.tag';
 
 @injectable()
 export class FollowController {
   constructor(
     @inject(MODULE.FOLLOW.SERVICE)
+    @tagged(SCOPE.TAG, SCOPE.MAIN)
     private readonly service: FollowService,
   ) {}
 
