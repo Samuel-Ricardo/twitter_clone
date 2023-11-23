@@ -1,21 +1,28 @@
 import { IPublishNotificationDTO } from '../../DTO/reactive/publish/create.dto';
 import { IPublishNotificationDeleteDTO } from '../../DTO/reactive/publish/delete.dto';
 import { IPublishNotificationViewedDTO } from '../../DTO/reactive/publish/view.dto';
+import { ISubscribeNotificationCreatedDTO } from '../../DTO/reactive/subscribe/created.dto';
+import { ISubscribeNotificationDeletedDTO } from '../../DTO/reactive/subscribe/deleted.dto';
+import { ISubscribeNotificationViewedDTO } from '../../DTO/reactive/subscribe/viewed.dto';
 
-export interface IReactiveNotificationGateway<C> {
+export interface IReactiveNotificationGateway {
   publishNewNotification(
-    data: IPublishNotificationDTO<C>,
+    data: IPublishNotificationDTO,
   ): void | any | Promise<void | any>;
   publishViewNotification(
-    data: IPublishNotificationViewedDTO<C>,
+    data: IPublishNotificationViewedDTO,
   ): void | any | Promise<void | any>;
   publishDeleteNotification(
-    data: IPublishNotificationDeleteDTO<C>,
+    data: IPublishNotificationDeleteDTO,
   ): void | any | Promise<void | any>;
 
-  subscribeToNotificationCreated(context: C): void | any | Promise<void | any>;
-  subscribeToNotificationVisualized(
-    context: C,
+  subscribeToNotificationCreated(
+    schedule: ISubscribeNotificationCreatedDTO,
   ): void | any | Promise<void | any>;
-  subscribeToNotificationDeleted(context: C): void | any | Promise<void | any>;
+  subscribeToNotificationVisualized(
+    schedule: ISubscribeNotificationViewedDTO,
+  ): void | any | Promise<void | any>;
+  subscribeToNotificationDeleted(
+    schedule: ISubscribeNotificationDeletedDTO,
+  ): void | any | Promise<void | any>;
 }
