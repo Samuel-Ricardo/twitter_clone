@@ -1,11 +1,11 @@
 import { inject, injectable } from 'inversify';
 import { type IFollowGateway } from './follow.gateway';
-import { MODULE } from '@/app/modules';
+import { MODULE } from '@/app/modules/app.registry';
 
 @injectable()
 export abstract class FollowGatewayAccess {
   constructor(
     @inject(MODULE.GATEWAY.AXIOS.FOLLOW)
-    private readonly gateway: IFollowGateway,
+    protected readonly gateway: IFollowGateway,
   ) {}
 }
