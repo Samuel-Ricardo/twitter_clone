@@ -36,7 +36,13 @@ export const Sidebar = () => {
       syncNotifications(notifications?.some((n) => !n.visualizedAt) || false),
   });
 
-
+  useEffect(
+    () =>
+      syncNotifications(
+        notifications ? notifications.some((n) => !n.visualizedAt) : false,
+      ),
+    [notifications],
+  );
 
   return (
     <div className="col-span-1 h-screen px-3 md:pr-6 pt-2 mr-2 bg-gradient-to-r from-gray-300/40 to-gray-100/30 rounded-e-lg ">
