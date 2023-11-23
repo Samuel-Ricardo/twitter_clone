@@ -6,5 +6,5 @@ export interface WebSocketGateway<S> {
   get socket(): S;
 
   publish<D>(payload: IPublishSocketData<D>): any | Promise<any>;
-  subscribe(scheduled: ISubscribeSocketData): any | Promise<any>;
+  subscribe(scheduled: ISubscribeSocketData<any, any>): any | Promise<any>;
 }
