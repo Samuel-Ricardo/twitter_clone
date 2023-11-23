@@ -1,5 +1,5 @@
 import { config as loadEnvForTests } from 'dotenv';
-loadEnvForTests({ path: '.env.local' });
+if (!process.env.NEXT_PUBLIC_API_URL) loadEnvForTests({ path: '.env.local' });
 
 export const ENV = {
   ...process.env,
