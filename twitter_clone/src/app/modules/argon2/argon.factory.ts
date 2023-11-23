@@ -1,4 +1,4 @@
-import argon2 from 'argon2';
+import argon2 from 'argon2-browser';
 import { ARGON_MODULE } from './argon.module';
 import { ARGON_REGISTRY } from './argon.registry';
 
