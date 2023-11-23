@@ -5,6 +5,10 @@ import { LikeObservableSupport } from '../../../observable/observable.support';
 @injectable()
 export class EmitLikeDeletedUseCase extends LikeObservableSupport {
   execute(like: IEmitDislikeDTO) {
-    this.observable.emitDislike(like);
+    like.isComment
+      ? this.observable.emitCommentDislike(like)
+      : this.observable.emitPostDislike(like);
+
+    //this.observable.emitDislike(like);
   }
 }
