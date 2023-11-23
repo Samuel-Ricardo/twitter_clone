@@ -7,7 +7,7 @@ import {
   IFindNotificationsByUserDTO,
   ISetNotificationVisualizedDTO,
 } from '../DTO';
-import { SCOPE } from '../notification.tag';
+import { SCOPE } from '@/app/modules/app.tag';
 
 @injectable()
 export class NotificationController {
@@ -18,6 +18,7 @@ export class NotificationController {
   ) {}
 
   create(notification: ICreateNotificationDTO) {
+    console.log({ CREATE: notification });
     return this.service.create(notification);
   }
 
