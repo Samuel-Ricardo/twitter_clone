@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { maxFileSize } from './rules/file/size.rule';
 import { toBase64 } from './transformers/file/toBase64.transformer';
 import { UppercaseFirstLetters } from './transformers/name.transformer';
+import { File } from '../../../../@types/file';
 
 export const userEditSchema = z.object({
   profileImage: z
