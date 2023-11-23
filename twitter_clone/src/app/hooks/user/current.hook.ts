@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { useLoginModal } from '../modal/user/login.hook';
+import { GlobalUser } from '@/app/global/user.global';
 
 export const useCurrentUser = (config?: IUseCurrentUserConfig) => {
   const MODULE = MODULES.USER.MAIN();
@@ -43,11 +44,15 @@ export const useCurrentUser = (config?: IUseCurrentUserConfig) => {
       default:
         break;
     }
-  }, [status]);
+  }, [status, data, login, displayLogin]);
 
   const result = MODULE.selectByEmail({ email: data?.user?.email });
 
-  const currentUser = useMemo(() => result?.user.data?.user, [result]);
+  const currentUser = useMemo(() => result?.user.data?.user, [result.user]);
+
+  useEffect(() => {
+    GlobalUser.user = currentUser;
+  }, [currentUser]);
 
   return { result: result.user, status, currentUser };
 };
