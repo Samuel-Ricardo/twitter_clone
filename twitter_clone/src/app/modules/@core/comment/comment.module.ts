@@ -17,9 +17,16 @@ import { ReactiveCommentService } from './service/reactive/comment.service';
 import { SCOPE } from '../../app.tag';
 import { ReactiveCommentController } from './controller/reactive/comment.controller';
 
+import getDecorators from 'inversify-inject-decorators';
+import { OBSERVABLE_MODULE } from '../../observable/observable.module';
+
 const MODULE = new Container({ autoBindInjectable: true });
 
-export const COMMENT_MODULE = Container.merge(MODULE, GatewayModule);
+export const COMMENT_MODULE = Container.merge(
+  MODULE,
+  OBSERVABLE_MODULE,
+  GatewayModule,
+);
 
 COMMENT_MODULE.bind(COMMENT_REGISTRY.USE_CASE.CREATE).to(CreateCommentUseCase);
 
@@ -53,9 +60,13 @@ COMMENT_MODULE.bind(COMMENT_REGISTRY.MAIN).to(CommentController);
 
 COMMENT_MODULE.bind(COMMENT_REGISTRY.SERVICE)
   .to(ReactiveCommentService)
+  .inSingletonScope()
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
+
 COMMENT_MODULE.bind(COMMENT_REGISTRY.CONTROLLER)
   .to(ReactiveCommentController)
   .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
 
 COMMENT_MODULE.bind(COMMENT_REGISTRY.REACTIVE).to(ReactiveCommentController);
+
+export const { lazyInject } = getDecorators(COMMENT_MODULE);
