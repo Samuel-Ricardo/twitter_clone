@@ -1,4 +1,4 @@
-import { inject, injectable } from 'inversify';
+import { inject, injectable, tagged } from 'inversify';
 import { PostService } from '../service';
 import { MODULE } from '../../../app.registry';
 import {
@@ -8,11 +8,13 @@ import {
   IUpdatePostDTO,
   IFindPostByIdDTO,
 } from '../DTO';
+import { SCOPE } from '../../../app.tag';
 
 @injectable()
 export class PostController {
   constructor(
     @inject(MODULE.POST.SERVICE)
+    @tagged(SCOPE.TAG, SCOPE.MAIN)
     private readonly service: PostService,
   ) {}
 
@@ -33,8 +35,8 @@ export class PostController {
     return { posts: this.service.findAll() };
   }
 
-  findById(post: IFindPostByIdDTO) {
-    return { post: this.service.findById(post) };
+  findById(id: IFindPostByIdDTO) {
+    return { post: this.service.findById(id) };
   }
 
   findByAuthor(author: IFindPostByAuthorIdDTO) {
