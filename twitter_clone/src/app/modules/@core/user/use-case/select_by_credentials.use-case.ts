@@ -4,7 +4,7 @@ import { UserGatewayAccess } from '../gateway';
 
 @injectable()
 export class SelectUserByCredentialsUseCase extends UserGatewayAccess {
-  execute(user: ISelectUserByCredentialsDTO) {
+  async execute(user: ISelectUserByCredentialsDTO) {
     return this.gateway.selectByCredentials(user);
   }
 }
