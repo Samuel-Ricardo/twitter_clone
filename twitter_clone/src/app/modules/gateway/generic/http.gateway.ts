@@ -1,7 +1,4 @@
 export interface IHTTPGateway {
-  readonly URL: string;
-  readonly client: any;
-
   get<T>(path: string, config?: any): Promise<any>;
 
   post<T>(path: string, body: any, config?: any): Promise<any>;
