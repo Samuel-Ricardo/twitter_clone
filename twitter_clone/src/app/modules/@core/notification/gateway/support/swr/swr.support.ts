@@ -1,8 +1,8 @@
 import { SWRResponse } from 'swr';
-import { IGetNotificationsByUserDTO, INotificationDTO } from '../../../DTO';
+import { IFindNotificationsByUserDTO, INotificationDTO } from '../../../DTO';
 
 export interface ISWRSupport {
   swrGetByUser(
-    user: IGetNotificationsByUserDTO,
+    user: IFindNotificationsByUserDTO,
   ): SWRResponse<{ notifications: INotificationDTO[] }>;
 }
