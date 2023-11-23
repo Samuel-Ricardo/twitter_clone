@@ -8,3 +8,5 @@ export const ARGON_MODULE = new Container({ autoBindInjectable: true });
 ARGON_MODULE.bind(ARGON_REGISTRY.ARGON2).toConstantValue(argon2);
 
 export const { lazyInject: argonInject } = getDecorators(ARGON_MODULE);
+
+export const { argon2d, argon2i, argon2id } = argon2;
