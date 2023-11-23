@@ -17,7 +17,7 @@ import { OBSERVABLE_MODULE as OBSERVABLE } from './observable/observable.module'
 import { NOTIFICATION_MODULE as NOTIFICATION } from './@core/notification/notification.module';
 import { CRYPTO_MODULE as CRYPTO } from './crypto/crypto.module';
 import { BCRYPT_MODULE as BCRYPT } from './bcrypt/bcrypt.module';
-import { ARGON_MODULE as ARGON } from './argon2/argon.module';
+//import { ARGON_MODULE as ARGON } from './argon2/argon.module';
 import { SECURITY_MODULE as SECURITY } from './security/security.module';
 import { CYPHER_MODULE as CYPHER } from './cypher/cypher.module';
 
@@ -41,7 +41,7 @@ export const AppModule = Container.merge(
   OBSERVABLE,
   CRYPTO,
   BCRYPT,
-  ARGON,
+  //  ARGON,
   SECURITY,
   CYPHER,
 );
