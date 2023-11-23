@@ -16,10 +16,20 @@ import { ListenPostLikeUseCase } from './use-case/observable/listen/post/created
 import { ListenPostDislikeUseCase } from './use-case/observable/listen/post/deleted.use-case';
 import { ListenCommentLikeUseCase } from './use-case/observable/listen/comment/created.use-case';
 import { ListenCommentDislikeUseCase } from './use-case/observable/listen/comment/deleted.use-case';
+import { ReactiveLikeService } from './service/reactive/like.service';
+import { ReactiveLikeController } from './controller/reactive/like.controller';
+import { SCOPE } from '../../app.tag';
+import { OBSERVABLE_MODULE } from '../../observable/observable.module';
+
+import getDecorators from 'inversify-inject-decorators';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
-export const LIKE_MODULE = Container.merge(MODULE, GatewayModule);
+export const LIKE_MODULE = Container.merge(
+  MODULE,
+  OBSERVABLE_MODULE,
+  GatewayModule,
+);
 
 LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.CREATE).to(CreateLikeUseCase);
 LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.DELETE).to(DeleteLikeUseCase);
@@ -50,8 +60,22 @@ LIKE_MODULE.bind(LIKE_REGISTRY.USE_CASE.OBSERVABLE.LISTEN.COMMENT.DELETED).to(
   ListenCommentDislikeUseCase,
 );
 
-LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
+LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE)
+  .to(LikeService)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
 
-LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE).to(LikeService);
+LIKE_MODULE.bind(LIKE_REGISTRY.SERVICE)
+  .to(ReactiveLikeService)
+  .inSingletonScope()
+  .whenTargetTagged(SCOPE.TAG, SCOPE.REACTIVE);
 
-LIKE_MODULE.bind(LIKE_REGISTRY.CONTROLLER).to(LikeController);
+LIKE_MODULE.bind(LIKE_REGISTRY.CONTROLLER)
+  .to(LikeController)
+  .whenTargetTagged(SCOPE.TAG, SCOPE.MAIN);
+
+LIKE_MODULE.bind(LIKE_REGISTRY.MAIN).to(LikeController);
+LIKE_MODULE.bind(LIKE_REGISTRY.REACTIVE)
+  .to(ReactiveLikeController)
+  .inSingletonScope();
+
+export const { lazyInject } = getDecorators(LIKE_MODULE);
