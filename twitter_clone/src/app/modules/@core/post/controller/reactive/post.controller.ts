@@ -1,7 +1,7 @@
 import { inject, injectable, tagged } from 'inversify';
 import { ReactivePostService } from '../../service/reactive/post.service';
 import { MODULE } from '@/app/modules/app.registry';
-import { SCOPE } from '../../post.tag';
+import { SCOPE } from '../../../../app.tag';
 import { IEmitPostDTO } from '../../DTO/observable/emit/created.dto';
 import { IListenPostDTO } from '../../DTO/observable/listen/created.dto';
 
