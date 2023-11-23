@@ -15,7 +15,15 @@ export const NotificationItem = ({ notification }: INotificationItemProps) => {
   return (
     <NotificationItemContainer onClick={handleClick}>
       <SidebarLogo />
-
+      <NotificationItemBody
+        notification={notification}
+        createdAt={new Date(notification.createdAt)}
+        visualizedAt={
+          notification.visualizedAt
+            ? new Date(notification.visualizedAt)
+            : undefined
+        }
+      />
       <DeleteNotificationButton id={notification.id} />
     </NotificationItemContainer>
   );
