@@ -8,23 +8,22 @@ import { DeleteNotificationUseCase } from './use-case/delete.use-case';
 import { FindNotificationByUserUseCase } from './use-case/findByUser.use-case';
 import { NotificationService } from './service/notification.service';
 import { ReactiveNotificationService } from './service/reactive/notification.service';
-import { SCOPE } from './notification.tag';
+import { SCOPE } from '../../app.tag';
 import { NotificationController } from './controller/notification.controller';
 import { ReactiveNotificationController } from './controller/reactive/notification.controller';
 import { EmitNotificationUseCase } from './use-case/observable/emit/created.use-case';
 import { ListenNotificationUseCase } from './use-case/observable/listen/created.use-case';
 import { ListenNotificationViewedUseCase } from './use-case/observable/listen/viewed.use-case';
 import { ListenNotificationDeletedUseCase } from './use-case/observable/listen/deleted.use-case';
-import { LIKE_MODULE } from '../like/like.module';
-import { POST_MODULE } from '../post';
-import { COMMENT_MODULE } from '../comment';
-import { UserModule } from '../user/user.module';
-import { FOLLOW_MODULE } from '../follow/follow.module';
 import { SubscribeNotificationUseCase } from './use-case/reactive/subscribe/created.use-case';
 import { SubscribeNotificationViewedUseCase } from './use-case/reactive/subscribe/viewed.use-case';
 import { SubscribeNotificationDeletedUseCase } from './use-case/reactive/subscribe/deleted.use-case';
 import { EmitNotificationViewedUSeCase } from './use-case/observable/emit/viewed.use-case';
 import { EmitNotificationDeletedUseCase } from './use-case/observable/emit/deleted.use-case';
+import { ConfigRegistry } from '../../config/config.registry';
+import { CONFIG } from '../../config/app.config';
+
+import getDecorators from 'inversify-inject-decorators';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -32,12 +31,15 @@ export const NOTIFICATION_MODULE = Container.merge(
   MODULE,
   OBSERVABLE_MODULE,
   GatewayModule,
-  LIKE_MODULE,
-  POST_MODULE,
-  COMMENT_MODULE,
-  UserModule,
-  FOLLOW_MODULE,
 );
+
+NOTIFICATION_MODULE.rebind(ConfigRegistry.API.SOCKET.URL).toConstantValue(
+  CONFIG.API.SOCKET.URL,
+);
+NOTIFICATION_MODULE.rebind(ConfigRegistry.SOCKET_EVENT).toConstantValue(
+  CONFIG.EVENT.SOCKET,
+);
+NOTIFICATION_MODULE.rebind(ConfigRegistry.EVENT).toConstantValue(CONFIG.EVENT);
 
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.USE_CASE.CREATE).to(
   CreateNotificationUseCase,
@@ -124,3 +126,6 @@ NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.MAIN).to(NotificationController);
 NOTIFICATION_MODULE.bind(NOTIFICATION_REGISTRY.REACTIVE)
   .to(ReactiveNotificationController)
   .inSingletonScope();
+
+export const { lazyInject: notificationInject } =
+  getDecorators(NOTIFICATION_MODULE);
