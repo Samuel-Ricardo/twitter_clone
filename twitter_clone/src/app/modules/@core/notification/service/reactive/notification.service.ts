@@ -108,22 +108,15 @@ export class ReactiveNotificationService {
   async observeTweets() {
     this.reactivePost.onPost({
       action: async (post) => {
-        console.log('OBSERVE POST', { post });
-
         const { user: author } = await this.userModule.findByIdAsync({
           id: post.authorId,
         });
-
-        console.log({ author });
 
         const { followers } = await this.followModule.followersOfAsync({
           followingId: post.authorId,
         });
 
-        console.log({ followers });
-
         followers.forEach((follow) => {
-          console.log({ follow: follow });
           this.notification.create({
             type: POST,
             body: `@${author.username} Post a new Tweet 🚀 - ${cut(post.body)}`,
