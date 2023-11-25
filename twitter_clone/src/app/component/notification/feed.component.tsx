@@ -18,7 +18,6 @@ export const NotificationFeed = () => {
 
   event.onCreate({
     action: (notification) => {
-      console.log({ notificationCreatedFront: notification });
       notifications?.push(notification);
       notifications?.sort((a, b) =>
         compareDesc(new Date(a.createdAt), new Date(b.createdAt)),
