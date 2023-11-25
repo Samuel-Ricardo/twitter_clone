@@ -25,7 +25,6 @@ export class NotificationService {
   ) {}
 
   async create(notification: ICreateNotificationDTO) {
-    console.log({ CREATESERVICE: notification });
     return this.createNotification.execute(notification);
   }
 
