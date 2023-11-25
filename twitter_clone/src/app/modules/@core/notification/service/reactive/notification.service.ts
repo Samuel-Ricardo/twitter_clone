@@ -188,13 +188,9 @@ export class ReactiveNotificationService {
   async observeCommentLikes() {
     this.likeModule.onCommentLike({
       action: async (like) => {
-        console.log('OBSERVE COMMENT LIKE', { like });
-
         const { comment } = await this.commentModule.findAsyncByID({
           id: like.likedId,
         });
-
-        console.log({ comment });
 
         this.notification.create({
           type: LIKE,
