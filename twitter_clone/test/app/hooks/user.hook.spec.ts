@@ -48,8 +48,6 @@ describe('[HOOK] | USER', () => {
       updatedAt: new Date(),
     };
 
-    console.log({ MODULES: MODULES.USER.MAIN() });
-
     MODULES.USER.MAIN().listAll.mockReturnValue({
       users: {
         data: [USER_DATA],
@@ -60,14 +58,8 @@ describe('[HOOK] | USER', () => {
       },
     });
 
-    console.log({ MODULES2: MODULES.USER.MAIN().listAll() });
-
     const { result } = renderHook(() => useUsers());
     const { data, isLoading, error } = result.current;
-
-    console.log({ data: result.current });
-
-    console.log({ isLoading, error, data });
 
     expect(MODULES.USER.MAIN().listAll).toHaveBeenCalled();
 
