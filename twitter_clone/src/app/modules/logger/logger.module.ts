@@ -1,3 +1,5 @@
+import { CONFIG } from '../config/app.config';
+
 export const log = ({
   context,
   message,
@@ -6,7 +8,7 @@ export const log = ({
   message: string;
 }) => console.log(`[${context}] | ${message}`);
 
-export const logger = {
+let logger = {
   error: ({
     context,
     message,
@@ -23,3 +25,25 @@ export const logger = {
   warn: ({ context, message }: { context: string; message: string }) =>
     console.warn(`[${Date.now()}] | [${context}] | ${message}`),
 };
+
+const disable = {
+  error: ({
+    context,
+    message,
+    error,
+  }: {
+    context: string;
+    message: string;
+    error?: Error;
+  }) => {},
+  info: (
+    { context, message }: { context: string; message: string },
+    ...data: any[]
+  ) => {},
+  warn: ({ context, message }: { context: string; message: string }) => {},
+};
+
+if (CONFIG.NODE_ENV !== 'development' && CONFIG.NODE_ENV !== 'test')
+  logger = disable;
+
+export { logger };
