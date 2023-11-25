@@ -41,13 +41,9 @@ export class AxiosUserGateway extends AxiosHTTPGateway implements IUserGateway {
   async _create(user: ICreateUserDTO) {
     const response = await this.post<{ user: string }>(this.prefix, user);
 
-    console.log({ response });
-
     const result = this.POLICY.SECURITY.DECRYPT.USER.execute(
       response.data.user,
     );
-
-    console.log({ result });
 
     return User.create(result);
   }
