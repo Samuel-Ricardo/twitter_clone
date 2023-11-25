@@ -32,8 +32,6 @@ export const NotificationFeed = () => {
       sync(notifications?.filter((n) => n.id !== notification.id)),
   });
 
-  console.log({ notifications });
-
   if (!currentUser)
     return (
       <div className="mt-4">
