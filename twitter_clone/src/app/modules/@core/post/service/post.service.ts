@@ -64,7 +64,6 @@ export class PostService {
   }
 
   async findByIdAsync(post: IFindPostByIdDTO) {
-    console.log({ PEDRO: post });
     return this.findPostById.executeAsync(post);
   }
 }
