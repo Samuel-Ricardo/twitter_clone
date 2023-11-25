@@ -82,10 +82,7 @@ export class ReactiveNotificationService {
 
   async observerNotificationCreated() {
     this.subscribeNotification.execute({
-      job: (notification) => {
-        console.log({ SUBSCRIBED: notification });
-        this.emitNotification.execute(notification);
-      },
+      job: (notification) => this.emitNotification.execute(notification),
     });
   }
 
