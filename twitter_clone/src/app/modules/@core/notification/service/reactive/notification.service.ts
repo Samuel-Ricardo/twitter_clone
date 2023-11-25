@@ -131,19 +131,13 @@ export class ReactiveNotificationService {
   async observeComments() {
     this.reactiveComment.onComment({
       action: async (comment) => {
-        console.log('OBSERVE COMMENT', { comment });
-
         const { user: author } = await this.userModule.findByIdAsync({
           id: comment.authorId,
         });
 
-        console.log({ author });
-
         const { post } = await this.postModule.findByIdAsync({
           id: comment.postId,
         });
-
-        console.log({ post });
 
         this.notification.create({
           type: COMMENT,
