@@ -51,9 +51,7 @@ export const RegisterModal = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log(data);
     toast.success('Successfully toasted! :D');
-
     create(data);
   };
 
