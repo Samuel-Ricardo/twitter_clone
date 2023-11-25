@@ -122,9 +122,7 @@ export class Turing implements ICryptographer {
   }
 
   static getDataFromSecret(secret: string, breaker: string) {
-    const data = secret.split(breaker)[1];
-    console.log({ breaker, secret, data });
-    return data;
+    return secret.split(breaker)[1];
   }
 
   protected get crypto() {
