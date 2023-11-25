@@ -37,11 +37,6 @@ export class SocketIOGateway implements WebSocketGateway<SocketIO> {
   publish(payload: IPublishSocketData<any>) {
     const encrypted = this.encrypt(payload.data);
     this.socket.io.emit(payload.event, encrypted);
-    console.log({
-      SOCKET: this.socket,
-      payload,
-      encrypted,
-    });
   }
 
   subscribe(scheduled: ISubscribeSocketData<any, any>) {
