@@ -154,13 +154,9 @@ export class ReactiveNotificationService {
   async observeFollows() {
     this.reactiveFollow.onFollow({
       action: async (follow) => {
-        console.log('OBSERVE FOLLOW', { follow });
-
         const { user: follower } = await this.userModule.findByIdAsync({
           id: follow.followerId,
         });
-
-        console.log({ follower });
 
         this.notification.create({
           type: FOLLOW,
