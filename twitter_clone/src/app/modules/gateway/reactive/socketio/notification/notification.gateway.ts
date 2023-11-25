@@ -7,14 +7,15 @@ import { IPublishNotificationDeleteDTO } from '@/app/modules/@core/notification/
 import { ISubscribeNotificationCreatedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/created.dto';
 import { ISubscribeNotificationViewedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/viewed.dto';
 import { ISubscribeNotificationDeletedDTO } from '@/app/modules/@core/notification/DTO/reactive/subscribe/deleted.dto';
+import { injectable } from 'inversify';
 
+@injectable()
 export class SocketIONotificationGateway
   extends SocketIOGateway
   implements IReactiveNotificationGateway
 {
   publishNewNotification(data: IPublishNotificationDTO) {
     this.publish({ event: SOCKET.NOTIFICATION.NEW, data });
-    console.log({ PUBLISH_NEW_NOTIFICATION: data });
   }
 
   publishViewNotification(data: IPublishNotificationViewedDTO) {
