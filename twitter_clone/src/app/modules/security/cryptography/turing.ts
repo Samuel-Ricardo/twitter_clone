@@ -118,14 +118,7 @@ export class Turing implements ICryptographer {
   }
 
   static setDataInSecret(secret: string, data: string, breaker: string) {
-    const result = secret.concat(breaker, data, breaker);
-    console.log({
-      breaker,
-      secret,
-      data,
-      result,
-    });
-    return result;
+    return secret.concat(breaker, data, breaker);
   }
 
   static getDataFromSecret(secret: string, breaker: string) {
