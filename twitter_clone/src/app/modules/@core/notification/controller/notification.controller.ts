@@ -18,7 +18,6 @@ export class NotificationController {
   ) {}
 
   create(notification: ICreateNotificationDTO) {
-    console.log({ CREATE: notification });
     return this.service.create(notification);
   }
 
