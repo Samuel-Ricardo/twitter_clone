@@ -29,8 +29,6 @@ export const LoginModal = () => {
   if (!isOpen) return null;
 
   const submit = handleSubmit(async (credentials) => {
-    console.log({ credentials });
-
     const response = await toast.promise(
       signIn('credentials', { ...credentials, redirect: false }),
       {
