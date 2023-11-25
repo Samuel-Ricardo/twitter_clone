@@ -171,13 +171,9 @@ export class ReactiveNotificationService {
   async observeTweetLikes() {
     this.likeModule.onTweetLike({
       action: async (like) => {
-        console.log('OBSERVE TWEET LIKE', { like });
-
         const { post } = await this.postModule.findByIdAsync({
           id: like.likedId,
         });
-
-        console.log({ post });
 
         this.notification.create({
           type: LIKE,
