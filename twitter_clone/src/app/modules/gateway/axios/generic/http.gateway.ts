@@ -48,8 +48,6 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
     );
     response.data = await this.decrypt(response.data);
 
-    console.log({ response });
-
     return response;
   }
 
