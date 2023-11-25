@@ -48,7 +48,6 @@ export class SocketIOGateway implements WebSocketGateway<SocketIO> {
     };
 
     this.socket.io.on(scheduled.event, decryptMiddleware);
-    console.log({ SOCKET: this.socket, scheduled });
   }
 
   private get userToken() {
