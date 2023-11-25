@@ -14,7 +14,6 @@ export const useDislike = () => {
     error,
   } = useMutation<any, any, IDeleteLikeDTO>({
     mutationFn: async (DTO) => {
-      console.log({ DTO });
       return await toast.promise(MODULE.dislike(DTO), {
         loading: `Deleting like... 💌`,
         success: `Dislike 💔`,
