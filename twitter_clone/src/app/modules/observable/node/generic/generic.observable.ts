@@ -15,14 +15,12 @@ export class NodeObservable implements IObservable {
 
   listen(event: string, action: GenericAction) {
     this._events.on(event, action);
-    console.log({ LISTEN: this.events }, { EVENT: event }, { ACTION: action });
   }
   stopListening(event: string, action: GenericAction) {
     this._events.off(event, action);
   }
   emit(event: string, data: any) {
     this._events.emit(event, data);
-    console.log({ EMIT: this.events }, { EVENT: event }, { DATA: data });
   }
 
   get events() {
