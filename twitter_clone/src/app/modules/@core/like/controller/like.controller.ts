@@ -19,7 +19,6 @@ export class LikeController {
   ) {}
 
   async create(like: ICreateLikeDTO) {
-    console.log({ LIKEcontrolller: like });
     return { like: (await this.service.create(like)).toStruct() };
   }
 
