@@ -22,11 +22,7 @@ export const RegisterModal = () => {
   const { open: openLogin } = useLoginModal();
   const { create, data, error, isLoading } = useCreateUser();
 
-  useEffect(() => console.log({ data }), [data]);
-  useEffect(() => console.log({ error }), [error]);
-  useEffect(() => {
-    toast.error(error?.message);
-  }, [error]);
+  useEffect(() => toast.error(error?.message) as any, [error]);
 
   const {
     register,
