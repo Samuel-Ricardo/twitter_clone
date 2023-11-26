@@ -15,8 +15,6 @@ export const ImageUploadContainer = ({
       {children}
     </div>
 
-    {errors && (
-      <p className="text-red-500 font-semibold text-sm">{errors.message}</p>
-    )}
+    {errors && <p className="text-red-500 font-semibold text-sm">{errors}</p>}
   </div>
 );
