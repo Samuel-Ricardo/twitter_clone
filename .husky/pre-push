@@ -1,4 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ./twitter_clone && docker compose -f docker-compose.ci.yaml up --abort-on-container-exit --build --force-recreate --remove-orphans
+cd ./twitter_clone 
+
+npm run lint:next 
+npm run format:fix
+
+docker-compose down
+docker compose -f docker-compose.ci.yaml up --abort-on-container-exit --build --force-recreate --remove-orphans
