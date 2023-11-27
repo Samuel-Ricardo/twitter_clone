@@ -6,3 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.ci
     entrypoint: ['npm', 'run', 'code:ci']
+    external_links:
+      - 'host.docker.internal'
+    depends_on:
+      - api
