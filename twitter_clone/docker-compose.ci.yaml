@@ -12,9 +12,7 @@ services:
       - api
 
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile.api
+    image: ghcr.io/samuel-ricardo/twitter_clone-api:main
     entrypoint: ['npm', 'run', 'start:docker']
     ports:
       - '3004:3000'
