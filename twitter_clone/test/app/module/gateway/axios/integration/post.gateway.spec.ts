@@ -8,6 +8,7 @@ import { IPostGateway, Post } from '@/app/modules/@core/post';
 import { MODULES } from '@/app/modules';
 import { expect } from '@jest/globals';
 import { AxiosPostGateway } from '@/app/modules/gateway/axios/post/post.gateway';
+import { CREATE_POST_DATA } from '@test/mock/data/post';
 
 describe('[GATEWAY] | AXIOS => [POST]', () => {
   let gateway: IPostGateway;
@@ -16,6 +17,13 @@ describe('[GATEWAY] | AXIOS => [POST]', () => {
     gateway = MODULES.GATEWAY.AXIOS.POST();
 
     expect(gateway).toBeInstanceOf(AxiosPostGateway);
+  });
+
+  it('[INTEGRATION] | Should: create [POST]', async () => {
+    const result = await gateway.create(CREATE_POST_DATA);
+
+    expect(result).toBeInstanceOf(Post);
+    expect(result.id).toBeDefined();
   });
 
   it('[INTEGRATION] | Should: find [all] => [POST]', async () => {
