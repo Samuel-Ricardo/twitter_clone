@@ -44,4 +44,4 @@ jobs:
       #        run: npm run lint:next && npm run lint:staged
 
       - name: Run tests with docker-compose
-        run: docker compose -f ./twitter_clone/docker-compose.ci.yaml up
+        run: docker compose -f ./twitter_clone/docker-compose.ci.yaml up --abort-on-container-exit
