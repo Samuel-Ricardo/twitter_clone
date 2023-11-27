@@ -10,6 +10,7 @@ import { MODULES } from '@/app/modules';
 import { AxiosLikeGateway } from '@/app/modules/gateway/axios/like/like.gateway';
 import { Post } from '@/app/modules/@core/post';
 import { Like } from '@/app/modules/@core/like/entity';
+import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 
 describe('[GATEWAY] | Axios => [LIKE]', () => {
   let gatewat: ILikeGateway;
@@ -23,6 +24,13 @@ describe('[GATEWAY] | Axios => [LIKE]', () => {
 
   beforeEach(async () => {
     post = (await MODULES.GATEWAY.AXIOS.POST().findAll())[0];
+  });
+
+  it('[INTEGRATION] | Should: create [LIKE]', async () => {
+    const result = await gatewat.create(CREATE_POST_LIKE_DATA);
+
+    expect(result).toBeInstanceOf(Like);
+    expect(result.id).toBeDefined();
   });
 
   it('[INTEGRATION] | Should: find by [POST] => [LIKE]', async () => {
