@@ -26,17 +26,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <BaseLayout>
-          {/* <div className="fixed left-0 top-0 h-screen w-fit"> */}
           <Sidebar />
-          {/* </div> */}
-
-          {/* <div className="h-full ml-[18vw] w-full mr-[30vw] z-50"> */}
           <NotificationModule />
           <Suspense fallback={<Loading />}>{children}</Suspense>
-          {/* </div> */}
-          {/* <div className="fixed right-0 top-0 h-screen w-fit"> */}
           <FollowBar />
-          {/* </div>  */}
         </BaseLayout>
       </body>
     </html>
