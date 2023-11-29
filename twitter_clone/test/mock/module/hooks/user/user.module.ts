@@ -4,6 +4,7 @@ import { USER_HOOKS_REGISTRY_MOCK } from './user.registry';
 import { mockUseUsers, simulateUseUsers } from './all.hook';
 import { mockUseSession } from './session.hook';
 import { mockUseCurrentUser, simulateUseCurrentUser } from './current.hook';
+import { simulateUserHooks } from './user.hook';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -28,3 +29,7 @@ USER_HOOKS_MODULE_MOCK.bind(
 USER_HOOKS_MODULE_MOCK.bind(
   USER_HOOKS_REGISTRY_MOCK.CURRENT.SIMULATE,
 ).toDynamicValue(simulateUseCurrentUser);
+
+USER_HOOKS_MODULE_MOCK.bind(
+  USER_HOOKS_REGISTRY_MOCK.ALL.SIMULATE,
+).toDynamicValue(simulateUserHooks);
