@@ -4,10 +4,14 @@ import { useUsers } from '@/app/hooks/user/all.hook';
 import { USER_HOOKS_REGISTRY_MOCK } from './user.registry';
 import { ISimulatedUseUsersHook } from '@test/@types/simulate/user/hooks/all';
 import { MockedUseSession } from '@test/@types/hooks/user/session';
-import { useCurrentUser } from './current.hook';
 import { UseCurrentUserMock } from '@test/@types/hooks/user/current';
+import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
 
 export const USER_HOOKS_FACTORY_MOCK = {
+  SIMULATE: () =>
+    USER_HOOKS_MODULE_MOCK.get<ISimulatedUserHooks>(
+      USER_HOOKS_REGISTRY_MOCK.SIMULATE,
+    ),
   ALL: {
     MOCK: () =>
       USER_HOOKS_MODULE_MOCK.get<DeepMockProxy<typeof useUsers>>(
