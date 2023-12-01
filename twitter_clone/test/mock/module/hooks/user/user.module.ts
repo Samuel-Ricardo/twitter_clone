@@ -30,6 +30,6 @@ USER_HOOKS_MODULE_MOCK.bind(
   USER_HOOKS_REGISTRY_MOCK.CURRENT.SIMULATE,
 ).toDynamicValue(simulateUseCurrentUser);
 
-USER_HOOKS_MODULE_MOCK.bind(
-  USER_HOOKS_REGISTRY_MOCK.ALL.SIMULATE,
-).toDynamicValue(simulateUserHooks);
+USER_HOOKS_MODULE_MOCK.bind(USER_HOOKS_REGISTRY_MOCK.SIMULATE).toDynamicValue(
+  simulateUserHooks,
+);
