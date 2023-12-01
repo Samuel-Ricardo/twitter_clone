@@ -14,6 +14,8 @@ services:
   api:
     image: ghcr.io/samuel-ricardo/twitter_clone-api:main
     entrypoint: ['npm', 'run', 'start:docker']
+    env_file:
+      - .env.ci
     ports:
       - '3004:3000'
     external_links:
@@ -26,6 +28,8 @@ services:
     command: ['--replSet', 'rs0']
     ports:
       - '27017:27017'
+    env_file:
+      - .env.ci
     external_links:
       - 'host.docker.internal'
 
