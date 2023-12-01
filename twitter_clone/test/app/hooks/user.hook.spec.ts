@@ -4,21 +4,21 @@ import { MODULES, useUsers } from '@test/mock/module/hooks/user/all.hook';
 import { expect } from '@jest/globals';
 
 import { renderHook } from '@testing-library/react-hooks';
-import { ISimulatedUseUsersHook } from '@test/@types/simulate/user/hooks/all';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import { SWR_USER, USER_DATA } from '@test/mock/data/react/user';
+import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
 
 describe('[HOOK] | USER', () => {
-  let MODULE: ISimulatedUseUsersHook;
+  let MODULE: ISimulatedUserHooks;
 
   beforeEach(() => {
-    MODULE = MODULES_MOCK.HOOKS.USER.ALL.SIMULATE();
+    MODULE = MODULES_MOCK.HOOKS.USER.SIMULATE();
   });
 
   it('[UNIT] | [HOOK] - Should: list [all] => [USER]', async () => {
     MODULE.controller.listAll.mockReturnValue(SWR_USER([USER_DATA]) as any);
 
-    const { result } = renderHook(() => useUsers());
+    const { result } = renderHook(() => MODULE.all());
     const { data } = result.current;
 
     expect(MODULE.controller.listAll).toHaveBeenCalledTimes(1);
