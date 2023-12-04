@@ -1,11 +1,16 @@
 import 'reflect-metadata';
 
-import { MODULES, useUsers } from '@test/mock/module/hooks/user/all.hook';
+import { MODULES, useUsers } from '@test/mock/module/hooks/user/user.hook';
 import { expect } from '@jest/globals';
 
 import { renderHook } from '@testing-library/react-hooks';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
-import { SWR_USER, USER_DATA } from '@test/mock/data/react/user';
+import {
+  AUTHENTICATED_SESSION,
+  SWR_USER,
+  SWR_USERS,
+  USER_DATA,
+} from '@test/mock/data/react/user';
 import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
 
 describe('[HOOK] | USER', () => {
@@ -15,8 +20,30 @@ describe('[HOOK] | USER', () => {
     MODULE = MODULES_MOCK.HOOKS.USER.SIMULATE();
   });
 
+  it('[UNIT] | [HOOK] - Should: find [current] => [USER]', async () => {
+    MODULE.controller.selectByEmail.mockReturnValue(SWR_USER(USER_DATA) as any);
+    MODULE.session.mockReturnValue(AUTHENTICATED_SESSION as any);
+
+    const { result } = renderHook(() => MODULE.current());
+
+    expect(MODULE.session).toHaveBeenCalledTimes(1);
+    expect(MODULE.session).toHaveBeenCalledWith();
+
+    expect(MODULE.controller.selectByEmail).toHaveBeenCalledTimes(1);
+    expect(MODULE.controller.selectByEmail).toHaveBeenCalledWith({
+      email: USER_DATA.email,
+    });
+
+    expect(result.current).toBeDefined();
+
+    expect(result.current.result.data).toBeDefined();
+    expect(result.current.result.data).toStrictEqual(USER_DATA);
+
+    expect(result.current.status).toBe('authenticated');
+  });
+
   it('[UNIT] | [HOOK] - Should: list [all] => [USER]', async () => {
-    MODULE.controller.listAll.mockReturnValue(SWR_USER([USER_DATA]) as any);
+    MODULE.controller.listAll.mockReturnValue(SWR_USERS([USER_DATA]) as any);
 
     const { result } = renderHook(() => MODULE.all());
     const { data } = result.current;
