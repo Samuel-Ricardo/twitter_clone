@@ -15,7 +15,7 @@ export const USER_DATA: IUserDTO = {
 
 export const USER = User.create(USER_DATA);
 
-export const SWR_USER = (data: IUserDTO | IUserDTO[]) => ({
+export const SWR_USERS = (data: IUserDTO | IUserDTO[]) => ({
   users: {
     data,
     error: null,
@@ -24,3 +24,24 @@ export const SWR_USER = (data: IUserDTO | IUserDTO[]) => ({
     isValidating: false,
   },
 });
+
+export const SWR_USER = (data: IUserDTO) => ({
+  user: {
+    data,
+    error: null,
+    mutate: () => ({}) as any,
+    isLoading: false,
+    isValidating: false,
+  },
+});
+
+export const AUTHENTICATED_SESSION = {
+  data: {
+    user: {
+      email: USER_DATA.email,
+      name: USER_DATA.name,
+      image: USER_DATA.coverImage,
+    },
+  },
+  status: 'authenticated',
+};
