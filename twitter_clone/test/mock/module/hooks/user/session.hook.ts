@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 const mockUseSession = () => mockFn<typeof useSession>();
 
 jest.mock('next-auth/react', () => ({
-  useSession: mockFn<typeof useSession>(),
+  useSession: jest.fn(),
 }));
 
 export { useSession, mockUseSession };
