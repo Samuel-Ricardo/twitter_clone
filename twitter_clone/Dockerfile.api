@@ -1,3 +1,0 @@
-FROM ghcr.io/samuel-ricardo/twitter_clone-api:main
-
-COPY --chown=node:node .env.ci .env 
