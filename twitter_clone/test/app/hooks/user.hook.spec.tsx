@@ -20,6 +20,20 @@ describe('[HOOK] | USER', () => {
     MODULE = MODULES_MOCK.HOOKS.USER.SIMULATE();
   });
 
+  it('[UNIT] | [HOOK] - Should: find [one] => USER', async () => {
+    MODULE.controller.selectById.mockReturnValue(SWR_USER(USER_DATA) as any);
+
+    const { result } = renderHook(() => MODULE.one({ id: USER_DATA.id }));
+
+    expect(MODULE.controller.selectById).toHaveBeenCalledTimes(1);
+    expect(MODULE.controller.selectById).toHaveBeenCalledWith({
+      id: USER_DATA.id,
+    });
+
+    expect(result.current.data).toBeDefined();
+    expect(result.current.data).toStrictEqual(USER_DATA);
+  });
+
   it('[UNIT] | [HOOK] - Should: find [current] => [USER]', async () => {
     MODULE.controller.selectByEmail.mockReturnValue(SWR_USER(USER_DATA) as any);
     MODULE.session.mockReturnValue(AUTHENTICATED_SESSION as any);
