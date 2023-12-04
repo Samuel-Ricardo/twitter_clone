@@ -1,12 +1,10 @@
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { UserController } from '@/app/modules/@core/user/controller';
-import { DeepMockProxy, mockFn } from 'jest-mock-extended';
-import { useSession } from 'next-auth/react';
-
-const a = mockFn<typeof useSession>();
+import { MockedUseSession } from '@test/@types/hooks/user/session';
+import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulatedUseCurrentUserHook {
   hook: typeof useCurrentUser;
-  session: typeof a;
+  session: MockedUseSession;
   controller: DeepMockProxy<UserController>;
 }
