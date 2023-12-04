@@ -1,6 +1,7 @@
 import { useSession } from './session.hook';
 import { useCurrentUser } from '@/app/hooks/user/current.hook';
 import { useUsers } from '@/app/hooks/user/all.hook';
+import { useUser } from '@/app/hooks/user/one.hook';
 
 import { interfaces } from 'inversify';
 import { MODULES } from '@/app/modules';
@@ -10,7 +11,7 @@ import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
 import { MockedUseSession } from '@test/@types/hooks/user/session';
 
 jest.mock('../../../../../src/app/modules/@core/user/user.factory.ts');
-export { MODULES, useSession, useUsers, useCurrentUser };
+export { MODULES, useSession, useUsers, useCurrentUser, useUser };
 
 export const simulateUserHooks = ({
   container,
@@ -21,6 +22,7 @@ export const simulateUserHooks = ({
 
   return {
     all: useUsers,
+    one: useUser,
     current: useCurrentUser,
     session: useSession as MockedUseSession,
     controller,
