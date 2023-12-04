@@ -1,12 +1,10 @@
 import { useUsers } from '@/app/hooks/user/all.hook';
 import { mockFn } from 'jest-mock-extended';
 
-import { MODULES } from '@/app/modules';
+import { MODULES } from './user.hook';
 import { interfaces } from 'inversify';
 import { ISimulatedUseUsersHook } from '@test/@types/simulate/user/hooks/all';
 import { MODULE_MOCK } from '../../app.registry';
-
-jest.mock('../../../../../src/app/modules/@core/user/user.factory.ts');
 
 export { useUsers, MODULES };
 
