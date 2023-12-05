@@ -19,7 +19,40 @@ describe('[HOOK] | USER', () => {
   let MODULE: ISimulatedUserHooks;
 
   beforeEach(() => {
+    jest.clearAllMocks();
     MODULE = MODULES_MOCK.HOOKS.USER.SIMULATE();
+  });
+
+  it('[UNIT] | [HOOK] - Should: edit => [USER]', async () => {
+    const updated = { ...USER_DATA, name: 'updated' };
+
+    const mutation = MUTATION(
+      { user: updated },
+      { execute: MODULE.controller.update },
+    );
+
+    MODULE.mutation.mockReturnValue(mutation as any);
+    MODULE.controller.update.mockResolvedValue({ user: updated });
+
+    const { result } = renderHook(() => MODULE.mutate.create());
+
+    result.current.create({ ...updated });
+    await result.current.createAsync({ ...updated });
+
+    expect(MODULE.controller.update).toHaveBeenCalledTimes(2);
+    expect(MODULE.controller.update).toHaveBeenCalledWith({ ...updated });
+
+    expect(MODULE.mutation).toHaveBeenCalledTimes(1);
+
+    expect(mutation.mutate).toHaveBeenCalledTimes(1);
+    expect(mutation.mutate).toHaveBeenCalledWith({ ...updated });
+
+    expect(mutation.mutateAsync).toHaveBeenCalledTimes(1);
+    expect(mutation.mutateAsync).toHaveBeenCalledWith({ ...updated });
+
+    expect(result.current).toBeDefined();
+    expect(result.current.data).toBeDefined();
+    expect(result.current.data?.user).toStrictEqual(updated);
   });
 
   it('[UNIT] | [HOOK] - Should: create => [USER]', async () => {
