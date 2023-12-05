@@ -7,11 +7,13 @@ import { renderHook } from '@testing-library/react-hooks';
 import { MODULES_MOCK } from '@test/mock/module/app.factory';
 import {
   AUTHENTICATED_SESSION,
+  MUTATION,
   SWR_USER,
   SWR_USERS,
   USER_DATA,
 } from '@test/mock/data/react/user';
 import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
+import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 
 describe('[HOOK] | USER', () => {
   let MODULE: ISimulatedUserHooks;
@@ -20,7 +22,37 @@ describe('[HOOK] | USER', () => {
     MODULE = MODULES_MOCK.HOOKS.USER.SIMULATE();
   });
 
-  it('[UNIT] | [HOOK] - Should: find [one] => USER', async () => {
+  it('[UNIT] | [HOOK] - Should: create => [USER]', async () => {
+    const mutation = MUTATION(
+      { user: USER_DATA },
+      { execute: MODULE.controller.create },
+    );
+
+    MODULE.controller.create.mockResolvedValue({ user: USER_DATA });
+    MODULE.mutation.mockReturnValue(mutation as any);
+
+    const { result } = renderHook(() => MODULE.mutate.create());
+
+    result.current.create({ ...USER_DATA });
+    await result.current.createAsync({ ...USER_DATA });
+
+    expect(MODULE.controller.create).toHaveBeenCalledTimes(2);
+    expect(MODULE.controller.create).toHaveBeenCalledWith({ ...USER_DATA });
+
+    expect(MODULE.mutation).toHaveBeenCalledTimes(1);
+
+    expect(mutation.mutate).toHaveBeenCalledTimes(1);
+    expect(mutation.mutate).toHaveBeenCalledWith({ ...USER_DATA });
+
+    expect(mutation.mutateAsync).toHaveBeenCalledTimes(1);
+    expect(mutation.mutateAsync).toHaveBeenCalledWith({ ...USER_DATA });
+
+    expect(result.current).toBeDefined();
+    expect(result.current.data).toBeDefined();
+    expect(result.current.data?.user).toStrictEqual(USER_DATA);
+  });
+
+  it('[UNIT] | [HOOK] - Should: find [one] => [USER]', async () => {
     MODULE.controller.selectById.mockReturnValue(SWR_USER(USER_DATA) as any);
 
     const { result } = renderHook(() => MODULE.one({ id: USER_DATA.id }));
