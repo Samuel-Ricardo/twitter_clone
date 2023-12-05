@@ -13,7 +13,6 @@ import {
   USER_DATA,
 } from '@test/mock/data/react/user';
 import { ISimulatedUserHooks } from '@test/@types/simulate/user/hooks';
-import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 
 describe('[HOOK] | USER', () => {
   let MODULE: ISimulatedUserHooks;
