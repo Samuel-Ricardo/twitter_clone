@@ -1,4 +1,4 @@
-import { IUserDTO } from '@/app/modules/@core/user/DTO';
+import { ICreateUserDTO, IUserDTO } from '@/app/modules/@core/user/DTO';
 import { User } from '@/app/modules/@core/user/entity/user.entity';
 
 export const USER_DATA: IUserDTO = {
@@ -44,4 +44,24 @@ export const AUTHENTICATED_SESSION = {
     },
   },
   status: 'authenticated',
+};
+
+export const MUTATION = <T>(value: T, mutator?: { execute?: any }) => {
+  const mutation = {
+    data: value,
+    mutate: jest.fn(),
+    mutateAsync: jest.fn(),
+    isLoading: false,
+    error: null,
+  };
+
+  mutation.mutate.mockImplementation(
+    (data: ICreateUserDTO) => (mutation.data = mutator?.execute(data) || value),
+  );
+  mutation.mutateAsync.mockImplementation(
+    async (data: ICreateUserDTO) =>
+      (mutation.data = mutator?.execute() || value),
+  );
+
+  return mutation;
 };
