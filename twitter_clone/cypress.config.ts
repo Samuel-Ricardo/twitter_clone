@@ -10,14 +10,24 @@ export default defineConfig({
   screenshotsFolder: 'cypress/screenshots',
   downloadsFolder: 'cypress/downloads',
 
+  component: {
+    devServer: {
+      framework: 'next',
+      bundler: 'webpack',
+    },
+    specPattern: 'cypress/component/**/*.cy.{js,jsx,ts,tsx}',
+  },
+
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
     baseUrl: env.API_URL || 'http://localhost:3000',
     specPattern: [
-      'test/app/E2E/**/*.{js,jsx,ts,tsx}',
+      'test/app/E2E/**/*.cy.{js,jsx,ts,tsx}',
       'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+      'cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
+      'cypress/E2E/**/*.cy.{js,jsx,ts,tsx}',
     ],
   },
 });
