@@ -26,3 +26,13 @@ services:
       - 'host.docker.internal'
     depends_on:
       - mongo_setup
+
+  mongo:
+    image: mongo:latest
+    command: ['--replSet', 'rs0']
+    ports:
+      - '27017:27017'
+    env_file:
+      - .env.ci
+    external_links:
+      - 'host.docker.internal'
