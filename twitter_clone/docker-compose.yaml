@@ -6,7 +6,23 @@ services:
     entrypoint: ['npm', 'run', 'start:docker']
     ports:
       - '3000:3000'
+    env_file:
+      - .env.local
     volumes:
       - .:/home/node/app
     external_links:
       - 'host.docker.internal'
+    depends_on:
+      - api
+
+  api:
+    image: ghcr.io/samuel-ricardo/twitter_clone-api:main
+    entrypoint: ['npm', 'run', 'start:docker']
+    env_file:
+      - .env.ci
+    ports:
+      - '3004:3000'
+    external_links:
+      - 'host.docker.internal'
+    depends_on:
+      - mongo_setup
