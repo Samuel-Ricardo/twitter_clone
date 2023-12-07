@@ -36,3 +36,13 @@ services:
       - .env.ci
     external_links:
       - 'host.docker.internal'
+
+  mongo_setup:
+    image: mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./.docker/mongo/scripts:/scripts
+    entrypoint: ['bash', '/scripts/mongo_setup.sh']
+    external_links:
+      - 'host.docker.internal'
