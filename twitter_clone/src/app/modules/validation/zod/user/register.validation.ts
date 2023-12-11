@@ -10,10 +10,13 @@ export const userRegisterSchema = z.object({
   name: z
     .string()
     .nonempty("Name can't be empty")
-    .length(3, 'Name must be at least 3 characters')
+    .min(3, 'Name must be at least 3 characters')
     .transform(UppercaseFirstLetters),
   username: z.string().nonempty("Username can't be empty"),
-  password: z.string().nonempty("Password can't be empty").min(6), //transform (pass => encript(pass))
+  password: z
+    .string()
+    .nonempty("Password can't be empty")
+    .min(6, 'Password must be at least 6 characters'), //transform (pass => encript(pass))
 });
 
 export type UserRegisterFormData = z.infer<typeof userRegisterSchema>;
