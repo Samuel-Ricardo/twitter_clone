@@ -4,12 +4,14 @@
 import { HTMLAttributes, useRef } from 'react';
 import { BiExit } from 'react-icons/bi';
 
-export const SubmitIcon = (props: HTMLAttributes<HTMLButtonElement>) => {
+export const SubmitIcon = (
+  props: HTMLAttributes<HTMLButtonElement> | HTMLAttributes<SVGElement>,
+) => {
   const submitRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <BiExit
-        {...props}
+        {...(props as any)}
         size={30}
         onClick={() => submitRef.current?.click()}
         className={
