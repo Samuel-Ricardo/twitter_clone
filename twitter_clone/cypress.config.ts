@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress';
 import { env } from 'process';
 
 export default defineConfig({
-  viewportWidth: 12880,
+  viewportWidth: 1280,
   viewportHeight: 720,
   video: true,
   screenshotOnRunFailure: true,
