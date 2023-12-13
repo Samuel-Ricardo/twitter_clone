@@ -8,6 +8,7 @@ import { ICommentGateway } from '@/app/modules/@core/comment/gateway';
 import { User } from '@/app/modules/@core/user/entity/user.entity';
 import { AxiosCommentGateway } from '@/app/modules/gateway/axios/comment/comment.gateway';
 import { expect } from '@jest/globals';
+import { CREATE_USER_DATA } from '@test/mock/data/user';
 import 'reflect-metadata';
 
 describe('[GATEWAY] | AXIOS =:> [COMMENT]', () => {
@@ -22,6 +23,8 @@ describe('[GATEWAY] | AXIOS =:> [COMMENT]', () => {
 
   beforeEach(async () => {
     user = (await MODULES.GATEWAY.AXIOS.USER().listAll())[0];
+    if (!user)
+      user = await MODULES.GATEWAY.AXIOS.USER().create(CREATE_USER_DATA);
   });
 
   it('[INTEGRATION] | Should: find by [AUTHOR] => [COMMENT]', async () => {
