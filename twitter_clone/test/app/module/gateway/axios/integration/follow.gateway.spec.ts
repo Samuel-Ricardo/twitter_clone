@@ -10,6 +10,7 @@ import { MODULES } from '@/app/modules/app.factory';
 import { User } from '@/app/modules/@core/user/entity/user.entity';
 import { Follow } from '@/app/modules/@core/follow/entity';
 import { AxiosFollowGateway } from '@/app/modules/gateway/axios/follow/follow.gateway';
+import { CREATE_USER_DATA } from '@test/mock/data/user';
 
 describe('[GATEWAY] | Axios => [FOLLOW]', () => {
   let gateway: IFollowGateway;
@@ -25,6 +26,8 @@ describe('[GATEWAY] | Axios => [FOLLOW]', () => {
 
   beforeEach(async () => {
     user = (await MODULES.GATEWAY.AXIOS.USER().listAll())[0];
+    if (!user)
+      user = await MODULES.GATEWAY.AXIOS.USER().create(CREATE_USER_DATA);
   });
 
   it('[INTEGRATION] | Should: get [following] => [FOLLOW]', async () => {
