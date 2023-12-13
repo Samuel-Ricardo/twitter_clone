@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "sleeping for 15 seconds"
-sleep 15s
+echo "sleeping for 5 seconds"
+sleep 5s
 
 echo mongo_setup.sh time now: `date +"%T" `
 mongosh --host mongo:27017 <<EOF
@@ -28,6 +28,7 @@ mongosh --host mongo:27017 <<EOF
   db.isMaster();
   rs.conf();
   rs.status();
+  db.getUsers();
 
 EOF
 
