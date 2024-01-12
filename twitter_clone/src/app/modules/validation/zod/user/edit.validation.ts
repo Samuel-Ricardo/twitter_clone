@@ -14,7 +14,7 @@ export const userEditSchema = z.object({
       }),
     )
     .nullish()
-    .refine(maxFileSize(5 * 1024 * 1024), 'File size must be less than 5MB')
+    .refine(maxFileSize(1 * 1024 * 1024), 'File size must be less than 1MB')
     .transform(toBase64),
   coverImage: z
     .custom<File>(mustBeValidFile, {
@@ -22,7 +22,7 @@ export const userEditSchema = z.object({
     })
     .or(z.string())
     .nullish()
-    .refine(maxFileSize(5 * 1024 * 1024), 'File size must be less than 5MB')
+    .refine(maxFileSize(1 * 1024 * 1024), 'File size must be less than 1MB')
     .transform(toBase64),
   name: z
     .string()
