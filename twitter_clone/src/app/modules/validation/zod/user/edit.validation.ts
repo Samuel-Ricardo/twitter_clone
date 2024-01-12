@@ -27,7 +27,7 @@ export const userEditSchema = z.object({
   name: z
     .string()
     .nonempty("Name can't be empty")
-    .length(3, 'Name must be at least 3 characters')
+    .min(3, 'Name must be at least 3 characters')
     .transform(UppercaseFirstLetters),
   username: z.string().nonempty("Username can't be empty"),
   bio: z.string().nullish(),
