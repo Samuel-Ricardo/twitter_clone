@@ -14,7 +14,7 @@ export const SubmitTweetSchema = z.object({
     .string()
     .or(z.custom<File>(mustBeValidFile, { message: 'Must be an image file' }))
     .nullish()
-    .refine(maxFileSize(5 * 1024 * 1024), 'File size must be less than 5MB')
+    .refine(maxFileSize(1 * 1024 * 1024), 'File size must be less than 1MB')
     .transform(toBase64),
 });
 
