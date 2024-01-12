@@ -34,7 +34,10 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   };
 
   async get<T>(path: string, config?: AxiosRequestConfig) {
-    const response = await this.client.get<T>(`${this.URL}/${path}`, config);
+    const response = await this.client.get<T>(`${this.URL}/${path}`, {
+      headers: { Authorization: `Bearer ${this.userToken}` },
+      ...config,
+    });
     response.data = await this.decrypt(response.data);
 
     return response;
@@ -44,7 +47,10 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
     const response = await this.client.post<T>(
       `${this.URL}/${path}`,
       this.encrypt(body),
-      config,
+      {
+        headers: { Authorization: `Bearer ${this.userToken}` },
+        ...config,
+      },
     );
     response.data = await this.decrypt(response.data);
 
@@ -52,29 +58,30 @@ export class AxiosHTTPGateway implements IHTTPGateway, ISWRSupport {
   }
 
   async put<T>(path: string, body: any, config?: AxiosRequestConfig) {
-    const response = await this.client.put<T>(
-      `${this.URL}/${path}`,
-      body,
-      config,
-    );
+    const response = await this.client.put<T>(`${this.URL}/${path}`, body, {
+      headers: { Authorization: `Bearer ${this.userToken}` },
+      ...config,
+    });
     response.data = await this.decrypt(response.data);
 
     return response;
   }
 
   async patch<T>(path: string, body: any, config?: AxiosRequestConfig) {
-    const response = await this.client.patch<T>(
-      `${this.URL}/${path}`,
-      body,
-      config,
-    );
+    const response = await this.client.patch<T>(`${this.URL}/${path}`, body, {
+      headers: { Authorization: `Bearer ${this.userToken}` },
+      ...config,
+    });
     response.data = await this.decrypt(response.data);
 
     return response;
   }
 
   async delete<T>(path: string, config?: AxiosRequestConfig) {
-    return await this.client.delete<T>(`${this.URL}/${path}`, config);
+    return await this.client.delete<T>(`${this.URL}/${path}`, {
+      headers: { Authorization: `Bearer ${this.userToken}` },
+      ...config,
+    });
   }
 
   get server() {
