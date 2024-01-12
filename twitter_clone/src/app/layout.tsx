@@ -10,6 +10,8 @@ import { NotificationModule } from './component/notification/module.component';
 import { Suspense } from 'react';
 import Loading from './loading';
 
+import { Analytics } from '@vercel/analytics/react';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -31,6 +33,7 @@ export default async function RootLayout({
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <FollowBar />
         </BaseLayout>
+        <Analytics />
       </body>
     </html>
   );
