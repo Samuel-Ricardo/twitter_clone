@@ -2,7 +2,7 @@
 
 <p align="center"> 
   <a href="https://fullcycle.com.br/" target="_blank">
-    <img width="auto" src="https://medias.revistaoeste.com/qa-staging/wp-content/uploads/2021/09/twitter.jpg"/>
+    <img width="auto" src="./README_FILES/_41122539-a504-4d4c-8d40-90b50423972e.jpg"/>
   </a> 
 </p>
 
@@ -43,9 +43,20 @@
 
 <br>
 
-- API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)]
-
 <p id="project"/>
+
+<br>
+
+<h2>  | :artificial_satellite: About:  </h2>
+
+<p align="justify">
+  This project is a functional twitter clone Full Stack application with a rethink metalic design, implements the main features of Twitter with the best pratice of Clean Architeture and with a Modular system, has the complete testing pyramid, security layer and more. The entire system is built on Docker.
+</p>
+
+<br>
+
+🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)]
+📡 | Hosted on Vercel: https://twitter-clone-gules-seven.vercel.app/
 
 <br>
 
