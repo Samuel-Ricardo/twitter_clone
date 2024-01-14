@@ -272,6 +272,19 @@
 </p>
 
 <br>
+
+## 🍏🐢 | Performance
+
+> <img width="auto" src="./README_FILES/performance.png"/>
+
+<p>
+
+<br>
+
+🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)]
+📡 | Hosted on Vercel: https://twitter-clone-gules-seven.vercel.app/
+
+<br>
 <br>
 
 <h2 id="run-project"> 
