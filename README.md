@@ -169,6 +169,21 @@
   Which means this application tends to be faster the more you are using it, the more you use this application the faster it will be because it will be optimized in real time.
 </p>
 
+<br>
+<br>
+
+### 🔏 | Cryptography
+
+<br>
+
+<p>
+  This application uses a cryptography system for various functions, such as password hashing with Argon2 or Bcrypt, it is a hybrid system. In addition to hashing, it uses salts and other strategies to update password security and avoid rainbow tables.
+</p>
+
+<p>
+  It implements an end-to-end encryption system, using symmetric keys and other strategies to encrypt and decrypt all communication between this application and the server, even if the connection is insecure, your data is safe. 
+</p>
+
 <h2 id="run-project"> 
    👨‍💻 | How to use
 </h2>
