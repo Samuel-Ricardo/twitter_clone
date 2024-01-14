@@ -60,6 +60,63 @@
 
 <br>
 
+#
+
+<br>
+
+<h2 id="techs">
+  :building_construction: | Technologies and Concepts Studied:
+</h2>
+
+> <a href='https://nextjs.org/'> <img width="128px" src="https://cdn.dribbble.com/userupload/4083900/file/original-af6fd9a0f697fc74d006f73f0e9d1ed5.png?resize=1024x576" /> </a>
+
+- NextJS 14
+- TailwindCSS
+- Typescript
+- Jest
+- Cypress
+- Docker
+- Inversify
+- MongoDB
+- NextAuth
+- Zod
+- Zustand
+- React-Hook-Forms
+- File Upload & File Handle
+- SWR
+- React-Query [@tanstack]
+- Cryptography
+- Argon2
+- Bcrypt
+- Crypto - [NodeJS]
+- Axios
+- Socket.IO
+- Websockets
+- eslint
+- Prettier
+- husky
+- lint-staged
+- Events & Async
+- Event-Emitter 2
+- Storybook - [DOCS]
+- Analytics - [Vercel]
+- Design Patterns
+- Perfomance
+- Clean Architeture
+- Clean Code / SOLID
+- Scalability
+- Real Time
+
+> Among Others...
+
+#
+
+<br>
+
+<h2 id="app">
+  💻 | Application:
+</h2>
+
 <h2 id="run-project"> 
    👨‍💻 | How to use
 </h2>
