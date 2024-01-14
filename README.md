@@ -187,6 +187,8 @@
   It implements an end-to-end encryption system, using symmetric keys and other strategies to encrypt and decrypt all communication between this application and the server, even if the connection is insecure, your data is safe. 
 </p>
 
+<br>
+
 ### 🕊️ | Detailed Post
 
 > <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_post.png"/> </a>
@@ -199,6 +201,26 @@
 
 <p>
  The content is responsive, you can better view images, for example, and comments are ordered by date. 
+</p>
+
+<br>
+
+### ☕ | Profile
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_profile.png"/> </a>
+
+<br>
+
+<p>
+  Here you can see users profile, latest tweets and data like followers and following, name, bio and much more.
+</p>
+
+<p>
+  Here you can get to know users better and decide whether to follow or unfollow them.
+</p>
+
+<p>
+  On your profile, you can edit to make this space yours and update your data such as name, avatar or background.  
 </p>
 
 <h2 id="run-project"> 
