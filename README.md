@@ -249,6 +249,19 @@
 
 <br>
 
+### 🛂 | Authentication
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_login.png"/> </a>
+
+<br>
+
+<p>
+  The login flow is divided on front & back end, the backend handle the search and authentication of a user applying the domain logics, the frontend handle the session with nextauth 
+</p>
+
+<br>
+<br>
+
 <h2 id="run-project"> 
    👨‍💻 | How to use
 </h2>
