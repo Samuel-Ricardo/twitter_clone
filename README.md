@@ -260,6 +260,18 @@
 </p>
 
 <br>
+
+### 📜 | Forms & Validation
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_register.png"/> </a>
+
+<br>
+
+<p>
+ This app uses react hooks form to build amazing forms with very good usability and maintainability. All this with Zod to handle data validation and transformation and maintain data security. 
+</p>
+
+<br>
 <br>
 
 <h2 id="run-project"> 
