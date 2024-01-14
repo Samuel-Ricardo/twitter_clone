@@ -99,6 +99,7 @@
 - lint-staged
 - Events & Async
 - Event-Emitter 2
+- Caching
 - Storybook - [ DOCS ]
 - Analytics - [ Vercel ]
 - Design Patterns
@@ -143,7 +144,15 @@
 <br>
 
 <p>
-  
+  On home page you find the newest posts, you can interact with them and click on a post to see more details and the comments. if you are the author, you can delete post.
+</p>
+
+<p>
+  You can create a post on "What are you thinking?" box, images are optional and all images are optimized to better performance. This section have data validations to prevent erros.
+</p>
+
+<p>
+  On right side have a list of users that you may like to meet.
 </p>
 
 <br>
