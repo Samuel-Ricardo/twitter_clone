@@ -139,6 +139,8 @@
 <br>
 <br>
 
+### 🏡 | Home
+
 > <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_posts.png"/> </a>
 
 <br>
@@ -155,8 +157,17 @@
   On right side have a list of users that you may like to meet.
 </p>
 
+### 💾 | Caching
+
 <br>
-<br>
+
+<p>
+  This application uses an efficient caching system, the entire page structure is cached on demand, avoiding unnecessary page requests, the same happens with the data that is cached and hydrated, avoiding unnecessary reloads, but without losing the reactivity of the software
+</p>
+
+<p>
+  Which means this application tends to be faster the more you are using it, the more you use this application the faster it will be because it will be optimized in real time.
+</p>
 
 <h2 id="run-project"> 
    👨‍💻 | How to use
