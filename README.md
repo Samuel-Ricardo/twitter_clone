@@ -331,8 +331,11 @@ Navigate to project folder `$ cd ./twitter_clone/` and run it using `docker-comp
   #Apps Running on:
 
   $ APP: http://localhost:3000
+  $ API: http://localhost:3004
 
   $ STORYBOOK: http://localhost:6006/ [DOCUMENTATION] | [DEV]
+
+  $ MONGO: http://localhost:27017
 
 
   $ [DEV] = only on development environment
