@@ -157,6 +157,10 @@
   On right side have a list of users that you may like to meet.
 </p>
 
+✅ | This site is completly responsive, you can use it on any device and screen size :D
+
+<br>
+
 ### 💾 | Caching
 
 <br>
@@ -170,7 +174,6 @@
 </p>
 
 <br>
-<br>
 
 ### 🔏 | Cryptography
 
@@ -182,6 +185,20 @@
 
 <p>
   It implements an end-to-end encryption system, using symmetric keys and other strategies to encrypt and decrypt all communication between this application and the server, even if the connection is insecure, your data is safe. 
+</p>
+
+### 🕊️ | Detailed Post
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_post.png"/> </a>
+
+<br>
+
+<p>
+  Here you can have a better experience by seeing the post and its comments, you can interact with the comments and create your own comment about it.
+</p>
+
+<p>
+ The content is responsive, you can better view images, for example, and comments are ordered by date. 
 </p>
 
 <h2 id="run-project"> 
