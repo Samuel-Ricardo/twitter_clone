@@ -118,6 +118,37 @@
   💻 | Application:
 </h2>
 
+> Go to the video demo by clicking on any image
+
+  <br>
+  <br>
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/_5cc71638-1246-4488-9b29-d0b574e59a6e.jpg"/> </a>
+
+<br>
+
+<p>
+  This is the front-end of the application, it was built with NextJS 14, TailwindCSS and Typescript, as the basis of the software. Here you can create and browse posts (Tweets) and interact with them, you can follow and unfollow users and be notified of relevant events such as a new post from someone you follow
+</p>
+
+<br>
+
+> 📑 | More details about: [LinkedIn Posts](https://www.linkedin.com/in/samuel-ricardo/recent-activity/all/) with [#samuclone_twitter](https://www.linkedin.com/search/results/content/?keywords=%23samuclone_twitter&origin=FACETED_SEARCH&sid=VXl&sortBy=%22date_posted%22)
+
+<br>
+<br>
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_posts.png"/> </a>
+
+<br>
+
+<p>
+  
+</p>
+
+<br>
+<br>
+
 <h2 id="run-project"> 
    👨‍💻 | How to use
 </h2>
@@ -163,7 +194,7 @@ Navigate to project folder `$ cd ./twitter_clone/` and run it using `docker-comp
 
   $ APP: http://localhost:3000
 
-  $ STORYBOOK: http://localhost:6006/ [DOCUMENTATION] [DEV]
+  $ STORYBOOK: http://localhost:6006/ [DOCUMENTATION] | [DEV]
 
 
   $ [DEV] = only on development environment
