@@ -55,7 +55,7 @@
 
 <br>
 
-🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)]
+🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)] <br>
 📡 | Hosted on Vercel: https://twitter-clone-gules-seven.vercel.app/
 
 <br>
@@ -281,7 +281,7 @@
 
 <br>
 
-🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)]
+🔭 | API Repository: [[twitter_clone-API](https://github.com/Samuel-Ricardo/twitter_clone-api)] <br>
 📡 | Hosted on Vercel: https://twitter-clone-gules-seven.vercel.app/
 
 <br>
