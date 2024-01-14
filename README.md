@@ -80,15 +80,16 @@
 - MongoDB
 - NextAuth
 - Zod
+- Validations
 - Zustand
 - React-Hook-Forms
 - File Upload & File Handle
 - SWR
-- React-Query [@tanstack]
+- React-Query - [ @tanstack ]
 - Cryptography
 - Argon2
 - Bcrypt
-- Crypto - [NodeJS]
+- Crypto - [ NodeJS ]
 - Axios
 - Socket.IO
 - Websockets
@@ -98,8 +99,8 @@
 - lint-staged
 - Events & Async
 - Event-Emitter 2
-- Storybook - [DOCS]
-- Analytics - [Vercel]
+- Storybook - [ DOCS ]
+- Analytics - [ Vercel ]
 - Design Patterns
 - Perfomance
 - Clean Architeture
