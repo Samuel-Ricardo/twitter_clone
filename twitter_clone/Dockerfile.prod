@@ -1,4 +1,4 @@
-FROM node:18.16.0-slim
+FROM node:hydrogen-bookworm-slim
 
 USER node
 
